@@ -11,6 +11,25 @@ const isProd = !isDev;
 
 const fileName = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
+const cssLoader = (additional) => {
+  const loaders = [
+    {
+      loader: MiniCssExtractPlugin.loader,
+      options: {
+        hmr: true,
+        reloadAll: true,
+      },
+    },
+    'css-loader',
+  ];
+
+  if (additional) {
+    loaders.push(additional);
+  }
+
+  return loaders;
+};
+
 const optimization = () => {
   const config = {
   };
@@ -51,7 +70,7 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: 'images', to: 'images' },
+        { from: 'assets/images', to: 'assets/images' },
       ],
     }),
   ],
@@ -98,6 +117,10 @@ module.exports = {
             ],
           },
         },
+      },
+      {
+        test: /\.s[ac]ss$/,
+        use: cssLoader('sass-loader'),
       },
     ],
   },
