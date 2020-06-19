@@ -1,0 +1,47 @@
+@import "../../../../styles/variables";
+
+.footer {
+  background-color: var(--white);
+  padding: 39px 0;
+  width: 100%;
+  margin: 0 auto;
+  height: 90px;
+}
+
+.footer__text {
+  color: var(--gray);
+  font-size: 11px;
+  line-height: 17px;
+  text-align: left;
+  margin: 0;
+}
+
+
+.footer__text-link {
+  cursor: pointer;
+  color: var(--gray);
+}
+
+.footer__text-link:hover {
+  color: var(--green);
+}
+
+.container {
+  width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1199px) {
+  .container {
+    padding: 0 40px;
+    width: auto;
+  }
+}
+
+@media (max-width: 719px) {
+  .container {
+    padding: 0 20px;
+    width: auto;
+  }
+}
