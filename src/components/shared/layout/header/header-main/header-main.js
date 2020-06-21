@@ -1,4 +1,4 @@
-import './nav-bar.scss';
+import './header-main.scss';
 
 class NavBar {
   message = 'after render';
@@ -22,11 +22,9 @@ class NavBar {
                             <div class="navbar-item">
                                 <div class="buttons">
                                     <a class="button is-primary" href="/#/register">
-                                        <strong>Sign up</strong>
+                                        <strong>Создать аккаунт</strong>
                                     </a>
-                                    <a class="button is-light">
-                                        Log in
-                                    </a>
+                                    <a class="button is-light">Войти</a>
                                 </div>
                             </div>
                         </div>
