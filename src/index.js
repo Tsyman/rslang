@@ -1,5 +1,6 @@
 import Main from './components/pages/main-page/main-page';
 import Stat from './components/pages/stat-page/stat-page';
+import OurTeam from './components/pages/our-team/our-team';
 import NotFound from './components/pages/not-found/not-found';
 
 import NavBar from './components/shared/layout/nav-bar/nav-bar';
@@ -11,6 +12,7 @@ import Utils from './services/Utils';
 const routes = {
   '/': Main,
   '/stat': Stat,
+  '/ourteam': OurTeam,
 };
 
 // The router code. Takes a URL, checks against the list of supported routes

@@ -14,6 +14,9 @@ class NavBar {
                             <a class="navbar-item" href="/#stat">
                                 Stat
                             </a>
+                            <a class="navbar-item" href="/#ourteam">
+                                Our team
+                            </a>
                             <a class="navbar-item" href="/#/other">
                                 Other
                             </a>
