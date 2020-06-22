@@ -4,33 +4,37 @@ class NavBar {
   message = 'after render';
 
   view = `
-             <nav class="navbar" role="navigation" aria-label="main navigation">
-                <div class="container">
-                    <div id="navbarBasicExample" class="navbar__menu is-active" aria-expanded="false">
-                        <div class="navbar-start">
-                            <a class="navbar-item" href="/#/">
-                                Main
-                            </a>
-                            <a class="navbar-item" href="/#stat">
-                                Stat
-                            </a>
-                            <a class="navbar-item" href="/#/other">
-                                Other
-                            </a>
-                        </div>
-                        <div class="navbar-end">
-                            <div class="navbar-item">
-                                <div class="buttons">
-                                    <a class="button is-primary" href="/#/register">
-                                        <strong>Создать аккаунт</strong>
-                                    </a>
-                                    <a class="button is-light">Войти</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <header class="header-main">
+            <div class="container">
+              <nav class="header-main__nav">
+                <div class="header-main__logo header-main__start"></div>
+                <div class="header-main__middle">
+                  <ul class="header-main__list">
+                    <li class="header-main__item main-active-item">
+                      <a class="header-main__link" href="/#games">Игры</a>
+                    </li>
+                    <li class="header-main__item">
+                      <a class="header-main__link" href="/#dictionary">Словари</a>
+                  </li>
+                  <li class="header-main__item">
+                    <a class="header-main__link" href="/#statistics">Статитсика</a>
+                  </li>
+                  <li class="header-main__item">
+                    <a class="header-main__link" href="/#learning">Новые слова</a>
+                  </li>
+                  </ul>
                 </div>
-            </nav>
+                <div class="header-main__end">
+                  <div class="header-main__account">
+                    <p class="header-main__text">Мария</p>
+                    <div >
+                      <a class="account-btn" href="/#/">М</a>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </header>
         `;
 
   async render() {
