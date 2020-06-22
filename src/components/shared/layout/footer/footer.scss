@@ -1,11 +1,17 @@
 @import "../../../../styles/variables";
 
+.container {
+  width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
 .footer {
+  height: 90px;
   background-color: var(--white);
   padding: 39px 0;
   width: 100%;
   margin: 0 auto;
-  height: 90px;
 }
 
 .footer__text {
@@ -26,20 +32,14 @@
   color: var(--green);
 }
 
-.container {
-  width: 1200px;
-  padding: 0 20px;
-  margin: 0 auto;
-}
-
 @media (max-width: 1199px) {
   .container {
-    padding: 0 40px;
-    width: auto;
+    padding: 0 24px;
+    width: 720px;
   }
 }
 
-@media (max-width: 719px) {
+@media (max-width: 767px) {
   .container {
     padding: 0 20px;
     width: auto;
