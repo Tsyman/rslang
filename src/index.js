@@ -12,7 +12,7 @@ import Utils from './services/Utils';
 const routes = {
   '/': Main,
   '/stat': Stat,
-  '/ourteam': OurTeam,
+  '/team': OurTeam,
 };
 
 // The router code. Takes a URL, checks against the list of supported routes
