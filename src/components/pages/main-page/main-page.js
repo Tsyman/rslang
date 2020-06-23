@@ -16,16 +16,22 @@ class MainPage {
 
   view = `
     <section class="section">
-      <h1> Main Page </h1>
     </section>
     <div class="popup" id="popup">
-      <div class="popup__content" id="popup-content">
-      <a class="popup__close" id="popup-close-button">&times;</a>
-      <h2 class="heading-tertiary u-margin-bottom-small" id="popup-header">Something went wrong</h2>
-      <p class="popup__text" id="popup-text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua.
-      </p>
+      <div class="popup-content" id="popup-content">
+        <div class="popup-content__control-section">
+          <div class="popup-content__control-section--information-part">
+            <div class="popup-content__control-section--logo"></div>
+            <div class="popup-content__control-section--name">Настройки</div>
+          </div>
+          <a class="popup__close" id="popup-close-button">&times;</a>
+        </div>
+        <div class="popup-content__settings-section">
+
+        </div>
+        <div class="popup-content__save-button">
+          <a class="btn">Сохранить</a>
+        </div>
       </div>
     </div>
     <a id="open-popup">Open Popup</a>

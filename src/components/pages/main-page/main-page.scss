@@ -16,14 +16,14 @@
     background-color: rgba(var(--black), .3);
   }
 
-  &__content {
+  &-content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
+    height: 30rem;
     width: 50%;
-    background-color: var(--white);
+    background-color: var(--black);
     box-shadow: 0 2rem 4rem rgba(var(--black), .2);
     border-radius: 3px;
     display: flex;
@@ -34,6 +34,37 @@
     transform: translate(-50%, -50%) scale(.25);
     transition: all .5s .2s;
     padding: 2rem;
+    &__control-section {
+      background-color: red;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      height: 35px;
+      &--information-part {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      &--logo {
+        background-image: url('/assets/images/settings-icon.png');
+        height: 2rem;
+        width: 2rem;
+      }
+      &--name {
+        font: Bold var(--unnamed-font-size-21)/var(--unnamed-line-spacing-32) var(--unnamed-font-family-rubik);
+        letter-spacing: var(--unnamed-character-spacing-0);
+        color: var(--gray);
+        text-align: left;
+        opacity: 1;
+      }
+    }
+    &__settings-section {
+      background-color: blue;
+    }
+    &__save-button {
+      background-color: green;
+    }
   }
 
   &__text {
@@ -59,4 +90,87 @@
       color: var(--green);
     }
   }
+}
+.btn {
+    &,
+    &:link,
+    &:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        display: inline-block;
+        border-radius: 10rem;
+        transition: all .2s;
+        position: relative;
+        font-size: 16px;
+
+        //Change for the <button> element
+        border: none;
+        cursor: pointer;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2rem rgba(var(--black),.2);
+
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+    }
+
+    &:active,
+    &:focus {
+        outline: none;
+        transform: translateY(-1px);
+        box-shadow: 0 .5rem 1rem rgba(var(--back),.2);
+    }
+
+    &--white {
+        background-color: var(--white);
+        color: var(--gray);
+
+        &::after {
+            background-color: var(--white);
+        }
+    }
+
+    &--green {
+        background-color: var(--green);
+        color: var(--white);
+
+        &::after {
+            background-color: var(--green);
+        }
+    }
+
+    &::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: all .4s;
+    }
+
+    &--animated {
+        animation: moveInBottom .5s ease-out .75s;
+        animation-fill-mode: backwards;
+    }
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(3rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
 }
