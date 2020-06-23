@@ -7,5 +7,6 @@ module.exports = {
     jest: true,
   },
   rules: {
+    
   },
 };

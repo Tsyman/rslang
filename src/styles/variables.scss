@@ -1,5 +1,9 @@
 :root {
+<<<<<<< HEAD
 
+=======
+/* Colors: */
+>>>>>>> 947569c4148fd1ca43d67487457d66b635fe5797
 --white: #FFFFFF;
 --gray: #6B83B3;
 --bg-blue: #D9F2FF;
@@ -10,6 +14,7 @@
 --red: #FF0080;
 --dark-blue: #004CFF;
 --bg-green: #D9FFE2;
+<<<<<<< HEAD
 --black: #000;
 
 --unnamed-font-family-rubik: Rubik;
@@ -29,4 +34,87 @@
 --unnamed-line-spacing-47: 47px;
 --unnamed-line-spacing-63: 63px;
 --unnamed-line-spacing-74: 74px;
+=======
+
+/* Font/text values */
+--font-family-rubik: Rubik;
+--font-style-bold: Bold;
+--font-style-regular: Regular;
+--font-size-11: 11px;
+--font-size-15: 15px;
+--font-size-17: 17px;
+--font-size-21: 21px;
+--font-size-31: 31px;
+--font-size-42: 42px;
+--font-size-59: 59px;
+--character-spacing-0: 0px;
+--line-spacing-17: 17px;
+--line-spacing-25: 25px;
+--line-spacing-32: 32px;
+--line-spacing-47: 47px;
+--line-spacing-63: 63px;
+--line-spacing-74: 74px;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.visually-hidden:not(:focus):not(:active),
+input[type="checkbox"].visually-hidden,
+input[type="radio"].visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.container {
+  width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1199px) {
+  .container {
+    padding: 0 24px;
+    width: 720px;
+  }
+>>>>>>> 947569c4148fd1ca43d67487457d66b635fe5797
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0 20px;
+    width: auto;
+  }
 }
