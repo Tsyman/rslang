@@ -21,7 +21,7 @@ class NavBar {
                         <div class="navbar-end">
                             <div class="navbar-item">
                                 <div class="buttons">
-                                    <a class="button is-primary" href="/#/register">
+                                    <a class="button is-primary" href="/#/login">
                                         <strong>Sign up</strong>
                                     </a>
                                     <a class="button is-light">

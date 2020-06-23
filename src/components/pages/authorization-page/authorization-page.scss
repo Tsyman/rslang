@@ -1,0 +1,179 @@
+body {
+  background-color: #00A8FF;
+}
+
+.disabled {
+  display: none;
+}
+
+.return-button {
+  outline: none;
+  border: none;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0px 4px 1px #00A8FF1A;
+  width: 60px;
+  height: 60px;
+  font-size: 35px;
+  color: #00A8FF;
+  padding-bottom: 5px;
+  margin: 50px 0 0 50px;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  width: 400px;
+  height: 550px;
+  background-color: #FFFFFF;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Rubik', sans-serif;
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+}
+
+.form-header-icon {
+  height: 30px;
+  width: 125px;
+  margin-right: 10px;
+}
+
+.form-body {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-name {
+  color: #3D4B66;
+  font-weight: bold;
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+.name__inner {
+  margin-bottom: 30px;
+}
+
+.input {
+  width: 250px;
+  height: 25px;
+  padding: 0 10px;
+}
+
+.label-name {
+  position: relative;
+}
+
+.label-name::before {
+  background-image: url('../../../assets/images/user.svg');
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  content: " ";
+  position: absolute;
+  left: -25px;
+  top: 0px;
+}
+
+.email__inner {
+  margin-bottom: 30px;
+}
+
+.label-email {
+  position: relative;
+}
+
+.label-email::before {
+  background-image: url('../../../assets/images/mail.svg');
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  content: " ";
+  position: absolute;
+  left: -25px;
+  top: 0px;
+}
+
+.password__inner {
+  margin-bottom: 40px;
+}
+
+.label-password {
+  position: relative;
+}
+
+.label-password::before {
+  background-image: url('../../../assets/images/lock.svg');
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  content: " ";
+  position: absolute;
+  left: -25px;
+  top: 0px;
+}
+
+.submit-button {
+  background-color: #00A8FF;
+  box-shadow: 0px 4px 1px #00A8FF1A;
+  border-radius: 15px;
+  outline: none;
+  border: none;
+  color: #FFFFFF;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 40px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.form-footer p {
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  margin-right: 20px;
+}
+
+.form-footer button {
+  width: 120px;
+  height: 30px;
+  color: #00A8FF;
+  background-color: #f2fbff;
+  box-shadow: 0px 4px 1px #00A8FF1A;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
