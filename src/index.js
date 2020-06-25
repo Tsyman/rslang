@@ -3,7 +3,6 @@ import Stat from './components/pages/stat-page/stat-page';
 import NotFound from './components/pages/not-found/not-found';
 
 import HeaderPromo from './components/shared/layout/header/header-promo/header-promo';
-import HeaderMain from './components/shared/layout/header/header-main/header-main';
 import Footer from './components/shared/layout/footer/footer';
 
 import Utils from './services/Utils';
@@ -19,15 +18,13 @@ const routes = {
 const router = async () => {
   // Lazy load view element:
   const header = null || document.getElementById('header_container');
-  const headerMain = null || document.getElementById('header_container-main');
   const content = null || document.getElementById('page_container');
   const footer = null || document.getElementById('footer_container');
 
   // Render the Header and footer of the page
   header.innerHTML = await HeaderPromo.render();
   await HeaderPromo.afterRender();
-  headerMain.innerHTML = await HeaderMain.render();
-  await HeaderMain.afterRender();
+
   footer.innerHTML = await Footer.render();
 
   // Get the parsed URl from the addressbar
@@ -40,7 +37,7 @@ const router = async () => {
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   const page = routes[parsedURL] ? routes[parsedURL] : NotFound;
   content.innerHTML = await page.render();
-  // await page.afterRender();
+  await page.afterRender();
 };
 
 // Listen on hash change:

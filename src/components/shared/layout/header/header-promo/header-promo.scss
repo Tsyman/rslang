@@ -39,8 +39,7 @@
   position: relative;
 }
 
-.promo-active-item::before {
-  content: "";
+.promo-active-item {
   position: absolute;
   width: 100%;
   height: 5px;
@@ -100,7 +99,7 @@
 
 
 @media (max-width: 1199px) {
-  .promo-active-item::before {
+  .promo-active-item {
     background-color: var(--blue);
     bottom: 0;
     right: 0;

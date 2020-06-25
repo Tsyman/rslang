@@ -16,27 +16,31 @@ class HeaderMain {
                   <ul class="header-main__list">
                     <li class="header-main__item main-active-item">
                       <a class="header-main__link" href="/#games">
-                      <span class="header-main__heading">Игры</span>
-                      <img class="header-main__img" src="../../../../../assets/images/games-icon.svg">
+                        <span class="header-main__heading">Игры</span>
+                        <img class="header-main__img" src="../../../../../assets/images/games-icon.svg">
                       </a>
+                      <div class="current-page"></div>
                     </li>
                     <li class="header-main__item">
                       <a class="header-main__link" href="/#vocabularies">
-                      <span class="header-main__heading">Словари</span>
-                      <img class="header-main__img" src="../../../../../assets/images/vocabulary-icon.svg">
+                        <span class="header-main__heading">Словари</span>
+                        <img class="header-main__img" src="../../../../../assets/images/vocabulary-icon.svg">
                       </a>
+                      <div id="current-page"></div>
                   </li>
                   <li class="header-main__item">
-                    <a class="header-main__link current-page" href="/#statistics">
+                    <a class="header-main__link" href="/#statistics">
                       <span class="header-main__heading">Статистика</span>
-                    <img class="header-main__img" src="../../../../../assets/images/statistics-icon.svg">
+                      <img class="header-main__img" src="../../../../../assets/images/statistics-icon.svg">
                     </a>
+                    <div id="current-page"></div>
                   </li>
                   <li class="header-main__item">
                     <a class="header-main__link" href="/#new-words">
                       <span class="header-main__heading">Новые слова</span>
-                    <img class="header-main__img" src="../../../../../assets/images/new-words-icon.svg">
+                      <img class="header-main__img" src="../../../../../assets/images/new-words-icon.svg">
                     </a>
+                    <div id="current-page"></div>
                   </li>
                   </ul>
                 </div>

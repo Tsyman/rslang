@@ -17,11 +17,13 @@ class HeaderPromo {
                   </label>
                   <div class="header-promo__end sidebar__menu">
                     <ul class="header-promo__list sidebar__list">
-                      <li class="header-promo__item promo-active-item sidebar__item" id="promo-tab1">
+                      <li class="header-promo__item sidebar__item" id="promo-tab1">
                         <a class="header-promo__link" href="/#/">Главная</a>
+                        <div class="promo-active-item"></div>
                       </li>
                       <li class="header-promo__item sidebar__item" id="promo-tab2">
                         <a class="header-promo__link" href="/#team">Наша команда</a>
+                        <div id="promo-active-item"></div>
                       </li>
                       <li class="registration-btn sidebar__item">
                         <a class="button secondary-btn" href="/#/register">Создать аккаунт</a>

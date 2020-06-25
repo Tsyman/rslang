@@ -79,15 +79,14 @@
   position: relative;
 }
 
-.current-page::after {
-  content: "";
+.current-page {
   position: absolute;
   height: 5px;
   background-color: var(--blue);
   border-radius: 3px;
   width: 100%;
   left: 0;
-  bottom: -10px;
+  bottom: -15px;
 }
 
 .header-main__link:hover {
@@ -138,16 +137,24 @@
 
 @media (max-width: 767px) {
   .header-main__middle {
+    margin: 0 auto;
+    width: 100%;
     position: absolute;
     bottom: 0;
+    height: 60px;
+    left: 0;
+  }
+
+  .header-main__list {
+    width: auto;
+    padding: 0 12%;
+  }
+
+  .current-page::after {
+    bottom: -20px;
   }
 
   .header-main__heading {
     display: none;
   }
-
-  .header-main__list {
-    width: 100%;
-  }
-
 }
