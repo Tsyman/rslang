@@ -4,7 +4,7 @@ class OurTeam {
 view = `
 <section class="Our-team">
 <div class="container">
-  <h1>Наша<br>команда</h1>
+  <h1>Наша команда</h1>
   <div class="our-team-wrapper">
     <div class="our-team-item">
       <div class="our-team-item-icon">
@@ -12,7 +12,7 @@ view = `
       </div>
       <div class="our-team-item-info">
         <h3 > <a href="http://github.com/profile" target="_blank" rel="noopener noreferrer" alt = "Github account">Имя фамилия</a></h3>
-        <p class="our-team-item-job">Фронтедщик</p>
+        <p class="our-team-item-job">Фронтендщик</p>
         <p class="our-team-item-description">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum
         </p>
@@ -30,7 +30,7 @@ view = `
       </div>
       <div class="our-team-item-info">
         <h3 > <a href="http://github.com/profile" target="_blank" rel="noopener noreferrer" alt = "Github account">Имя фамилия</a></h3>
-        <p class="our-team-item-job">Фронтедщик</p>
+        <p class="our-team-item-job">Фронтендщик</p>
         <p class="our-team-item-description">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum
         </p>
@@ -48,7 +48,7 @@ view = `
       </div>
       <div class="our-team-item-info">
         <h3 > <a href="http://github.com/profile" target="_blank" rel="noopener noreferrer" alt = "Github account">Имя фамилия</a></h3>
-        <p class="our-team-item-job">Фронтедщик</p>
+        <p class="our-team-item-job">Фронтендщик</p>
         <p class="our-team-item-description">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum
         </p>
@@ -66,7 +66,7 @@ view = `
       </div>
       <div class="our-team-item-info">
         <h3 > <a href="http://github.com/profile" target="_blank" rel="noopener noreferrer" alt = "Github account">Имя фамилия</a></h3>
-        <p class="our-team-item-job">Фронтедщик</p>
+        <p class="our-team-item-job">Фронтендщик</p>
         <p class="our-team-item-description">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum
         </p>
@@ -84,7 +84,7 @@ view = `
       </div>
       <div class="our-team-item-info">
         <h3 > <a href="http://github.com/profile" target="_blank" rel="noopener noreferrer" alt = "Github account">Имя фамилия</a></h3>
-        <p class="our-team-item-job">Фронтедщик</p>
+        <p class="our-team-item-job">Фронтендщик</p>
         <p class="our-team-item-description">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum
         </p>
@@ -102,7 +102,7 @@ view = `
       </div>
       <div class="our-team-item-info">
         <h3 > <a href="http://github.com/profile" target="_blank" rel="noopener noreferrer" alt = "Github account">Имя фамилия</a></h3>
-        <p class="our-team-item-job">Фронтедщик</p>
+        <p class="our-team-item-job">Фронтендщик</p>
         <p class="our-team-item-description">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum
         </p>

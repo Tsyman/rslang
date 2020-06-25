@@ -10,9 +10,25 @@
 --red: #FF0080;
 --dark-blue: #004CFF;
 --bg-green: #D9FFE2;
---heading-text: #3D4B66;
---text-description: #6B83B3;
---text-job: #004CFF;
+
+/* Font/text values */
+--font-family-rubik: Rubik;
+--font-style-bold: Bold;
+--font-style-regular: Regular;
+--font-size-11: 11px;
+--font-size-15: 15px;
+--font-size-17: 17px;
+--font-size-21: 21px;
+--font-size-31: 31px;
+--font-size-42: 42px;
+--font-size-59: 59px;
+--character-spacing-0: 0px;
+--line-spacing-17: 17px;
+--line-spacing-25: 25px;
+--line-spacing-32: 32px;
+--line-spacing-47: 47px;
+--line-spacing-63: 63px;
+--line-spacing-74: 74px;
 }
 
 html {
@@ -23,7 +39,6 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
-  // outline: 1px solid;
 }
 
 body {
@@ -47,8 +62,33 @@ input[type="radio"].visually-hidden {
   overflow: hidden;
 }
 
-
 a {
   text-decoration: none;
-  color: green;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.container {
+  width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1199px) {
+  .container {
+    padding: 0 24px;
+    width: 720px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0 20px;
+    width: auto;
+  }
 }
