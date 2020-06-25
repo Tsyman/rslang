@@ -27,7 +27,13 @@ class MainPage {
           <a class="popup__close" id="popup-close-button">&times;</a>
         </div>
         <div class="popup-content__settings-section">
-
+          <div class="switch-container">
+            <label class="switch-container__content">
+              <input type="checkbox" class="switch-container__input" checked>
+              <span class="switch-container__label" data-on="Off" data-off="On"></span>
+              <span class="switch-container__handle"></span>
+            </label>
+          </div>
         </div>
         <div class="popup-content__save-button">
           <a class="btn">Сохранить</a>
