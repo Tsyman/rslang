@@ -3,67 +3,74 @@
 .card__wrapper {
   position: absolute;
   top: 210px;
-  left: 40px;
+  left: 440px;
   height: 580px;
   width: 720px;
-  border: 2px solid yellow;
+  user-select: none;
 }
 
 .card__container {
+  position: relative;
   width: 720px;
   height: 480px;
-  border: 2px solid red;
-  background: #FFFFFF 0 0 no-repeat padding-box;
-  box-shadow: 0 40px 40px #00A8FF0D;
+  background: var(--white) 0 0 no-repeat padding-box;
+  box-shadow: 0 40px 40px var(--dark-gray);
   border-radius: 60px;
-  opacity: 1;
 }
 
 .card__containerWrapper {
+  position: absolute;
   margin: 80px 60px 0 60px;
+}
+
+.card__img {
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--dark-blue);
 }
 
 .card__text {
   width: 600px;
   height: 153px;
-  font: Bold 59px/74px Rubik;
-  letter-spacing: 0;
-  color: #3D4B66;
-  text-align: left;
   margin-bottom: 37px;
   word-wrap: break-word;
+  font: var(--font-style-bold) var(--font-size-59)/var(--line-spacing-74) var(--font-family-rubik);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--dark);
+  text-align: left;
 }
 
 .card__text.smallSize {
-  font: Bold 48px/60px Rubik;
+  font: var(--font-style-bold) 48px/60px Rubik;
 }
 
 .card__text.microSize {
-  font: Bold 33px/50px Rubik;
+  font: var(--font-style-bold) 33px/50px Rubik;
 }
 
 .card__text.nanoSize {
-  font: Bold 22px/35px Rubik;
+  font: var(--font-style-bold) 22px/35px Rubik;
 }
 
-.card__startText {
-  display: inline;
-}
-
+.card__startText,
 .card__endText {
   display: inline;
 }
 
 .card__input {
-  padding-left: 20px;
-  outline:none;
-  font: 21px/32px Rubik;
   height: 60px;
   max-width: 160px;
-  background: #F2FBFF 0 0 no-repeat padding-box;
-  border: 1px solid #F2FBFF;
-  border-radius: 15px;
+  padding-left: 20px;
   vertical-align: middle;
+  font: var(--font-size-21)/var(--line-spacing-32) var(--font-family-rubik);
+  letter-spacing: var(--character-spacing-0);
+  background: var(--blue-light-gray) 0 0 no-repeat padding-box;
+  border: 1px solid var(--blue-light-gray);
+  border-radius: 15px;
+  outline:none;
 }
 
 .card__input.smallSize {
@@ -76,43 +83,46 @@
 }
 
 .card__translateText {
+  margin-bottom: 10px;
   width: 600px;
   height: 40px;
+  border-bottom: 1px solid var(--bg-green);
+  font: var(--font-size-21)/var(--line-spacing-32) var(--font-family-rubik);
+  letter-spacing: var(--character-spacing-0);
   text-align: left;
-  font: 21px/32px Rubik;
-  letter-spacing: 0;
-  color: #6B83B3;
-  border-bottom: 1px solid #D9F2FF;
-  margin-bottom: 10px
+  color: var(--gray);
 }
 
 .card__wordType {
   width: 600px;
   height: 20px;
-  text-align: left;
-  font: Regular 11px/17px Rubik;
-  letter-spacing: 0;
-  color: #6B83B3;
   margin: auto auto 55px;
+  font: var(--font-size-11)/var(--line-spacing-17) var(--font-family-rubik);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--gray);
 }
 
 .card__handlers {
   display: flex;
   justify-content: space-between;
-  border: 2px solid blue;
   width: 100%;
 }
 
 .card_btnDelete {
-  width: 70px;
-  height: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 70px;
+  height: 30px;
+  font: Medium var(--font-size-15)/var(--line-spacing-32) var(--font-family-rubik);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--red);
   text-align: left;
-  font: Medium 15px/32px Rubik;
-  letter-spacing: 0;
-  color: #FF0080;
+  cursor: pointer;
+
+  &:hover {
+  border-bottom: 2px solid var(--red);
+  }
 }
 
 .card_btnTransfer {
@@ -120,11 +130,15 @@
   flex-direction: column;
   justify-content: center;
   width: 180px;
-  height: 20px;
-  text-align: left;
-  font: Medium 15px/32px Rubik;
-  letter-spacing: 0;
-  color: #004CFF;
+  height: 30px;
+  font: Medium var(--font-size-15)/var(--line-spacing-32) var(--font-family-rubik);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--dark-blue);
+  cursor: pointer;
+
+  &:hover {
+    border-bottom: 2px solid var(--dark-blue);
+  }
 }
 
 .card_btnShowAnswer {
@@ -133,19 +147,82 @@
   justify-content: center;
   width: 170px;
   height: 30px;
-  background: #F2FBFF 0 0 no-repeat padding-box;
-  box-shadow: 0 2px 1px #00A8FF1A;
+  background: var(--blue-light-gray) 0 0 no-repeat padding-box;
+  box-shadow: 0 2px 1px var(--dark-gray);
   border-radius: 15px;
+  font: Regular var(--font-size-15)/var(--line-spacing-32) var(--font-family-rubik);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--blue);
   text-align: center;
-  font: Regular 15px/32px Rubik;
-  letter-spacing: 0;
-  color: #00A8FF;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d0d2d7;
+  }
+}
+
+.card__bottomContent {
+  margin: 20px 60px 0 60px;
 }
 
 .card__wordTranslate {
-  text-align: left;
-  font: Bold 17px/32px Rubik;
+  font: var(--font-style-bold) 17px/32px Rubik;
   letter-spacing: 0;
-  color: #3D4B66;
-  margin: 20px 60px 0 60px;
+  color: var(--dark);
+  text-align: left;
+}
+
+.card__bottomContentBtn {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  height: 30px;
+  overflow: hidden;
+}
+
+.card__btnAgain,
+.card__btnHard,
+.card__btnGood,
+.card__btnEasy {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: 100%;
+  background: var(--blue) 0 0 no-repeat padding-box;
+  box-shadow: 0 4px 1px #00A8FF1A;
+  border-radius: 15px;
+  text-align: center;
+  font: var(--font-style-bold) var(--font-size-15)/var(--line-spacing-32) var(--font-family-rubik);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--white);
+  cursor: pointer;
+
+  &:hover {
+background-color: #0388cb;
+  }
+}
+
+.card__btnHard {
+  background: var(--red) 0 0 no-repeat padding-box;
+
+  &:hover {
+    background-color: #cd0166;
+  }
+}
+
+.card__btnGood {
+  background: var(--green) 0 0 no-repeat padding-box;
+
+  &:hover {
+    background-color: #00d774;
+  }
+}
+
+.card__btnEasy {
+  background: var(--dark-blue) 0 0 no-repeat padding-box;
+
+  &:hover {
+    background-color: #003dcb;
+  }
 }
