@@ -27,12 +27,57 @@ class MainPage {
           <a class="popup__close" id="popup-close-button">&times;</a>
         </div>
         <div class="popup-content__settings-section">
-          <div class="switch-container">
-            <label class="switch-container__content">
-              <input type="checkbox" class="switch-container__input" checked>
-              <span class="switch-container__label" data-on="Off" data-off="On"></span>
-              <span class="switch-container__handle"></span>
-            </label>
+          <div class="popup-content__settings-section--figure-container">
+            <div class="popup-content__settings-section--figure-row">
+              <div class="popup-content__settings-section--figure-text">
+                Количество новых слов, планируемых выучить за день
+              </div>
+              <input class="settings-figure" type="number" placeholder="Число новых слов">
+            </div>
+            <div class="popup-content__settings-section--figure-row">
+              <div class="popup-content__settings-section--figure-text">
+                Максимальное количество карточек со словами в день
+              </div>
+              <input class="settings-figure" type="number" placeholder="Макс. количество карточек">
+            </div>
+          </div>
+          <div class="popup-content__settings-section--switcher-container">
+            <div class="popup-content__settings-section--switcher-row">
+              <div class="popup-content__settings-section--switcher-text">
+                Перевод слова
+              </div>
+              <div class="switch-container">
+                <label class="switch-container__content">
+                  <input type="checkbox" class="switch-container__input" checked>
+                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__handle"></span>
+                </label>
+              </div>
+            </div>
+            <div class="popup-content__settings-section--switcher-row">
+              <div class="popup-content__settings-section--switcher-text">
+                Предложение с объяснением значения
+              </div>
+              <div class="switch-container">
+                <label class="switch-container__content">
+                  <input type="checkbox" class="switch-container__input" checked>
+                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__handle"></span>
+                </label>
+              </div>
+            </div>
+            <div class="popup-content__settings-section--switcher-row">
+              <div class="popup-content__settings-section--switcher-text">
+                Пример использования изучаемого слова
+              </div>
+              <div class="switch-container">
+                <label class="switch-container__content">
+                  <input type="checkbox" class="switch-container__input" checked>
+                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__handle"></span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
         <div class="popup-content__save-button">
