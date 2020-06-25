@@ -2,22 +2,19 @@
 
 .header-main {
   background-color: var(--white);
+  // background-color: yellowgreen;
 }
 
 .header-main__nav {
   display: flex;
   justify-content: space-between;
   height: 100px;
-  padding: 20px 0;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .header-main__logo {
-  width: 120px;
-  height: 60px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-image: url(../../../../../assets/images/main-logo.png);
+  cursor: pointer;
+  margin-right: 45px;
 }
 
 .header-main__list {
@@ -26,26 +23,34 @@
   margin: 0;
   padding: 0;
   justify-content: space-between;
+  width: 500px;
 }
 
 .header-main__item {
   text-align: center;
+  position: relative;
 }
 
 .header-main__link {
-  padding-left: 60px;
-  text-decoration: none;
-  font-size: 17px;
-  line-height: 32px;
+  line-height: var(--line-spacing-32);
+  font-size: var(--font-size-17);
   color: var(--gray);
+  display: flex;
+  flex-flow: column-reverse;
+  align-items: center;
+  cursor: pointer;
 }
 
 .header-main__text {
-  font-size: 21px;
-  line-height: 32px;
+  line-height: var(--line-spacing-32);
+  font-size: var(--font-size-21);
   font-weight: bold;
   color: var(--gray);
   margin: 0;
+}
+
+.header-main__text:hover {
+  color: var(--red);
 }
 
 .header-main__account {
@@ -54,8 +59,8 @@
 }
 
 .account-btn {
-  font-size: 21px;
-  line-height: 32px;
+  line-height: var(--line-spacing-32);
+  font-size: var(--font-size-21);
   color: var(--white);
   font-weight: bold;
   background-color: var(--blue);
@@ -68,4 +73,81 @@
   justify-content: center;
   margin-left: 40px;
   cursor: pointer;
+}
+
+.current-page {
+  position: relative;
+}
+
+.current-page::after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  background-color: var(--blue);
+  border-radius: 3px;
+  width: 100%;
+  left: 0;
+  bottom: -10px;
+}
+
+.header-main__link:hover {
+  color: var(--blue);
+}
+
+.account-btn:hover {
+  background-color: var(--dark-blue);
+}
+
+
+
+@media (max-width: 1199px) {
+  .header-main__img-logo {
+    width: 50px;
+    height: 40px;
+  }
+
+  .header-main__text {
+    display: none;
+  }
+
+  .header-main__list {
+    width: 390px;
+  }
+
+  .header-main__logo {
+    margin-right: 30px;
+  }
+
+  .header-main__link {
+    line-height: var(--line-spacing-25);
+    font-size: var(--font-size-15);
+  }
+
+  .header-main__img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .account-btn {
+    width: 40px;
+    height: 40px;
+    line-height: var(--line-spacing-25);
+    font-size: var(--font-size-17);
+  }
+}
+
+@media (max-width: 767px) {
+  .header-main__middle {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .header-main__heading {
+    display: none;
+  }
+
+  .header-main__list {
+    width: 100%;
+  }
+
 }

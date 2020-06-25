@@ -1,26 +1,42 @@
 import './header-main.scss';
 
-class NavBar {
+class HeaderMain {
   message = 'after render';
 
   view = `
           <header class="header-main">
             <div class="container">
               <nav class="header-main__nav">
-                <div class="header-main__logo header-main__start"></div>
+                <div class="header-main__logo header-main__start">
+                  <a class="header-main__link-logo" href="/#">
+                    <img class="header-main__img-logo" src="../../../../../assets/images//main-logo.png">
+                  </a>
+                </div>
                 <div class="header-main__middle">
                   <ul class="header-main__list">
                     <li class="header-main__item main-active-item">
-                      <a class="header-main__link" href="/#games">Игры</a>
+                      <a class="header-main__link" href="/#games">
+                      <span class="header-main__heading">Игры</span>
+                      <img class="header-main__img" src="../../../../../assets/images/games-icon.svg">
+                      </a>
                     </li>
                     <li class="header-main__item">
-                      <a class="header-main__link" href="/#dictionary">Словари</a>
+                      <a class="header-main__link" href="/#vocabularies">
+                      <span class="header-main__heading">Словари</span>
+                      <img class="header-main__img" src="../../../../../assets/images/vocabulary-icon.svg">
+                      </a>
                   </li>
                   <li class="header-main__item">
-                    <a class="header-main__link" href="/#statistics">Статитсика</a>
+                    <a class="header-main__link current-page" href="/#statistics">
+                      <span class="header-main__heading">Статистика</span>
+                    <img class="header-main__img" src="../../../../../assets/images/statistics-icon.svg">
+                    </a>
                   </li>
                   <li class="header-main__item">
-                    <a class="header-main__link" href="/#learning">Новые слова</a>
+                    <a class="header-main__link" href="/#new-words">
+                      <span class="header-main__heading">Новые слова</span>
+                    <img class="header-main__img" src="../../../../../assets/images/new-words-icon.svg">
+                    </a>
                   </li>
                   </ul>
                 </div>
@@ -46,4 +62,4 @@ class NavBar {
   }
 }
 
-export default new NavBar();
+export default new HeaderMain();
