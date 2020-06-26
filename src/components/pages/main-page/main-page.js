@@ -43,7 +43,6 @@ class MainPage {
           </div>
 
 
-          /* Начало обязательного одного пункта*/
           <div class="popup-content__settings-section--switcher-container">
             <div class="popup-content__settings-section--switcher-row">
               <div class="popup-content__settings-section--switcher-text">
@@ -81,7 +80,9 @@ class MainPage {
                 </label>
               </div>
             </div>
-            /* Конец обязательного одно пункта */
+
+
+
             <div class="popup-content__settings-section--switcher-row">
               <div class="popup-content__settings-section--switcher-text">
                 Транскрипция слова
@@ -180,9 +181,7 @@ class MainPage {
             </div>
           </div>
         </div>
-        <div class="popup-content__save-button">
-          <a class="btn">Сохранить</a>
-        </div>
+        <a class="btn btn--animated">Сохранить</a>
       </div>
     </div>
     <a id="open-popup">Open Popup</a>

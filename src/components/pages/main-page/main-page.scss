@@ -48,8 +48,8 @@
       }
       &--logo {
         background-image: url('/assets/images/settings-icon.png');
-        height: 2rem;
-        width: 2rem;
+        height: 35px;
+        width: 35px;
         background-size: cover;
         margin-right: 25px;
       }
@@ -107,16 +107,9 @@
         font-family: var(--unnamed-font-family-rubik);
         letter-spacing: var(--unnamed-character-spacing-0);
         color: var(--gray);
+        width: 75%;
       }
     }
-    &__save-button {
-      background-color: green;
-    }
-  }
-
-  &__text {
-    font-size: 1.4rem;
-    text-align: center;
   }
 
   &__close {
@@ -143,21 +136,27 @@
     &:visited {
         text-transform: uppercase;
         text-decoration: none;
-        padding: 1.5rem 4rem;
+        padding: 20px 65px;
         display: inline-block;
-        border-radius: 10rem;
+        border-radius: 100px;
         transition: all .2s;
-        position: relative;
-        font-size: 16px;
-
-        //Change for the <button> element
         border: none;
         cursor: pointer;
+        position: relative;
+        font-weight: Bold;
+        font-size: var(--unnamed-font-size-15);
+        line-height: var(--unnamed-line-spacing-32);
+        font-family: var(--unnamed-font-family-rubik);
+        letter-spacing: var(--unnamed-character-spacing-0);
+        color: var(--white);
+        text-align: center;
+        background-color: var(--green);
+        color: var(--white);
     }
 
     &:hover {
         transform: translateY(-3px);
-        box-shadow: 0 1rem 2rem rgba(var(--black),.2);
+        box-shadow: 0 10px 20px rgba(var(--black),.2);
 
         &::after {
             transform: scaleX(1.4) scaleY(1.6);
@@ -169,25 +168,7 @@
     &:focus {
         outline: none;
         transform: translateY(-1px);
-        box-shadow: 0 .5rem 1rem rgba(var(--back),.2);
-    }
-
-    &--white {
-        background-color: var(--white);
-        color: var(--gray);
-
-        &::after {
-            background-color: var(--white);
-        }
-    }
-
-    &--green {
-        background-color: var(--green);
-        color: var(--white);
-
-        &::after {
-            background-color: var(--green);
-        }
+        box-shadow: 0 .5px 10px rgba(var(--back),.2);
     }
 
     &::after {
@@ -195,12 +176,13 @@
         display: inline-block;
         height: 100%;
         width: 100%;
-        border-radius: 10rem;
+        border-radius: 100px;
         position: absolute;
         top: 0;
         left: 0;
         z-index: -1;
         transition: all .4s;
+        background-color: var(--green);
     }
 
     &--animated {
@@ -212,7 +194,7 @@
 @keyframes moveInBottom {
     0% {
         opacity: 0;
-        transform: translateY(3rem);
+        transform: translateY(30px);
     }
 
     100% {
