@@ -41,6 +41,9 @@ class MainPage {
               <input class="settings-figure" type="number" placeholder="Макс. количество карточек">
             </div>
           </div>
+
+
+          /* Начало обязательного одного пункта*/
           <div class="popup-content__settings-section--switcher-container">
             <div class="popup-content__settings-section--switcher-row">
               <div class="popup-content__settings-section--switcher-text">
@@ -69,6 +72,103 @@ class MainPage {
             <div class="popup-content__settings-section--switcher-row">
               <div class="popup-content__settings-section--switcher-text">
                 Пример использования изучаемого слова
+              </div>
+              <div class="switch-container">
+                <label class="switch-container__content">
+                  <input type="checkbox" class="switch-container__input" checked>
+                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__handle"></span>
+                </label>
+              </div>
+            </div>
+            /* Конец обязательного одно пункта */
+            <div class="popup-content__settings-section--switcher-row">
+              <div class="popup-content__settings-section--switcher-text">
+                Транскрипция слова
+              </div>
+              <div class="switch-container">
+                <label class="switch-container__content">
+                  <input type="checkbox" class="switch-container__input" checked>
+                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__handle"></span>
+                </label>
+              </div>
+            </div>
+            <div class="popup-content__settings-section--switcher-row">
+              <div class="popup-content__settings-section--switcher-text">
+                Картинка-ассоциация
+              </div>
+              <div class="switch-container">
+                <label class="switch-container__content">
+                  <input type="checkbox" class="switch-container__input" checked>
+                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__handle"></span>
+                </label>
+              </div>
+            </div>
+            <div class="popup-content__settings-section--switcher-row">
+              <div class="popup-content__settings-section--switcher-text">
+                Произношение слова на английском языке
+              </div>
+              <div class="switch-container">
+                <label class="switch-container__content">
+                  <input type="checkbox" class="switch-container__input" checked>
+                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__handle"></span>
+                </label>
+              </div>
+            </div>
+            <div class="popup-content__settings-section--switcher-row">
+              <div class="popup-content__settings-section--switcher-text">
+                Произношение предложений с объяснением слова и с примером использования слова
+              </div>
+              <div class="switch-container">
+                <label class="switch-container__content">
+                  <input type="checkbox" class="switch-container__input" checked>
+                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__handle"></span>
+                </label>
+              </div>
+            </div>
+            <div class="popup-content__settings-section--switcher-row">
+              <div class="popup-content__settings-section--switcher-text">
+                Кнопка "Показать ответ"
+              </div>
+              <div class="switch-container">
+                <label class="switch-container__content">
+                  <input type="checkbox" class="switch-container__input" checked>
+                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__handle"></span>
+                </label>
+              </div>
+            </div>
+            <div class="popup-content__settings-section--switcher-row">
+              <div class="popup-content__settings-section--switcher-text">
+                Кнопка "Удалить"
+              </div>
+              <div class="switch-container">
+                <label class="switch-container__content">
+                  <input type="checkbox" class="switch-container__input" checked>
+                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__handle"></span>
+                </label>
+              </div>
+            </div>
+            <div class="popup-content__settings-section--switcher-row">
+              <div class="popup-content__settings-section--switcher-text">
+                Кнопка "В сложные слова"
+              </div>
+              <div class="switch-container">
+                <label class="switch-container__content">
+                  <input type="checkbox" class="switch-container__input" checked>
+                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__handle"></span>
+                </label>
+              </div>
+            </div>
+            <div class="popup-content__settings-section--switcher-row">
+              <div class="popup-content__settings-section--switcher-text">
+                Кнопки "Снова", "Трудно", "Хорошо", "Легко"
               </div>
               <div class="switch-container">
                 <label class="switch-container__content">
