@@ -1,3 +1,19 @@
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 37.5em) { @content };
+    }
+    @if $breakpoint == tab-port {
+        @media only screen and (max-width: 56.25em) { @content };
+    }
+    @if $breakpoint == tab-land {
+        @media only screen and (max-width: 75em) { @content };
+    }
+
+    @if $breakpoint == normal {
+        @media (min-width: 75em) { @content };
+    }
+}
+
 .popup {
   height: 100vh;
   width: 100%;
@@ -21,7 +37,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 720px;
     background-color: var(--white);
     box-shadow: 0 20px 40px rgba(var(--black), .2);
     border-radius: 50px;
@@ -34,6 +50,15 @@
     transform: translate(-50%, -50%) scale(.25);
     transition: all .5s .2s;
     padding: 50px;
+    @include respond(tab-land) {
+      width: 720px;
+    }
+    @include respond(tab-port) {
+      width: 550px;
+    }
+    @include respond(phone) {
+      width: 320px;
+    }
     &__control-section {
       display: flex;
       flex-direction: row;
