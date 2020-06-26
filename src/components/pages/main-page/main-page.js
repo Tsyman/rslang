@@ -84,7 +84,7 @@ class MainPage {
               <div class="switch-container">
                 <label class="switch-container__content">
                   <input type="checkbox" class="switch-container__input" checked>
-                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
                   <span class="switch-container__handle"></span>
                 </label>
               </div>
@@ -96,7 +96,7 @@ class MainPage {
               <div class="switch-container">
                 <label class="switch-container__content">
                   <input type="checkbox" class="switch-container__input" checked>
-                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
                   <span class="switch-container__handle"></span>
                 </label>
               </div>
@@ -108,7 +108,7 @@ class MainPage {
               <div class="switch-container">
                 <label class="switch-container__content">
                   <input type="checkbox" class="switch-container__input" checked>
-                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
                   <span class="switch-container__handle"></span>
                 </label>
               </div>
@@ -123,7 +123,7 @@ class MainPage {
               <div class="switch-container">
                 <label class="switch-container__content">
                   <input type="checkbox" class="switch-container__input" checked>
-                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
                   <span class="switch-container__handle"></span>
                 </label>
               </div>
@@ -135,7 +135,7 @@ class MainPage {
               <div class="switch-container">
                 <label class="switch-container__content">
                   <input type="checkbox" class="switch-container__input" checked>
-                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
                   <span class="switch-container__handle"></span>
                 </label>
               </div>
@@ -147,7 +147,7 @@ class MainPage {
               <div class="switch-container">
                 <label class="switch-container__content">
                   <input type="checkbox" class="switch-container__input" checked>
-                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
                   <span class="switch-container__handle"></span>
                 </label>
               </div>
@@ -159,7 +159,7 @@ class MainPage {
               <div class="switch-container">
                 <label class="switch-container__content">
                   <input type="checkbox" class="switch-container__input" checked>
-                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
                   <span class="switch-container__handle"></span>
                 </label>
               </div>
@@ -171,7 +171,7 @@ class MainPage {
               <div class="switch-container">
                 <label class="switch-container__content">
                   <input type="checkbox" class="switch-container__input" checked>
-                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
                   <span class="switch-container__handle"></span>
                 </label>
               </div>
@@ -183,7 +183,7 @@ class MainPage {
               <div class="switch-container">
                 <label class="switch-container__content">
                   <input type="checkbox" class="switch-container__input" checked>
-                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
                   <span class="switch-container__handle"></span>
                 </label>
               </div>
@@ -195,7 +195,7 @@ class MainPage {
               <div class="switch-container">
                 <label class="switch-container__content">
                   <input type="checkbox" class="switch-container__input" checked>
-                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
                   <span class="switch-container__handle"></span>
                 </label>
               </div>
@@ -207,7 +207,7 @@ class MainPage {
               <div class="switch-container">
                 <label class="switch-container__content">
                   <input type="checkbox" class="switch-container__input" checked>
-                  <span class="switch-container__label" data-on="Off" data-off="On"></span>
+                  <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
                   <span class="switch-container__handle"></span>
                 </label>
               </div>
