@@ -9,6 +9,8 @@ class MainPage {
 
   popupCloseButton = null;
 
+  popupSaveButton = null;
+
   constructor() {
     this.openPopupFunction = this.openPopupFunction.bind(this);
     this.closePopupFunction = this.closePopupFunction.bind(this);
@@ -181,7 +183,7 @@ class MainPage {
             </div>
           </div>
         </div>
-        <a class="btn btn--animated">Сохранить</a>
+        <a class="btn btn--animated" id="popup-save-button">Сохранить</a>
       </div>
     </div>
     <a id="open-popup">Open Popup</a>
@@ -196,9 +198,11 @@ class MainPage {
     this.popup = document.querySelector('#popup');
     this.popupContent = document.querySelector('#popup-content');
     this.popupCloseButton = document.querySelector('#popup-close-button');
+    this.popupSaveButton = document.querySelector('#popup-save-button');
 
     this.popupOpenButton.addEventListener('click', this.openPopupFunction);
     this.popupCloseButton.addEventListener('click', this.closePopupFunction);
+    this.popupSaveButton.addEventListener('click', this.closePopupFunction);
   }
 
   openPopupFunction() {
