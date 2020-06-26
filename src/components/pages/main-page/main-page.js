@@ -186,7 +186,6 @@ class MainPage {
         <a class="btn btn--animated" id="popup-save-button">Сохранить</a>
       </div>
     </div>
-    <a id="open-popup">Open Popup</a>
   `;
 
   async render() {

@@ -17,6 +17,7 @@ class NavBar {
                             <a class="navbar-item" href="/#/other">
                                 Other
                             </a>
+                            <a class="navbar-item" id="open-popup">Open Popup</a>
                         </div>
                         <div class="navbar-end">
                             <div class="navbar-item">
