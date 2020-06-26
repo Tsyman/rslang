@@ -25,6 +25,9 @@
   opacity: 0;
   visibility: hidden;
   transition: all .3s;
+  @include respond(phone) {
+    position: relative;
+  }
 
   @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
     -webkit-backdrop-filter: blur(10px);
@@ -58,6 +61,8 @@
     }
     @include respond(phone) {
       width: 320px;
+      padding: 5px;
+      border-radius: 0;
     }
     &__control-section {
       display: flex;
@@ -96,6 +101,9 @@
       &--figure-container {
         margin-bottom: 30px;
         width: 100%;
+        @include respond(phone) {
+          margin-bottom: 5px;
+        }
       }
       &--figure-row {
         display: flex;
@@ -104,10 +112,16 @@
         justify-content: space-between;
         width: 100%;
         margin-bottom: 10px;
+        @include respond(phone) {
+          margin-bottom: 5px;
+        }
       }
       &--switcher-container {
         margin-bottom: 30px;
         width: 100%;
+        @include respond(phone) {
+          margin-bottom: 5px;
+        }
       }
       &--switcher-row {
         display: flex;
@@ -116,6 +130,9 @@
         justify-content: space-between;
         width: 100%;
         margin-bottom: 15px;
+        @include respond(phone) {
+          margin-bottom: 5px;
+        }
       }
       &--figure-text {
         font-weight: Regular;
@@ -124,6 +141,9 @@
         font-family: var(--unnamed-font-family-rubik);
         letter-spacing: var(--unnamed-character-spacing-0);
         color: var(--dark);
+        @include respond(phone) {
+          width: 80%;
+        }
       }
       &--switcher-text {
         font-weight: Regular;
@@ -133,6 +153,9 @@
         letter-spacing: var(--unnamed-character-spacing-0);
         color: var(--gray);
         width: 75%;
+        @include respond(phone) {
+          width: 80%;
+        }
       }
     }
   }
@@ -177,6 +200,10 @@
         text-align: center;
         background-color: var(--green);
         color: var(--white);
+        @include respond(phone) {
+          padding: 7px 44px;
+          text-transform: none;
+        }
     }
 
     &:hover {
@@ -239,6 +266,9 @@
     border-radius: 25px;
     cursor: pointer;
     display: inline-block;
+    @include respond(phone) {
+      width: 60px;
+    }
   }
   &__input {
     display: none;
@@ -291,6 +321,9 @@
 }
 .switch-container__input:checked ~ .switch-container__handle {
   left: 58px;
+  @include respond(phone) {
+    left: 35px;
+  }
 }
 .settings-figure {
   width: 235px;
@@ -312,5 +345,9 @@
     font-family: var(--unnamed-font-family-rubik);
     letter-spacing: var(--unnamed-character-spacing-0);
     color: var(--gray);
+  }
+  @include respond(phone) {
+    width: 60px;
+    padding: 0 10px;
   }
 }
