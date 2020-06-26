@@ -11,7 +11,7 @@ class AuthorizationPage {
 
   view = `
     <div class="container">
-      <button class="return-button">&#10132;</button>
+      <button class="return-button" type="submit" onClick="location.href='/#/'">&#10132;</button>
       <div class="form__container">
         <form class="form">
           <div class="form-header">
@@ -27,7 +27,7 @@ class AuthorizationPage {
             </div>
             <div class="email__inner">
               <label class="label-email" for="email"></label>
-              <input class="input input-email" type="text" placeholder="Электронная почта" title="Введите почту" name="email" id="email" required>
+              <input class="input input-email" type="email" placeholder="Электронная почта" title="Введите почту" name="email" id="email" required>
             </div>
             <div class="password__inner">
               <label class="label-password" for="password"></label>
@@ -36,7 +36,10 @@ class AuthorizationPage {
                 title="Пароль должен содержать не менее 8 символов, как минимум одну прописную букву, одну заглавную букву, одну цифру и один спецсимвол из +-_@$!%*?&#.,;:[]{}" 
               >
             </div>
-          <button type="submit" class="submit-button">Создать аккаунт</button>
+          <div class="submit-button__inner">
+            <button type="submit" class="submit-button">Создать аккаунт</button>
+            <span class="tooltip">Неверная почта или пароль</span>
+          </div>
           </div>
           <div class="form-footer">
             <p>Уже есть аккаунт?</p>
@@ -47,17 +50,12 @@ class AuthorizationPage {
     </div>
   `;
 
-  addListeners() {
-    document.querySelector('.form').addEventListener('submit', this.submitHandler);
-    document.querySelector('.form-footer button').addEventListener('click', this.changeForm);
-  }
-
   changeForm() {
-    document.querySelector('.form-name').innerHTML = !this.flag ? 'Создать аккаунт' : 'Войти';
+    document.querySelector('.form-name').textContent = !this.flag ? 'Создать аккаунт' : 'Войти';
     document.querySelector('.name__inner').classList.toggle('disabled');
-    document.querySelector('.submit-button').innerHTML = !this.flag ? 'Создать аккаунт' : 'Войти';
-    document.querySelector('.form-footer p').innerHTML = !this.flag ? 'Уже есть аккаунт?' : 'Нет аккаунта?';
-    document.querySelector('.form-footer button').innerHTML = !this.flag ? 'Войти' : 'Создать';
+    document.querySelector('.submit-button').textContent = !this.flag ? 'Создать аккаунт' : 'Войти';
+    document.querySelector('.form-footer p').textContent = !this.flag ? 'Уже есть аккаунт?' : 'Нет аккаунта?';
+    document.querySelector('.form-footer button').textContent = !this.flag ? 'Войти' : 'Создать';
     this.flag = !this.flag;
   }
 
@@ -75,6 +73,7 @@ class AuthorizationPage {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userID', data.userId);
                 localStorage.setItem('token', userName);
+                document.querySelector('.form').reset();
               });
           });
       } else {
@@ -82,14 +81,28 @@ class AuthorizationPage {
           .then((data) => {
             localStorage.setItem('token', data.token);
             localStorage.setItem('token', data.userId);
+            document.querySelector('.form').reset();
+          }).catch(() => {
+            document.querySelector('.tooltip').classList.add('tooltip-active');
+            setTimeout(() => {
+              document.querySelector('.tooltip').classList.remove('tooltip-active');
+            }, 3000);
           });
       }
-      document.querySelector('.form').reset();
     }
   }
 
   async render() {
     return this.view;
+  }
+
+  async afterRender() {
+    document.querySelector('.form').addEventListener('submit', this.submitHandler);
+    document.querySelector('.form-footer button').addEventListener('click', this.changeForm);
+    document.querySelector('.return-button').addEventListener('click', () => {
+      document.getElementById('header_container').style.display = 'block';
+      document.getElementById('footer_container').style.display = 'block';
+    });
   }
 }
 

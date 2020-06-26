@@ -40,7 +40,7 @@ const router = async () => {
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   const page = routes[parsedURL] ? routes[parsedURL] : NotFound;
   content.innerHTML = await page.render();
-  // await page.afterRender();
+  await page.afterRender();
 };
 
 // Listen on hash change:
@@ -48,12 +48,3 @@ window.addEventListener('hashchange', router);
 
 // Listen on page load:
 window.addEventListener('load', router);
-/*
-window.addEventListener('load', AuthorizationPage.render()
-  .then((data) => {
-    document.body.innerHTML = data;
-  })
-  .then(() => {
-    AuthorizationPage.addListeners();
-  }));
-*/

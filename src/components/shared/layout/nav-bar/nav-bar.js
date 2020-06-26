@@ -21,7 +21,7 @@ class NavBar {
                         <div class="navbar-end">
                             <div class="navbar-item">
                                 <div class="buttons">
-                                    <a class="button is-primary" href="/#/login">
+                                    <a class="button is-primary" href="/#login">
                                         <strong>Sign up</strong>
                                     </a>
                                     <a class="button is-light">
@@ -41,6 +41,10 @@ class NavBar {
 
   async afterRender() {
     console.log(this.message);
+    document.querySelector('.button.is-primary').addEventListener('click', () => {
+      document.getElementById('header_container').style.display = 'none';
+      document.getElementById('footer_container').style.display = 'none';
+    });
   }
 }
 

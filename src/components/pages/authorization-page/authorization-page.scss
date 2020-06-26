@@ -1,21 +1,25 @@
+@import "../../../styles/variables.scss";
+
 body {
-  background-color: #00A8FF;
+  background-color: var(--blue);
 }
 
 .disabled {
   display: none;
 }
 
+/* Return button */
+
 .return-button {
   outline: none;
   border: none;
-  background-color: #FFFFFF;
+  background-color: var(--white);
   border-radius: 50%;
   box-shadow: 0px 4px 1px #00A8FF1A;
   width: 60px;
   height: 60px;
   font-size: 35px;
-  color: #00A8FF;
+  color: var(--blue);
   padding-bottom: 5px;
   margin: 50px 0 0 50px;
   text-align: center;
@@ -27,6 +31,8 @@ body {
   transform: rotate(180deg);
 }
 
+/* Form */
+
 .form__container {
   display: flex;
   flex-direction: column;
@@ -36,7 +42,7 @@ body {
 .form {
   width: 400px;
   height: 550px;
-  background-color: #FFFFFF;
+  background-color: var(--white);
   border-radius: 40px;
   display: flex;
   flex-direction: column;
@@ -139,15 +145,14 @@ body {
 }
 
 .submit-button {
-  background-color: #00A8FF;
+  background-color: var(--blue);
   box-shadow: 0px 4px 1px #00A8FF1A;
   border-radius: 15px;
   outline: none;
   border: none;
-  color: #FFFFFF;
+  color: var(--white);
   width: 300px;
   height: 50px;
-  margin-bottom: 40px;
   font-size: 16px;
   cursor: pointer;
 }
@@ -169,11 +174,50 @@ body {
 .form-footer button {
   width: 120px;
   height: 30px;
-  color: #00A8FF;
-  background-color: #f2fbff;
+  color: var(--blue);
+  background-color: var(--blue-light-gra);
   box-shadow: 0px 4px 1px #00A8FF1A;
   outline: none;
   border: none;
   border-radius: 20px;
   cursor: pointer;
+}
+
+/* Tooltip */
+
+.submit-button__inner {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.tooltip{
+  position: absolute;
+  width: 80%;
+  height: 40px;
+  line-height: 44px;
+  background: #ca3232;
+  color: #30333A;
+  left: 280px;
+  top: 60px;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: all 0.5s ease;
+  padding-left: 10px;
+}
+
+.tooltip:before{
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0px;
+  border-left: 10px solid #ca3232;
+  border-right: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.tooltip-active{
+  opacity: 1;
 }
