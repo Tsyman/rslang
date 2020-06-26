@@ -84,11 +84,9 @@
         margin-right: 25px;
       }
       &--name {
-        font-weight: Bold;
+        font-weight: bold;
         font-size: var(--unnamed-font-size-21);
         line-height: var(--unnamed-line-spacing-32);
-        font-family: var(--unnamed-font-family-rubik);
-        letter-spacing: var(--unnamed-character-spacing-0);
         color: var(--gray);
       }
     }
@@ -135,22 +133,18 @@
         }
       }
       &--figure-text {
-        font-weight: Regular;
+        font-weight: 400;
         font-size: var(--unnamed-font-size-15);
         line-height: var(--unnamed-line-spacing-25);
-        font-family: var(--unnamed-font-family-rubik);
-        letter-spacing: var(--unnamed-character-spacing-0);
         color: var(--dark);
         @include respond(phone) {
           width: 80%;
         }
       }
       &--switcher-text {
-        font-weight: Regular;
+        font-weight: 400;
         font-size: var(--unnamed-font-size-15);
         line-height: var(--unnamed-line-spacing-25);
-        font-family: var(--unnamed-font-family-rubik);
-        letter-spacing: var(--unnamed-character-spacing-0);
         color: var(--gray);
         width: 75%;
         @include respond(phone) {
@@ -191,11 +185,9 @@
         border: none;
         cursor: pointer;
         position: relative;
-        font-weight: Bold;
+        font-weight: bold;
         font-size: var(--unnamed-font-size-15);
         line-height: var(--unnamed-line-spacing-32);
-        font-family: var(--unnamed-font-family-rubik);
-        letter-spacing: var(--unnamed-character-spacing-0);
         color: var(--white);
         text-align: center;
         background-color: var(--green);
@@ -333,21 +325,111 @@
   outline: none;
   border: none;
   padding: 0 20px;
-  font-weight: Regular;
+  font-weight: 400;
   font-size: var(--unnamed-font-size-15);
   line-height: var(--unnamed-line-spacing-25);
-  font-family: var(--unnamed-font-family-rubik);
-  letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--dark);
   &::placeholder {
-    font-weight: Regular var(--unnamed-font-size-11);
+    font-weight: 400;
+    font-size: var(--unnamed-font-size-11);
     line-height: var(--unnamed-line-spacing-17);
-    font-family: var(--unnamed-font-family-rubik);
-    letter-spacing: var(--unnamed-character-spacing-0);
     color: var(--gray);
   }
   @include respond(phone) {
     width: 60px;
     padding: 0 10px;
+  }
+}
+
+
+.section-main-page {
+  background-color: var(--blue-light-gray);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: 100vh;
+  &__banner {
+    margin: 50px 0;
+    width: 1200px;
+    height: 160px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+    border-radius: 60px;
+    position: relative;
+    font-weight: bold;
+    font-size: var(--unnamed-font-size-31);
+    line-height: var(--unnamed-line-spacing-47);
+    color: var(--dark);
+
+    &--icon {
+      background-image: url('/assets/images/waving-hand.svg');
+      background-color: transparent;
+      background-repeat: no-repeat;
+      height: 100%;
+      width: 120px;
+      position: absolute;
+      bottom: 0;
+      left: 50px;
+      background-size: cover;
+    }
+  }
+  &__menu {
+    height: 336px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    &--start-studying {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 570px;
+      background-color: var(--white);
+      border-radius: 60px;
+    }
+    &--start-studying-text {
+
+    }
+    &--start-studying-button {
+
+    }
+    &--statistics {
+      height: 100%;
+      width: 570px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--white);
+      border-radius: 60px;
+    }
+    &--statistics-heading {
+
+    }
+    &--statistics-text {
+
+    }
+    &--statistics-button {
+
+    }
+    &--statistics-icon {
+      background-image: url('/assets/images/lazy-bones.svg');
+      background-color: transparent;
+      background-repeat: no-repeat;
+      height: 100%;
+      width: 120px;
+      position: absolute;
+      bottom: 0;
+      left: 50px;
+      background-size: cover;
+    }
   }
 }
