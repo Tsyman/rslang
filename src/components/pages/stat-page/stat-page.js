@@ -40,12 +40,30 @@ class StatPage {
             <a class="game__blue">Играть</a>
           </div>
           <ul class="game__list">
-            <li class="game__item"><a class="game__link">SpeakIt</a></li>
-            <li class="game__item"><a class="game__link">English Puzzle</a></li>
-            <li class="game__item"><a class="game__link">Саванна</a></li>
-            <li class="game__item"><a class="game__link">Аудиовызов</a></li>
-            <li class="game__item"><a class="game__link">Спринт</a></li>
-            <li class="game__item"><a class="game__link">Своя игра</a></li>
+            <li class="game__item">
+            <img class="game__img speakit" src="../../../../assets/images/speakit.svg">
+            <a class="game__link">SpeakIt</a>
+            </li>
+            <li class="game__item">
+            <img class="game__img puzzle" src="../../../../assets/images/puzzle.svg">
+            <a class="game__link">English Puzzle</a>
+            </li>
+            <li class="game__item">
+            <img class="game__img puzzle" src="../../../../assets/images/savanna.svg">
+              <a class="game__link">Саванна</a>
+            </li>
+            <li class="game__item">
+            <img class="game__img puzzle" src="../../../../assets/images/audio-choice.svg">
+              <a class="game__link">Аудиовызов</a>
+            </li>
+            <li class="game__item">
+              <img class="game__img puzzle" src="../../../../assets/images/sprint.svg">
+              <a class="game__link">Спринт</a>
+            </li>
+            <li class="game__item">
+              <img class="game__img puzzle" src="../../../../assets/images/our-game.svg">
+              <a class="game__link">Своя игра</a>
+            </li>
           </ul>
         </div>
       </section>

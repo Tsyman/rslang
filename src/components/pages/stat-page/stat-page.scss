@@ -42,7 +42,7 @@
 
 .promo__video {
   border-radius: 25px;
-  width: 585px;
+  width: 520px;
   height: 400px;
 }
 
@@ -92,7 +92,7 @@
 .vocabulary__item {
   box-shadow: 0px 10px 0px #00A8FF17;
   border-radius: 50px;
-  width: 585px;
+  width: 450px;
   height: 120px;
   margin-bottom: 40px;
   background-color: var(--white);
@@ -103,8 +103,8 @@
   justify-content: center;
   align-items: center;
   color: var(--dark-blue);
-  font-size: var(--font-size-21);
-  line-height: var(--line-spacing-32);
+  font-size: var(--font-size-31);
+  line-height: var(--line-spacing-47);
   margin: 0;
   width: inherit;
   height: inherit;
@@ -167,8 +167,9 @@
 
 .game__item {
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   width: 360px;
   height: 240px;
   box-shadow: 0px 10px 0px #00A8FF08;
@@ -183,7 +184,12 @@
   line-height: 32px;
   text-align: center;
   font-weight: bold;
-  padding-bottom: 50px;
+}
+
+.game__img {
+  display: block;
+  width: 130px;
+  height: 130px;
 }
 
 
@@ -273,7 +279,7 @@
 
 .section-statistics {
   background-color: var(--blue-light-gray);
-  padding-bottom: 160px;
+  padding-bottom: 60px;
 }
 
 .statistic__title {
@@ -369,8 +375,8 @@
 }
 
 .account-btn {
-  font-size: 21px;
-  line-height: 32px;
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-32);
   color: var(--white);
   font-weight: bold;
   background-color: var(--blue);
@@ -474,9 +480,11 @@
     height: 200px;
   }
 
-  .game__link {
-    padding-bottom: 25px;
+  .game__img {
+    width: 100px;
+    height: 100px;
   }
+
 
   .section-interval {
     padding-bottom: 80px;
@@ -503,7 +511,7 @@
   }
 
   .section-statistics {
-    padding-bottom: 80px;
+    padding-bottom: 60px;
   }
 
   .statistic__title {
@@ -555,6 +563,11 @@
   .vocabulary__item {
     width: 262px;
     height: 100px;
+  }
+
+  .vocabulary__item-text {
+    font-size: var(--font-size-21);
+    line-height: var(--line-spacing-32);
   }
 
   .game-wrapper {
@@ -614,7 +627,6 @@
 
   .game__item {
     margin: 0 auto;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
-
 }
