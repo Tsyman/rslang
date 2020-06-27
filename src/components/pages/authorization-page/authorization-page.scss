@@ -187,7 +187,7 @@ body {
 
 .submit-button__inner {
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
 .tooltip{
@@ -197,7 +197,7 @@ body {
   line-height: 44px;
   background: #ca3232;
   color: #30333A;
-  left: 280px;
+  left: 15%;
   top: 60px;
   font-weight: 700;
   font-size: 16px;
@@ -220,4 +220,36 @@ body {
 
 .tooltip-active{
   opacity: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .authorization-page__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .return-button {
+    margin: 50px 0 30px 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .form {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .form {
+    width: 300px;
+  }
+  .input {
+    width: 225px;
+  }
+  .submit-button {
+    width: 275px;
+  }
+  .tooltip {
+    font-size: 14px;
+  }
 }

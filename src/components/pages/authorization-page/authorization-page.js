@@ -10,7 +10,7 @@ class AuthorizationPage {
   }
 
   view = `
-    <div class="container">
+    <div class="authorization-page__container">
       <button class="return-button" type="submit" onClick="location.href='/#/'">&#10132;</button>
       <div class="form__container">
         <form class="form">
