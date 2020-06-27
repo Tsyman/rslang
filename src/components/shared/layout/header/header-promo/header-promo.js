@@ -8,18 +8,30 @@ class HeaderPromo {
             <div class="container">
               <nav class="header-promo__nav">
                 <div class="header-promo__logo header-promo__start"></div>
-                <div class="header-promo__inner">
-                  <div class="header-promo__middle">
-                    <ul class="header-promo__list">
-                      <li class="header-promo__item promo-active-item" id="promo-tab1"><a class="header-promo__link" href="/#/">Главная</a></li>
-                      <li class="header-promo__item" id="promo-tab2"><a class="header-promo__link" href="/#team">Наша команда</a></li>
+                <div class="sidebar">
+                  <input class="sidebar__input" id="sidebar__input" type="checkbox">
+                  <label for="sidebar__input" class="sidebar__label">
+                    <div class="burger diagonal diagonal-1"></div>
+                    <div class="burger horizontal"></div>
+                    <div class="burger diagonal diagonal-2"></div>
+                  </label>
+                  <div class="header-promo__end sidebar__menu">
+                    <ul class="header-promo__list sidebar__list">
+                      <li class="header-promo__item sidebar__item" id="promo-tab1">
+                        <a class="header-promo__link" href="/#/">Главная</a>
+                        <div class="promo-active-item"></div>
+                      </li>
+                      <li class="header-promo__item sidebar__item" id="promo-tab2">
+                        <a class="header-promo__link" href="/#team">Наша команда</a>
+                        <div id="promo-active-item"></div>
+                      </li>
+                      <li class="registration-btn sidebar__item">
+                        <a class="button secondary-btn" href="/#/register">Создать аккаунт</a>
+                      </li>
+                      <li class="registration-btn sidebar__item">
+                        <a class="button secondary-light-btn" href="/#/signin">Войти</a>
+                      </li>
                     </ul>
-                  </div>
-                  <div class="header-promo__end">
-                    <div class="header-promo__btn">
-                      <a class="button secondary-btn" href="/#/register">Создать аккаунт</a>
-                      <a class="button secondary-light-btn" href="/#/signin">Войти</a>
-                    </div>
                   </div>
                 </div>
               </nav>
