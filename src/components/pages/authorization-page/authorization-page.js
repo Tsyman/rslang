@@ -80,7 +80,7 @@ class AuthorizationPage {
         signInUser({ email: userEmail, password: userPassword })
           .then((data) => {
             localStorage.setItem('token', data.token);
-            localStorage.setItem('token', data.userId);
+            localStorage.setItem('userId', data.userId);
             document.querySelector('.form').reset();
           }).catch(() => {
             document.querySelector('.tooltip').classList.add('tooltip-active');
