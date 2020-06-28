@@ -1,6 +1,8 @@
-import './main-page.scss';
+import './header-main.scss';
 
-class MainPage {
+class NavBar {
+  message = 'after render';
+
   view = `
           <header class="header-main">
             <div class="container">
@@ -38,7 +40,10 @@ class MainPage {
   async render() {
     return this.view;
   }
-  // async afterRender() {}
+
+  async afterRender() {
+    console.log(this.message);
+  }
 }
 
-export default new MainPage();
+export default new NavBar();

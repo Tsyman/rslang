@@ -1,0 +1,71 @@
+@import "../../../../../styles/variables.scss";
+
+.header-main {
+  background-color: var(--white);
+}
+
+.header-main__nav {
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  padding: 20px 0;
+  align-items: flex-end;
+}
+
+.header-main__logo {
+  width: 120px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url(../../../../../assets/images/main-logo.png);
+}
+
+.header-main__list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+}
+
+.header-main__item {
+  text-align: center;
+}
+
+.header-main__link {
+  padding-left: 60px;
+  text-decoration: none;
+  font-size: 17px;
+  line-height: 32px;
+  color: var(--gray);
+}
+
+.header-main__text {
+  font-size: 21px;
+  line-height: 32px;
+  font-weight: bold;
+  color: var(--gray);
+  margin: 0;
+}
+
+.header-main__account {
+  display: flex;
+  align-items: center;
+}
+
+.account-btn {
+  font-size: 21px;
+  line-height: 32px;
+  color: var(--white);
+  font-weight: bold;
+  background-color: var(--blue);
+  width: 60px;
+  height: 60px;
+  text-decoration: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 40px;
+  cursor: pointer;
+}
