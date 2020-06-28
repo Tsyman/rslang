@@ -28,7 +28,7 @@ class MainPage {
           <div class="section-main-page__menu--start-studying-text">
             Good evening! - Добрый вечер!
           </div>
-          <div class="section-main-page__menu--start-studying-button">
+          <div class="btn btn--animated btn--blue">
             Выучить пару английских слов
           </div>
         </div>
@@ -39,7 +39,7 @@ class MainPage {
           <div class="section-main-page__menu--statistics-text">
             Похоже, что вы только что зарегистрировались или очень давно не занимались
           </div>
-          <div class="section-main-page__menu--statistics-button">
+          <div class="btn btn--animated btn--green">
             Го играть!
           </div>
           <div class="section-main-page__menu--statistics-icon">
@@ -214,7 +214,7 @@ class MainPage {
             </div>
           </div>
         </div>
-        <a class="btn btn--animated" id="popup-save-button">Сохранить</a>
+        <a class="btn btn--animated btn--green" id="popup-save-button">Сохранить</a>
       </div>
     </div>
   `;
