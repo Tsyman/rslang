@@ -212,6 +212,12 @@
         background-color: var(--blue);
         border-radius: 15px;
       }
+      @include respond(tab-land) {
+        padding: 10px 20px;
+      }
+      @include respond(phone) {
+        line-height: var(--unnamed-line-spacing-25);
+      }
     }
     &--green {
       &::after {
@@ -395,6 +401,33 @@
       bottom: 0;
       left: 50px;
       background-size: cover;
+      @include respond(tab-land) {
+        height: 70%;
+        width: 90px;
+        left: 30px;
+      }
+      @include respond(tab-port) {
+        height: 60%;
+        width: 72px;
+        left: 30px;
+      }
+      @include respond(phone) {
+        height: 86%;
+        width: 60px;
+        left: 39px;
+      }
+    }
+    @include respond(tab-land) {
+      width: 600px;
+      font-size: var(--unnamed-font-size-21);
+    }
+    @include respond(tab-port) {
+      width: 530px;
+      font-size: var(--unnamed-font-size-17);
+    }
+    @include respond(phone) {
+      width: 260px;
+      font-size: var(--unnamed-font-size-15);
     }
   }
   &__menu {
@@ -404,6 +437,16 @@
     align-items: center;
     justify-content: space-between;
     width: 1200px;
+    @include respond(tab-land) {
+      flex-direction: column;
+      height: 465px;
+    }
+    @include respond(tab-port) {
+      width: 530px;
+    }
+    @include respond(phone) {
+      width: 260px;
+    }
     &--start-studying {
       display: flex;
       flex-direction: column;
@@ -413,12 +456,27 @@
       width: 570px;
       background-color: var(--white);
       border-radius: 60px;
+      @include respond(tab-land) {
+        margin-bottom: 20px;
+      }
+      @include respond(tab-port) {
+        width: 530px;
+      }
+      @include respond(phone) {
+        width: 260px;
+      }
     }
     &--start-studying-text {
       font-weight: 400;
       font-size: var(--unnamed-font-size-21);
       color: var(--dark);
       margin-bottom: 30px;
+      @include respond(tab-land) {
+        font-size: var(--unnamed-font-size-17);
+      }
+      @include respond(phone) {
+        font-size: var(--unnamed-font-size-15);
+      }
     }
     &--statistics {
       height: 100%;
@@ -430,12 +488,24 @@
       background-color: var(--white);
       border-radius: 60px;
       position: relative;
+      @include respond(tab-land) {
+        padding: 20px;
+      }
+      @include respond(tab-port) {
+        width: 530px;
+      }
+      @include respond(phone) {
+        width: 260px;
+      }
     }
     &--statistics-heading {
       font-size: var(--unnamed-font-size-21);
       font-weight: bold;
       color: var(--dark);
       margin-bottom: 15px;
+      @include respond(tab-land) {
+        font-size: var(--unnamed-font-size-17);
+      }
     }
     &--statistics-text {
       font-weight: 400;
@@ -445,9 +515,9 @@
       text-align: center;
       line-height: var(--unnamed-line-spacing-32);
       margin-bottom: 35px;
-    }
-    &--statistics-button {
-
+      @include respond(tab-land) {
+        font-size: var(--unnamed-font-size-15);
+      }
     }
     &--statistics-icon {
       background-image: url('/assets/images/lazy-bones.svg');
@@ -459,6 +529,9 @@
       bottom: 0;
       left: 50px;
       background-size: cover;
+    }
+    @include respond(tab-land) {
+      width: 600px;
     }
   }
 }
