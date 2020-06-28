@@ -178,6 +178,10 @@
   margin-bottom: 60px;
 }
 
+.game__item:hover {
+  box-shadow: 0 14px 28px var(--blue-light-gray), 0 10px 10px var(--blue);
+}
+
 .game__link {
   color: var(--blue);
   font-size: 21px;
