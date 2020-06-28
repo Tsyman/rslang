@@ -2,9 +2,10 @@ import AuthorizationPage from './components/pages/authorization-page/authorizati
 
 import Main from './components/pages/main-page/main-page';
 import Stat from './components/pages/stat-page/stat-page';
+import OurTeam from './components/pages/our-team/our-team';
 import NotFound from './components/pages/not-found/not-found';
 
-import NavBar from './components/shared/layout/nav-bar/nav-bar';
+import HeaderPromo from './components/shared/layout/header/header-promo/header-promo';
 import Footer from './components/shared/layout/footer/footer';
 
 import Utils from './services/Utils';
@@ -14,6 +15,7 @@ const routes = {
   '/': Main,
   '/stat': Stat,
   '/login': AuthorizationPage,
+  '/team': OurTeam,
 };
 
 // The router code. Takes a URL, checks against the list of supported routes
@@ -25,8 +27,8 @@ const router = async () => {
   const footer = null || document.getElementById('footer_container');
 
   // Render the Header and footer of the page
-  header.innerHTML = await NavBar.render();
-  await NavBar.afterRender();
+  header.innerHTML = await HeaderPromo.render();
+  await HeaderPromo.afterRender();
   footer.innerHTML = await Footer.render();
 
   // Get the parsed URl from the addressbar

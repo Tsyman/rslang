@@ -93,6 +93,7 @@ class AuthorizationPage {
   }
 
   async render() {
+    this.flag = true;
     return this.view;
   }
 
