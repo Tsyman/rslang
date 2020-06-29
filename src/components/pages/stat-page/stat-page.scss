@@ -1,6 +1,6 @@
 @import "../../../styles/variables.scss";
 
-.section-promo {
+.promo {
   background-color: var(--blue);
   padding-top: 150px;
   padding-bottom: 250px;
@@ -13,12 +13,12 @@
   margin: 0;
 }
 
-.promo-wrapper {
+.promo__wrapper {
   display: flex;
   justify-content: space-between;
 }
 
-.promo-wrapper-1 {
+.promo__wrapper-1 {
   width: 49%;
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@
   cursor: pointer;
 }
 
-.promo-wrapper-2 {
+.promo__wrapper-2 {
   width: 45%;
 }
 
@@ -67,19 +67,19 @@
   margin: 0;
 }
 
-.vocabulary-inner {
+.vocabulary__inner {
   display: flex;
   justify-content: space-between;
 }
 
-.vocabulary-inner-1 {
+.vocabulary__inner-1 {
   width: 30%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.vocabulary-inner-2 {
+.vocabulary__inner-2 {
   width: 68%;
 }
 
@@ -98,7 +98,7 @@
   background-color: var(--white);
 }
 
-.vocabulary__item-text {
+.vocabulary__heading {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,7 +114,7 @@
   align-self: flex-end;
 }
 
-.vocabulary-blue {
+.vocabulary__link-blue {
   background-color: var(--blue);
   box-shadow: 0px 4px 2px #0000000A;
   border-radius: 25px;
@@ -125,14 +125,14 @@
   width: 220px;
 }
 
-.game-wrapper {
+.game__wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 60px;
 }
 
-.section-game {
+.game {
   background-color: var(--blue-light-gray);
   padding-bottom: 120px;
 }
@@ -145,7 +145,7 @@
   margin: 0;
 }
 
-.game__blue {
+.game__link-blue {
   background-color: var(--blue);
   box-shadow: 0px 4px 2px #0000000A;
   border-radius: 25px;
@@ -184,8 +184,8 @@
 
 .game__link {
   color: var(--blue);
-  font-size: 21px;
-  line-height: 32px;
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-32);
   text-align: center;
   font-weight: bold;
 }
@@ -197,17 +197,17 @@
 }
 
 
-.section-interval {
+.interval {
   background-color: var(--blue-light-gray);
   padding-bottom: 120px;
 }
 
-.interval-wrapper {
+.interval__wrapper {
   display: flex;
   justify-content: space-between;
 }
 
-.interval {
+.interval__heading {
   width: 45%;
 }
 
@@ -245,6 +245,7 @@
   height: 72px;
   border-radius: 36px;
   position: relative;
+  font-weight: bold;
 }
 
 .interval__text {
@@ -273,6 +274,8 @@
 }
 
 .interval__link {
+  font-size: var(--font-size-17);
+  line-height: var(--line-spacing-25);
   margin-top: 20px;
   padding-top: 5px;
   color: var(--white);
@@ -281,15 +284,15 @@
   align-items: center;
 }
 
-.section-statistics {
+.statistics {
   background-color: var(--blue-light-gray);
   padding-bottom: 60px;
 }
 
 .statistic__title {
   margin: 0;
-  font-size: 59px;
-  line-height: 74px;
+  font-size: var(--font-size-59);
+  line-height: var(--line-spacing-74);
   color: var(--dark);
   font-weight: bold;
   text-align: center;
@@ -395,19 +398,19 @@
   cursor: pointer;
 }
 
-.vocabulary-blue:hover,
-.game__blue:hover,
+.vocabulary__link-blue:hover,
+.game__link-blue:hover,
 .statistic__link:hover {
   background-color: var(--dark-blue);
 }
 
 .promo__link-blue:hover {
-  background-color: var(--blue);
+  background-color: var(--green);
 }
 
 
 @media (max-width: 1199px) {
-  .section-promo {
+  .promo {
     padding-top: 125px;
     padding-bottom: 80px;
   }
@@ -419,18 +422,18 @@
     margin-bottom: 40px;
   }
 
-  .promo-wrapper {
+  .promo__wrapper {
     align-items: center;
     flex-direction: column-reverse;
   }
 
-  .promo-wrapper-1 {
+  .promo__wrapper-1 {
     width: 100%;
     align-items: center;
     padding: 0 15px;
   }
 
-  .promo-wrapper-2 {
+  .promo__wrapper-2 {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -459,23 +462,23 @@
     margin-bottom: 40px;
   }
 
-  .vocabulary-inner {
+  .vocabulary__inner {
     flex-direction: column;
   }
 
-  .vocabulary-inner-1 {
+  .vocabulary__inner-1 {
     width: 100%;
   }
 
-  .vocabulary-inner-2 {
+  .vocabulary__inner-2 {
     width: 100%;
   }
 
-  .vocabulary-blue {
+  .vocabulary__link-blue {
     margin-bottom: 50px;
   }
 
-  .section-game {
+  .game {
     padding-bottom: 20px;
   }
 
@@ -490,11 +493,11 @@
   }
 
 
-  .section-interval {
+  .interval {
     padding-bottom: 80px;
   }
 
-  .interval {
+  .interval__heading {
     width: 100%;
   }
 
@@ -502,7 +505,7 @@
     width: 100%;
   }
 
-  .interval-wrapper {
+  .interval__wrapper {
     flex-direction: column;
     width: 100%;
   }
@@ -514,7 +517,7 @@
     margin-bottom: 40px;
   }
 
-  .section-statistics {
+  .statistics {
     padding-bottom: 60px;
   }
 
@@ -530,7 +533,7 @@
 }
 
 @media (max-width: 767px) {
-  .section-promo {
+  .promo {
     padding-top: 30px;
     padding-bottom: 100px;
   }
@@ -559,7 +562,7 @@
     line-height: var(--line-spacing-25);
   }
 
-  .vocabulary-blue {
+  .vocabulary__link-blue {
     margin: 0 auto;
     margin-bottom: 40px;
   }
@@ -569,12 +572,12 @@
     height: 100px;
   }
 
-  .vocabulary__item-text {
+  .vocabulary__heading {
     font-size: var(--font-size-21);
     line-height: var(--line-spacing-32);
   }
 
-  .game-wrapper {
+  .game__wrapper {
     flex-direction: column;
   }
 
@@ -601,6 +604,8 @@
 
   .interval__link {
     margin-top: 5px;
+    font-size: var(--font-size-15);
+    line-height: var(--line-spacing-21);
   }
 
   .statistic__title {
@@ -617,9 +622,9 @@
     line-height: var(--line-spacing-25);
   }
 
-  .vocabulary-blue,
+  .vocabulary__link-blue,
   .promo__link-blue,
-  .game__blue,
+  .game__link-blue,
   .statistic__link {
     width: 200px;
   }
