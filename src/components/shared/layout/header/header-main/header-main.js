@@ -62,7 +62,7 @@ class HeaderMain {
   }
 
   async afterRender() {
-    console.log(this.message);
+    return this.message;
   }
 }
 

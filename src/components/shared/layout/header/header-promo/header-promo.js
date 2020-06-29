@@ -44,7 +44,7 @@ class HeaderPromo {
   }
 
   async afterRender() {
-    console.log(this.message);
+    return this.message;
   }
 }
 
