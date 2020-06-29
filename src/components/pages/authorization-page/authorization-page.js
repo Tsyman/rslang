@@ -1,10 +1,24 @@
 import './authorization-page.scss';
-import createUser from './createUser';
-import signInUser from './singInUser';
+import userRequest from './userRequest';
+import extractTokenExpiration from './tokenHandling/decodeToken';
+import timestamp from './tokenHandling/formattedTime';
+
+const paths = {
+  createUser: 'users',
+  signInUser: 'signin',
+};
+
+const keyNames = {
+  token: 'token',
+  userId: 'userId',
+  userName: 'userName',
+  tokenEndTime: 'tokenEndTime',
+};
 
 class AuthorizationPage {
   constructor() {
     this.flag = true;
+    this.tooltipTime = 3000;
     this.changeForm = this.changeForm.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
   }
@@ -66,38 +80,46 @@ class AuthorizationPage {
       const userEmail = document.querySelector('.input-email').value;
       const userPassword = document.querySelector('.input-password').value;
       if (this.flag) {
-        createUser({ email: userEmail, password: userPassword })
+        userRequest({ email: userEmail, password: userPassword }, paths.createUser)
           .then(() => {
-            signInUser({ email: userEmail, password: userPassword })
+            userRequest({ email: userEmail, password: userPassword }, paths.signInUser)
               .then((data) => {
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('userID', data.userId);
-                localStorage.setItem('token', userName);
+                localStorage.setItem(keyNames.token, data.token);
+                localStorage.setItem(keyNames.userId, data.userId);
+                localStorage.setItem(keyNames.userName, userName);
+                localStorage.setItem(
+                  keyNames.tokenEndTime,
+                  timestamp(extractTokenExpiration(data.token)),
+                );
                 document.querySelector('.form').reset();
               });
           });
       } else {
-        signInUser({ email: userEmail, password: userPassword })
+        userRequest({ email: userEmail, password: userPassword }, paths.signInUser)
           .then((data) => {
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('userId', data.userId);
+            localStorage.setItem(keyNames.token, data.token);
+            localStorage.setItem(keyNames.userId, data.userId);
+            localStorage.setItem(
+              keyNames.tokenEndTime,
+              timestamp(extractTokenExpiration(data.token)),
+            );
             document.querySelector('.form').reset();
           }).catch(() => {
             document.querySelector('.tooltip').classList.add('tooltip-active');
             setTimeout(() => {
               document.querySelector('.tooltip').classList.remove('tooltip-active');
-            }, 3000);
+            }, this.tooltipTime);
           });
       }
     }
   }
 
-  async render() {
+  render() {
     this.flag = true;
     return this.view;
   }
 
-  async afterRender() {
+  afterRender() {
     document.querySelector('.form').addEventListener('submit', this.submitHandler);
     document.querySelector('.form-footer button').addEventListener('click', this.changeForm);
     document.querySelector('.return-button').addEventListener('click', () => {
