@@ -3,24 +3,23 @@ import userRequest from './userRequest';
 import extractTokenExpiration from './tokenHandling/decodeToken';
 import timestamp from './tokenHandling/formattedTime';
 
-const paths = {
-  createUser: 'users',
-  signInUser: 'signin',
-};
-
-const keyNames = {
-  token: 'token',
-  userId: 'userId',
-  userName: 'userName',
-  tokenEndTime: 'tokenEndTime',
-};
-
 class AuthorizationPage {
   constructor() {
+    this.errorMessage = null;
     this.flag = true;
     this.tooltipTime = 3000;
     this.changeForm = this.changeForm.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
+    this.keyNames = {
+      token: 'token',
+      userId: 'userId',
+      userName: 'userName',
+      tokenEndTime: 'tokenEndTime',
+    };
+    this.paths = {
+      createUser: 'users',
+      signInUser: 'signin',
+    };
   }
 
   view = `
@@ -52,7 +51,7 @@ class AuthorizationPage {
             </div>
           <div class="submit-button__inner">
             <button type="submit" class="submit-button">Создать аккаунт</button>
-            <span class="tooltip">Неверная почта или пароль</span>
+            <span class="tooltip"></span>
           </div>
           </div>
           <div class="form-footer">
@@ -73,6 +72,67 @@ class AuthorizationPage {
     this.flag = !this.flag;
   }
 
+  registerUserForm(mail, pass, name) {
+    userRequest({ email: mail, password: pass }, this.paths.createUser)
+      .then(() => {
+        userRequest({ email: mail, password: pass }, this.paths.signInUser)
+          .then((response) => {
+            if (response.status.toString().charAt(0) === '5') {
+              this.errorMessage = 'Проблемы с сервером';
+            }
+            return response.json();
+          })
+          .then((data) => {
+            localStorage.setItem(this.keyNames.userName, name);
+            this.afterSignIn(data);
+          });
+      }).catch(() => {
+        document.querySelector('.tooltip').textContent = this.errorMessage;
+        document.querySelector('.tooltip').classList.add('tooltip-active');
+        setTimeout(() => {
+          document.querySelector('.tooltip').classList.remove('tooltip-active');
+          this.errorMessage = '';
+          document.querySelector('.tooltip').textContent = this.errorMessage;
+        }, this.tooltipTime);
+      });
+  }
+
+  signInUserForm(mail, pass) {
+    userRequest({ email: mail, password: pass }, this.paths.signInUser)
+      .then((response) => {
+        if (response.status === 403) {
+          this.errorMessage = 'Неверная почта или пароль';
+        } else if (response.status === 404) {
+          this.errorMessage = 'Такого пользователя не существует';
+        } else if (response.status.toString().charAt(0) === '5') {
+          this.errorMessage = 'Проблемы с сервером';
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.afterSignIn(data);
+      })
+      .catch(() => {
+        document.querySelector('.tooltip').textContent = this.errorMessage;
+        document.querySelector('.tooltip').classList.add('tooltip-active');
+        setTimeout(() => {
+          document.querySelector('.tooltip').classList.remove('tooltip-active');
+          this.errorMessage = '';
+          document.querySelector('.tooltip').textContent = this.errorMessage;
+        }, this.tooltipTime);
+      });
+  }
+
+  afterSignIn(data) {
+    localStorage.setItem(this.keyNames.token, data.token);
+    localStorage.setItem(this.keyNames.userId, data.userId);
+    localStorage.setItem(
+      this.keyNames.tokenEndTime,
+      timestamp(extractTokenExpiration(data.token)),
+    );
+    document.querySelector('.form').reset();
+  }
+
   submitHandler(event) {
     if (document.querySelector('.form').checkValidity()) {
       event.preventDefault();
@@ -80,36 +140,9 @@ class AuthorizationPage {
       const userEmail = document.querySelector('.input-email').value;
       const userPassword = document.querySelector('.input-password').value;
       if (this.flag) {
-        userRequest({ email: userEmail, password: userPassword }, paths.createUser)
-          .then(() => {
-            userRequest({ email: userEmail, password: userPassword }, paths.signInUser)
-              .then((data) => {
-                localStorage.setItem(keyNames.token, data.token);
-                localStorage.setItem(keyNames.userId, data.userId);
-                localStorage.setItem(keyNames.userName, userName);
-                localStorage.setItem(
-                  keyNames.tokenEndTime,
-                  timestamp(extractTokenExpiration(data.token)),
-                );
-                document.querySelector('.form').reset();
-              });
-          });
+        this.registerUserForm(userEmail, userPassword, userName);
       } else {
-        userRequest({ email: userEmail, password: userPassword }, paths.signInUser)
-          .then((data) => {
-            localStorage.setItem(keyNames.token, data.token);
-            localStorage.setItem(keyNames.userId, data.userId);
-            localStorage.setItem(
-              keyNames.tokenEndTime,
-              timestamp(extractTokenExpiration(data.token)),
-            );
-            document.querySelector('.form').reset();
-          }).catch(() => {
-            document.querySelector('.tooltip').classList.add('tooltip-active');
-            setTimeout(() => {
-              document.querySelector('.tooltip').classList.remove('tooltip-active');
-            }, this.tooltipTime);
-          });
+        this.signInUserForm(userEmail, userPassword);
       }
     }
   }

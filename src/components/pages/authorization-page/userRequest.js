@@ -1,5 +1,5 @@
 const userRequest = async (user, path) => {
-  const rawResponse = await fetch(`https://afternoon-falls-25894.herokuapp.com/${path}`, {
+  const rawResponse = await fetch(`http://pacific-castle-12388.herokuapp.com/${path}`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -7,7 +7,7 @@ const userRequest = async (user, path) => {
     },
     body: JSON.stringify(user),
   });
-  return rawResponse.json();
+  return rawResponse;
 };
 
 export default userRequest;
