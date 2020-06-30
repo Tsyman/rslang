@@ -2,6 +2,7 @@ import Main from './components/pages/main-page/main-page';
 import Stat from './components/pages/stat-page/stat-page';
 import OurTeam from './components/pages/our-team/our-team';
 import NotFound from './components/pages/not-found/not-found';
+import Dictionary from './components/pages/dictionary-page/dictionary-page';
 
 import HeaderPromo from './components/shared/layout/header/header-promo/header-promo';
 import Footer from './components/shared/layout/footer/footer';
@@ -13,6 +14,8 @@ const routes = {
   '/': Main,
   '/stat': Stat,
   '/team': OurTeam,
+  '/dictionary': Dictionary,
+  '/dictionary/:id': Dictionary,
 };
 
 // The router code. Takes a URL, checks against the list of supported routes
@@ -38,7 +41,7 @@ const router = async () => {
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   const page = routes[parsedURL] ? routes[parsedURL] : NotFound;
   content.innerHTML = await page.render();
-  // await page.afterRender();
+  await page.afterRender();
 };
 
 // Listen on hash change:
