@@ -139,6 +139,7 @@
         color: var(--dark);
         @include respond(phone) {
           width: 80%;
+          font-size: var(--unnamed-font-size-11);
         }
       }
       &--switcher-text {
@@ -149,6 +150,7 @@
         width: 75%;
         @include respond(phone) {
           width: 80%;
+          font-size: var(--unnamed-font-size-11);
         }
       }
     }
