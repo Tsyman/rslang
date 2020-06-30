@@ -1,9 +1,5 @@
 @import "../../../styles/variables";
 
-    body {
-      background-color: #003dcb;
-    }
-
 .card {
   &__wrapper {
     position: absolute;
@@ -116,6 +112,7 @@
   &__btnWrapper {
     display: flex;
     width: 100%;
+    max-width: 250px;
     justify-content: space-around;
   }
 
@@ -142,7 +139,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-width: 180px;
+      max-width: 180px;
       height: 30px;
       font: var(--font-size-15)/var(--line-spacing-32) var(--font-family-rubik);
       letter-spacing: var(--character-spacing-0);
@@ -280,7 +277,7 @@
       width: 100%;
       min-width: 240px;
       height: 135px;
-      margin: auto;
+      margin: 0 auto 5px auto;
       font: Bold var(--font-size-42)/var(--line-spacing-47) var(--font-family-rubik);
       letter-spacing: var(--character-spacing-0);
 
@@ -314,7 +311,7 @@
     }
 
     &__wordType {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       width: 85%;
     }
 
@@ -340,25 +337,29 @@
 @media (max-width: 631px) {
   .card {
     &__wrapper {
-      height: 730px;
       min-width: 280px;
+      top: 120px;
     }
 
     &__container {
       min-width: 280px;
     }
 
-    &__btn {
-      &--Delete {
-        font: var(--font-size-11)/var(--line-spacing-17) var(--font-family-rubik);
+    &__text {
+      height: auto;
+      min-height: 64px;
+      font: var(--font-style-bold) var(--font-size-31)/var(--line-spacing-32) var(--font-family-rubik);
+
+      &.smallSize {
+        font: var(--font-size-21)/var(--line-spacing-32) var(--font-family-rubik);
       }
 
-      &--Transfer {
-        font: var(--font-size-11)/var(--line-spacing-17) var(--font-family-rubik);
+      &.microSize {
+        font: 17px/25px;
       }
 
-      &--ShowAnswer {
-        font: var(--font-size-11)/var(--line-spacing-17) var(--font-family-rubik);
+      &.nanoSize {
+        font: 17px/25px;
       }
     }
 
@@ -372,7 +373,7 @@
     }
 
     &__btnWrapper {
-      margin-bottom: 35px;
+      margin-bottom: 25px;
     }
 
     &__bottomContent {
@@ -390,6 +391,24 @@
       &--Again,
       &--Good {
         margin-right: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 431px) {
+  .card {
+    &__btn {
+      &--Delete {
+        font: var(--font-size-11)/var(--line-spacing-17) var(--font-family-rubik);
+      }
+
+      &--Transfer {
+        font: var(--font-size-11)/var(--line-spacing-17) var(--font-family-rubik);
+      }
+
+      &--ShowAnswer {
+        font: var(--font-size-11)/var(--line-spacing-17) var(--font-family-rubik);
       }
     }
   }
