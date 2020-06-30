@@ -1,7 +1,9 @@
 import './card.scss';
 
 class Card {
-  constructor(startText, endText, word, textTranslate, wordType, wordTranslate) {
+  constructor({
+    startText, endText, word, textTranslate, wordType, wordTranslate,
+  }) {
     this.startText = startText;
     this.endText = endText;
     this.textTranslate = textTranslate;
@@ -33,19 +35,25 @@ class Card {
                 <div class="card__translateText">${this.textTranslate}</div>
                 <div class="card__wordType">${this.wordType}</div>
                 <div class="card__handlers">
-                    <div class="card_btnDelete">Удалить</div> 
-                    <div class="card_btnTransfer">Перенести в "Сложное"</div> 
-                    <div class="card_btnShowAnswer">Показать ответ</div> 
+                    <div class="card__btnWrapper">
+                        <div class="card__btn--Delete">Удалить</div> 
+                        <div class="card__btn--Transfer">Перенести в "Сложное"</div> 
+                    </div>
+                    <div class="card__btn--ShowAnswer">Показать ответ</div> 
                 </div>
             </div>
         </div>
         <div class="card__bottomContent">
             <div class="card__wordTranslate">${this.wordTranslate}</div>
             <div class="card__bottomContentBtn">
-                <div class="card__btnAgain">Снова</div>
-                <div class="card__btnHard">Трудно</div>
-                <div class="card__btnGood">Хорошо</div>
-                <div class="card__btnEasy">Легко</div>
+                <div class="card__bottomContentBtnTop">
+                    <div class="card__bottomBtn--Again">Снова</div>
+                    <div class="card__bottomBtn--Hard">Трудно</div>
+                </div>
+                <div class="card__bottomContentBtnBottom">
+                    <div class="card__bottomBtn--Good">Хорошо</div>
+                    <div class="card__bottomBtn--Easy">Легко</div>
+                </div>
             </div>
         </div>
     </div>`;
@@ -57,10 +65,30 @@ export default Card;
 
 /*
 Тестовые карточки разной длины;
-const newCard = new Card('I would like a room with a sea',
-'.', 'view', 'Я бы хотел комнату с видом на море', 'сущ.ед.ч.', 'вид, пейзаж');
-const newCard2 = new Card('I ', 'would like a room with a sea view.',
- 'would', 'Я бы хотел комнату с видом на море', 'сущ.ед.ч.', 'бы');
-const newCard3 = new Card('I ', 'would liwwwww ule wouldlike wou like would
- like w a room with a sea view.', 'would', 'Я бы хотел комнату с видом на море', 'сущ.ед.ч.', 'бы');
+      // const newCard = new Card({
+      //   startText: 'I would like a room with a sea',
+      //   endText: '.',
+      //   word: 'view',
+      //   textTranslate: 'Я бы хотел комнату с видом на море',
+      //   wordType: 'сущ.ед.ч.',
+      //   wordTranslate: 'вид, пейзаж',
+      // });
+
+      // const newCard = new Card({
+      //   startText: 'I ',
+      //   endText: 'would like a room with a sea view.',
+      //   word: 'would',
+      //   textTranslate: 'Я бы хотел комнату с видом на море',
+      //   wordType: 'сущ.ед.ч.',
+      //   wordTranslate: 'бы',
+      // });
+
+      // const newCard = new Card({
+      //   startText: 'I ',
+      //   endText: 'would liwwwww ule wouldlike wou like would like w a room with a sea view.',
+      //   word: 'would',
+      //   textTranslate: 'Я бы хотел комнату с видом на море',
+      //   wordType: 'сущ.ед.ч.',
+      //   wordTranslate: 'бы',
+      // });
 */
