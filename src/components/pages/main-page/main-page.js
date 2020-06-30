@@ -39,7 +39,7 @@ class MainPage {
           <div class="section-main-page__menu--statistics-text">
             Похоже, что вы только что зарегистрировались или очень давно не занимались
           </div>
-          <div class="btn btn--animated btn--green">
+          <div class="btn btn--animated btn--green" id="go-play-button">
             Го играть!
           </div>
           <div class="section-main-page__menu--statistics-icon">
@@ -238,6 +238,7 @@ class MainPage {
   openPopupFunction() {
     this.popup.style.opacity = '1';
     this.popup.style.visibility = 'visible';
+    /* this.popup.style.display = 'block'; */
     this.popupContent.style.opacity = '1';
     this.popupContent.style.transform = 'translate(-50%, -50%) scale(1)';
   }
@@ -245,6 +246,7 @@ class MainPage {
   closePopupFunction() {
     this.popup.style.opacity = '0';
     this.popup.style.visibility = 'hidden';
+    /* this.popup.style.display = 'none'; */
     this.popupContent.style.opacity = '0';
     this.popupContent.style.transform = 'translate(-50%, -50%) scale(.25)';
   }
