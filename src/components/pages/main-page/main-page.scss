@@ -26,7 +26,7 @@
   visibility: hidden;
   transition: all .3s;
   @include respond(phone) {
-    position: relative;
+    position: fixed;
   }
 
   @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
@@ -377,6 +377,9 @@
   align-items: center;
   justify-content: start;
   height: 100vh;
+  @include respond(phone) {
+    height: 700px;
+  }
   &__banner {
     margin: 50px 0;
     width: 1000px;
@@ -557,5 +560,6 @@
   padding: 15px 45px;
   @include respond(phone) {
     margin-right: 0;
+    padding: 0 45px;
   }
 }
