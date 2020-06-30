@@ -1,7 +1,7 @@
 import Main from './components/pages/main-page/main-page';
 import Stat from './components/pages/stat-page/stat-page';
 import NotFound from './components/pages/not-found/not-found';
-
+import SettingsPage from './components/pages/settings-popup/settings-popup';
 import NavBar from './components/shared/layout/nav-bar/nav-bar';
 import Footer from './components/shared/layout/footer/footer';
 
@@ -20,6 +20,7 @@ const router = async () => {
   const header = null || document.getElementById('header_container');
   const content = null || document.getElementById('page_container');
   const footer = null || document.getElementById('footer_container');
+  const settings = new SettingsPage(); // eslint-disable-line no-unused-vars
 
   // Render the Header and footer of the page
   header.innerHTML = await NavBar.render();
@@ -36,7 +37,9 @@ const router = async () => {
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   const page = routes[parsedURL] ? routes[parsedURL] : NotFound;
   content.innerHTML = await page.render();
-  await page.afterRender();
+  if (page.afterRender) {
+    await page.afterRender();
+  }
 };
 
 // Listen on hash change:
