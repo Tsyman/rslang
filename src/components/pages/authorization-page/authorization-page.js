@@ -88,9 +88,9 @@ class AuthorizationPage {
           });
       }).catch(() => {
         document.querySelector('.tooltip').textContent = this.errorMessage;
-        document.querySelector('.tooltip').classList.add('tooltip-active');
+        document.querySelector('.tooltip').classList.add('tooltip--active');
         setTimeout(() => {
-          document.querySelector('.tooltip').classList.remove('tooltip-active');
+          document.querySelector('.tooltip').classList.remove('tooltip--active');
           this.errorMessage = '';
           document.querySelector('.tooltip').textContent = this.errorMessage;
         }, this.tooltipTime);
@@ -114,9 +114,9 @@ class AuthorizationPage {
       })
       .catch(() => {
         document.querySelector('.tooltip').textContent = this.errorMessage;
-        document.querySelector('.tooltip').classList.add('tooltip-active');
+        document.querySelector('.tooltip').classList.add('tooltip--active');
         setTimeout(() => {
-          document.querySelector('.tooltip').classList.remove('tooltip-active');
+          document.querySelector('.tooltip').classList.remove('tooltip--active');
           this.errorMessage = '';
           document.querySelector('.tooltip').textContent = this.errorMessage;
         }, this.tooltipTime);
