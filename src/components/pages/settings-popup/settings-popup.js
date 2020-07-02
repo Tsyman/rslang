@@ -17,7 +17,10 @@ class SettingsPage {
   }
 
   view = `
-            <div class="popup-content__settings-section--switcher-container">
+            <div class="popup" id="popup">
+    <div class="popup-content" id="popup-content">
+      <div class="popup-content__settings-section">
+        <div class="popup-content__settings-section--switcher-container">
             <div class="popup-content__settings-section--switcher-row">
               <div class="popup-content__settings-section--switcher-text">
                 Перевод слова
@@ -191,4 +194,4 @@ class SettingsPage {
   }
 }
 
-export default SettingsPage;
+export default new SettingsPage();

@@ -20,7 +20,9 @@ const router = async () => {
   const header = null || document.getElementById('header_container');
   const content = null || document.getElementById('page_container');
   const footer = null || document.getElementById('footer_container');
-  const settings = new SettingsPage(); // eslint-disable-line no-unused-vars
+  const settings = null || document.getElementById('settings_popup');
+  settings.innerHTML = await SettingsPage.render();
+  await SettingsPage.afterRender();
 
   // Render the Header and footer of the page
   header.innerHTML = await NavBar.render();
