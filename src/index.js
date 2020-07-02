@@ -21,8 +21,6 @@ const router = async () => {
   const content = null || document.getElementById('page_container');
   const footer = null || document.getElementById('footer_container');
   const settings = null || document.getElementById('settings_popup');
-  settings.innerHTML = await SettingsPage.render();
-  await SettingsPage.afterRender();
 
   // Render the Header and footer of the page
   header.innerHTML = await NavBar.render();
@@ -42,6 +40,9 @@ const router = async () => {
   if (page.afterRender) {
     await page.afterRender();
   }
+
+  settings.innerHTML = await SettingsPage.render();
+  await SettingsPage.afterRender();
 };
 
 // Listen on hash change:

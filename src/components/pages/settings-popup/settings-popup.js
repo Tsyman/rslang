@@ -175,7 +175,7 @@ class SettingsPage {
     this.popupSaveButton = document.querySelector('#popup-save-button');
 
     this.popupOpenButton.addEventListener('click', this.openPopupFunction);
-    this.popupCloseButton.addEventListener('click', this.closePopupFunction);
+    // this.popupCloseButton.addEventListener('click', this.closePopupFunction);
     this.popupSaveButton.addEventListener('click', this.closePopupFunction);
   }
 
