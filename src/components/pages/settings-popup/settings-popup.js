@@ -19,7 +19,33 @@ class SettingsPage {
   view = `
             <div class="popup" id="popup">
     <div class="popup-content" id="popup-content">
+      <div class="popup-content__control-section">
+        <div class="popup-content__control-section--information-part">
+          <div class="popup-content__control-section--logo">
+          </div>
+          <div class="popup-content__control-section--name">
+            Настройки
+          </div>
+        </div>
+        <div class="popup__close" id="popup-close-button">
+          &times;
+        </div>
+      </div>
       <div class="popup-content__settings-section">
+        <div class="popup-content__settings-section--figure-container">
+            <div class="popup-content__settings-section--figure-row">
+              <div class="popup-content__settings-section--figure-text">
+                Количество новых слов, планируемых выучить за день
+              </div>
+              <input class="settings-figure" type="number" placeholder="Число новых слов">
+            </div>
+            <div class="popup-content__settings-section--figure-row">
+              <div class="popup-content__settings-section--figure-text">
+                Максимальное количество карточек со словами в день
+              </div>
+              <input class="settings-figure" type="number" placeholder="Макс. количество карточек">
+            </div>
+          </div>
         <div class="popup-content__settings-section--switcher-container">
             <div class="popup-content__settings-section--switcher-row">
               <div class="popup-content__settings-section--switcher-text">
