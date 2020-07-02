@@ -57,7 +57,7 @@
       height: 100vh;
     }
     @include respond(phone) {
-      width: 320px;
+      width: 100vw;
       padding: 5px;
       border-radius: 0;
       height: 100vh;
@@ -127,7 +127,7 @@
         width: 100%;
         margin-bottom: 15px;
         @include respond(phone) {
-          margin-bottom: 5px;
+          margin-bottom: 10px;
         }
       }
       &--figure-text {
@@ -294,7 +294,7 @@
     cursor: pointer;
     display: inline-block;
     @include respond(phone) {
-      width: 60px;
+      width: 70px;
     }
   }
   &__input {
@@ -328,7 +328,7 @@
   &__handle {
     position: absolute;
     top: 6px;
-    left: 9px;
+    left: 5px;
     width: 20px;
     height: 20px;
     background: var(--white);
@@ -349,7 +349,7 @@
 .switch-container__input:checked ~ .switch-container__handle {
   left: 58px;
   @include respond(phone) {
-    left: 35px;
+    left: 45px;
   }
 }
 .settings-figure {
