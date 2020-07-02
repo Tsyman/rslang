@@ -17,7 +17,7 @@ class SettingsPage {
   }
 
   view = `
-            <div class="popup" id="popup">
+  <div class="popup" id="popup">
     <div class="popup-content" id="popup-content">
       <div class="popup-content__control-section">
         <div class="popup-content__control-section--information-part">
