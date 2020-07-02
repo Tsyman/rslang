@@ -1,9 +1,5 @@
 :root {
-<<<<<<< HEAD
-
-=======
 /* Colors: */
->>>>>>> 947569c4148fd1ca43d67487457d66b635fe5797
 --white: #FFFFFF;
 --gray: #6B83B3;
 --bg-blue: #D9F2FF;
@@ -14,27 +10,6 @@
 --red: #FF0080;
 --dark-blue: #004CFF;
 --bg-green: #D9FFE2;
-<<<<<<< HEAD
---black: #000;
-
---unnamed-font-family-rubik: Rubik;
---unnamed-font-style-bold: Bold;
---unnamed-font-style-regular: Regular;
---unnamed-font-size-11: 11px;
---unnamed-font-size-15: 15px;
---unnamed-font-size-17: 17px;
---unnamed-font-size-21: 21px;
---unnamed-font-size-31: 31px;
---unnamed-font-size-42: 42px;
---unnamed-font-size-59: 59px;
---unnamed-character-spacing-0: 0px;
---unnamed-line-spacing-17: 17px;
---unnamed-line-spacing-25: 25px;
---unnamed-line-spacing-32: 32px;
---unnamed-line-spacing-47: 47px;
---unnamed-line-spacing-63: 63px;
---unnamed-line-spacing-74: 74px;
-=======
 
 /* Font/text values */
 --font-family-rubik: Rubik;
@@ -109,7 +84,6 @@ li {
     padding: 0 24px;
     width: 720px;
   }
->>>>>>> 947569c4148fd1ca43d67487457d66b635fe5797
 }
 
 @media (max-width: 767px) {
