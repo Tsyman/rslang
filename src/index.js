@@ -5,6 +5,8 @@ import SettingsPage from './components/pages/settings-popup/settings-popup';
 import NavBar from './components/shared/layout/nav-bar/nav-bar';
 import Footer from './components/shared/layout/footer/footer';
 
+import './index.scss';
+
 import Utils from './services/Utils';
 
 // List of supported routes. Any url other than these routes will throw a 404 error

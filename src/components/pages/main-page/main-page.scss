@@ -25,9 +25,6 @@
   opacity: 0;
   visibility: hidden;
   transition: all .3s;
-  @include respond(phone) {
-    position: fixed;
-  }
 
   @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
     -webkit-backdrop-filter: blur(10px);
@@ -39,7 +36,6 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     width: 720px;
     background-color: var(--white);
     box-shadow: 0 20px 40px rgba(var(--black), .2);
@@ -48,21 +44,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    overflow: hidden;
     opacity: 0;
     transform: translate(-50%, -50%) scale(.25);
     transition: all .5s .2s;
     padding: 50px;
     @include respond(tab-land) {
       width: 720px;
+      height: 100vh;
     }
     @include respond(tab-port) {
       width: 550px;
+      height: 100vh;
     }
     @include respond(phone) {
       width: 320px;
       padding: 5px;
       border-radius: 0;
+      height: 100vh;
     }
     &__control-section {
       display: flex;
@@ -154,6 +152,13 @@
         }
       }
     }
+    &__info {
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   &__close {
@@ -174,6 +179,7 @@
     }
   }
 }
+
 .btn {
     &,
     &:link,

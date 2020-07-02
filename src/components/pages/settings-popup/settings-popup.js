@@ -19,6 +19,7 @@ class SettingsPage {
   view = `
   <div class="popup" id="popup">
     <div class="popup-content" id="popup-content">
+    <div class="popup-content__info">
       <div class="popup-content__control-section">
         <div class="popup-content__control-section--information-part">
           <div class="popup-content__control-section--logo">
@@ -185,6 +186,7 @@ class SettingsPage {
           </div>
         </div>
         <a class="btn btn--animated btn--green" id="popup-save-button">Сохранить</a>
+        </div>
       </div>
     </div>
   `;
