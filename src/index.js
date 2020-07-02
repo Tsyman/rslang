@@ -40,6 +40,7 @@ const router = async () => {
   if (page.afterRender) {
     await page.afterRender();
   }
+
   settings.innerHTML = await SettingsPage.render();
   await SettingsPage.afterRender();
 };
