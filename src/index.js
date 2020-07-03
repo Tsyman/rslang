@@ -7,12 +7,13 @@ import HeaderPromo from './components/shared/layout/header/header-promo/header-p
 import Footer from './components/shared/layout/footer/footer';
 
 import Utils from './services/Utils';
-
+import Audiocall from './components/minigames/audiocall/audiocall';
 // List of supported routes. Any url other than these routes will throw a 404 error
 const routes = {
   '/': Main,
   '/stat': Stat,
   '/team': OurTeam,
+  '/audiocall': Audiocall,
 };
 
 // The router code. Takes a URL, checks against the list of supported routes
