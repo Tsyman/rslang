@@ -8,32 +8,34 @@ class Dictionary {
   view = `
   <section class="dictionary container">
     <nav class="dictionary__nav">
-      <ul class="dictionary__menu">
-        <li class="dictionary__menu__item">
+      <ul class="dictionary-menu">
+        <li class="dictionary-menu__item" data-card-type="${CardType.LEARNING}">
           <a href="/#dictionary/learning-words">Изучаемые слова</a>
         </li>
-        <li class="dictionary__menu__item">
+        <li class="dictionary-menu__item" data-card-type="${CardType.HARD}">
           <a href="/#dictionary/hard-words">Сложные слова</a>
         </li>
-        <li class="dictionary__menu__item">
+        <li class="dictionary-menu__item" data-card-type="${CardType.DELETED}">
           <a href="/#dictionary/deleted-words">Удаленные слова</a>
         </li>
       </ul>
     </nav>
-    <div class="dictionary__card__list"></div>
+    <div class="dictionary__card-list"></div>
   </section>`;
 
-  tabId = 0;
+  cardType = '';
 
   async render() {
     const request = Utils.parseRequestURL();
 
+    this.cardType = CardType.LEARNING;
+
+    if (request.id === 'hard-words') {
+      this.cardType = CardType.HARD;
+    }
+
     if (request.id === 'deleted-words') {
-      this.tabId = 2;
-    } else if (request.id === 'hard-words') {
-      this.tabId = 1;
-    } else {
-      this.tabId = 0;
+      this.cardType = CardType.DELETED;
     }
 
     return this.view;
@@ -41,8 +43,6 @@ class Dictionary {
 
   async afterRender() {
     this.selectTab();
-
-    const cardType = this.getCardType();
 
     let html = '';
     for (let i = 0; i < 9; i += 1) {
@@ -64,31 +64,21 @@ class Dictionary {
           wordTranslate: 'лодка',
           wordsPerExampleSentence: 8,
         },
-        cardType,
+        this.cardType,
       );
 
       html += card.render();
     }
 
-    document.querySelector('.dictionary__card__list').innerHTML = html;
-  }
-
-  getCardType() {
-    if (this.tabId === 2) {
-      return CardType.DELETED;
-    }
-    if (this.tabId === 1) {
-      return CardType.HARD;
-    }
-    return CardType.LEARNING;
+    document.querySelector('.dictionary__card-list').innerHTML = html;
   }
 
   selectTab() {
     document
-      .querySelector('.dictionary__menu')
-      .querySelectorAll('li')[this.tabId]
+      .querySelector('.dictionary-menu')
+      .querySelector(`li[data-card-type="${this.cardType}"]`)
       .classList
-      .add('dictionary__menu__item--active');
+      .add('dictionary-menu__item--active');
   }
 }
 

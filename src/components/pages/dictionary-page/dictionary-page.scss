@@ -3,18 +3,18 @@
 .dictionary {
 	background-color: var(--white);
 }
-.dictionary__menu {
+.dictionary-menu {
   display: flex;
   justify-content: center;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
-.dictionary__menu__item {
+.dictionary-menu__item {
 	position: relative;
 	text-align: center;
 }
-.dictionary__menu__item--active::before {
+.dictionary-menu__item--active::before {
   background-color: var(--blue);
   border-radius: 3px;
   bottom: 0;
@@ -25,7 +25,7 @@
   transition: .3s;
 	width: 100%;
 }
-.dictionary__menu__item a {
+.dictionary-menu__item a {
   color: var(--gray);
   display: block;
   font-size: 17px;
@@ -33,11 +33,11 @@
 	padding: 30px;
 	text-decoration: none;
 }
-.dictionary__card__list {
+.dictionary__card-list {
 	margin: 30px 0;
 	text-align: left;
 }
-.dictionary__card {
+.dictionary-card {
 	background: #FFFFFF 0% 0% no-repeat padding-box;
 	border: 2px solid #F2FBFF;
 	border-radius: 40px;
@@ -47,10 +47,10 @@
   padding: 30px;
 	width: 30%;
 }
-.dictionary__card > div {
+.dictionary-card > div {
 	padding-bottom: 10px;
 }
-.dictionary__card__translation {
+.dictionary-card__translation {
   color: #3D4B66;
   font-size: 20px;
   font-weight: bold;
@@ -58,41 +58,42 @@
   opacity: 1;	
 	text-transform: capitalize;
 }
-.dictionary__card__word,
-.dictionary__card__description {
+.dictionary-card__word,
+.dictionary-card__description {
   color: #6B83B3;
   letter-spacing: 0;
 	opacity: 1;	
 }
-.dictionary__card__word span,
-.dictionary__card__word img {
+.dictionary-card__word {
   vertical-align: middle;
 }
-.dictionary__card__word img {
+.dictionary-card__word-sound,
+.dictionary-card__word-preview {
   cursor: pointer;
+  vertical-align: middle;
 }
-.dictionary__card__word__sound {
+.dictionary-card__word-sound {
   margin-left: 5px;
 }
-.dictionary__card__word__preview {
+.dictionary-card__word-preview {
   float: right;
 }
-.dictionary__card__description {
+.dictionary-card__description {
   line-height: 24px;
 }
-.dictionary__card__actions img,
-.dictionary__card__actions span {
+.dictionary-card__actions img,
+.dictionary-card__actions span {
   vertical-align: middle;
 }
-.dictionary__card__harden,
-.dictionary__card__learn {
+.dictionary-card-action__harden,
+.dictionary-card-action__learn {
   color: var(--blue);
 }
-.dictionary__card__remove {
+.dictionary-card-action__remove {
   color: var(--red);
   float: right;
 }
-.dictionary__card__restore {
+.dictionary-card-action__restore {
   color: var(--green);
   float: right;
 }
