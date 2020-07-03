@@ -8,7 +8,7 @@ class HeaderMain {
             <div class="container">
               <nav class="header-main__nav">
                 <div class="header-main__logo header-main__start">
-                  <a class="header-main__link-logo" href="/#">
+                  <a class="header-main__link-logo" href="/#/">
                     <img class="header-main__img-logo" src="../../../../../assets/images//main-logo.png">
                   </a>
                 </div>

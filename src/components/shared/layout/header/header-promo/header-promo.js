@@ -3,11 +3,23 @@ import './header-promo.scss';
 class HeaderPromo {
   message = 'after render';
 
+  linksContainer = null;
+
+  items = null;
+
+  constructor() {
+    this.changeActiveIteam = this.changeActiveIteam.bind(this);
+  }
+
   view = `
           <header class="header-promo">
             <div class="container">
               <nav class="header-promo__nav">
-                <div class="header-promo__logo header-promo__start"></div>
+                <div class="header-promo__logo header-promo__start">
+                  <a class="header-promo__link" href="/#/">
+                    <img src="../../../../../assets/images/logo.png">
+                  </a>
+                </div>
                 <div class="sidebar">
                   <input class="sidebar__input" id="sidebar__input" type="checkbox">
                   <label for="sidebar__input" class="sidebar__label">
@@ -17,19 +29,17 @@ class HeaderPromo {
                   </label>
                   <div class="header-promo__end sidebar__menu">
                     <ul class="header-promo__list sidebar__list">
-                      <li class="header-promo__item sidebar__item" id="promo-tab1">
-                        <a class="header-promo__link" href="/#/">Главная</a>
-                        <div class="promo-active-item"></div>
+                      <li class="header-promo__item sidebar__item promo-tab1" id="promo-tab1">
+                        <a class="header-promo__link promo-active__item" href="/#/">Главная</a>
                       </li>
-                      <li class="header-promo__item sidebar__item" id="promo-tab2">
+                      <li class="header-promo__item sidebar__item promo-tab2" id="promo-tab2">
                         <a class="header-promo__link" href="/#team">Наша команда</a>
-                        <div id="promo-active-item"></div>
                       </li>
-                      <li class="registration-btn sidebar__item">
-                        <a class="button secondary-btn" href="/#/register">Создать аккаунт</a>
+                      <li class="registration sidebar__item">
+                        <a class="registration__secondary-btn" href="/#/register">Создать аккаунт</a>
                       </li>
-                      <li class="registration-btn sidebar__item">
-                        <a class="button secondary-light-btn" href="/#/signin">Войти</a>
+                      <li class="registration sidebar__item">
+                        <a class="registration__light-btn" href="/#/signin">Войти</a>
                       </li>
                     </ul>
                   </div>
@@ -44,7 +54,20 @@ class HeaderPromo {
   }
 
   async afterRender() {
-    return this.message;
+    this.linksContainer = document.querySelector('.header-promo__list');
+    this.items = [...document.querySelectorAll('.header-promo__link')];
+
+    this.linksContainer.addEventListener('click', this.changeActiveIteam);
+  }
+
+  changeActiveIteam(event) {
+    event.preventDefault();
+    if (event.target.classList.contains('header-promo__link')) {
+      this.items.forEach((element) => {
+        element.classList.remove('promo-active__item');
+      });
+      event.target.classList.add('promo-active__item');
+    }
   }
 }
 
