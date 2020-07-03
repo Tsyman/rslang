@@ -1,4 +1,5 @@
 import './header-promo.scss';
+import Utils from '../../../../../services/Utils';
 
 class HeaderPromo {
   linksContainer = null;
@@ -6,6 +7,8 @@ class HeaderPromo {
   items = null;
 
   alreadyRendered = false;
+
+  activeItemClass = 'promo-active-link';
 
   constructor() {
     this.changeActiveIteam = this.changeActiveIteam.bind(this);
@@ -57,18 +60,20 @@ class HeaderPromo {
     if (!this.alreadyRendered) {
       this.items = [...document.querySelectorAll('.header-promo__link')];
       this.linksContainer = document.querySelector('.header-promo__list');
-      this.linksContainer.addEventListener('click', this.changeActiveIteam);
+      const request = Utils.parseRequestURL();
+      this.changeActiveIteam(request?.resource);
     }
   }
 
-  changeActiveIteam(event) {
-    window.setTimeout(() => {
-      if (event.target.classList.contains('header-promo__link')) {
-        this.items.forEach((element) => {
-          element.classList.toggle('promo-active-link');
-        });
-      }
-    }, 0);
+  changeActiveIteam(page) {
+    this.items.forEach((element) => {
+      element.classList.remove(this.activeItemClass);
+    });
+    if (page === 'team') {
+      document.getElementById('promo-tab2').children[0].classList.add(this.activeItemClass);
+    } else {
+      document.getElementById('promo-tab1').children[0].classList.add(this.activeItemClass);
+    }
   }
 }
 
