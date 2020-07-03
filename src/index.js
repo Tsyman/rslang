@@ -37,7 +37,7 @@ const router = async () => {
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   const page = routes[parsedURL] ? routes[parsedURL] : NotFound;
   content.innerHTML = await page.render();
-  await page.afterRender();
+  if (page.afterRender) await page.afterRender();
 };
 
 // Listen on hash change:
