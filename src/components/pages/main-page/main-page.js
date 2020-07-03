@@ -38,7 +38,6 @@ class MainPage {
   async render() {
     return this.view;
   }
-  // async afterRender() {}
 }
 
 export default new MainPage();
