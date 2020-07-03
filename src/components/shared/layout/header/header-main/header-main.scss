@@ -1,8 +1,18 @@
 @import "../../../../../styles/variables.scss";
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 37.5em) { @content };
+    }
+    @if $breakpoint == tab-port {
+        @media only screen and (max-width: 56.25em) { @content };
+    }
+    @if $breakpoint == tab-land {
+        @media only screen and (max-width: 75em) { @content };
+    }
+}
 
 .header-main {
   background-color: var(--white);
-  background-color: yellowgreen;
 }
 
 .header-main__nav {
@@ -15,6 +25,9 @@
 .header-main__logo {
   margin-right: 45px;
   cursor: pointer;
+  @include respond(tab-land) {
+    margin-right: 30px;
+  }
 }
 
 .header-main__list {
@@ -24,6 +37,13 @@
   list-style: none;
   display: flex;
   justify-content: space-between;
+  @include respond(tab-land) {
+    width: 390px;
+  }
+  @include respond(tab-port) {
+    width: auto;
+    padding: 0 15%;
+  }
 }
 
 .header-main__item {
@@ -32,13 +52,18 @@
 }
 
 .header-main__link {
-  line-height: var(--line-spacing-32);
-  font-size: var(--font-size-17);
+  padding: 0 10px;
   display: flex;
   flex-flow: column-reverse;
   align-items: center;
+  line-height: var(--line-spacing-32);
+  font-size: var(--font-size-17);
   cursor: pointer;
   color: var(--gray);
+  @include respond(tab-land) {
+    line-height: var(--line-spacing-25);
+    font-size: var(--font-size-15);
+  }
 }
 
 .header-main__text {
@@ -47,6 +72,9 @@
   font-size: var(--font-size-21);
   font-weight: bold;
   color: var(--gray);
+  @include respond(tab-land) {
+    display: none;
+  }
 }
 
 .header-main__text:hover {
@@ -62,31 +90,38 @@
   width: 60px;
   height: 60px;
   margin-left: 40px;
-  line-height: var(--line-spacing-32);
-  font-size: var(--font-size-21);
-  font-weight: bold;
   text-decoration: none;
   border-radius: 50%;
   display: flex;
-  background-color: var(--blue);
   align-items: center;
   justify-content: center;
+  line-height: var(--line-spacing-32);
+  font-size: var(--font-size-21);
+  font-weight: bold;
+  background-color: var(--blue);
   cursor: pointer;
   color: var(--white);
+  @include respond(tab-land) {
+    width: 40px;
+    height: 40px;
+    line-height: var(--line-spacing-25);
+    font-size: var(--font-size-17);
+  }
 }
 
-.current-page {
+.main-active-link {
   position: relative;
 }
 
-.current-page {
+.main-active-link::after {
+  content: "";
   position: absolute;
+  left: 0;
+  bottom: -15px;
+  width: 100%;
   height: 5px;
   background-color: var(--blue);
   border-radius: 3px;
-  width: 100%;
-  left: 0;
-  bottom: -15px;
 }
 
 .header-main__link:hover {
@@ -97,64 +132,39 @@
   background-color: var(--dark-blue);
 }
 
-
-
-@media (max-width: 1199px) {
-  .header-main__img-logo {
+.header-main__img-logo {
+  @include respond(tab-land) {
     width: 50px;
     height: 40px;
   }
+}
 
-  .header-main__text {
-    display: none;
-  }
-
-  .header-main__list {
-    width: 390px;
-  }
-
-  .header-main__logo {
-    margin-right: 30px;
-  }
-
-  .header-main__link {
-    line-height: var(--line-spacing-25);
-    font-size: var(--font-size-15);
-  }
-
-  .header-main__img {
+.header-main__img {
+  @include respond(tab-land) {
     width: 30px;
     height: 30px;
   }
-
-  .account-btn {
-    width: 40px;
-    height: 40px;
-    line-height: var(--line-spacing-25);
-    font-size: var(--font-size-17);
-  }
 }
 
-@media (max-width: 899px) {
-  .header-main__middle {
-    margin: 0 auto;
+.header-main__middle {
+  @include respond(tab-port) {
+    height: 60px;
     width: 100%;
     position: fixed;
     bottom: 0;
-    height: 60px;
     left: 0;
+    margin: 0 auto;
   }
+}
 
-  .header-main__list {
-    width: auto;
-    padding: 0 12%;
-  }
-
-  .current-page::after {
+.current-page::after {
+  @include respond(tab-port) {
     bottom: -20px;
   }
+}
 
-  .header-main__heading {
+.header-main__heading {
+  @include respond(tab-port) {
     display: none;
   }
 }
