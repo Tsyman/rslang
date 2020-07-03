@@ -1,8 +1,6 @@
 import './header-promo.scss';
 
 class HeaderPromo {
-  message = 'after render';
-
   linksContainer = null;
 
   items = null;
@@ -30,7 +28,7 @@ class HeaderPromo {
                   <div class="header-promo__end sidebar__menu">
                     <ul class="header-promo__list sidebar__list">
                       <li class="header-promo__item sidebar__item promo-tab1" id="promo-tab1">
-                        <a class="header-promo__link promo-active__item" href="/#/">Главная</a>
+                        <a class="header-promo__link promo-active-link" href="/#/">Главная</a>
                       </li>
                       <li class="header-promo__item sidebar__item promo-tab2" id="promo-tab2">
                         <a class="header-promo__link" href="/#team">Наша команда</a>
@@ -64,9 +62,9 @@ class HeaderPromo {
     event.preventDefault();
     if (event.target.classList.contains('header-promo__link')) {
       this.items.forEach((element) => {
-        element.classList.remove('promo-active__item');
+        element.classList.remove('promo-active-link');
       });
-      event.target.classList.add('promo-active__item');
+      event.target.classList.add('promo-active-link');
     }
   }
 }
