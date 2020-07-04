@@ -1,5 +1,6 @@
 @import "../../../styles/mixins";
 @import "../../../index.scss";
+@import "../../../styles/variables";
 
 .audiocall {
   &__container {
@@ -177,3 +178,289 @@
         transform: translate(0);
     }
 }
+
+.audiocall-start__container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  @include respond(tab-land) {
+  width: 900px;
+  }
+  @include respond(tab-port) {
+    padding: 0 24px;
+    width: 600px;
+  }
+  @include respond(phone) {
+    padding: 0 20px;
+    width: auto;
+  }
+}
+
+.audiocall-start {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(8deg, var(--game-lilac) 25%, var(--game-purple) 67%);
+}
+
+.audiocall-start__wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.audiocall-start__title {
+  margin-bottom: 80px;
+  font-weight: bold;
+  font-size: var(--font-size-84);
+  line-height: var(--line-spacing-74);
+  color: var(--white);
+  @include respond (tab-land) {
+    font-size: var(--font-size-59);
+    line-height: var(--line-spacing-63);
+  }
+  @include respond (phone) {
+    font-size: var(--font-size-42);
+    line-height: var(--line-spacing-47);
+  }
+}
+
+.audiocall-start__button {
+  width: 340px;
+  height: 80px;
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: var(--font-size-31);
+  line-height: var(--line-spacing-47);
+  color: var(--dark);
+  background-color: var(--white);
+  box-shadow: 0px 30px 15px var(--dark-gray);
+  cursor: pointer;
+  @include respond (tab-land) {
+    width: 280px;
+    height: 60px;
+    font-size: var(--font-size-21);
+    line-height: var(--line-spacing-32);
+  }
+  @include respond (phone) {
+    width: 220px;
+    font-size: var(--font-size-17);
+    line-height: var(--line-spacing-25);
+  }
+}
+
+.audiocall-start__button:hover {
+  background-color: var(--bg-blue);
+}
+
+// game
+
+.audiocall-game__wrapper {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.audiocall-game__sound {
+  width: 240px;
+  height: 240px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--white);
+  cursor: pointer;
+  @include respond(tab-land) {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.audiocall-game__sound:hover {
+  background: var(--bg-blue);
+}
+
+.audiocall-game__list {
+  width: 85%;
+  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  @include respond(tab-land) {
+    width: 100%;
+  }
+  @include respond(tab-port) {
+    justify-content: space-around;
+  }
+  @include respond(phone) {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+  }
+}
+
+.audiocall-game__item {
+  min-width: 240px;
+  height: 70px;
+  padding: 20px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  box-shadow: 0px 30px 15px #0000000A;
+  border-radius: 25px;
+  cursor: pointer;
+  @include respond(tab-port) {
+    min-width: 220px;
+    height: 60px;
+    margin-right: 0;
+  }
+}
+
+.audiocall-game__item:hover {
+  background: var(--bg-blue);
+}
+
+.audiocall-game__img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.audiocall-game__number {
+  width: 35px;
+  height: 30px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-32);
+  color: var(--white);
+  background-color: var(--game-lilac);
+  @include respond(tab-land) {
+    font-size: var(--font-size-17);
+    line-height: var(--line-spacing-25);
+  }
+  @include respond(tab-land) {
+    font-size: var(--font-size-15);
+    line-height: var(--line-spacing-17);
+  }
+}
+
+.audiocall-game__word {
+  width: 100%;
+  text-align: center;
+  color: var(--dark);
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-32);
+  @include respond(phone) {
+    font-size: var(--font-size-17);
+    line-height: var(--line-spacing-25);
+  }
+}
+
+.audiocall-game__btn {
+  min-width: 240px;
+  height: 60px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  box-shadow: 0px 4px 1px #00A8FF1A;
+  color: var(--white);
+  background-color: var(--red);
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-32);
+  cursor: pointer;
+  @include respond(tab-port) {
+    min-width: 220px;
+    height: 60px;
+  }
+  @include respond(phone) {
+    font-size: var(--font-size-17);
+    line-height: var(--line-spacing-25);
+  }
+}
+
+.audiocall-game__btn:hover {
+  background-color: var(--pink);
+}
+
+// .audiocall-game__btn-next {
+//   // display: none;
+//   min-width: 240px;
+//   height: 60px;
+//   border: none;
+//   outline: none;
+//   border-radius: 25px;
+//   box-shadow: 0px 4px 1px #00A8FF1A;
+//   color: var(--white);
+//   background-color: var(--green);
+//   font-size: var(--font-size-21);
+//   line-height: var(--line-spacing-32);
+//   cursor: pointer;
+//   @include respond(tab-port) {
+//     min-width: 220px;
+//     height: 60px;
+//   }
+//   @include respond(phone) {
+//     font-size: var(--font-size-17);
+//     line-height: var(--line-spacing-25);
+//   }
+// }
+
+// .audiocall-game__btn-next:hover {
+//   background-color: var(--light-green);
+// }
+
+// // //неправильный перевод зачеркивается
+
+// .audiocall-game__item-incorrect {
+//   text-decoration: line-through;
+// }
+
+
+// // // стили после угаданного слова
+
+// .audiocall-game__sound-bg {
+//   background-image: url(https://st4.depositphotos.com/13349494/27819/i/450/depositphotos_278194764-stock-photo-cropped-view-man-purple-rubber.jpg);
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
+
+// .audiocall-game__inner {
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+//   width: 70%;
+//   @include respond(tab-port) {
+//     flex-direction: column;
+//     margin-bottom: 30px;
+//   }
+// }
+
+// .audiocall-game__english-word {
+//   // display: none;
+//   font-weight: bold;
+//   font-size: var(--font-size-59);
+//   line-height: var(--line-spacing-63);
+//   color: var(--white);
+//   @include respond(tab-port) {
+//     font-size: var(--font-size-42);
+//     line-height: var(--line-spacing-47);
+//   }
+//   @include respond(phone) {
+//     font-size: var(--font-size-31);
+//   }
+// }
