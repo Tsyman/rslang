@@ -1,4 +1,6 @@
 @import "../../../../../styles/variables";
+@import "../../../../../styles/common";
+
 @mixin respond($breakpoint) {
     @if $breakpoint == phone {
         @media only screen and (max-width: 37.5em) { @content };
@@ -11,7 +13,7 @@
     }
 }
 
-.container {
+.header-promo__container {
   width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -30,6 +32,10 @@
 
 .header-promo {
   background-color: var(--blue);
+  font-family: 'Rubik', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .header-promo__nav {
@@ -59,6 +65,7 @@
 .header-promo__link {
   line-height: var(--line-spacing-32);
   font-size: var(--font-size-15);
+  text-decoration: none;
   color: var(--white);
   @include respond(tab-land) {
   color: var(--blue);
@@ -123,6 +130,7 @@
   height: 40px;
   border-radius: 25px;
   padding: 11px 20px;
+  text-decoration: none;
   line-height: var(--line-spacing-32);
   font-size: var(--font-size-15);
   background-color: var(--dark-blue);
@@ -139,6 +147,7 @@
   height: 40px;
   padding: 11px 20px;
   border-radius: 25px;
+  text-decoration: none;
   line-height: var(--line-spacing-32);
   font-size: var(--font-size-15);
   background-color: var(--white);

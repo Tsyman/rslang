@@ -1,4 +1,6 @@
 @import "../../../../../styles/variables.scss";
+@import "../../../../../styles/common";
+
 @mixin respond($breakpoint) {
     @if $breakpoint == phone {
         @media only screen and (max-width: 37.5em) { @content };
@@ -9,6 +11,23 @@
     @if $breakpoint == tab-land {
         @media only screen and (max-width: 75em) { @content };
     }
+}
+
+.header-main__container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  @include respond(tab-land) {
+  width: 900px;
+  }
+  @include respond(tab-port) {
+    padding: 0 24px;
+    width: 600px;
+  }
+  @include respond(phone) {
+    padding: 0 20px;
+    width: auto;
+  }
 }
 
 .header-main {
@@ -58,6 +77,7 @@
   align-items: center;
   line-height: var(--line-spacing-32);
   font-size: var(--font-size-17);
+  text-decoration: none;
   cursor: pointer;
   color: var(--gray);
   @include respond(tab-land) {

@@ -16,7 +16,7 @@ class HeaderPromo {
 
   view = `
           <header class="header-promo">
-            <div class="container">
+            <div class="header-promo__container">
               <nav class="header-promo__nav">
                 <div class="header-promo__logo header-promo__start">
                   <a class="header-promo__link" href="/#/">
