@@ -3,7 +3,7 @@ import './stat-page.scss';
 class StatPage {
   view = `
           <section class="promo">
-            <div class="container">
+            <div class="promo__container">
               <div class="promo__wrapper">
                 <div class="promo__wrapper-1">
                   <h1 class="promo__title">Добро пожаловать в онлайн-школу английского языка - RS Lang</h1>
@@ -16,7 +16,7 @@ class StatPage {
             </div>
           </section>
           <section class="vocabulary">
-            <div class="container">
+            <div class="promo__container">
               <div class="vocabulary__inner">
                 <div class="vocabulary__inner-1">
                   <h2 class="vocabulary__title">Словари под рукой!</h2>
@@ -40,7 +40,7 @@ class StatPage {
             </div>
           </section>
           <section class="game">
-            <div class="container">
+            <div class="promo__container">
               <div class="game__wrapper">
                 <h2 class="game__title">Наши игры</h2>
                 <a class="game__link-blue">Играть</a>
@@ -74,7 +74,7 @@ class StatPage {
             </div>
           </section>
           <section class="interval">
-            <div class="container">
+            <div class="promo__container">
               <div class="interval__wrapper">
                 <div class="interval__heading">
                   <h2 class="interval__title">Запоминайте новые слова по методике интервального повторения</h2>
@@ -103,7 +103,7 @@ class StatPage {
             </div>
           </section>
           <section class="statistics">
-            <div class="container">
+            <div class="promo__container">
               <div class="statistic__wrapper">
                 <h2 class="statistic__title">Отслеживайте результат</h2>
                 <p class="statistic__text">Увеличьте продуктивность и дисплину!</p>
