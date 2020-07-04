@@ -220,24 +220,46 @@
   background-color: var(--pink);
 }
 
+// .audiocall-game__btn-next {
+//   // display: none;
+//   min-width: 240px;
+//   height: 60px;
+//   border: none;
+//   outline: none;
+//   border-radius: 25px;
+//   box-shadow: 0px 4px 1px #00A8FF1A;
+//   color: var(--white);
+//   background-color: var(--green);
+//   font-size: var(--font-size-21);
+//   line-height: var(--line-spacing-32);
+//   cursor: pointer;
+//   @include respond(tab-port) {
+//     min-width: 220px;
+//     height: 60px;
+//   }
+//   @include respond(phone) {
+//     font-size: var(--font-size-17);
+//     line-height: var(--line-spacing-25);
+//   }
+// }
 
-// //неправильный перевод зачеркивается
+// .audiocall-game__btn-next:hover {
+//   background-color: var(--light-green);
+// }
+
+// // //неправильный перевод зачеркивается
 
 // .audiocall-game__item-incorrect {
 //   text-decoration: line-through;
 // }
 
 
-// // стили после угаданного слова
+// // // стили после угаданного слова
 
 // .audiocall-game__sound-bg {
 //   background-image: url(https://st4.depositphotos.com/13349494/27819/i/450/depositphotos_278194764-stock-photo-cropped-view-man-purple-rubber.jpg);
 //   background-repeat: no-repeat;
 //   background-size: cover;
-// }
-
-// .audiocall-game__btn-next {
-//   background-color: var(--green);
 // }
 
 // .audiocall-game__inner {

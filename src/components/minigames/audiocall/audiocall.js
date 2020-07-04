@@ -36,7 +36,10 @@ class Audiocall {
             <p class="audiocall-game__word">Lorem</p>
           </li>
         </ul>
-        <button class="audiocall-game__btn audiocall-game__btn-next">Не знаю</button>
+        <div class="audiocall-game__btn-inner">
+          <button class="audiocall-game__btn">Не знаю</button>
+          <button class="audiocall-game__btn-next visually-hidden">Дальше</button>
+        </div>
       </div>
       </div>
     </div>
