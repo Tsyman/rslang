@@ -1,7 +1,6 @@
 import './audiocall.scss';
 
 class Audiocall {
-  
   audioCallContainer = null;
 
   startGameButton = null;
