@@ -40,7 +40,7 @@ class Audiocall {
                 <div class="audiocall__confirm-exit-popup-content__text">
                   Если вы выйдете из игры, прогресс будет потерян.
                 </div>
-                <a class="btn btn--animated btn--green" id="audiocall__confirm-exit-popup-content__close-game">Закрыть</a>
+                <a class="btn btn--animated btn--blue" id="audiocall__confirm-exit-popup-content__close-game">Закрыть</a>
                 <a class="btn btn--animated btn--green" id="audiocall__confirm-exit-popup-content__close-popup">Отмена</a>
               </div>
             </div>
