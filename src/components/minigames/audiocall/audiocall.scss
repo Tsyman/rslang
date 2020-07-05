@@ -474,3 +474,192 @@
 //     font-size: var(--font-size-31);
 //   }
 // }
+
+
+.audiocall-statistics {
+  display: none;
+  position: fixed;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000080;
+}
+
+.audiocall-statistics__popup {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.audiocall-statistics__container {
+  width: 480px;
+  height: 650px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 50px;
+  color: var(--dark);
+  background-color: var(--white);
+  @include respond(tab-port) {
+    width: 350px;
+    height: 500px;
+  }
+  @include respond(phone) {
+    width: 230px;
+    height: 300px;
+    border-radius: 40px;
+  }
+}
+
+.audiocall-statistics__title {
+  text-align: center;
+  font-weight: bold;
+  font-size: var(--font-size-31);
+  line-height: var(--line-spacing-47);
+  @include respond(tab-port) {
+    font-size: var(--font-size-21);
+    line-height: var(--line-spacing-25);
+  }
+  @include respond(phone) {
+    font-size: var(--font-size-17);
+  }
+}
+
+.audiocall-statistics__img {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background-image: url(../../../assets/images/audiocall-sloth.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include respond(tab-port) {
+    width: 220px;
+    height: 220px;
+  }
+  @include respond(phone) {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+.audiocall-statistics__btn-inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.audiocall-statistics__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  height: 60px;
+  border-radius: 15px;
+  font-weight: bold;
+  color: var(--white);
+  font-size: var(--font-size-15);
+  line-height: var(--line-spacing-17);
+  cursor: pointer;
+  @include respond(tab-port) {
+    width: 145px;
+    height: 55px;
+  }
+  @include respond(phone) {
+    width: 95px;
+    height: 40px;
+    font-size: var(--font-size-11);
+  }
+}
+
+.audiocall-statistics__play-btn {
+  background-color: var(--blue);
+}
+
+.audiocall-statistics__exit-btn {
+  background-color: var(--red);
+}
+
+.audiocall-statistics__play-btn:hover {
+  opacity: 0.8;
+}
+
+.audiocall-statistics__exit-btn:hover {
+  opacity: 0.8;
+}
+
+.audiocall-statistics__content {
+  width: 400px;
+  height: 320px;
+  overflow-y: scroll;
+  cursor: pointer;
+  @include respond(tab-port) {
+    width: 300px;
+    height: 220px;
+  }
+  @include respond(phone) {
+    width: 190px;
+    height: 130px;
+  }
+}
+
+.audiocall-statistics__content-mistake,
+.audiocall-statistics__content-correct-answer {
+  display: flex;
+  flex-direction: column;
+}
+
+.audiocall-statistics__content-mistake {
+  margin-bottom: 60px;
+  @include respond(tab-port) {
+    margin-bottom: 50px;
+  }
+  @include respond(phone) {
+    margin-bottom: 40px;
+  }
+}
+
+.audiocall-statistics__mistake-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.audiocall-statistics__content-mistake-inner,
+.audiocall-statistics__content-correct-inner {
+  width: 100%;
+  display: flex;
+}
+
+.audiocall-statistics__content-mistake-heading,
+.audiocall-statistics__content-mistake-number,
+.audiocall-statistics__content-correct-heading,
+.audiocall-statistics__content-correct-number {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-25);
+  @include respond(tab-port) {
+    font-size: var(--font-size-17);
+  }
+  @include respond(phone) {
+    font-size: var(--font-size-15);
+    line-height: var(--line-spacing-17);
+  }
+}
+
+.audiocall-statistics__english-word-mistake,
+.audiocall-statistics__translation-mistake,
+.audiocall-statistics__english-word-correct,
+.audiocall-statistics__translation-correct {
+  padding-left: 10px;
+  font-size: var(--font-size-17);
+  line-height: var(--line-spacing-25);
+  @include respond(phone) {
+    font-size: var(--font-size-15);
+    line-height: var(--line-spacing-17);
+  }
+}
