@@ -22,6 +22,12 @@ class Audiocall {
 
   arrayOfWordsData = 'Element';
 
+  goToNextSlideButton = null;
+
+  mySwiper = null;
+
+  countSlides = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -93,7 +99,7 @@ class Audiocall {
     this.closeGameButton.addEventListener('click', this.openConfirmExitPopup);
     this.closeConfirmExitPopupButton.addEventListener('click', this.closeConfirmExitPopup);
     this.confirmExitFromGameButton.addEventListener('click', this.goToMainWebsitePage);
-    const mySwiper = new Swiper('.swiper-container', {
+    this.mySwiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
       loop: false,
       slidesPerView: 1,
@@ -102,7 +108,11 @@ class Audiocall {
       grabCurcor: false,
       simulateTouch: false,
     });
-    this.renderGameSlides(mySwiper, this.arrayOfWordsData);
+    this.renderGameSlides(this.mySwiper, this.arrayOfWordsData);
+    this.goToNextSlideButton = document.getElementById('button-next');
+    this.goToNextSlideButton.addEventListener('click', () => {
+      this.goToNextSlide(this.mySwiper);
+    });
   }
 
   openConfirmExitPopup() {
@@ -157,11 +167,16 @@ class Audiocall {
           </ul>
           <div class="audiocall-game__btn-inner">
             <button class="audiocall-game__btn">Не знаю</button>
-            <button class="audiocall-game__btn-next visually-hidden">Дальше</button>
+            <button class="audiocall-game__btn-next" id="button-next">Дальше</button>
           </div>
         </div>
       `);
     }
+  }
+
+  goToNextSlide(swiper) {
+    swiper.slideNext();
+    this.countSlides += 1;
   }
 }
 export default new Audiocall();
