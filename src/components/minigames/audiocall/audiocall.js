@@ -2,7 +2,6 @@ import './audiocall.scss';
 import Swiper from './swiper';
 
 const mySwiper = new Swiper('.swiper-container', {
-  // Optional parameters
   direction: 'horizontal',
   loop: false,
   slidesPerView: 4,
@@ -11,23 +10,6 @@ const mySwiper = new Swiper('.swiper-container', {
   grabCurcor: true,
   simulateTouch: true,
   centerInsufficientSlides: true,
-  breakpoints: {
-    320: {
-      slidesPerView: 1,
-    },
-    768: {
-      slidesPerView: 2,
-      spaceBetween: 30,
-    },
-    1200: {
-      slidesPerView: 3,
-      spaceBetween: 20,
-    },
-    1500: {
-      slidesPerView: 4,
-      spaceBetween: 30,
-    },
-  },
   // If we need pagination
   pagination: {
     el: '.swiper-pagination',
@@ -73,8 +55,6 @@ class Audiocall {
   }
 
   popup = `
-          <section id="audio-call-container" class="audiocall__container">
-            <div id="start-game-button">Start</div>
             <div class="audiocall__close-game-button" id="audiocall__close-game-button">
               &times;
             </div>
@@ -89,11 +69,17 @@ class Audiocall {
                 <a class="btn btn--animated btn--blue" id="audiocall__confirm-exit-popup-content__close-game">Закрыть</a>
                 <a class="btn btn--animated btn--green" id="audiocall__confirm-exit-popup-content__close-popup">Отмена</a>
               </div>
-            </div>
-          </section>`;
+            </div>`;
 
   mainGamePage = `
       <div class="audiocall-start__container" id="audiocall__swiper-container">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
   `;
 
@@ -115,21 +101,23 @@ class Audiocall {
   async afterRender() {
     this.audioCallContainer = document.getElementById('audio-call-container');
     this.startGameButton = document.getElementById('start-game-button');
+    this.startGameButton.addEventListener('click', this.goToMainGamePage);
+  }
+
+  goToMainGamePage() {
+    this.audioCallContainer.innerHTML = this.mainGamePage;
+    const previousHTML = this.audioCallContainer.innerHTML;
+    this.audioCallContainer.innerHTML = (previousHTML + this.popup);
     this.closeGameButton = document.getElementById('audiocall__close-game-button');
     this.confirmExitPopup = document.getElementById('audiocall__confirm-exit-popup');
     this.confirmExitPopupContent = document.getElementById('audiocall__confirm-exit-popup-content');
     this.closeConfirmExitPopupButton = document.getElementById('audiocall__confirm-exit-popup-content__close-popup');
     this.confirmExitFromGameButton = document.getElementById('audiocall__confirm-exit-popup-content__close-game');
     this.whereToAppendSwiper = document.getElementById('audiocall__swiper-container');
-    this.startGameButton.addEventListener('click', this.goToMainGamePage);
     this.closeGameButton.addEventListener('click', this.openConfirmExitPopup);
     this.closeConfirmExitPopupButton.addEventListener('click', this.closeConfirmExitPopup);
     this.confirmExitFromGameButton.addEventListener('click', this.goToMainWebsitePage);
-  }
-
-  goToMainGamePage() {
-    this.audioCallContainer.innerHTML = this.mainGamePage;
-    this.renderGameSlides(this.whereToAppendSwiper, this.arrayOfWordsData, mySwiper);
+    this.renderGameSlides(mySwiper, this.arrayOfWordsData);
   }
 
   openConfirmExitPopup() {
@@ -150,13 +138,13 @@ class Audiocall {
     window.location.href = this.urlForHomePage;
   }
 
-  renderGameSlides(whereToAppend, whatToAppend, swiper) {
+  renderGameSlides(whereToAppend) {
     for (let i = 0; i < 20; i += 1) {
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper">
           <div class="audiocall-game__inner">
             <div class="audiocall-game__sound audiocall-game__sound-bg">
-              <img class="audiocall-game__img" src="../../../assets/images/audio-call-game-icon.svg">
+              <img class="audiocall-game__img" src="${this.arrayOfWordsData}">
             </div>
             <div class="audiocall-game__english-word visually-hidden">lorem ipsum</div>
           </div>
