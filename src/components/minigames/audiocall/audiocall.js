@@ -1,7 +1,6 @@
 import './audiocall.scss';
 
 class Audiocall {
-  
   audioCallContainer = null;
 
   startGameButton = null;
@@ -18,11 +17,24 @@ class Audiocall {
 
   urlForHomePage = '/';
 
+  satisticsFirstButton = null;
+
+  statisticsPopup = null;
+
+  statisticPlayButton = null;
+
+  urlForHomePageGame = '/#games';
+
+  statisticsPopupOpositePage = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
     this.closeConfirmExitPopup = this.closeConfirmExitPopup.bind(this);
     this.goToMainWebsitePage = this.goToMainWebsitePage.bind(this);
+    this.openStatisticsFirstPage = this.openStatisticsFirstPage.bind(this);
+    this.goToStartGamePage = this.goToStartGamePage.bind(this);
+    this.openStatisticsSecondPage = this.openStatisticsSecondPage.bind(this);
   }
 
   popup = `
@@ -46,7 +58,7 @@ class Audiocall {
           </section>`;
 
   mainGamePage = `
-    <div class="audiocall-start__container">
+    <div class="audiocall-start__container" id="main-page-id">
       <div class="audiocall-game__wrapper">
         <div class="audiocall-game__inner">
           <div class="audiocall-game__sound audiocall-game__sound-bg">
@@ -80,6 +92,63 @@ class Audiocall {
           <button class="audiocall-game__btn">Не знаю</button>
           <button class="audiocall-game__btn-next visually-hidden">Дальше</button>
         </div>
+        <button id="result-1">Статистика1</button>
+        <button id="result-2">Статистика2</button>
+        <section class="audiocall-statistics" id="statistics-popup-1">
+          <div class="audiocall-statistics__popup">
+            <div class="audiocall-statistics__container">
+              <p class="audiocall-statistics__title">Неплохо, но есть над чем поработать</p>
+              <div class="audiocall-statistics__img"></div>
+              <div class="audiocall-statistics__btn-inner">
+                <a class="audiocall-statistics__play-btn audiocall-statistics__btn" id="audiocall-statistics__play-btn">Сыграем еще?</a>
+                <a class="audiocall-statistics__exit-btn audiocall-statistics__btn" id="audiocall-statistics__exit-btn">Выход из игры</a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="audiocall-statistics" id="statistics-popup-2">
+          <div class="audiocall-statistics__popup">
+            <div class="audiocall-statistics__container">
+                <p class="audiocall-statistics__title">Неплохо, но есть над чем поработать</p>
+                <div class="audiocall-statistics__content">
+                  <div class="audiocall-statistics__content-mistake">
+                    <div class="audiocall-statistics__content-mistake-inner">
+                      <p class="audiocall-statistics__content-mistake-heading">Ошибок</p>
+                      <p class="audiocall-statistics__content-mistake-number">&nbsp-&nbsp</p>
+                      <p class="audiocall-statistics__content-mistake-number">5</p>
+                    </div>
+                    <div class="audiocall-statistics__content-mistake-inner">
+                      <div class="audiocall-statistics__mistake-wrapper">
+                        <img class="audiocall-statistics__mistake-img" src="../../../assets/images/audio-call-game-icon.svg">
+                        <p class="audiocall-statistics__english-word-mistake">arm</p>
+                        <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
+                        <p class="audiocall-statistics__translation-mistake">рука</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="audiocall-statistics__content-correct-answer">
+                  <div class="audiocall-statistics__content-correct-inner">
+                    <p class="audiocall-statistics__content-correct-heading">Знаю</p>
+                    <p class="audiocall-statistics__content-correct-number">&nbsp-&nbsp</p>
+                    <p class="audiocall-statistics__content-correct-number">15</p>
+                  </div>
+                    <div class="audiocall-statistics__correct-wrapper">
+                      <div class="audiocall-statistics__content-correct-inner">
+                        <img class="audiocall-statistics__correct-img" src="../../../assets/images/audio-call-game-icon.svg">
+                        <p class="audiocall-statistics__english-word-correct">leg</p>
+                        <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
+                        <p class="audiocall-statistics__translation-correct">нога</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="audiocall-statistics__btn-inner">
+                  <a class="audiocall-statistics__play-btn audiocall-statistics__btn" id="audiocall-statistics__play-btn">Сыграем еще?</a>
+                  <a class="audiocall-statistics__exit-btn audiocall-statistics__btn" id="audiocall-statistics__exit-btn">Выход из игры</a>
+                </div>
+            </div>
+          </div>
+        </section>
       </div>
       </div>
     </div>
@@ -103,19 +172,21 @@ class Audiocall {
   async afterRender() {
     this.audioCallContainer = document.getElementById('audio-call-container');
     this.startGameButton = document.getElementById('start-game-button');
-    this.closeGameButton = document.getElementById('audiocall__close-game-button');
-    this.confirmExitPopup = document.getElementById('audiocall__confirm-exit-popup');
-    this.confirmExitPopupContent = document.getElementById('audiocall__confirm-exit-popup-content');
-    this.closeConfirmExitPopupButton = document.getElementById('audiocall__confirm-exit-popup-content__close-popup');
-    this.confirmExitFromGameButton = document.getElementById('audiocall__confirm-exit-popup-content__close-game');
     this.startGameButton.addEventListener('click', this.goToMainGamePage);
-    this.closeGameButton.addEventListener('click', this.openConfirmExitPopup);
-    this.closeConfirmExitPopupButton.addEventListener('click', this.closeConfirmExitPopup);
-    this.confirmExitFromGameButton.addEventListener('click', this.goToMainWebsitePage);
   }
 
   goToMainGamePage() {
     this.audioCallContainer.innerHTML = this.mainGamePage;
+    this.satisticsFirstButton = document.getElementById('result-1');
+    this.satisticsSecondButton = document.getElementById('result-2');
+    this.statisticsPopup = document.getElementById('statistics-popup-1');
+    this.statisticPlayButton = document.getElementById('audiocall-statistics__play-btn');
+    this.statisticExitButton = document.getElementById('audiocall-statistics__exit-btn');
+    this.statisticPlayButton.addEventListener('click', this.goToStartGamePage);
+    this.statisticExitButton.addEventListener('click', this.goToMainWebsitePage);
+    this.satisticsFirstButton.addEventListener('click', this.openStatisticsFirstPage);
+    this.statisticsPopupOpositePage = document.getElementById('statistics-popup-2');
+    this.satisticsSecondButton.addEventListener('click', this.openStatisticsSecondPage);
   }
 
   openConfirmExitPopup() {
@@ -134,6 +205,18 @@ class Audiocall {
 
   goToMainWebsitePage() {
     window.location.href = this.urlForHomePage;
+  }
+
+  goToStartGamePage() {
+    window.location.href = this.urlForHomePageGame;
+  }
+
+  openStatisticsFirstPage() {
+    this.statisticsPopup.style.display = 'block';
+  }
+
+  openStatisticsSecondPage() {
+    this.statisticsPopupOpositePage.style.display = 'block';
   }
 }
 
