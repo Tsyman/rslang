@@ -60,6 +60,10 @@ class Audiocall {
             </div>
             <div class="swiper-pagination"></div>
         </div>
+        <div class="audiocall-game__btn-inner">
+          <button class="audiocall-game__btn">Не знаю</button>
+          <button class="audiocall-game__btn-next" id="button-next">Дальше</button>
+        </div>
       </div>
   `;
 
@@ -167,10 +171,6 @@ class Audiocall {
               <p class="audiocall-game__word">Lorem</p>
             </li>
           </ul>
-          <div class="audiocall-game__btn-inner">
-            <button class="audiocall-game__btn">Не знаю</button>
-            <button class="audiocall-game__btn-next" id="button-next">Дальше</button>
-          </div>
         </div>
       `);
     }
