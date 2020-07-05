@@ -1,4 +1,5 @@
 @import "../../../styles/variables.scss";
+@import '../../../styles/mixins.scss';
 
 body {
   background-color: var(--blue);
@@ -6,6 +7,14 @@ body {
 
 .disabled {
   display: none;
+}
+
+.authorization-page__container {
+  @include respond(tab-port) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 /* Return button */
@@ -29,6 +38,9 @@ body {
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
+  @include respond(tab-port) {
+    margin: 50px 0 30px 0;
+  }
 }
 
 /* Form */
@@ -48,6 +60,9 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: 'Rubik', sans-serif;
+  @include respond(phone) {
+    width: 350px;
+  }
 }
 
 .form-header {
@@ -238,23 +253,6 @@ body {
     transform: scale(1.1);
     font-size: 16px;
     background-color: var(--bg-blue);
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .authorization-page__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .return-button {
-    margin: 50px 0 30px 0;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .form {
-    width: 350px;
   }
 }
 
