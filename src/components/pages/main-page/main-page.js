@@ -14,7 +14,7 @@ class MainPage {
   }
 
   async afterRender() {
-    this.headerMain = null || document.getElementById('header_container-main');
+    this.headerMain = document.getElementById('header_container-main');
     this.headerMain.innerHTML = await HeaderMain.render();
     await HeaderMain.afterRender();
   }
