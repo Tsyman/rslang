@@ -1,5 +1,5 @@
 import './authorization-page.scss';
-import userRequest from './userRequest';
+import userRequest from '../../../services/userRequest';
 import extractTokenExpiration from './tokenHandling/decodeToken';
 import timestamp from './tokenHandling/formattedTime';
 
