@@ -1,5 +1,48 @@
 import './audiocall.scss';
+import Swiper from './swiper';
 
+const mySwiper = new Swiper('.swiper-container', {
+  // Optional parameters
+  direction: 'horizontal',
+  loop: false,
+  slidesPerView: 4,
+  spaceBetween: 50,
+  updateOnWindowResize: true,
+  grabCurcor: true,
+  simulateTouch: true,
+  centerInsufficientSlides: true,
+  breakpoints: {
+    320: {
+      slidesPerView: 1,
+    },
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 30,
+    },
+    1200: {
+      slidesPerView: 3,
+      spaceBetween: 20,
+    },
+    1500: {
+      slidesPerView: 4,
+      spaceBetween: 30,
+    },
+  },
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+    dynamicBullets: true,
+    dynamicMainBullets: 10,
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+});
 class Audiocall {
   audioCallContainer = null;
 
@@ -17,11 +60,16 @@ class Audiocall {
 
   urlForHomePage = '/';
 
+  whereToAppendSwiper = null;
+
+  arrayOfWordsData = 'Put here array of data for game @mariya';
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
     this.closeConfirmExitPopup = this.closeConfirmExitPopup.bind(this);
     this.goToMainWebsitePage = this.goToMainWebsitePage.bind(this);
+    this.renderGameSlides = this.renderGameSlides.bind(this);
   }
 
   popup = `
@@ -45,43 +93,8 @@ class Audiocall {
           </section>`;
 
   mainGamePage = `
-    <div class="audiocall-start__container">
-      <div class="audiocall-game__wrapper">
-        <div class="audiocall-game__inner">
-          <div class="audiocall-game__sound audiocall-game__sound-bg">
-            <img class="audiocall-game__img" src="../../../assets/images/audio-call-game-icon.svg">
-          </div>
-          <div class="audiocall-game__english-word visually-hidden">lorem ipsum</div>
-        </div>
-        <ul class="audiocall-game__list">
-          <li class="audiocall-game__item">
-            <p class="audiocall-game__number">1</p>
-            <p class="audiocall-game__word">Lorem</p>
-          </li>
-          <li class="audiocall-game__item audiocall-game__item-incorrect">
-            <p class="audiocall-game__number">2</p>
-            <p class="audiocall-game__word">Lorem</p>
-          </li>
-          <li class="audiocall-game__item">
-            <p class="audiocall-game__number">3</p>
-            <p class="audiocall-game__word">Lorem</p>
-          </li>
-          <li class="audiocall-game__item">
-            <p class="audiocall-game__number">4</p>
-            <p class="audiocall-game__word">Lorem</p>
-          </li>
-          <li class="audiocall-game__item">
-            <p class="audiocall-game__number">5</p>
-            <p class="audiocall-game__word">Lorem</p>
-          </li>
-        </ul>
-        <div class="audiocall-game__btn-inner">
-          <button class="audiocall-game__btn">Не знаю</button>
-          <button class="audiocall-game__btn-next visually-hidden">Дальше</button>
-        </div>
+      <div class="audiocall-start__container" id="audiocall__swiper-container">
       </div>
-      </div>
-    </div>
   `;
 
   view = `
@@ -107,6 +120,7 @@ class Audiocall {
     this.confirmExitPopupContent = document.getElementById('audiocall__confirm-exit-popup-content');
     this.closeConfirmExitPopupButton = document.getElementById('audiocall__confirm-exit-popup-content__close-popup');
     this.confirmExitFromGameButton = document.getElementById('audiocall__confirm-exit-popup-content__close-game');
+    this.whereToAppendSwiper = document.getElementById('audiocall__swiper-container');
     this.startGameButton.addEventListener('click', this.goToMainGamePage);
     this.closeGameButton.addEventListener('click', this.openConfirmExitPopup);
     this.closeConfirmExitPopupButton.addEventListener('click', this.closeConfirmExitPopup);
@@ -115,6 +129,7 @@ class Audiocall {
 
   goToMainGamePage() {
     this.audioCallContainer.innerHTML = this.mainGamePage;
+    this.renderGameSlides(this.whereToAppendSwiper, this.arrayOfWordsData, mySwiper);
   }
 
   openConfirmExitPopup() {
@@ -134,6 +149,46 @@ class Audiocall {
   goToMainWebsitePage() {
     window.location.href = this.urlForHomePage;
   }
-}
 
+  renderGameSlides(whereToAppend, whatToAppend, swiper) {
+    for (let i = 0; i < 20; i += 1) {
+      whereToAppend.appendSlide(`
+        <div class="audiocall-game__wrapper">
+          <div class="audiocall-game__inner">
+            <div class="audiocall-game__sound audiocall-game__sound-bg">
+              <img class="audiocall-game__img" src="../../../assets/images/audio-call-game-icon.svg">
+            </div>
+            <div class="audiocall-game__english-word visually-hidden">lorem ipsum</div>
+          </div>
+          <ul class="audiocall-game__list">
+            <li class="audiocall-game__item">
+              <p class="audiocall-game__number">1</p>
+              <p class="audiocall-game__word">Lorem</p>
+            </li>
+            <li class="audiocall-game__item audiocall-game__item-incorrect">
+              <p class="audiocall-game__number">2</p>
+              <p class="audiocall-game__word">Lorem</p>
+            </li>
+            <li class="audiocall-game__item">
+              <p class="audiocall-game__number">3</p>
+              <p class="audiocall-game__word">Lorem</p>
+            </li>
+            <li class="audiocall-game__item">
+              <p class="audiocall-game__number">4</p>
+              <p class="audiocall-game__word">Lorem</p>
+            </li>
+            <li class="audiocall-game__item">
+              <p class="audiocall-game__number">5</p>
+              <p class="audiocall-game__word">Lorem</p>
+            </li>
+          </ul>
+          <div class="audiocall-game__btn-inner">
+            <button class="audiocall-game__btn">Не знаю</button>
+            <button class="audiocall-game__btn-next visually-hidden">Дальше</button>
+          </div>
+        </div>
+      `);
+    }
+  }
+}
 export default new Audiocall();
