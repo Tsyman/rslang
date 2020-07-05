@@ -1,30 +1,6 @@
 import './audiocall.scss';
 import Swiper from './swiper';
 
-const mySwiper = new Swiper('.swiper-container', {
-  direction: 'horizontal',
-  loop: false,
-  slidesPerView: 4,
-  spaceBetween: 50,
-  updateOnWindowResize: true,
-  grabCurcor: true,
-  simulateTouch: true,
-  centerInsufficientSlides: true,
-  // If we need pagination
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-    dynamicBullets: true,
-    dynamicMainBullets: 10,
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-
-});
 class Audiocall {
   audioCallContainer = null;
 
@@ -117,6 +93,28 @@ class Audiocall {
     this.closeGameButton.addEventListener('click', this.openConfirmExitPopup);
     this.closeConfirmExitPopupButton.addEventListener('click', this.closeConfirmExitPopup);
     this.confirmExitFromGameButton.addEventListener('click', this.goToMainWebsitePage);
+    const mySwiper = new Swiper('.swiper-container', {
+      direction: 'horizontal',
+      loop: false,
+      slidesPerView: 1,
+      spaceBetween: 50,
+      updateOnWindowResize: true,
+      grabCurcor: true,
+      simulateTouch: true,
+      centerInsufficientSlides: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        dynamicBullets: true,
+        dynamicMainBullets: 10,
+      },
+
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+    });
     this.renderGameSlides(mySwiper, this.arrayOfWordsData);
   }
 
