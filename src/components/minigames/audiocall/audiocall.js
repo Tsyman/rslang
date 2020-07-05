@@ -20,7 +20,7 @@ class Audiocall {
 
   whereToAppendSwiper = null;
 
-  arrayOfWordsData = 'Put here array of data for game @mariya';
+  arrayOfWordsData = 'Element';
 
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
@@ -97,23 +97,10 @@ class Audiocall {
       direction: 'horizontal',
       loop: false,
       slidesPerView: 1,
-      spaceBetween: 50,
+      spaceBetween: 20,
       updateOnWindowResize: true,
-      grabCurcor: true,
-      simulateTouch: true,
-      centerInsufficientSlides: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-        dynamicMainBullets: 10,
-      },
-
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-
+      grabCurcor: false,
+      simulateTouch: false,
     });
     this.renderGameSlides(mySwiper, this.arrayOfWordsData);
   }
@@ -139,21 +126,21 @@ class Audiocall {
   renderGameSlides(whereToAppend) {
     for (let i = 0; i < 20; i += 1) {
       whereToAppend.appendSlide(`
-        <div class="audiocall-game__wrapper">
+        <div class="audiocall-game__wrapper swiper-slide">
           <div class="audiocall-game__inner">
             <div class="audiocall-game__sound audiocall-game__sound-bg">
-              <img class="audiocall-game__img" src="${this.arrayOfWordsData}">
+              <img class="audiocall-game__img" src="">
             </div>
             <div class="audiocall-game__english-word visually-hidden">lorem ipsum</div>
           </div>
           <ul class="audiocall-game__list">
             <li class="audiocall-game__item">
               <p class="audiocall-game__number">1</p>
-              <p class="audiocall-game__word">Lorem</p>
+              <p class="audiocall-game__word">${this.arrayOfWordsData}</p>
             </li>
             <li class="audiocall-game__item audiocall-game__item-incorrect">
               <p class="audiocall-game__number">2</p>
-              <p class="audiocall-game__word">Lorem</p>
+              <p class="audiocall-game__word">I: ${i}</p>
             </li>
             <li class="audiocall-game__item">
               <p class="audiocall-game__number">3</p>
