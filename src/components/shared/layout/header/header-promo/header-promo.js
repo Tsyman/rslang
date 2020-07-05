@@ -39,10 +39,10 @@ class HeaderPromo {
                         <a class="header-promo__link" href="/#team">Наша команда</a>
                       </li>
                       <li class="registration sidebar__item">
-                        <a class="registration__secondary-btn" href="/#/register">Создать аккаунт</a>
+                        <a class="registration__secondary-btn" href="/#login">Создать аккаунт</a>
                       </li>
                       <li class="registration sidebar__item">
-                        <a class="registration__light-btn" href="/#/signin">Войти</a>
+                        <a class="registration__light-btn" href="/#login">Войти</a>
                       </li>
                     </ul>
                   </div>
@@ -57,6 +57,17 @@ class HeaderPromo {
   }
 
   async afterRender() {
+    document.querySelector('.registration__secondary-btn').addEventListener('click', () => {
+      document.getElementById('header_container').style.display = 'none';
+      document.getElementById('footer_container').style.display = 'none';
+    });
+    document.querySelector('.registration__light-btn').addEventListener('click', () => {
+      document.getElementById('header_container').style.display = 'none';
+      document.getElementById('footer_container').style.display = 'none';
+      setTimeout(() => {
+        document.querySelector('.form-footer button').click();
+      }, 0);
+    });
     if (!this.alreadyRendered) {
       this.items = [...document.querySelectorAll('.header-promo__link')];
       this.linksContainer = document.querySelector('.header-promo__list');
