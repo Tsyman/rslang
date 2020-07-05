@@ -2,7 +2,6 @@ import AuthorizationPage from './components/pages/authorization-page/authorizati
 
 import Main from './components/pages/main-page/main-page';
 import Stat from './components/pages/stat-page/stat-page';
-import OurTeam from './components/pages/our-team/our-team';
 import NotFound from './components/pages/not-found/not-found';
 
 import HeaderPromo from './components/shared/layout/header/header-promo/header-promo';
@@ -15,7 +14,6 @@ const routes = {
   '/': Main,
   '/stat': Stat,
   '/login': AuthorizationPage,
-  '/team': OurTeam,
 };
 
 // The router code. Takes a URL, checks against the list of supported routes
@@ -29,6 +27,7 @@ const router = async () => {
   // Render the Header and footer of the page
   header.innerHTML = await HeaderPromo.render();
   await HeaderPromo.afterRender();
+
   footer.innerHTML = await Footer.render();
 
   // Get the parsed URl from the addressbar
@@ -42,7 +41,7 @@ const router = async () => {
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   const page = routes[parsedURL] ? routes[parsedURL] : NotFound;
   content.innerHTML = await page.render();
-  await page.afterRender();
+  if (page.afterRender) await page.afterRender();
 };
 
 // Listen on hash change:
