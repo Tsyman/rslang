@@ -58,6 +58,7 @@ class Audiocall {
         <div class="swiper-container">
             <div class="swiper-wrapper">
             </div>
+            <div class="swiper-pagination"></div>
         </div>
       </div>
   `;
@@ -104,6 +105,10 @@ class Audiocall {
       updateOnWindowResize: true,
       grabCurcor: false,
       simulateTouch: false,
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'progressbar',
+      },
     });
     this.renderGameSlides(this.mySwiper, this.arrayOfWordsData);
     this.goToNextSlideButton = document.getElementById('button-next');
