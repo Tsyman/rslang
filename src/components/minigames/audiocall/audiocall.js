@@ -232,7 +232,6 @@ class Audiocall {
   openStatisticsSecondPage() {
     this.statisticsPopupOpositePage.style.display = 'block';
   }
-}
 
   renderGameSlides(whereToAppend) {
     for (let i = 0; i < 20; i += 1) {
