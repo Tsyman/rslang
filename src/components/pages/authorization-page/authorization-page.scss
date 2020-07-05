@@ -43,6 +43,12 @@ body {
   }
 }
 
+.return-button:hover {
+  font-size: 50px;
+  line-height: 0;
+  padding-bottom: 0;
+}
+
 /* Form */
 
 .form__container {
@@ -62,6 +68,9 @@ body {
   font-family: 'Rubik', sans-serif;
   @include respond(phone) {
     width: 350px;
+  }
+  @include respond(phone-portrait) {
+    width: 300px;
   }
 }
 
@@ -101,6 +110,9 @@ body {
   width: 250px;
   height: 25px;
   padding: 0 10px;
+  @include respond(phone-portrait) {
+    width: 225px;
+  }
 }
 
 .label-name {
@@ -171,6 +183,14 @@ body {
   font-size: 16px;
   cursor: pointer;
   transition: 0.7s;
+  @include respond(phone) {
+    width: 275px;
+  }
+}
+
+.submit-button:hover {
+  transform: scale(1.1);
+  font-size: 18px;
 }
 
 .form-footer {
@@ -200,6 +220,12 @@ body {
   transition: 0.7s;
 }
 
+.form-footer button:hover {
+  transform: scale(1.1);
+  font-size: 16px;
+  background-color: var(--bg-blue);
+}
+
 /* Tooltip */
 
 .submit-button__inner {
@@ -222,6 +248,10 @@ body {
   opacity: 0;
   transition: all 0.5s ease;
   padding-left: 10px;
+  @include respond(phone) {
+    left: 3%;
+    width: 98%;
+  }
 }
 
 .tooltip:before{
@@ -237,37 +267,4 @@ body {
 
 .tooltip--active{
   opacity: 1;
-}
-
-@media (hover: hover) {
-  .return-button:hover {
-    font-size: 50px;
-    line-height: 0;
-    padding-bottom: 0;
-  }
-  .submit-button:hover {
-    transform: scale(1.1);
-    font-size: 18px;
-  }
-  .form-footer button:hover {
-    transform: scale(1.1);
-    font-size: 16px;
-    background-color: var(--bg-blue);
-  }
-}
-
-@media screen and (max-width: 376px) {
-  .form {
-    width: 300px;
-  }
-  .input {
-    width: 225px;
-  }
-  .submit-button {
-    width: 275px;
-  }
-  .tooltip {
-    left: 3%;
-    width: 98%;
-  }
 }
