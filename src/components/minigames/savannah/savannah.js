@@ -21,11 +21,16 @@ function keyDownHandler(event) {
 
 class SavannahMiniGame {
   constructor() {
-    this.word = 'Savannah';
+    this.word = '';
     this.fallTime = 500;
     this.loadTime = 3000;
+    this.words = [];
+    this.answerNum = null;
+    this.answers = [];
     this.gameLoad = this.gameLoad.bind(this);
     this.keyUpHandler = this.keyUpHandler.bind(this);
+    this.fetchWords = this.fetchWords.bind(this);
+    this.chooseWord = this.chooseWord.bind(this);
   }
 
   view = `
@@ -62,7 +67,7 @@ class SavannahMiniGame {
               <p id="4">♥</p>
               <p id="5">♥</p>
             </div>
-            <div class="Content__fallingWord">Savannah</div>
+<!--            <div class="Content__fallingWord">Падающее слово</div>-->
           </div>
           <div class="start-game__overlay">
             <div class="overlay">
@@ -96,21 +101,28 @@ class SavannahMiniGame {
         `;
 
   startGame() {
+    this.chooseWord().then((res) => this.setAnswers(res)).then(() => this.createAnswerBtns())
+      .then(() => this.createFallWord());
+    // console.log(this.word);
+    // console.log(this.words);
+    // console.log(this.answers);
     window.addEventListener('keyup', this.keyUpHandler);
     window.addEventListener('keydown', keyDownHandler);
-    document.querySelector('.Content__fallingWord').classList.add('animate');
   }
 
   createFallWord() {
-    const fallWord = document.createElement('div');
-    fallWord.classList.add('Content__fallingWord');
-    fallWord.innerHTML = this.word;
-    document.querySelector('.Content__wrapper').append(fallWord);
-    fallWord.classList.add('animate');
+    if (this.words.length > 3) {
+      const fallWord = document.createElement('div');
+      fallWord.classList.add('Content__fallingWord');
+      fallWord.innerHTML = this.word;
+      document.querySelector('.Content__wrapper').append(fallWord);
+      fallWord.classList.add('animate');
+    }
   }
 
   async gameOverlay() {
     return new Promise((resolve) => {
+      this.fetchWords();
       setTimeout(() => {
         document.querySelector('.start-game__overlay').style.zIndex = '0';
         document.querySelector('.start-game__overlay').classList.add('disabled');
@@ -128,34 +140,96 @@ class SavannahMiniGame {
     });
   }
 
+  async fetchWords() {
+    return new Promise((resolve) => {
+      const MIN_PAGE = 0;
+      const MAX_PAGE = 29;
+      const MIN_GROUP = 0;
+      const MAX_GROUP = 5;
+      const groupNum = Math.floor(Math.random() * (MAX_GROUP - MIN_GROUP + 1)) + MIN_GROUP;
+      const pageNum = Math.floor(Math.random() * (MAX_PAGE - MIN_PAGE + 1)) + MIN_PAGE;
+      resolve(fetch(`https://afternoon-falls-25894.herokuapp.com/words?page=${pageNum}&group=${groupNum}`)
+        .then((res) => res.json().then((data) => data.forEach((el, index) => {
+          const updWord = { id: index, word: el.word, translate: el.wordTranslate };
+          return this.words.push(updWord);
+        }))));
+    });
+  }
+
+  getRandomNum(min, max) {
+    this.answerNum = Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  async chooseWord() {
+    return new Promise((resolve) => {
+      // this.getRandomNum(0, 19);
+      resolve(this.word = this.words[this.words.length - 1].word);
+    });
+  }
+
+  setAnswers(word) {
+    if (this.words.length > 3) {
+      this.answers = [];
+      this.answers.push(word);
+      for (let i = 0; i < 3; i += 1) {
+        this.getRandomNum(0, this.words.length - 1);
+        if (!this.answers.includes(this.words[this.answerNum].word)) {
+          this.answers.push(this.words[this.answerNum].word);
+        } else {
+          i -= 1;
+        }
+      }
+    } else {
+      alert('Pop up с результатами');
+    }
+  }
+
+  async createAnswerBtns() {
+    return new Promise((resolve) => {
+      this.answers.sort(() => Math.random() - 0.5);
+      // eslint-disable-next-line prefer-destructuring
+      resolve(document.querySelector('.Content__wordParagraph.first').innerText = this.answers[0],
+        // eslint-disable-next-line prefer-destructuring
+        document.querySelector('.Content__wordParagraph.second').innerText = this.answers[1],
+        // eslint-disable-next-line prefer-destructuring
+        document.querySelector('.Content__wordParagraph.thirty').innerText = this.answers[2],
+        // eslint-disable-next-line prefer-destructuring
+        document.querySelector('.Content__wordParagraph.fourth').innerText = this.answers[3]);
+    });
+  }
+
   keyUpHandler(event) {
-    const fallWord = document.querySelector('.Content__fallingWord').innerHTML;
+    const fallWord = document.querySelector('.Content__fallingWord').innerText;
     document.querySelectorAll('.Content__wordParagraph').forEach((elem) => {
       elem.parentElement.classList.remove('active');
     });
     switch (event.key) {
       case '1':
-        if (document.querySelector('.Content__wordParagraph.first').innerHTML === fallWord) {
+        if (document.querySelector('.Content__wordParagraph.first').innerText === fallWord) {
           document.querySelector('.Content__fallingWord').remove();
-          this.createFallWord();
+          this.words.pop();
+          this.startGame();
         }
         break;
       case '2':
-        if (document.querySelector('.Content__wordParagraph.second').innerHTML === fallWord) {
+        if (document.querySelector('.Content__wordParagraph.second').innerText === fallWord) {
           document.querySelector('.Content__fallingWord').remove();
-          this.createFallWord();
+          this.words.pop();
+          this.startGame();
         }
         break;
       case '3':
         if (document.querySelector('.Content__wordParagraph.thirty').innerHTML === fallWord) {
           document.querySelector('.Content__fallingWord').remove();
-          this.createFallWord();
+          this.words.pop();
+          this.startGame();
         }
         break;
       case '4':
         if (document.querySelector('.Content__wordParagraph.fourth').innerHTML === fallWord) {
           document.querySelector('.Content__fallingWord').remove();
-          this.createFallWord();
+          this.words.pop();
+          this.startGame();
         }
         break;
       default:
