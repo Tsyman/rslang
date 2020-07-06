@@ -3,6 +3,8 @@ import Card from './card';
 import CardType from './card-type';
 
 import Utils from '../../../services/Utils';
+import UserService from '../../../services/UserService';
+import AggregatedWordsFilter from '../../../services/AggregatedWordsFilter';
 
 class Dictionary {
   view = `
@@ -44,31 +46,17 @@ class Dictionary {
   async afterRender() {
     this.selectTab();
 
+    const response = await UserService.getAggregatedWords(
+      localStorage.getItem('userId'),
+      { filter: AggregatedWordsFilter.USER_WORD_NOT_NULL },
+    );
+
     let html = '';
-    for (let i = 0; i < 9; i += 1) {
-      const card = new Card(
-        {
-          _id: '5e9f5ee35eb9e72bc21af4a2',
-          group: 0,
-          page: 0,
-          word: 'boat',
-          image: 'files/01_0005.jpg',
-          audio: 'files/01_0005.mp3',
-          audioMeaning: 'files/01_0005_meaning.mp3',
-          audioExample: 'files/01_0005_example.mp3',
-          textMeaning: 'A <i>boat</i> is a vehicle that moves across water.',
-          textExample: 'There is a small <b>boat</b> on the lake.',
-          transcription: '[bout]',
-          textExampleTranslate: 'На озере есть маленькая лодка',
-          textMeaningTranslate: 'Лодка - это транспортное средство, которое движется по воде',
-          wordTranslate: 'лодка',
-          wordsPerExampleSentence: 8,
-        },
-        this.cardType,
-      );
+    response[0].paginatedResults.forEach((result) => {
+      const card = new Card(result, this.cardType);
 
       html += card.render();
-    }
+    });
 
     document.querySelector('.dictionary__card-list').innerHTML = html;
   }
