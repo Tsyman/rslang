@@ -40,6 +40,8 @@ class Audiocall {
 
   countSlides = null;
 
+  answerNum = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -202,7 +204,6 @@ class Audiocall {
         type: 'progressbar',
       },
     });
-    this.renderGameSlides(this.mySwiper, this.arrayOfWordsData);
     this.goToNextSlideButton = document.getElementById('button-next');
     this.goToNextSlideButton.addEventListener('click', () => {
       this.goToNextSlide(this.mySwiper);
@@ -241,34 +242,45 @@ class Audiocall {
 
   renderGameSlides(whereToAppend) {
     for (let i = 0; i < 20; i += 1) {
+      const a = this.parsedArrayOfWordsData[i];
+      const arrayOfCurrentWordsInEnglish = [];
+
+      console.log(a);
+      console.log(arrayOfCurrentWordsInEnglish);
+      a.forEach((el) => {
+        arrayOfCurrentWordsInEnglish.push(el.word);
+      });
+      this.answerNum = arrayOfCurrentWordsInEnglish[Math.floor(Math.random()
+        * arrayOfCurrentWordsInEnglish.length)];
+      console.log(this.answerNum);
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper swiper-slide">
           <div class="audiocall-game__inner">
             <div class="audiocall-game__sound audiocall-game__sound-bg">
               <img class="audiocall-game__img" src="">
             </div>
-            <div class="audiocall-game__english-word visually-hidden">lorem ipsum</div>
+            <div class="audiocall-game__english-word">${this.answerNum}</div>
           </div>
           <ul class="audiocall-game__list">
             <li class="audiocall-game__item">
               <p class="audiocall-game__number">1</p>
-              <p class="audiocall-game__word">${this.arrayOfWordsData}</p>
+              <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][0].trans}</p>
             </li>
             <li class="audiocall-game__item audiocall-game__item-incorrect">
               <p class="audiocall-game__number">2</p>
-              <p class="audiocall-game__word">I: ${i}</p>
+              <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][1].trans}</p>
             </li>
             <li class="audiocall-game__item">
               <p class="audiocall-game__number">3</p>
-              <p class="audiocall-game__word">Lorem</p>
+              <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][2].trans}</p>
             </li>
             <li class="audiocall-game__item">
               <p class="audiocall-game__number">4</p>
-              <p class="audiocall-game__word">Lorem</p>
+              <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][3].trans}</p>
             </li>
             <li class="audiocall-game__item">
               <p class="audiocall-game__number">5</p>
-              <p class="audiocall-game__word">Lorem</p>
+              <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][4].trans}</p>
             </li>
           </ul>
         </div>
@@ -309,11 +321,12 @@ class Audiocall {
       const startArray = this.arrayOfWordsData;
       for (let i = 1; i < 21; i += 1) {
         const tempArray = startArray.slice(startPoint, endPoint);
-        console.log(tempArray);
+        // console.log(tempArray);
         startPoint = endPoint;
         endPoint += 5;
         this.parsedArrayOfWordsData.push(tempArray);
       }
+      this.renderGameSlides(this.mySwiper, this.arrayOfWordsData);
     }
     return this.parsedArrayOfWordsData;
   }
