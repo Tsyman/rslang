@@ -30,13 +30,15 @@ class Audiocall {
 
   whereToAppendSwiper = null;
 
-  arrayOfWordsData = 'Element';
+  arrayOfWordsData = [];
 
   goToNextSlideButton = null;
 
   mySwiper = null;
 
   countSlides = null;
+
+  words = null;
 
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
@@ -47,6 +49,8 @@ class Audiocall {
     this.goToStartGamePage = this.goToStartGamePage.bind(this);
     this.openStatisticsSecondPage = this.openStatisticsSecondPage.bind(this);
     this.renderGameSlides = this.renderGameSlides.bind(this);
+    this.fetchWords = this.fetchWords.bind(this);
+    this.words = [];
   }
 
   popup = `
@@ -157,7 +161,9 @@ class Audiocall {
   async afterRender() {
     this.audioCallContainer = document.getElementById('audio-call-container');
     this.startGameButton = document.getElementById('start-game-button');
+    this.startGameButton = document.getElementById('start-game-button');
     this.startGameButton.addEventListener('click', this.goToMainGamePage);
+    this.startGameButton.addEventListener('click', this.fetchWords);
   }
 
   goToMainGamePage() {
@@ -273,6 +279,24 @@ class Audiocall {
   goToNextSlide(swiper) {
     swiper.slideNext();
     this.countSlides += 1;
+  }
+
+  async fetchWords() {
+    return new Promise((resolve) => {
+      const MIN_PAGE = 0;
+      const MAX_PAGE = 29;
+      const MIN_GROUP = 0;
+      const MAX_GROUP = 5;
+      const groupNum = Math.floor(Math.random() * (MAX_GROUP - MIN_GROUP + 1)) + MIN_GROUP;
+      const pageNum = Math.floor(Math.random() * (MAX_PAGE - MIN_PAGE + 1)) + MIN_PAGE;
+      resolve(fetch(`https://afternoon-falls-25894.herokuapp.com/words?page=${pageNum}&group=${groupNum}`)
+        .then((res) => res.json().then((data) => data.forEach((el) => {
+          const updWord = {
+            id: el.id, word: el.word, translate: el.wordTranslate, audio: el.audio, image: el.image,
+          };
+          return this.arrayOfWordsData.push(updWord);
+        }))));
+    });
   }
 }
 export default new Audiocall();
