@@ -134,9 +134,6 @@ class Audiocall {
           <button class="audiocall-game__btn">Не знаю</button>
           <button class="audiocall-game__btn-next" id="button-next">Дальше</button>
         </div>
-
-
-        <button id="result-1">Статистика1</button>
   `;
 
   view = `
@@ -200,8 +197,6 @@ class Audiocall {
     this.goToNextSlideButton.addEventListener('click', () => {
       this.goToNextSlide(this.mySwiper);
     });
-    this.satisticsFirstButton = document.getElementById('result-1');
-    this.satisticsFirstButton.addEventListener('click', this.openResultsPopup);
     this.statisticsPopup = document.getElementById('results-popup');
   }
 
@@ -285,6 +280,9 @@ class Audiocall {
   goToNextSlide(swiper) {
     swiper.slideNext();
     this.countSlides += 1;
+    if (this.countSlides === 20) {
+      this.openResultsPopup();
+    }
   }
 }
 export default new Audiocall();
