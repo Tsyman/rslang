@@ -3,6 +3,7 @@ import AuthorizationPage from './components/pages/authorization-page/authorizati
 import Main from './components/pages/main-page/main-page';
 import Stat from './components/pages/stat-page/stat-page';
 import NotFound from './components/pages/not-found/not-found';
+import Dictionary from './components/pages/dictionary-page/dictionary-page';
 import OurGames from './components/pages/our-games-page/our-games-page';
 
 import HeaderPromo from './components/shared/layout/header/header-promo/header-promo';
@@ -16,6 +17,8 @@ const routes = {
   '/main': Main,
   '/login': AuthorizationPage,
   '/games': OurGames,
+  '/dictionary': Dictionary,
+  '/dictionary/:id': Dictionary,
 };
 
 // The router code. Takes a URL, checks against the list of supported routes
