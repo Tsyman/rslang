@@ -295,26 +295,25 @@ class Audiocall {
             const updWord = {
               id: el.id, word: el.word, trans: el.wordTranslate, audio: el.audio, image: el.image,
             };
-            return this.arrayOfWordsData.push(updWord);
+            this.arrayOfWordsData.push(updWord);
+            this.parseWordsIntoGroups();
           }))));
       }
-      console.log(this.arrayOfWordsData);
-      this.parseWordsIntoGroups();
-      console.log(this.parsedArrayOfWordsData);
     });
   }
 
   parseWordsIntoGroups() {
-    let startPoint = 0;
-    let endPoint = 5;
-    console.log(this.arrayOfWordsData);
-    const startArray = this.arrayOfWordsData;
-    for (let i = 1; i < 21; i += 1) {
-      const tempArray = startArray.slice(startPoint, endPoint);
-      console.log(tempArray);
-      startPoint = endPoint;
-      endPoint += 5;
-      this.parsedArrayOfWordsData.push(tempArray);
+    if (this.arrayOfWordsData.length === 100) {
+      let startPoint = 0;
+      let endPoint = 5;
+      const startArray = this.arrayOfWordsData;
+      for (let i = 1; i < 21; i += 1) {
+        const tempArray = startArray.slice(startPoint, endPoint);
+        console.log(tempArray);
+        startPoint = endPoint;
+        endPoint += 5;
+        this.parsedArrayOfWordsData.push(tempArray);
+      }
     }
     return this.parsedArrayOfWordsData;
   }
