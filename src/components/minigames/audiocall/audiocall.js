@@ -32,13 +32,13 @@ class Audiocall {
 
   arrayOfWordsData = [];
 
+  parsedArrayOfWordsData = [];
+
   goToNextSlideButton = null;
 
   mySwiper = null;
 
   countSlides = null;
-
-  words = null;
 
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
@@ -50,7 +50,7 @@ class Audiocall {
     this.openStatisticsSecondPage = this.openStatisticsSecondPage.bind(this);
     this.renderGameSlides = this.renderGameSlides.bind(this);
     this.fetchWords = this.fetchWords.bind(this);
-    this.words = [];
+    this.parseWordsIntoGroups = this.parseWordsIntoGroups.bind(this);
   }
 
   popup = `
@@ -287,16 +287,36 @@ class Audiocall {
       const MAX_PAGE = 29;
       const MIN_GROUP = 0;
       const MAX_GROUP = 5;
-      const groupNum = Math.floor(Math.random() * (MAX_GROUP - MIN_GROUP + 1)) + MIN_GROUP;
-      const pageNum = Math.floor(Math.random() * (MAX_PAGE - MIN_PAGE + 1)) + MIN_PAGE;
-      resolve(fetch(`https://afternoon-falls-25894.herokuapp.com/words?page=${pageNum}&group=${groupNum}`)
-        .then((res) => res.json().then((data) => data.forEach((el) => {
-          const updWord = {
-            id: el.id, word: el.word, translate: el.wordTranslate, audio: el.audio, image: el.image,
-          };
-          return this.arrayOfWordsData.push(updWord);
-        }))));
+      for (let i = 0; i < 5; i += 1) {
+        const groupNum = Math.floor(Math.random() * (MAX_GROUP - MIN_GROUP + 1)) + MIN_GROUP;
+        const pageNum = Math.floor(Math.random() * (MAX_PAGE - MIN_PAGE + 1)) + MIN_PAGE;
+        resolve(fetch(`https://afternoon-falls-25894.herokuapp.com/words?page=${pageNum}&group=${groupNum}`)
+          .then((res) => res.json().then((data) => data.forEach((el) => {
+            const updWord = {
+              id: el.id, word: el.word, trans: el.wordTranslate, audio: el.audio, image: el.image,
+            };
+            return this.arrayOfWordsData.push(updWord);
+          }))));
+      }
+      console.log(this.arrayOfWordsData);
+      this.parseWordsIntoGroups();
+      console.log(this.parsedArrayOfWordsData);
     });
+  }
+
+  parseWordsIntoGroups() {
+    let startPoint = 0;
+    let endPoint = 5;
+    console.log(this.arrayOfWordsData);
+    const startArray = this.arrayOfWordsData;
+    for (let i = 1; i < 21; i += 1) {
+      const tempArray = startArray.slice(startPoint, endPoint);
+      console.log(tempArray);
+      startPoint = endPoint;
+      endPoint += 5;
+      this.parsedArrayOfWordsData.push(tempArray);
+    }
+    return this.parsedArrayOfWordsData;
   }
 }
 export default new Audiocall();
