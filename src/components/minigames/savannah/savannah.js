@@ -29,6 +29,8 @@ class SavannahMiniGame {
     this.answers = [];
     this.choosenAnswerId = null;
     this.onMouseListener = null;
+    this.remainingLifes = 5;
+    this.interval = null;
     this.gameLoad = this.gameLoad.bind(this);
     this.keyUpHandler = this.keyUpHandler.bind(this);
     this.fetchWords = this.fetchWords.bind(this);
@@ -63,11 +65,11 @@ class SavannahMiniGame {
               </div>
             </div>
             <div class="Content__lifesContainer">
+              <p id="0">♥</p>
               <p id="1">♥</p>
               <p id="2">♥</p>
               <p id="3">♥</p>
               <p id="4">♥</p>
-              <p id="5">♥</p>
             </div>
 <!--            <div class="Content__fallingWord">Падающее слово</div>-->
           </div>
@@ -122,6 +124,7 @@ class SavannahMiniGame {
       fallWord.innerHTML = this.currentWord.word;
       document.querySelector('.Content__wrapper').append(fallWord);
       fallWord.classList.add('animate');
+      this.checkWordPosition();
     }
   }
 
@@ -219,7 +222,7 @@ class SavannahMiniGame {
           this.words.pop();
           this.startGame();
         } else {
-          console.log('Минус жизнь');
+          this.checkRemainingLifes();
         }
         break;
       case '2':
@@ -228,7 +231,7 @@ class SavannahMiniGame {
           this.words.pop();
           this.startGame();
         } else {
-          console.log('Минус жизнь');
+          this.checkRemainingLifes();
         }
         break;
       case '3':
@@ -237,7 +240,7 @@ class SavannahMiniGame {
           this.words.pop();
           this.startGame();
         } else {
-          console.log('Минус жизнь');
+          this.checkRemainingLifes();
         }
         break;
       case '4':
@@ -246,7 +249,7 @@ class SavannahMiniGame {
           this.words.pop();
           this.startGame();
         } else {
-          console.log('Минус жизнь');
+          this.checkRemainingLifes();
         }
         break;
       default:
@@ -281,8 +284,33 @@ class SavannahMiniGame {
       this.words.pop();
       this.startGame();
     } else {
-      console.log('Минус жизнь');
+      this.checkRemainingLifes();
     }
+  }
+
+  checkRemainingLifes() {
+    this.remainingLifes -= 1;
+    const lifesContainer = Array.from(document.querySelector('.Content__lifesContainer').children);
+    lifesContainer[this.remainingLifes].style.opacity = '0.25';
+
+    if (this.remainingLifes === 0) {
+      clearInterval(this.interval);
+      alert('Pop up с результатами');
+    }
+    this.startGame();
+  }
+
+  checkWordPosition() {
+    this.interval = setInterval(() => {
+      const fallingWord = document.querySelector('.Content__fallingWord');
+      const wordContentY = document.querySelector('.Content__wordContent').getBoundingClientRect().y;
+      const coordY = fallingWord.getBoundingClientRect().y + 110;
+      if (coordY > wordContentY) {
+        fallingWord.remove();
+        this.words.pop();
+        this.checkRemainingLifes();
+      }
+    }, 200);
   }
 
   async render() {
