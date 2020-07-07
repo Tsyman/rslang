@@ -242,24 +242,21 @@ class Audiocall {
 
   renderGameSlides(whereToAppend) {
     for (let i = 0; i < 20; i += 1) {
-      const a = this.parsedArrayOfWordsData[i];
+      const currentArrayWithFiveObject = this.parsedArrayOfWordsData[i];
       const arrayOfCurrentWordsInEnglish = [];
 
-      console.log(a);
-      console.log(arrayOfCurrentWordsInEnglish);
-      a.forEach((el) => {
+      currentArrayWithFiveObject.forEach((el) => {
         arrayOfCurrentWordsInEnglish.push(el.word);
       });
       this.answerNum = arrayOfCurrentWordsInEnglish[Math.floor(Math.random()
         * arrayOfCurrentWordsInEnglish.length)];
-      console.log(this.answerNum);
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper swiper-slide">
           <div class="audiocall-game__inner">
             <div class="audiocall-game__sound audiocall-game__sound-bg">
               <img class="audiocall-game__img" src="">
             </div>
-            <div class="audiocall-game__english-word">${this.answerNum}</div>
+            <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerNum}</div>
           </div>
           <ul class="audiocall-game__list">
             <li class="audiocall-game__item">
@@ -321,7 +318,6 @@ class Audiocall {
       const startArray = this.arrayOfWordsData;
       for (let i = 1; i < 21; i += 1) {
         const tempArray = startArray.slice(startPoint, endPoint);
-        // console.log(tempArray);
         startPoint = endPoint;
         endPoint += 5;
         this.parsedArrayOfWordsData.push(tempArray);

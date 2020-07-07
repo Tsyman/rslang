@@ -184,6 +184,7 @@
   width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  height: 850px;
   @include respond(tab-land) {
   width: 900px;
   }
@@ -449,31 +450,31 @@
 //   background-size: cover;
 // }
 
-// .audiocall-game__inner {
-//   display: flex;
-//   justify-content: space-around;
-//   align-items: center;
-//   width: 70%;
-//   @include respond(tab-port) {
-//     flex-direction: column;
-//     margin-bottom: 30px;
-//   }
-// }
+.audiocall-game__inner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  @include respond(tab-port) {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+}
 
-// .audiocall-game__english-word {
-//   // display: none;
-//   font-weight: bold;
-//   font-size: var(--font-size-59);
-//   line-height: var(--line-spacing-63);
-//   color: var(--white);
-//   @include respond(tab-port) {
-//     font-size: var(--font-size-42);
-//     line-height: var(--line-spacing-47);
-//   }
-//   @include respond(phone) {
-//     font-size: var(--font-size-31);
-//   }
-// }
+.audiocall-game__english-word {
+  display: none;
+  font-weight: bold;
+  font-size: var(--font-size-59);
+  line-height: var(--line-spacing-63);
+  color: var(--white);
+  @include respond(tab-port) {
+    font-size: var(--font-size-42);
+    line-height: var(--line-spacing-47);
+  }
+  @include respond(phone) {
+    font-size: var(--font-size-31);
+  }
+}
 
 
 .audiocall-statistics {
