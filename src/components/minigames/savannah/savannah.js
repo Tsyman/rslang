@@ -19,15 +19,25 @@ function keyDownHandler(event) {
   }
 }
 
+function statisticsWordInner(word, translate) {
+  return `
+        <div class="word-audio"></div>
+        <p class="word-name"><span class="word--blue">${word}</span> - <span>${translate}</span></p>
+        <div class="word-delete"></div>
+      `;
+}
+
 class SavannahMiniGame {
   constructor() {
     this.currentWord = {};
+    this.correctWords = [];
+    this.unCorrectWords = [];
     this.fallTime = 500;
-    this.loadTime = 2000;
+    this.loadTime = 4000;
     this.words = [];
     this.answerNum = null;
     this.answers = [];
-    this.choosenAnswerId = null;
+    this.chosenAnswerId = null;
     this.onMouseListener = null;
     this.remainingLifes = 5;
     this.interval = null;
@@ -71,7 +81,6 @@ class SavannahMiniGame {
               <p id="3">♥</p>
               <p id="4">♥</p>
             </div>
-<!--            <div class="Content__fallingWord">Падающее слово</div>-->
           </div>
           <div class="start-game__overlay">
             <div class="overlay">
@@ -95,6 +104,7 @@ class SavannahMiniGame {
                   <p class="title word--green">Знаю: 12</p>
                   <div class="words-list"></div>
                 </div>
+              </div>
               <div class="popup-footer">
                 <a href="#" class="resume">Продолжить тренировку</a>
                 <a href="/#/" class="games">В главное меню</a>
@@ -104,17 +114,13 @@ class SavannahMiniGame {
         </main>
         `;
 
-  startGame() {
+  async startGame() {
     this.chooseWord()
       .then((res) => this.setAnswers(res))
       .then(() => this.createAnswerBtns())
       .then(() => this.mouseDown())
       .then(() => this.createFallWord());
-    // console.log(this.word);
-    // console.log(this.words);
-    // console.log(this.answers);
-    window.addEventListener('keyup', this.keyUpHandler);
-    window.addEventListener('keydown', keyDownHandler);
+    clearInterval(this.interval);
   }
 
   createFallWord() {
@@ -130,13 +136,16 @@ class SavannahMiniGame {
 
   async gameOverlay() {
     return new Promise((resolve) => {
-      this.fetchWords();
-      setTimeout(() => {
-        document.querySelector('.start-game__overlay').style.zIndex = '0';
-        document.querySelector('.start-game__overlay').classList.add('disabled');
-        document.querySelector('.Content__wrapper').style.zIndex = '2';
-        resolve();
-      }, this.loadTime);
+      this.fetchWords().then(() => {
+        setTimeout(() => {
+          document.querySelector('.start-game__overlay').style.zIndex = '0';
+          document.querySelector('.start-game__overlay').classList.add('disabled');
+          document.querySelector('.Content__wrapper').style.zIndex = '2';
+          window.addEventListener('keyup', this.keyUpHandler);
+          window.addEventListener('keydown', keyDownHandler);
+          resolve();
+        }, this.loadTime);
+      });
     });
   }
 
@@ -157,10 +166,11 @@ class SavannahMiniGame {
       const groupNum = Math.floor(Math.random() * (MAX_GROUP - MIN_GROUP + 1)) + MIN_GROUP;
       const pageNum = Math.floor(Math.random() * (MAX_PAGE - MIN_PAGE + 1)) + MIN_PAGE;
       resolve(fetch(`https://afternoon-falls-25894.herokuapp.com/words?page=${pageNum}&group=${groupNum}`)
-        .then((res) => res.json().then((data) => data.forEach((el, index) => {
-          const updWord = { id: index, word: el.word, translate: el.wordTranslate };
-          return this.words.push(updWord);
-        }))));
+        .then((res) => res.json()
+          .then((data) => data.forEach((el, index) => {
+            const updWord = { id: index, word: el.word, translate: el.wordTranslate };
+            return this.words.push(updWord);
+          }))));
     });
   }
 
@@ -190,7 +200,7 @@ class SavannahMiniGame {
         }
       }
     } else {
-      alert('Pop up с результатами');
+      this.setStatistics();
     }
   }
 
@@ -199,14 +209,10 @@ class SavannahMiniGame {
       .removeEventListener('click', this.onMouseListener);
     return new Promise((resolve) => {
       this.answers.sort(() => Math.random() - 0.5);
-      // eslint-disable-next-line prefer-destructuring
-      resolve(document.querySelector('.Content__wordParagraph.first').innerText = this.answers[0],
-        // eslint-disable-next-line prefer-destructuring
-        document.querySelector('.Content__wordParagraph.second').innerText = this.answers[1],
-        // eslint-disable-next-line prefer-destructuring
-        document.querySelector('.Content__wordParagraph.thirty').innerText = this.answers[2],
-        // eslint-disable-next-line prefer-destructuring
-        document.querySelector('.Content__wordParagraph.fourth').innerText = this.answers[3]);
+      resolve(document.querySelectorAll('.Content__wordParagraph').forEach((elem, index) => {
+        const element = elem;
+        element.innerText = this.answers[index];
+      }));
     });
   }
 
@@ -219,36 +225,44 @@ class SavannahMiniGame {
       case '1':
         if (document.querySelector('.Content__wordParagraph.first').innerText === fallWordTranslate) {
           document.querySelector('.Content__fallingWord').remove();
+          this.correctWords.push(this.currentWord);
           this.words.pop();
           this.startGame();
         } else {
+          this.unCorrectWords.push(this.currentWord);
           this.checkRemainingLifes();
         }
         break;
       case '2':
         if (document.querySelector('.Content__wordParagraph.second').innerText === fallWordTranslate) {
           document.querySelector('.Content__fallingWord').remove();
+          this.correctWords.push(this.currentWord);
           this.words.pop();
           this.startGame();
         } else {
+          this.unCorrectWords.push(this.currentWord);
           this.checkRemainingLifes();
         }
         break;
       case '3':
         if (document.querySelector('.Content__wordParagraph.thirty').innerHTML === fallWordTranslate) {
           document.querySelector('.Content__fallingWord').remove();
+          this.correctWords.push(this.currentWord);
           this.words.pop();
           this.startGame();
         } else {
+          this.unCorrectWords.push(this.currentWord);
           this.checkRemainingLifes();
         }
         break;
       case '4':
         if (document.querySelector('.Content__wordParagraph.fourth').innerHTML === fallWordTranslate) {
           document.querySelector('.Content__fallingWord').remove();
+          this.correctWords.push(this.currentWord);
           this.words.pop();
           this.startGame();
         } else {
+          this.unCorrectWords.push(this.currentWord);
           this.checkRemainingLifes();
         }
         break;
@@ -262,10 +276,10 @@ class SavannahMiniGame {
       this.onMouseListener = (event) => {
         let parentElement = event.target;
         if (parentElement.id !== '') {
-          this.choosenAnswerId = parentElement.id;
+          this.chosenAnswerId = parentElement.id;
         } else if (!event.target.classList.contains('Content__wordContentWrapper')) {
           parentElement = event.target.parentElement;
-          this.choosenAnswerId = parentElement.id;
+          this.chosenAnswerId = parentElement.id;
         }
         this.checkMouseAnswer();
       };
@@ -277,25 +291,27 @@ class SavannahMiniGame {
 
   checkMouseAnswer() {
     const fallWordTranslate = this.currentWord.translate;
-    const allAnswers = Array.from(document.querySelectorAll('.Content__wordContent'));
-    const choosen = allAnswers.filter((el) => el.id === this.choosenAnswerId);
-    if (choosen[0].querySelector('.Content__wordParagraph').innerText === fallWordTranslate) {
+    const allAnswers = [...document.querySelectorAll('.Content__wordContent')];
+    const chosen = allAnswers.filter((el) => el.id === this.chosenAnswerId);
+    if (chosen[0].querySelector('.Content__wordParagraph').innerText === fallWordTranslate) {
       document.querySelector('.Content__fallingWord').remove();
+      this.correctWords.push(this.currentWord);
       this.words.pop();
       this.startGame();
     } else {
+      this.unCorrectWords.push(this.currentWord);
       this.checkRemainingLifes();
     }
   }
 
   checkRemainingLifes() {
     this.remainingLifes -= 1;
-    const lifesContainer = Array.from(document.querySelector('.Content__lifesContainer').children);
+    const lifesContainer = [...document.querySelector('.Content__lifesContainer').children];
     lifesContainer[this.remainingLifes].style.opacity = '0.25';
 
     if (this.remainingLifes === 0) {
       clearInterval(this.interval);
-      alert('Pop up с результатами');
+      this.setStatistics();
     }
     this.startGame();
   }
@@ -306,11 +322,40 @@ class SavannahMiniGame {
       const wordContentY = document.querySelector('.Content__wordContent').getBoundingClientRect().y;
       const coordY = fallingWord.getBoundingClientRect().y + 110;
       if (coordY > wordContentY) {
+        this.unCorrectWords.push(this.currentWord);
         fallingWord.remove();
         this.words.pop();
         this.checkRemainingLifes();
       }
     }, 200);
+  }
+
+  setStatistics() {
+    this.words
+      .map((elem) => ({
+        word: elem.word,
+        translate: elem.translate,
+      }))
+      .concat(this.unCorrectWords)
+      .forEach((elem) => {
+        const wordInner = document.createElement('div');
+        wordInner.classList.add('word');
+        wordInner.innerHTML = statisticsWordInner(elem.word, elem.translate);
+        document.querySelector('.unknown-words .words-list').append(wordInner);
+      });
+
+    this.correctWords.forEach((elem) => {
+      const wordInner = document.createElement('div');
+      wordInner.classList.add('word');
+      wordInner.innerHTML = statisticsWordInner(elem.word, elem.translate);
+      document.querySelector('.known-words .words-list').append(wordInner);
+    });
+
+    document.querySelector('.unknown-words .title').textContent = `Ошибок: ${this.words.length + this.unCorrectWords.length}`;
+    document.querySelector('.known-words .title').textContent = `Знаю: ${this.correctWords.length}`;
+    document.querySelector('.popup-header-stats .word--green').textContent = this.correctWords.length;
+    document.querySelector('.popup-header-stats .word--red').textContent = this.words.length + this.unCorrectWords.length;
+    document.querySelector('.savannah-popup__container').style.display = 'block';
   }
 
   async render() {
