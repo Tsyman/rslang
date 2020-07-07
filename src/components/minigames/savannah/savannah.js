@@ -23,10 +23,12 @@ class SavannahMiniGame {
   constructor() {
     this.currentWord = {};
     this.fallTime = 500;
-    this.loadTime = 3000;
+    this.loadTime = 2000;
     this.words = [];
     this.answerNum = null;
     this.answers = [];
+    this.choosenAnswerId = null;
+    this.onMouseListener = null;
     this.gameLoad = this.gameLoad.bind(this);
     this.keyUpHandler = this.keyUpHandler.bind(this);
     this.fetchWords = this.fetchWords.bind(this);
@@ -43,19 +45,19 @@ class SavannahMiniGame {
           <div class="Content__wrapper">
             <button class="Content__backBtn">&lt;</button>
             <div class="Content__wordContentWrapper">
-              <div class="Content__wordContent">
+              <div id ='1' class="Content__wordContent">
                 <div class="Content__wordNum">1</div>
                 <p class="Content__wordParagraph first">BirdIsTheWord</p>
               </div>
-              <div class="Content__wordContent">
+              <div id ='2' class="Content__wordContent">
                 <div class="Content__wordNum">2</div>
                 <p class="Content__wordParagraph second">BirdIsTheWord</p>
               </div>
-              <div class="Content__wordContent">
+              <div id ='3' class="Content__wordContent">
                 <div class="Content__wordNum">3</div>
-                <p class="Content__wordParagraph thirty">Savannah</p>
+                <p class="Content__wordParagraph thirty">BirdIsTheWord</p>
               </div>
-              <div class="Content__wordContent">
+              <div id ='4' class="Content__wordContent">
                 <div class="Content__wordNum">4</div>
                 <p class="Content__wordParagraph fourth">BirdIsTheWord</p>
               </div>
@@ -101,7 +103,10 @@ class SavannahMiniGame {
         `;
 
   startGame() {
-    this.chooseWord().then((res) => this.setAnswers(res)).then(() => this.createAnswerBtns())
+    this.chooseWord()
+      .then((res) => this.setAnswers(res))
+      .then(() => this.createAnswerBtns())
+      .then(() => this.mouseDown())
       .then(() => this.createFallWord());
     // console.log(this.word);
     // console.log(this.words);
@@ -187,6 +192,8 @@ class SavannahMiniGame {
   }
 
   async createAnswerBtns() {
+    document.querySelector('.Content__wordContentWrapper')
+      .removeEventListener('click', this.onMouseListener);
     return new Promise((resolve) => {
       this.answers.sort(() => Math.random() - 0.5);
       // eslint-disable-next-line prefer-destructuring
@@ -211,6 +218,8 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.startGame();
+        } else {
+          console.log('Минус жизнь');
         }
         break;
       case '2':
@@ -218,6 +227,8 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.startGame();
+        } else {
+          console.log('Минус жизнь');
         }
         break;
       case '3':
@@ -225,6 +236,8 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.startGame();
+        } else {
+          console.log('Минус жизнь');
         }
         break;
       case '4':
@@ -232,10 +245,43 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.startGame();
+        } else {
+          console.log('Минус жизнь');
         }
         break;
       default:
         break;
+    }
+  }
+
+  mouseDown() {
+    return new Promise((resolve) => {
+      this.onMouseListener = (event) => {
+        let parentElement = event.target;
+        if (parentElement.id !== '') {
+          this.choosenAnswerId = parentElement.id;
+        } else if (!event.target.classList.contains('Content__wordContentWrapper')) {
+          parentElement = event.target.parentElement;
+          this.choosenAnswerId = parentElement.id;
+        }
+        this.checkMouseAnswer();
+      };
+
+      resolve(document.querySelector('.Content__wordContentWrapper')
+        .addEventListener('click', this.onMouseListener));
+    });
+  }
+
+  checkMouseAnswer() {
+    const fallWordTranslate = this.currentWord.translate;
+    const allAnswers = Array.from(document.querySelectorAll('.Content__wordContent'));
+    const choosen = allAnswers.filter((el) => el.id === this.choosenAnswerId);
+    if (choosen[0].querySelector('.Content__wordParagraph').innerText === fallWordTranslate) {
+      document.querySelector('.Content__fallingWord').remove();
+      this.words.pop();
+      this.startGame();
+    } else {
+      console.log('Минус жизнь');
     }
   }
 
