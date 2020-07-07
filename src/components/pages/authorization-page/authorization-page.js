@@ -86,7 +86,7 @@ class AuthorizationPage {
             localStorage.setItem(this.keyNames.userName, name);
             this.afterSignIn(data);
           }).then(() => {
-            document.location.href = '/#/';
+            document.location.href = '/#main';
             document.getElementById('header_container').style.display = 'block';
             document.getElementById('footer_container').style.display = 'block';
           });
@@ -116,7 +116,7 @@ class AuthorizationPage {
       .then((data) => {
         this.afterSignIn(data);
       }).then(() => {
-        document.location.href = '/#/';
+        document.location.href = '/#main';
         document.getElementById('header_container').style.display = 'block';
         document.getElementById('footer_container').style.display = 'block';
       })

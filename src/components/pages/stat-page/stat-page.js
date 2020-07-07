@@ -7,7 +7,7 @@ class StatPage {
               <div class="promo__wrapper">
                 <div class="promo__wrapper-1">
                   <h1 class="promo__title">Добро пожаловать в онлайн-школу английского языка - RS Lang</h1>
-                  <a class="promo__link-blue">Сделать первый шаг!</a>
+                  <a class="promo__link-blue" href="/#login">Сделать первый шаг!</a>
                 </div>
                 <div class="promo__wrapper-2">
                   <iframe class="promo__video" src="https://www.youtube.com/embed/5qap5aO4i9A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -21,7 +21,7 @@ class StatPage {
                 <div class="vocabulary__inner-1">
                   <h2 class="vocabulary__title">Словари под рукой!</h2>
                   <p class="vocabulary__text">Изучайте новое и стремитесь к лучшему!</p>
-                  <a class="vocabulary__link-blue">Начать!</a>
+                  <a class="vocabulary__link-blue" href="/#login">Начать!</a>
                 </div>
                 <div class="vocabulary__inner-2">
                   <ul class="vocabulary__list">
@@ -43,7 +43,7 @@ class StatPage {
             <div class="promo__container">
               <div class="game__wrapper">
                 <h2 class="game__title">Наши игры</h2>
-                <a class="game__link-blue">Играть</a>
+                <a class="game__link-blue" href="/#games">Играть</a>
               </div>
               <ul class="game__list">
                 <li class="game__item">
@@ -107,7 +107,7 @@ class StatPage {
               <div class="statistic__wrapper">
                 <h2 class="statistic__title">Отслеживайте результат</h2>
                 <p class="statistic__text">Увеличьте продуктивность и дисплину!</p>
-                <a class="statistic__link">Начать!</a>
+                <a class="statistic__link" href="/#login">Начать!</a>
               </div>
             </div>
           </section>
