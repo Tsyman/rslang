@@ -46,6 +46,10 @@ class Audiocall {
 
   randomObj = null;
 
+  randomImage = null;
+
+  randomAudio =null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -247,29 +251,21 @@ class Audiocall {
   renderGameSlides(whereToAppend) {
     for (let i = 0; i < 20; i += 1) {
       const currentArrayWithFiveObject = this.parsedArrayOfWordsData[i];
-      const arrayOfCurrentWordsInEnglish = [];
       this.randomObj = currentArrayWithFiveObject[Math.floor(Math.random()
         * currentArrayWithFiveObject.length)];
-      console.log(this.randomObj);
-
-      currentArrayWithFiveObject.forEach((el) => {
-        arrayOfCurrentWordsInEnglish.push(el.word);
-      });
-      this.answerEnglishWord = arrayOfCurrentWordsInEnglish[Math.floor(Math.random()
-        * arrayOfCurrentWordsInEnglish.length)];
-      console.log(currentArrayWithFiveObject);
-      console.log(arrayOfCurrentWordsInEnglish);
-      console.log(this.answerEnglishWord);
+      this.randomImage = this.randomObj.image;
+      this.randomAudio = this.randomObj.audio;
+      this.answerEnglishWord = this.randomObj.word;
 
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper swiper-slide">
           <div class="audiocall-game__inner">
             <div class="audiocall-game__sound">
               <img class="audiocall-game__sound-icon" src="../../../assets/images/audio-call-game-icon.svg">
-              <audio class="audio-sound" controls id="audio-sound" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.parsedArrayOfWordsData[i][0].audio}"></audio>
-              <img class="audiocall-game__img" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.parsedArrayOfWordsData[i][0].image}">
+              <audio class="audio-sound" controls id="audio-sound" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomAudio}"></audio>
+              <img class="audiocall-game__img" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomImage}">
             </div>
-            <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerNum}</div>
+            <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerEnglishWord}</div>
           </div>
           <ul class="audiocall-game__list">
             <li class="audiocall-game__item">
