@@ -40,7 +40,11 @@ class Audiocall {
 
   countSlides = null;
 
-  answerNum = null;
+  answerEnglishWord = null;
+
+  audioSound = null;
+
+  randomObj = null;
 
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
@@ -244,17 +248,26 @@ class Audiocall {
     for (let i = 0; i < 20; i += 1) {
       const currentArrayWithFiveObject = this.parsedArrayOfWordsData[i];
       const arrayOfCurrentWordsInEnglish = [];
+      this.randomObj = currentArrayWithFiveObject[Math.floor(Math.random()
+        * currentArrayWithFiveObject.length)];
+      console.log(this.randomObj);
 
       currentArrayWithFiveObject.forEach((el) => {
         arrayOfCurrentWordsInEnglish.push(el.word);
       });
-      this.answerNum = arrayOfCurrentWordsInEnglish[Math.floor(Math.random()
+      this.answerEnglishWord = arrayOfCurrentWordsInEnglish[Math.floor(Math.random()
         * arrayOfCurrentWordsInEnglish.length)];
+      console.log(currentArrayWithFiveObject);
+      console.log(arrayOfCurrentWordsInEnglish);
+      console.log(this.answerEnglishWord);
+
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper swiper-slide">
           <div class="audiocall-game__inner">
-            <div class="audiocall-game__sound audiocall-game__sound-bg">
-              <img class="audiocall-game__img" src="">
+            <div class="audiocall-game__sound">
+              <img class="audiocall-game__sound-icon" src="../../../assets/images/audio-call-game-icon.svg">
+              <audio class="audio-sound" controls id="audio-sound" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.parsedArrayOfWordsData[i][0].audio}"></audio>
+              <img class="audiocall-game__img" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.parsedArrayOfWordsData[i][0].image}">
             </div>
             <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerNum}</div>
           </div>
@@ -283,6 +296,9 @@ class Audiocall {
         </div>
       `);
     }
+    this.audioSound = document.getElementById('audio-sound');
+    console.log(this.audioSound);
+    this.audioSound.play();
   }
 
   goToNextSlide(swiper) {
