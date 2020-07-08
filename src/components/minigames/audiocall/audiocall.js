@@ -50,6 +50,8 @@ class Audiocall {
 
   randomAudio =null;
 
+  soundIcon = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -61,6 +63,7 @@ class Audiocall {
     this.renderGameSlides = this.renderGameSlides.bind(this);
     this.fetchWords = this.fetchWords.bind(this);
     this.parseWordsIntoGroups = this.parseWordsIntoGroups.bind(this);
+    this.playSoundOnIcon = this.playSoundOnIcon.bind(this);
   }
 
   popup = `
@@ -262,9 +265,10 @@ class Audiocall {
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper swiper-slide">
           <div class="audiocall-game__inner">
-            <div class="audiocall-game__sound">
+            <div class="audiocall-game__sound" id="icon-sound">
               <img class="audiocall-game__sound-icon" src="../../../assets/images/audio-call-game-icon.svg">
-              <audio class="audio-sound" controls id="audio-sound" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomAudio}"></audio>
+              <audio class="audio-sound visually-hidden" controls id="audio-sound" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomAudio}"></audio>
+<!             <img class="audiocall-game__img" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomImage}"> >
             </div>
             <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerEnglishWord}</div>
           </div>
@@ -296,13 +300,15 @@ class Audiocall {
     this.audioSound = document.getElementById('audio-sound');
     console.log(this.audioSound);
     this.audioSound.play();
+    this.soundIcon = document.getElementById('icon-sound');
+    this.soundIcon.addEventListener('click', this.playSoundOnIcon);
   }
 
   goToNextSlide(swiper) {
-    this.audioSound = document.getElementById('audio-sound');
-    this.audioSound.play();
     swiper.slideNext();
     this.countSlides += 1;
+    this.audioSound = document.getElementById('audio-sound');
+    this.audioSound.play();
   }
 
   async fetchWords() {
@@ -340,6 +346,11 @@ class Audiocall {
       this.renderGameSlides(this.mySwiper, this.arrayOfWordsData);
     }
     return this.parsedArrayOfWordsData;
+  }
+
+  playSoundOnIcon() {
+    this.audioSound = document.getElementById('audio-sound');
+    this.audioSound.play();
   }
 }
 export default new Audiocall();
