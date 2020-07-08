@@ -256,6 +256,7 @@ class Audiocall {
       this.randomImage = this.randomObj.image;
       this.randomAudio = this.randomObj.audio;
       this.answerEnglishWord = this.randomObj.word;
+      console.log(currentArrayWithFiveObject);
 
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper swiper-slide">
@@ -293,13 +294,14 @@ class Audiocall {
       `);
     }
     this.audioSound = document.getElementById('audio-sound');
-    console.log(this.audioSound);
     this.audioSound.play();
   }
 
   goToNextSlide(swiper) {
     swiper.slideNext();
     this.countSlides += 1;
+    this.audioSound = document.getElementById('audio-sound');
+    this.audioSound.play();
   }
 
   async fetchWords() {
