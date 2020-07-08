@@ -231,6 +231,8 @@ class Audiocall {
       slidesPerView: 1,
       spaceBetween: 20,
       updateOnWindowResize: true,
+      observer: true,
+      observeParents: true,
       grabCurcor: true,
       simulateTouch: true,
       pagination: {
