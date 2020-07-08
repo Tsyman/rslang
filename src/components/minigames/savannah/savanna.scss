@@ -333,7 +333,6 @@ html, body, main {
     }
 }
 
-
 /* Popup */
 
 .savannah-popup {
@@ -434,7 +433,11 @@ html, body, main {
         height: 20px;
         background-repeat: no-repeat;
         margin-right: 20px;
-    }
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    } 
 }
 
 @keyframes falling-word {

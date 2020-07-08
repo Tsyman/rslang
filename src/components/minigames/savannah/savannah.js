@@ -27,24 +27,28 @@ function statisticsWordInner(word, translate, audio) {
 }
 
 function playGameAudio(sound) {
+  if (document.querySelector('audio')) {
+    document.querySelector('audio').remove();
+  }
+
   const audio = document.createElement('audio');
   document.body.append(audio);
   audio.src = sound;
   audio.play();
-  audio.onended = () => {
-    document.querySelectorAll('audio').forEach((elem) => {
-      elem.remove();
-    });
-  };
 }
 
+const finalTitles = {
+  bad: 'В этот раз не получилось, но продолжай тренироваться!',
+  good: 'Неплохо, но есть над чем поработать',
+  nice: 'Отлично, молодец',
+};
 class SavannahMiniGame {
   constructor() {
     this.resourcesURL = 'https://raw.githubusercontent.com/tsyman/rslang-data/master/';
     this.currentWord = {};
     this.correctWords = [];
     this.unCorrectWords = [];
-    this.loadTime = 3000;
+    this.loadTime = 4000;
     this.words = [];
     this.answerNum = null;
     this.answers = [];
@@ -108,7 +112,7 @@ class SavannahMiniGame {
           <div class="savannah-popup__container">
             <div class="savannah-popup">
               <div class="popup-header">
-                <p class="popup-header-title">Неплохо, но есть над чем поработать</p>
+                <p class="popup-header-title"></p>
                 <p class="popup-header-stats"><span class="word--green"></span> слов изучено, <span class="word--red"></span> на изучении</p>
               </div>
               <div class="popup-body">
@@ -224,8 +228,11 @@ class SavannahMiniGame {
         }
       }
     } else {
-      playGameAudio(this.endGameAudio);
-      this.setStatistics();
+      this.removeKeyHandler();
+      setTimeout(() => {
+        playGameAudio(this.endGameAudio);
+        this.setStatistics();
+      }, 500);
     }
   }
 
@@ -253,14 +260,13 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.correctWords.push(this.currentWord);
           this.words.pop();
-          this.startGame().then();
+          this.startGame();
         } else {
           playGameAudio(this.unCorrectAnswerAudio);
           this.unCorrectWords.push(this.currentWord);
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.checkRemainingLifes();
-          this.startGame().then();
         }
         break;
       case '2':
@@ -269,14 +275,13 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.correctWords.push(this.currentWord);
           this.words.pop();
-          this.startGame().then();
+          this.startGame();
         } else {
           playGameAudio(this.unCorrectAnswerAudio);
           this.unCorrectWords.push(this.currentWord);
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.checkRemainingLifes();
-          this.startGame().then();
         }
         break;
       case '3':
@@ -285,14 +290,13 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.correctWords.push(this.currentWord);
           this.words.pop();
-          this.startGame().then();
+          this.startGame();
         } else {
           playGameAudio(this.unCorrectAnswerAudio);
           this.unCorrectWords.push(this.currentWord);
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.checkRemainingLifes();
-          this.startGame().then();
         }
         break;
       case '4':
@@ -301,14 +305,13 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.correctWords.push(this.currentWord);
           this.words.pop();
-          this.startGame().then();
+          this.startGame();
         } else {
           playGameAudio(this.unCorrectAnswerAudio);
           this.unCorrectWords.push(this.currentWord);
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.checkRemainingLifes();
-          this.startGame().then();
         }
         break;
       default:
@@ -325,6 +328,8 @@ class SavannahMiniGame {
         } else if (!event.target.classList.contains('Content__wordContentWrapper')) {
           parentElement = event.target.parentElement;
           this.chosenAnswerId = parentElement.id;
+        } else if (event.target.classList.contains('Content__wordContentWrapper')) {
+          return;
         }
         this.checkMouseAnswer();
       };
@@ -343,14 +348,13 @@ class SavannahMiniGame {
       document.querySelector('.Content__fallingWord').remove();
       this.correctWords.push(this.currentWord);
       this.words.pop();
-      this.startGame().then();
+      this.startGame();
     } else {
       playGameAudio(this.unCorrectAnswerAudio);
       this.unCorrectWords.push(this.currentWord);
       document.querySelector('.Content__fallingWord').remove();
       this.words.pop();
       this.checkRemainingLifes();
-      this.startGame().then();
     }
   }
 
@@ -360,8 +364,13 @@ class SavannahMiniGame {
     lifesContainer[this.remainingLifes].style.opacity = '0.25';
 
     if (this.remainingLifes === 0) {
-      playGameAudio(this.endGameAudio);
-      this.setStatistics();
+      this.removeKeyHandler();
+      setTimeout(() => {
+        playGameAudio(this.endGameAudio);
+        this.setStatistics();
+      }, 500);
+    } else {
+      this.startGame();
     }
   }
 
@@ -371,7 +380,6 @@ class SavannahMiniGame {
     this.unCorrectWords.push(this.currentWord);
     this.words.pop();
     this.checkRemainingLifes();
-    this.startGame().then();
   }
 
   setStatistics() {
@@ -398,6 +406,14 @@ class SavannahMiniGame {
     document.querySelectorAll('.word-audio').forEach((elem) => {
       elem.addEventListener('click', this.playWordAudio);
     });
+
+    if (this.correctWords.length <= 5) {
+      document.querySelector('.popup-header-title').textContent = finalTitles.bad;
+    } else if (this.correctWords.length > 5 && this.correctWords.length <= 14) {
+      document.querySelector('.popup-header-title').textContent = finalTitles.good;
+    } else {
+      document.querySelector('.popup-header-title').textContent = finalTitles.nice;
+    }
   }
 
   playWordAudio(event) {
@@ -409,7 +425,7 @@ class SavannahMiniGame {
       const element = elem;
       element.style.pointerEvents = 'none';
     });
-    document.querySelector('audio').onended = () => {
+    audio.onended = () => {
       document.querySelectorAll('audio').forEach((elem) => {
         elem.remove();
         document.querySelectorAll('.word-audio').forEach((e) => {
@@ -417,6 +433,11 @@ class SavannahMiniGame {
         });
       });
     };
+  }
+
+  removeKeyHandler() {
+    window.removeEventListener('keyup', this.keyUpHandler);
+    window.removeEventListener('keydown', keyDownHandler);
   }
 
   async render() {
