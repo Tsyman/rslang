@@ -6,7 +6,6 @@ html, body, main {
     width: 100%;
     margin: 0;
     padding: 0;
-    user-select: none;
 }
 
 .Index {
@@ -199,7 +198,8 @@ html, body, main {
         &.animate {
             opacity: 0;
             animation-name: falling-word;
-            animation-duration: 6s;
+            animation-duration: 4s;
+            animation-timing-function: linear;
         }
     }
 }
@@ -435,21 +435,11 @@ html, body, main {
         background-repeat: no-repeat;
         margin-right: 20px;
     }
-
-    &-delete {
-        background-image: url('../../../assets/images/minigames/savanna/trash.svg');
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: 100%;
-        position: absolute;
-        right: 15px;
-    }
 }
 
 @keyframes falling-word {
     from {
-        top: -10%;
+        top: 0%;
     }
     to {
         top: 70%;
@@ -468,19 +458,15 @@ html, body, main {
     }
 
     40% {
-        opacity: 0.5;
-    }
-
-    50% {
-        opacity: 0.3;
+        opacity: 0.6;
     }
 
     60% {
-        opacity: 0.1;
+        opacity: 0.4;
     }
 
-    70% {
-        opacity: 0;
+    80% {
+        opacity: 0.2;
     }
 
     100% {
