@@ -265,9 +265,9 @@ class Audiocall {
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper swiper-slide">
           <div class="audiocall-game__inner">
-            <div class="audiocall-game__sound" id="icon-sound">
+            <div class="audiocall-game__sound icon-sound">
               <img class="audiocall-game__sound-icon" src="../../../assets/images/audio-call-game-icon.svg">
-              <audio class="audio-sound visually-hidden" controls id="audio-sound" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomAudio}"></audio>
+              <audio class="audio-sound visually-hidden" controls src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomAudio}"></audio>
 <!             <img class="audiocall-game__img" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomImage}"> >
             </div>
             <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerEnglishWord}</div>
@@ -297,17 +297,18 @@ class Audiocall {
         </div>
       `);
     }
-    this.audioSound = document.getElementById('audio-sound');
+    this.audioSound = document.querySelector('.audio-sound');
     console.log(this.audioSound);
     this.audioSound.play();
-    this.soundIcon = document.getElementById('icon-sound');
-    this.soundIcon.addEventListener('click', this.playSoundOnIcon);
+    this.soundIcon = document.querySelectorAll('.icon-sound');
+    this.soundIcon.forEach((icon) => icon.addEventListener('click', this.playSoundOnIcon));
   }
 
   goToNextSlide(swiper) {
     swiper.slideNext();
     this.countSlides += 1;
-    this.audioSound = document.getElementById('audio-sound');
+    const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
+    this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
   }
 
@@ -349,7 +350,8 @@ class Audiocall {
   }
 
   playSoundOnIcon() {
-    this.audioSound = document.getElementById('audio-sound');
+    const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
+    this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
   }
 }
