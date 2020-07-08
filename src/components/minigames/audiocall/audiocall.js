@@ -253,10 +253,11 @@ class Audiocall {
       const currentArrayWithFiveObject = this.parsedArrayOfWordsData[i];
       this.randomObj = currentArrayWithFiveObject[Math.floor(Math.random()
         * currentArrayWithFiveObject.length)];
+      console.log(currentArrayWithFiveObject);
       this.randomImage = this.randomObj.image;
       this.randomAudio = this.randomObj.audio;
       this.answerEnglishWord = this.randomObj.word;
-      console.log(currentArrayWithFiveObject);
+      console.log(this.randomAudio);
 
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper swiper-slide">
@@ -264,7 +265,6 @@ class Audiocall {
             <div class="audiocall-game__sound">
               <img class="audiocall-game__sound-icon" src="../../../assets/images/audio-call-game-icon.svg">
               <audio class="audio-sound" controls id="audio-sound" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomAudio}"></audio>
-              <img class="audiocall-game__img" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomImage}">
             </div>
             <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerEnglishWord}</div>
           </div>
@@ -294,14 +294,15 @@ class Audiocall {
       `);
     }
     this.audioSound = document.getElementById('audio-sound');
+    console.log(this.audioSound);
     this.audioSound.play();
   }
 
   goToNextSlide(swiper) {
-    swiper.slideNext();
-    this.countSlides += 1;
     this.audioSound = document.getElementById('audio-sound');
     this.audioSound.play();
+    swiper.slideNext();
+    this.countSlides += 1;
   }
 
   async fetchWords() {
