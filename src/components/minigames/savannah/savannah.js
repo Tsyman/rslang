@@ -32,8 +32,7 @@ class SavannahMiniGame {
     this.currentWord = {};
     this.correctWords = [];
     this.unCorrectWords = [];
-    this.fallTime = 500;
-    this.loadTime = 4000;
+    this.loadTime = 3000;
     this.words = [];
     this.answerNum = null;
     this.answers = [];
@@ -107,7 +106,7 @@ class SavannahMiniGame {
               </div>
               <div class="popup-footer">
                 <a href="#" class="resume">Продолжить тренировку</a>
-                <a href="/#/" class="games">В главное меню</a>
+                <a href="/#" class="games">В главное меню</a>
               </div>
             </div>
           </div>
@@ -120,7 +119,6 @@ class SavannahMiniGame {
       .then(() => this.createAnswerBtns())
       .then(() => this.mouseDown())
       .then(() => this.createFallWord());
-    clearInterval(this.interval);
   }
 
   createFallWord() {
@@ -168,7 +166,13 @@ class SavannahMiniGame {
       resolve(fetch(`https://afternoon-falls-25894.herokuapp.com/words?page=${pageNum}&group=${groupNum}`)
         .then((res) => res.json()
           .then((data) => data.forEach((el, index) => {
-            const updWord = { id: index, word: el.word, translate: el.wordTranslate };
+            const updWord = {
+              id: index,
+              word: el.word,
+              translate: el.wordTranslate,
+              image: el.image,
+              audio: el.audio,
+            };
             return this.words.push(updWord);
           }))));
     });
@@ -227,10 +231,13 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.correctWords.push(this.currentWord);
           this.words.pop();
-          this.startGame();
+          this.startGame().then();
         } else {
           this.unCorrectWords.push(this.currentWord);
+          document.querySelector('.Content__fallingWord').remove();
+          this.words.pop();
           this.checkRemainingLifes();
+          this.startGame().then();
         }
         break;
       case '2':
@@ -238,10 +245,13 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.correctWords.push(this.currentWord);
           this.words.pop();
-          this.startGame();
+          this.startGame().then();
         } else {
           this.unCorrectWords.push(this.currentWord);
+          document.querySelector('.Content__fallingWord').remove();
+          this.words.pop();
           this.checkRemainingLifes();
+          this.startGame().then();
         }
         break;
       case '3':
@@ -249,10 +259,13 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.correctWords.push(this.currentWord);
           this.words.pop();
-          this.startGame();
+          this.startGame().then();
         } else {
           this.unCorrectWords.push(this.currentWord);
+          document.querySelector('.Content__fallingWord').remove();
+          this.words.pop();
           this.checkRemainingLifes();
+          this.startGame().then();
         }
         break;
       case '4':
@@ -260,10 +273,13 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.correctWords.push(this.currentWord);
           this.words.pop();
-          this.startGame();
+          this.startGame().then();
         } else {
           this.unCorrectWords.push(this.currentWord);
+          document.querySelector('.Content__fallingWord').remove();
+          this.words.pop();
           this.checkRemainingLifes();
+          this.startGame().then();
         }
         break;
       default:
@@ -297,10 +313,13 @@ class SavannahMiniGame {
       document.querySelector('.Content__fallingWord').remove();
       this.correctWords.push(this.currentWord);
       this.words.pop();
-      this.startGame();
+      this.startGame().then();
     } else {
       this.unCorrectWords.push(this.currentWord);
+      document.querySelector('.Content__fallingWord').remove();
+      this.words.pop();
       this.checkRemainingLifes();
+      this.startGame().then();
     }
   }
 
@@ -310,10 +329,8 @@ class SavannahMiniGame {
     lifesContainer[this.remainingLifes].style.opacity = '0.25';
 
     if (this.remainingLifes === 0) {
-      clearInterval(this.interval);
       this.setStatistics();
     }
-    this.startGame();
   }
 
   checkWordPosition() {
@@ -322,10 +339,12 @@ class SavannahMiniGame {
       const wordContentY = document.querySelector('.Content__wordContent').getBoundingClientRect().y;
       const coordY = fallingWord.getBoundingClientRect().y + 110;
       if (coordY > wordContentY) {
-        this.unCorrectWords.push(this.currentWord);
         fallingWord.remove();
+        clearInterval(this.interval);
+        this.unCorrectWords.push(this.currentWord);
         this.words.pop();
         this.checkRemainingLifes();
+        this.startGame().then();
       }
     }, 200);
   }
