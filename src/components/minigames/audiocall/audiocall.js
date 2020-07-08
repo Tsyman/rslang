@@ -268,7 +268,7 @@ class Audiocall {
             <div class="audiocall-game__sound icon-sound">
               <img class="audiocall-game__sound-icon" src="../../../assets/images/audio-call-game-icon.svg">
               <audio class="audio-sound visually-hidden" controls src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomAudio}"></audio>
-<!             <img class="audiocall-game__img" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomImage}"> >
+              <img class="audiocall-game__img" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomImage}">
             </div>
             <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerEnglishWord}</div>
           </div>
@@ -298,7 +298,6 @@ class Audiocall {
       `);
     }
     this.audioSound = document.querySelector('.audio-sound');
-    console.log(this.audioSound);
     this.audioSound.play();
     this.soundIcon = document.querySelectorAll('.icon-sound');
     this.soundIcon.forEach((icon) => icon.addEventListener('click', this.playSoundOnIcon));
