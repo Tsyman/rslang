@@ -85,6 +85,10 @@ class AuthorizationPage {
           .then((data) => {
             localStorage.setItem(this.keyNames.userName, name);
             this.afterSignIn(data);
+          }).then(() => {
+            document.location.href = '/#main';
+            document.getElementById('header_container').style.display = 'block';
+            document.getElementById('footer_container').style.display = 'block';
           });
       }).catch(() => {
         document.querySelector('.tooltip').textContent = this.errorMessage;
@@ -111,6 +115,10 @@ class AuthorizationPage {
       })
       .then((data) => {
         this.afterSignIn(data);
+      }).then(() => {
+        document.location.href = '/#main';
+        document.getElementById('header_container').style.display = 'block';
+        document.getElementById('footer_container').style.display = 'block';
       })
       .catch(() => {
         document.querySelector('.tooltip').textContent = this.errorMessage;

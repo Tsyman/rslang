@@ -1,10 +1,10 @@
 import AuthorizationPage from './components/pages/authorization-page/authorization-page';
-import OurTeam from './components/pages/our-team/our-team';
 
 import Main from './components/pages/main-page/main-page';
 import Stat from './components/pages/stat-page/stat-page';
 import NotFound from './components/pages/not-found/not-found';
-import Statistics from './components/pages/statisctics/statistics';
+import Dictionary from './components/pages/dictionary-page/dictionary-page';
+import OurGames from './components/pages/our-games-page/our-games-page';
 
 import HeaderPromo from './components/shared/layout/header/header-promo/header-promo';
 import Footer from './components/shared/layout/footer/footer';
@@ -13,20 +13,21 @@ import Utils from './services/Utils';
 
 // List of supported routes. Any url other than these routes will throw a 404 error
 const routes = {
-  '/': Main,
-  '/stat': Stat,
+  '/': Stat,
+  '/main': Main,
   '/login': AuthorizationPage,
-  '/team': OurTeam,
-  '/statistics': Statistics,
+  '/games': OurGames,
+  '/dictionary': Dictionary,
+  '/dictionary/:id': Dictionary,
 };
 
 // The router code. Takes a URL, checks against the list of supported routes
 // and then renders the corresponding content page.
 const router = async () => {
   // Lazy load view element:
-  const header = null || document.getElementById('header_container');
-  const content = null || document.getElementById('page_container');
-  const footer = null || document.getElementById('footer_container');
+  const header = document.getElementById('header_container');
+  const content = document.getElementById('page_container');
+  const footer = document.getElementById('footer_container');
 
   // Render the Header and footer of the page
   header.innerHTML = await HeaderPromo.render();
