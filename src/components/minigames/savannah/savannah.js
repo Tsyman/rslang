@@ -51,7 +51,6 @@ class SavannahMiniGame {
     this.chosenAnswerId = null;
     this.onMouseListener = null;
     this.remainingLifes = 5;
-    this.interval = null;
     this.correctAnswerAudio = '../../../assets/audio/savannah/correct.mp3';
     this.unCorrectAnswerAudio = '../../../assets/audio/savannah/incorrect.mp3';
     this.endGameAudio = '../../../assets/audio/savannah/endgame.mp3';
@@ -123,8 +122,8 @@ class SavannahMiniGame {
                 </div>
               </div>
               <div class="popup-footer">
-                <a href="#" class="resume">Продолжить тренировку</a>
-                <a href="/#" class="games">В главное меню</a>
+                <a href="/#/" class="resume">Продолжить тренировку</a>
+                <a href="/#/" class="games">В главное меню</a>
               </div>
             </div>
           </div>
@@ -168,10 +167,9 @@ class SavannahMiniGame {
   async gameLoad() {
     document.querySelector('.Index__wrapper').classList.add('disabled');
     document.querySelector('.Content__wrapper').classList.add('enabled');
-    playGameAudio(this.startGameAudio);
     await this.gameOverlay().then(() => {
       this.startGame();
-    });
+    }).then(() => { playGameAudio(this.startGameAudio); });
   }
 
   fetchWords() {
@@ -260,7 +258,9 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.checkRemainingLifes();
-          this.startGame().then();
+          if (this.remainingLifes !== 0) {
+            this.startGame().then();
+          }
         }
         break;
       case '2':
@@ -276,7 +276,9 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.checkRemainingLifes();
-          this.startGame().then();
+          if (this.remainingLifes !== 0) {
+            this.startGame().then();
+          }
         }
         break;
       case '3':
@@ -292,7 +294,9 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.checkRemainingLifes();
-          this.startGame().then();
+          if (this.remainingLifes !== 0) {
+            this.startGame().then();
+          }
         }
         break;
       case '4':
@@ -308,7 +312,9 @@ class SavannahMiniGame {
           document.querySelector('.Content__fallingWord').remove();
           this.words.pop();
           this.checkRemainingLifes();
-          this.startGame().then();
+          if (this.remainingLifes !== 0) {
+            this.startGame().then();
+          }
         }
         break;
       default:
@@ -350,7 +356,9 @@ class SavannahMiniGame {
       document.querySelector('.Content__fallingWord').remove();
       this.words.pop();
       this.checkRemainingLifes();
-      this.startGame().then();
+      if (this.remainingLifes !== 0) {
+        this.startGame().then();
+      }
     }
   }
 
