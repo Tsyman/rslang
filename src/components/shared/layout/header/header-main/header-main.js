@@ -32,9 +32,9 @@ class HeaderMain {
                       </a>
                     </li>
                     <li class="header-main__item" id="main-tab2">
-                      <a class="header-main__link" href="/#vocabularies">
+                      <a class="header-main__link" href="/#dictionary">
                         <span class="header-main__heading">Словари</span>
-                        <img class="header-main__img" src="../../../../../assets/images/vocabulary-icon.svg">
+                        <img class="header-main__img" src="../../../../../assets/images/dictionary-icon.svg">
                       </a>
                   </li>
                   <li class="header-main__item" id="main-tab3">
