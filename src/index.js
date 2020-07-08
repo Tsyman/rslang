@@ -1,5 +1,4 @@
 import SavannahMiniGame from './components/minigames/savannah/savannah';
-/*
 import AuthorizationPage from './components/pages/authorization-page/authorization-page';
 
 import Main from './components/pages/main-page/main-page';
@@ -21,12 +20,12 @@ const routes = {
   '/games': OurGames,
   '/dictionary': Dictionary,
   '/dictionary/:id': Dictionary,
+  '/savannah': SavannahMiniGame,
 };
-*/
+
 // The router code. Takes a URL, checks against the list of supported routes
 // and then renders the corresponding content page.
 const router = async () => {
-  /*
   // Lazy load view element:
   const header = document.getElementById('header_container');
   const content = document.getElementById('page_container');
@@ -50,9 +49,6 @@ const router = async () => {
   const page = routes[parsedURL] ? routes[parsedURL] : NotFound;
   content.innerHTML = await page.render();
   if (page.afterRender) await page.afterRender();
-  */
-  document.getElementById('page_container').innerHTML = await SavannahMiniGame.render();
-  await SavannahMiniGame.afterRender();
 };
 
 // Listen on hash change:

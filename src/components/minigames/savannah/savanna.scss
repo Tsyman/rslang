@@ -243,7 +243,6 @@ html, body, main {
     position: relative;
     width: 80px;
     height: 80px;
-    padding-top: 200px;
 
     & div {
         transform-origin: 40px 40px;
@@ -415,9 +414,11 @@ html, body, main {
 .learning-words {
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 
     & .title {
         margin-bottom: 10px;
+        margin-top: 10px;
     }
 }
 

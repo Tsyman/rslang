@@ -55,7 +55,6 @@ class SavannahMiniGame {
     this.chosenAnswerId = null;
     this.onMouseListener = null;
     this.remainingLifes = 5;
-    this.interval = null;
     this.correctAnswerAudio = '../../../assets/audio/savannah/correct.mp3';
     this.unCorrectAnswerAudio = '../../../assets/audio/savannah/incorrect.mp3';
     this.endGameAudio = '../../../assets/audio/savannah/endgame.mp3';
@@ -71,7 +70,7 @@ class SavannahMiniGame {
   view = `
         <main>
           <div class="Index__wrapper">
-            <button class="Content__backBtn" type="submit" onClick="location.href='/#/'">&lt;</button>
+            <button class="Content__backBtn" type="submit" onClick="location.href='/#main'">&lt;</button>
             <p class="Index__titleText">Savanna</p>
             <button class="Index__startBtn">Начать игру</button>
           </div>
@@ -127,8 +126,8 @@ class SavannahMiniGame {
                 </div>
               </div>
               <div class="popup-footer">
-                <a href="#" class="resume">Продолжить тренировку</a>
-                <a href="/#" class="games">В главное меню</a>
+                <a href="/#savannah" class="resume">Продолжить тренировку</a>
+                <a href="/#main" class="menu">В главное меню</a>
               </div>
             </div>
           </div>
@@ -440,12 +439,40 @@ class SavannahMiniGame {
     window.removeEventListener('keydown', keyDownHandler);
   }
 
+  resetGame() {
+    this.remainingLifes = 5;
+    this.currentWord = {};
+    this.correctWords = [];
+    this.unCorrectWords = [];
+    this.words = [];
+    this.answerNum = null;
+    this.answers = [];
+    this.chosenAnswerId = null;
+    this.onMouseListener = null;
+  }
+
   async render() {
     return this.view;
   }
 
   afterRender() {
+    document.getElementById('header_container').style.display = 'none';
     document.querySelector('.Index__startBtn').addEventListener('click', this.gameLoad);
+    document.querySelector('.Content__backBtn').addEventListener('click', () => {
+      document.getElementById('header_container').style.display = 'block';
+      this.resetGame();
+    });
+    document.querySelector('.popup-footer .resume').addEventListener('click', () => {
+      document.getElementById('page_container').innerHTML = this.view;
+      this.afterRender();
+      this.resetGame();
+    });
+
+    document.querySelector('.popup-footer .menu').addEventListener('click', () => {
+      document.getElementById('page_container').innerHTML = this.view;
+      this.afterRender();
+      this.resetGame();
+    });
   }
 }
 
