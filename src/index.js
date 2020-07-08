@@ -5,6 +5,8 @@ import Stat from './components/pages/stat-page/stat-page';
 import NotFound from './components/pages/not-found/not-found';
 import Dictionary from './components/pages/dictionary-page/dictionary-page';
 import OurGames from './components/pages/our-games-page/our-games-page';
+import OurTeam from './components/pages/our-team/our-team';
+import Statistics from './components/pages/statisctics/statistics';
 
 import HeaderPromo from './components/shared/layout/header/header-promo/header-promo';
 import Footer from './components/shared/layout/footer/footer';
@@ -15,6 +17,8 @@ import Utils from './services/Utils';
 const routes = {
   '/': Stat,
   '/main': Main,
+  '/team': OurTeam,
+  '/statistics': Statistics,
   '/login': AuthorizationPage,
   '/games': OurGames,
   '/dictionary': Dictionary,

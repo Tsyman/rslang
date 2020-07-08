@@ -16,24 +16,41 @@
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    
+    @include respond (phone) {
+        display: block;
+        padding-top: 1px;
+    }
  }
  .statistic, .graph {
-        width: 40%;
-        margin: 60px 80px 100px 0;
+    width: 39%;
+    margin: 60px 70px 100px 0;
 
+    @include respond (tab-port) {
+        width: 45%;
+        margin: 60px 20px 70px 0;
+    }
+
+    @include respond (phone) {
+        width: 100%;
+        margin: 30px auto;
+    }
         background-color: var(--white);
         border-radius: 50px;
         .statistic__subtitle {
             margin-top: 20px;
-            margin-bottom: 60px;
     
             font-size: var(--font-size-21);
             line-height: var(--line-spacing-25);
             font-weight: bold;
             text-align: center;
             
-            color: var(--dark);         
+            color: var(--dark);    
+            @include respond (tab-port) {
+                font-size: var(--font-size-17);
+                line-height: var(--line-spacing-25);
+            }     
         }
  }
 
@@ -50,20 +67,40 @@
  }
 
  .statistic__container {
-    margin: 110px 85px;
+    margin: 60px 85px 110px;
 
+    @include respond (tab-land) {
+        margin: 60px 68px 110px
+    }
+    @include respond (tab-port) {
+        margin: 40px 30px 60px;
+    }
     .statistic__details {
         margin-bottom: 20px;
+        display: inline-block;
+        width: 190px;
 
         font-size: var(--font-size-17);
         line-height: var(--line-spacing-32);
         font-weight: var(--font-style-regular);
         text-align: left;
+        color: var(--dark);     
+        @include respond (tab-port) {
+            width: 120px;
+
+            font-size: var(--font-size-15);
+            line-height: var(--line-spacing-17);
+        }
+    }
+    .statistic__details:nth-child(10) {
+        line-height: var(--line-spacing-0);
     }
     .statististic__details--align_left {
         font-size: var(--font-size-17);
         line-height: var(--line-spacing-32);
         font-weight: var(--font-style-bold);
         text-align: right;
+        float: right;
+        color: var(--dark);      
     }
  }
