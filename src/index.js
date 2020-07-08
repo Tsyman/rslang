@@ -1,8 +1,10 @@
 import AuthorizationPage from './components/pages/authorization-page/authorization-page';
+import OurTeam from './components/pages/our-team/our-team';
 
 import Main from './components/pages/main-page/main-page';
 import Stat from './components/pages/stat-page/stat-page';
 import NotFound from './components/pages/not-found/not-found';
+import Statistics from './components/pages/statisctics/statistics';
 
 import HeaderPromo from './components/shared/layout/header/header-promo/header-promo';
 import Footer from './components/shared/layout/footer/footer';
@@ -14,6 +16,8 @@ const routes = {
   '/': Main,
   '/stat': Stat,
   '/login': AuthorizationPage,
+  '/team': OurTeam,
+  '/statistics': Statistics,
 };
 
 // The router code. Takes a URL, checks against the list of supported routes
