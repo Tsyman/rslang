@@ -161,13 +161,6 @@ class Audiocall {
 
   goToMainGamePage() {
     this.audioCallContainer.innerHTML = this.mainGamePage;
-    /*
-      this.statisticPlayButton = document.getElementById('audiocall-statistics__play-btn');
-      this.statisticExitButton = document.getElementById('audiocall-statistics__exit-btn');
-      this.statisticPlayButton.addEventListener('click', this.goToStartGamePage);
-      this.statisticExitButton.addEventListener('click', this.goToMainWebsitePage);
-      this.statisticsPopupOpositePage = document.getElementById('statistics-popup-2
-    */
     const previousHTML = this.audioCallContainer.innerHTML;
     this.audioCallContainer.innerHTML = (previousHTML + this.popup);
     const previousHTML2 = this.audioCallContainer.innerHTML;
@@ -181,6 +174,10 @@ class Audiocall {
     this.closeGameButton.addEventListener('click', this.openConfirmExitPopup);
     this.closeConfirmExitPopupButton.addEventListener('click', this.closeConfirmExitPopup);
     this.confirmExitFromGameButton.addEventListener('click', this.goToMainWebsitePage);
+    this.statisticPlayButton = document.getElementById('audiocall-statistics__play-btn');
+    this.statisticExitButton = document.getElementById('audiocall-statistics__exit-btn');
+    this.statisticPlayButton.addEventListener('click', this.goToStartGamePage);
+    this.statisticExitButton.addEventListener('click', this.goToMainWebsitePage);
     this.mySwiper = new Swiper('.s1', {
       direction: 'horizontal',
       loop: false,
