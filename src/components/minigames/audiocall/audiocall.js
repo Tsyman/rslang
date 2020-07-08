@@ -112,6 +112,8 @@ class Audiocall {
                 </div>
               </div>
             </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
           </div>
           <div class="audiocall-statistics__btn-inner">
@@ -229,15 +231,18 @@ class Audiocall {
       slidesPerView: 1,
       spaceBetween: 20,
       updateOnWindowResize: true,
-      grabCurcor: false,
-      simulateTouch: false,
+      grabCurcor: true,
+      simulateTouch: true,
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
       },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
     });
     this.statisticsPopup.style.display = 'block';
-    console.log('Click');
   }
 
   renderGameSlides(whereToAppend) {
