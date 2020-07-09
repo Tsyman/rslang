@@ -84,6 +84,8 @@ class Audiocall {
 
   answerImageBlock = null;
 
+  clickedWordBlock = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -327,8 +329,6 @@ class Audiocall {
       this.englishWordAnswersArray.push(this.answerEnglishWord);
       this.audioAnswersArray.push(this.randomAudio);
       this.imageAnswersArray.push(this.randomImage);
-      console.log(`Sdfsdf: ${this.answerRussianWord}`);
-      console.log(this.randomAudio);
 
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper swiper-slide">
@@ -441,6 +441,7 @@ class Audiocall {
     const targetElement = event.target;
     if (targetElement.tagName === 'LI') {
       const wordBlock = targetElement.querySelector('.audiocall-game__word');
+      this.clickedWordBlock = wordBlock;
       if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
         this.behaviousWhenAnswerIsCorrect();
       } else {
@@ -471,6 +472,7 @@ class Audiocall {
     this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
     this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
     this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
+    this.clickedWordBlock.classList.add('audiocall-game__item-incorrect');
   }
 
   behaviousINotKnow() {
