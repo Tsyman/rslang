@@ -455,7 +455,7 @@ class Audiocall {
     const audio = this.audioAnswersArray[this.countSlides];
     const englishWords = this.englishWordAnswersArray[this.countSlides];
     const russianWords = this.rightAnswersArray[this.countSlides];
-    const image = this.audioAnswersArray[this.countSlides];
+    const image = this.imageAnswersArray[this.countSlides];
     this.rightUsersAnswersArray.push([audio, englishWords, russianWords]);
     this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
     this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
@@ -467,7 +467,7 @@ class Audiocall {
     const audio = this.audioAnswersArray[this.countSlides];
     const englishWords = this.englishWordAnswersArray[this.countSlides];
     const russianWords = this.rightAnswersArray[this.countSlides];
-    const image = this.audioAnswersArray[this.countSlides];
+    const image = this.imageAnswersArray[this.countSlides];
     this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
     this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
     this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
@@ -479,7 +479,7 @@ class Audiocall {
     const audio = this.audioAnswersArray[this.countSlides];
     const englishWords = this.englishWordAnswersArray[this.countSlides];
     const russianWords = this.rightAnswersArray[this.countSlides];
-    const image = this.audioAnswersArray[this.countSlides];
+    const image = this.imageAnswersArray[this.countSlides];
     this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
     this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
     this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
