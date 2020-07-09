@@ -466,7 +466,10 @@ class Audiocall {
   }
 
   isTheRightAnswer(event) {
-    const targetElement = event.target;
+    let targetElement = event.target;
+    if (targetElement.tagName === 'P') {
+      targetElement = targetElement.parentElement;
+    }
     if (targetElement.tagName === 'LI') {
       this.listOfWordsBlock.removeEventListener('click', this.isTheRightAnswer);
       this.allWordsBlocks.forEach((item) => {
