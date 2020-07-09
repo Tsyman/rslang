@@ -36,6 +36,8 @@ class Audiocall {
 
   goToNextSlideButton = null;
 
+  iNotKnowButton = null;
+
   mySwiper = null;
 
   resultsSwiper = null;
@@ -70,6 +72,7 @@ class Audiocall {
     this.isTheRightAnswer = this.isTheRightAnswer.bind(this);
     this.behaviousWhenAnswerIsCorrect = this.behaviousWhenAnswerIsCorrect.bind(this);
     this.behaviousWhenAnswerIsIncorrect = this.behaviousWhenAnswerIsIncorrect.bind(this);
+    this.behaviousINotKnow = this.behaviousINotKnow.bind(this);
   }
 
   popup = `
@@ -155,7 +158,7 @@ class Audiocall {
             <div class="swiper-pagination"></div>
         </div>
         <div class="audiocall-game__btn-inner">
-          <button class="audiocall-game__btn">Не знаю</button>
+          <button class="audiocall-game__btn" id="button-i-not-know">Не знаю</button>
           <button class="audiocall-game__btn-next" id="button-next">Дальше</button>
         </div>
   `;
@@ -216,6 +219,8 @@ class Audiocall {
       },
     });
     this.goToNextSlideButton = document.getElementById('button-next');
+    this.iNotKnowButton = document.getElementById('button-i-not-know');
+    this.iNotKnowButton.addEventListener('click', this.behaviousINotKnow);
     this.goToNextSlideButton.addEventListener('click', () => {
       this.goToNextSlide(this.mySwiper);
     });
@@ -322,6 +327,8 @@ class Audiocall {
     this.audioSound.play();
     this.soundIcon = document.querySelectorAll('.icon-sound');
     this.soundIcon.forEach((icon) => icon.addEventListener('click', this.playSoundOnIcon));
+    this.iNotKnowButton.classList.add('audiocall-game__btn--active');
+    this.goToNextSlideButton.classList.remove('audiocall-game__btn-next--active');
   }
 
   goToNextSlide(swiper) {
@@ -334,6 +341,8 @@ class Audiocall {
     listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
     this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
+    this.iNotKnowButton.classList.add('audiocall-game__btn--active');
+    this.goToNextSlideButton.classList.remove('audiocall-game__btn-next--active');
     if (this.countSlides >= 20) {
       this.openResultsPopup();
     }
@@ -398,12 +407,20 @@ class Audiocall {
 
   behaviousWhenAnswerIsCorrect() {
     console.log('correct');
-    console.log(this);
+    this.iNotKnowButton.classList.remove('audiocall-game__btn--active');
+    this.goToNextSlideButton.classList.add('audiocall-game__btn-next--active');
   }
 
   behaviousWhenAnswerIsIncorrect() {
     console.log('wrong');
-    console.log(this);
+    this.iNotKnowButton.classList.remove('audiocall-game__btn--active');
+    this.goToNextSlideButton.classList.add('audiocall-game__btn-next--active');
+  }
+
+  behaviousINotKnow() {
+    console.log('wrong');
+    this.iNotKnowButton.classList.remove('audiocall-game__btn--active');
+    this.goToNextSlideButton.classList.add('audiocall-game__btn-next--active');
   }
 }
 export default new Audiocall();
