@@ -62,6 +62,8 @@ class Audiocall {
 
   audioAnswersArray = [];
 
+  imageAnswersArray = [];
+
   rightUsersAnswersArray = [];
 
   wrongUsersAnswersArray = [];
@@ -79,6 +81,8 @@ class Audiocall {
   blockForAppendingCorrectAnswers = null;
 
   answerWordBlockInHead = null;
+
+  answerImageBlock = null;
 
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
@@ -322,6 +326,7 @@ class Audiocall {
       this.rightAnswersArray.push(this.answerRussianWord);
       this.englishWordAnswersArray.push(this.answerEnglishWord);
       this.audioAnswersArray.push(this.randomAudio);
+      this.imageAnswersArray.push(this.randomImage);
       console.log(`Sdfsdf: ${this.answerRussianWord}`);
       console.log(this.randomAudio);
 
@@ -331,7 +336,7 @@ class Audiocall {
             <div class="audiocall-game__sound icon-sound">
               <img class="audiocall-game__sound-icon" src="../../../assets/images/audio-call-game-icon.svg">
               <audio class="audio-sound visually-hidden" controls src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomAudio}"></audio>
-              <div class="audiocall-game__img" style="background-image: url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomImage}')"></div>
+              <div class="audiocall-game__img" style="background-image: none" id="audiocall-game__img"></div>
             </div>
             <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerEnglishWord}</div>
           </div>
@@ -369,6 +374,7 @@ class Audiocall {
     this.iNotKnowButton.classList.add('audiocall-game__btn--active');
     this.goToNextSlideButton.classList.remove('audiocall-game__btn-next--active');
     this.answerWordBlockInHead = document.getElementById('audiocall-game__english-word');
+    this.answerImageBlock = document.getElementById('audiocall-game__img');
   }
 
   goToNextSlide(swiper) {
@@ -382,6 +388,7 @@ class Audiocall {
     this.iNotKnowButton.classList.add('audiocall-game__btn--active');
     this.goToNextSlideButton.classList.remove('audiocall-game__btn-next--active');
     this.answerWordBlockInHead = activeSlide.querySelector('.audiocall-game__english-word');
+    this.answerImageBlock = activeSlide.querySelector('.audiocall-game__img');
     if (this.countSlides >= 20) {
       this.openResultsPopup();
     }
@@ -434,8 +441,6 @@ class Audiocall {
     const targetElement = event.target;
     if (targetElement.tagName === 'LI') {
       const wordBlock = targetElement.querySelector('.audiocall-game__word');
-      console.log(wordBlock.innerHTML);
-      console.log(this.rightAnswersArray[this.countSlides]);
       if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
         this.behaviousWhenAnswerIsCorrect();
       } else {
@@ -450,8 +455,10 @@ class Audiocall {
     const audio = this.audioAnswersArray[this.countSlides];
     const englishWords = this.englishWordAnswersArray[this.countSlides];
     const russianWords = this.rightAnswersArray[this.countSlides];
+    const image = this.audioAnswersArray[this.countSlides];
     this.rightUsersAnswersArray.push([audio, englishWords, russianWords]);
     this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
+    this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
   }
 
   behaviousWhenAnswerIsIncorrect() {
@@ -460,8 +467,10 @@ class Audiocall {
     const audio = this.audioAnswersArray[this.countSlides];
     const englishWords = this.englishWordAnswersArray[this.countSlides];
     const russianWords = this.rightAnswersArray[this.countSlides];
+    const image = this.audioAnswersArray[this.countSlides];
     this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
     this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
+    this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
   }
 
   behaviousINotKnow() {
@@ -470,8 +479,10 @@ class Audiocall {
     const audio = this.audioAnswersArray[this.countSlides];
     const englishWords = this.englishWordAnswersArray[this.countSlides];
     const russianWords = this.rightAnswersArray[this.countSlides];
+    const image = this.audioAnswersArray[this.countSlides];
     this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
     this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
+    this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
   }
 }
 export default new Audiocall();
