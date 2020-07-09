@@ -58,6 +58,14 @@ class Audiocall {
 
   rightAnswersArray = [];
 
+  englishWordAnswersArray = [];
+
+  audioAnswersArray = [];
+
+  rightUsersAnswersArray = [];
+
+  wrongUsersAnswersArray = [];
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -283,6 +291,8 @@ class Audiocall {
       this.answerEnglishWord = this.randomObj.word;
       this.answerRussianWord = this.randomObj.trans;
       this.rightAnswersArray.push(this.answerRussianWord);
+      this.englishWordAnswersArray.push(this.answerEnglishWord);
+      this.audioAnswersArray.push(this.randomAudio);
       console.log(`Sdfsdf: ${this.answerRussianWord}`);
       console.log(this.randomAudio);
 
@@ -406,21 +416,33 @@ class Audiocall {
   }
 
   behaviousWhenAnswerIsCorrect() {
-    console.log('correct');
     this.iNotKnowButton.classList.remove('audiocall-game__btn--active');
     this.goToNextSlideButton.classList.add('audiocall-game__btn-next--active');
+    const audio = this.audioAnswersArray[this.countSlides];
+    const englishWords = this.englishWordAnswersArray[this.countSlides];
+    const russianWords = this.rightAnswersArray[this.countSlides];
+    this.rightUsersAnswersArray.push([audio, englishWords, russianWords]);
+    console.log(this.rightUsersAnswersArray);
   }
 
   behaviousWhenAnswerIsIncorrect() {
-    console.log('wrong');
     this.iNotKnowButton.classList.remove('audiocall-game__btn--active');
     this.goToNextSlideButton.classList.add('audiocall-game__btn-next--active');
+    const audio = this.audioAnswersArray[this.countSlides];
+    const englishWords = this.englishWordAnswersArray[this.countSlides];
+    const russianWords = this.rightAnswersArray[this.countSlides];
+    this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
+    console.log(this.wrongUsersAnswersArray);
   }
 
   behaviousINotKnow() {
-    console.log('wrong');
     this.iNotKnowButton.classList.remove('audiocall-game__btn--active');
     this.goToNextSlideButton.classList.add('audiocall-game__btn-next--active');
+    const audio = this.audioAnswersArray[this.countSlides];
+    const englishWords = this.englishWordAnswersArray[this.countSlides];
+    const russianWords = this.rightAnswersArray[this.countSlides];
+    this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
+    console.log(this.wrongUsersAnswersArray);
   }
 }
 export default new Audiocall();
