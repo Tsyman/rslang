@@ -558,6 +558,7 @@
   width: 280px;
   height: 280px;
   margin: 0 auto;
+  background-image: url(../../../assets/images/audiocall-sloth.svg);
   border-radius: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -622,6 +623,7 @@
   height: 320px;
   margin: 0 auto;
   overflow-y: scroll;
+  overflow-x: hidden;
   cursor: pointer;
   @include respond(tab-port) {
     width: 230px;
@@ -650,6 +652,10 @@
 }
 
 .audiocall-statistics__mistake-wrapper {
+  display: flex;
+  width: 100%;
+}
+.audiocall-statistics__correct-wrapper {
   display: flex;
   width: 100%;
 }

@@ -147,7 +147,6 @@ class Audiocall {
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
           </div>
           <div class="audiocall-statistics__btn-inner">
             <a class="audiocall-statistics__play-btn audiocall-statistics__btn" id="audiocall-statistics__play-btn">Сыграем еще?</a>
@@ -156,15 +155,6 @@ class Audiocall {
         </div>
       </div>
     </section>
-  `;
-
-  correctAnswerWrapper = `
-    <div class="audiocall-statistics__correct-wrapper">
-      <img class="audiocall-statistics__correct-img" src="../../../assets/images/audio-call-game-icon.svg">
-      <p class="audiocall-statistics__english-word-correct">leg</p>
-      <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
-      <p class="audiocall-statistics__translation-correct">нога</p>
-    </div>
   `;
 
   mainGamePage = `
@@ -279,10 +269,6 @@ class Audiocall {
       observeParents: true,
       grabCurcor: true,
       simulateTouch: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
@@ -306,6 +292,18 @@ class Audiocall {
         </div>
       `;
       this.blockForAppendingMistakes.innerHTML = (previousValue + newValue);
+    }
+    for (let i = 0; i < this.numberOfCorrectAnswersValue; i += 1) {
+      const previousValue = this.blockForAppendingCorrectAnswers.innerHTML;
+      const newValue = `
+        <div class="audiocall-statistics__correct-wrapper">
+          <img class="audiocall-statistics__correct-img" src="../../../assets/images/audio-call-game-icon.svg">
+          <p class="audiocall-statistics__english-word-correct">${this.rightUsersAnswersArray[i][1]}</p>
+          <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
+          <p class="audiocall-statistics__translation-correct">${this.rightUsersAnswersArray[i][2]}</p>
+        </div>
+      `;
+      this.blockForAppendingCorrectAnswers.innerHTML = (previousValue + newValue);
     }
   }
 
