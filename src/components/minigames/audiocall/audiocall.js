@@ -490,6 +490,11 @@ class Audiocall {
     this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
     this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
     this.clickedWordBlock.classList.add('audiocall-game__item-incorrect');
+    this.allWordsBlocks.forEach((item) => {
+      if (item.querySelector('.audiocall-game__word').innerHTML === this.rightAnswersArray[this.countSlides]) {
+        item.querySelector('.audiocall-game__word').classList.add('audiocall-game__item-correct');
+      }
+    });
   }
 
   behaviousINotKnow() {
@@ -502,6 +507,11 @@ class Audiocall {
     this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
     this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
     this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
+    this.allWordsBlocks.forEach((item) => {
+      if (item.querySelector('.audiocall-game__word').innerHTML === this.rightAnswersArray[this.countSlides]) {
+        item.querySelector('.audiocall-game__word').classList.add('audiocall-game__item-correct');
+      }
+    });
   }
 }
 export default new Audiocall();
