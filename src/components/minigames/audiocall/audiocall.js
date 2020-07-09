@@ -84,7 +84,7 @@ class Audiocall {
                 <div class="audiocall__confirm-exit-popup-content__text">
                   Если вы выйдете из игры, прогресс будет потерян.
                 </div>
-                <a class="btn btn--animated btn--blue" id="audiocall__confirm-exit-popup-content__close-game">Закрыть</a>
+                <a class="btn btn--animated btn--red" id="audiocall__confirm-exit-popup-content__close-game">Закрыть</a>
                 <a class="btn btn--animated btn--green" id="audiocall__confirm-exit-popup-content__close-popup">Отмена</a>
               </div>
             </div>`;
@@ -287,7 +287,7 @@ class Audiocall {
             <div class="audiocall-game__sound icon-sound">
               <img class="audiocall-game__sound-icon" src="../../../assets/images/audio-call-game-icon.svg">
               <audio class="audio-sound visually-hidden" controls src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomAudio}"></audio>
-              <img class="audiocall-game__img" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomImage}">
+              <div class="audiocall-game__img" style="background-image: url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomImage}')"></div>
             </div>
             <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerEnglishWord}</div>
           </div>
@@ -296,7 +296,7 @@ class Audiocall {
               <p class="audiocall-game__number">1</p>
               <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][0].trans}</p>
             </li>
-            <li class="audiocall-game__item audiocall-game__item-incorrect">
+            <li class="audiocall-game__item">
               <p class="audiocall-game__number">2</p>
               <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][1].trans}</p>
             </li>
