@@ -40,7 +40,7 @@ class Audiocall {
 
   resultsSwiper = null;
 
-  countSlides = null;
+  countSlides = 0;
 
   answerEnglishWord = null;
 
@@ -316,6 +316,8 @@ class Audiocall {
         </div>
       `);
     }
+    const listOfWordsBlock = document.querySelector('.audiocall-game__list');
+    listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
     this.audioSound = document.querySelector('.audio-sound');
     this.audioSound.play();
     this.soundIcon = document.querySelectorAll('.icon-sound');
@@ -385,21 +387,23 @@ class Audiocall {
     if (targetElement.tagName === 'LI') {
       const wordBlock = targetElement.querySelector('.audiocall-game__word');
       console.log(wordBlock.innerHTML);
-      console.log(this.answerRussianWord);
+      console.log(this.rightAnswersArray[this.countSlides]);
       if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
-        this.behaviousWhenAnswerIsCorrect()
+        this.behaviousWhenAnswerIsCorrect();
       } else {
-        this.behaviousWhenAnswerIsIncorrect()
+        this.behaviousWhenAnswerIsIncorrect();
       }
     }
   }
 
   behaviousWhenAnswerIsCorrect() {
     console.log('correct');
+    console.log(this);
   }
 
   behaviousWhenAnswerIsIncorrect() {
     console.log('wrong');
+    console.log(this);
   }
 }
 export default new Audiocall();
