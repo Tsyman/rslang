@@ -352,6 +352,10 @@
   align-items: center;
   border-radius: 50%;
   cursor: pointer;
+  @include respond(tab-land) {
+    width: 150px;
+    height: 150px;
+  }
 }
 
 .audiocall-game__number {
