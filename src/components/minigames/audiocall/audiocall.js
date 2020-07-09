@@ -68,6 +68,8 @@ class Audiocall {
     this.playSoundOnIcon = this.playSoundOnIcon.bind(this);
     this.openResultsPopup = this.openResultsPopup.bind(this);
     this.isTheRightAnswer = this.isTheRightAnswer.bind(this);
+    this.behaviousWhenAnswerIsCorrect = this.behaviousWhenAnswerIsCorrect.bind(this);
+    this.behaviousWhenAnswerIsIncorrect = this.behaviousWhenAnswerIsIncorrect.bind(this);
   }
 
   popup = `
@@ -385,11 +387,19 @@ class Audiocall {
       console.log(wordBlock.innerHTML);
       console.log(this.answerRussianWord);
       if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
-        console.log('correct');
+        this.behaviousWhenAnswerIsCorrect()
       } else {
-        console.log('wrong');
+        this.behaviousWhenAnswerIsIncorrect()
       }
     }
+  }
+
+  behaviousWhenAnswerIsCorrect() {
+    console.log('correct');
+  }
+
+  behaviousWhenAnswerIsIncorrect() {
+    console.log('wrong');
   }
 }
 export default new Audiocall();
