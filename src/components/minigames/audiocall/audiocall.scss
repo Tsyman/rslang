@@ -184,6 +184,7 @@
   width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  height: 850px;
   @include respond(tab-land) {
   width: 900px;
   }
@@ -271,8 +272,9 @@
 }
 
 .audiocall-game__sound {
+  position: relative;
   width: 240px;
-  height: 240px;
+  height: 220px;
   margin-bottom: 40px;
   display: flex;
   justify-content: center;
@@ -288,6 +290,13 @@
 
 .audiocall-game__sound:hover {
   background: var(--bg-blue);
+}
+
+.audiocall-game__sound-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  z-index: 4;
 }
 
 .audiocall-game__list {
@@ -334,8 +343,14 @@
 }
 
 .audiocall-game__img {
-  width: 40px;
-  height: 40px;
+  display: none;
+  z-index: 2;
+  width: 240px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
   cursor: pointer;
 }
 
@@ -407,73 +422,67 @@
   background-color: var(--pink);
 }
 
-// .audiocall-game__btn-next {
-//   // display: none;
-//   min-width: 240px;
-//   height: 60px;
-//   border: none;
-//   outline: none;
-//   border-radius: 25px;
-//   box-shadow: 0px 4px 1px #00A8FF1A;
-//   color: var(--white);
-//   background-color: var(--green);
-//   font-size: var(--font-size-21);
-//   line-height: var(--line-spacing-32);
-//   cursor: pointer;
-//   @include respond(tab-port) {
-//     min-width: 220px;
-//     height: 60px;
-//   }
-//   @include respond(phone) {
-//     font-size: var(--font-size-17);
-//     line-height: var(--line-spacing-25);
-//   }
-// }
+.audiocall-game__btn-next {
+  // display: none;
+  min-width: 240px;
+  height: 60px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  box-shadow: 0px 4px 1px #00A8FF1A;
+  color: var(--white);
+  background-color: var(--green);
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-32);
+  cursor: pointer;
+  @include respond(tab-port) {
+    min-width: 220px;
+    height: 60px;
+  }
+  @include respond(phone) {
+    font-size: var(--font-size-17);
+    line-height: var(--line-spacing-25);
+  }
+}
 
-// .audiocall-game__btn-next:hover {
-//   background-color: var(--light-green);
-// }
+.audiocall-game__btn-next:hover {
+  background-color: var(--light-green);
+}
 
 // // //неправильный перевод зачеркивается
 
-// .audiocall-game__item-incorrect {
-//   text-decoration: line-through;
-// }
+.audiocall-game__item-incorrect {
+  text-decoration: line-through;
+}
 
 
 // // // стили после угаданного слова
 
-// .audiocall-game__sound-bg {
-//   background-image: url(https://st4.depositphotos.com/13349494/27819/i/450/depositphotos_278194764-stock-photo-cropped-view-man-purple-rubber.jpg);
-//   background-repeat: no-repeat;
-//   background-size: cover;
-// }
+.audiocall-game__inner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  @include respond(tab-port) {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+}
 
-// .audiocall-game__inner {
-//   display: flex;
-//   justify-content: space-around;
-//   align-items: center;
-//   width: 70%;
-//   @include respond(tab-port) {
-//     flex-direction: column;
-//     margin-bottom: 30px;
-//   }
-// }
-
-// .audiocall-game__english-word {
-//   // display: none;
-//   font-weight: bold;
-//   font-size: var(--font-size-59);
-//   line-height: var(--line-spacing-63);
-//   color: var(--white);
-//   @include respond(tab-port) {
-//     font-size: var(--font-size-42);
-//     line-height: var(--line-spacing-47);
-//   }
-//   @include respond(phone) {
-//     font-size: var(--font-size-31);
-//   }
-// }
+.audiocall-game__english-word {
+  // display: none;
+  font-weight: bold;
+  font-size: var(--font-size-59);
+  line-height: var(--line-spacing-63);
+  color: var(--white);
+  @include respond(tab-port) {
+    font-size: var(--font-size-42);
+    line-height: var(--line-spacing-47);
+  }
+  @include respond(phone) {
+    font-size: var(--font-size-31);
+  }
+}
 
 
 .audiocall-statistics {

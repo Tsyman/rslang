@@ -30,7 +30,9 @@ class Audiocall {
 
   whereToAppendSwiper = null;
 
-  arrayOfWordsData = 'Element';
+  arrayOfWordsData = [];
+
+  parsedArrayOfWordsData = [];
 
   goToNextSlideButton = null;
 
@@ -40,6 +42,18 @@ class Audiocall {
 
   countSlides = null;
 
+  answerEnglishWord = null;
+
+  audioSound = null;
+
+  randomObj = null;
+
+  randomImage = null;
+
+  randomAudio =null;
+
+  soundIcon = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -47,6 +61,9 @@ class Audiocall {
     this.goToMainWebsitePage = this.goToMainWebsitePage.bind(this);
     this.goToStartGamePage = this.goToStartGamePage.bind(this);
     this.renderGameSlides = this.renderGameSlides.bind(this);
+    this.fetchWords = this.fetchWords.bind(this);
+    this.parseWordsIntoGroups = this.parseWordsIntoGroups.bind(this);
+    this.playSoundOnIcon = this.playSoundOnIcon.bind(this);
     this.openResultsPopup = this.openResultsPopup.bind(this);
   }
 
@@ -156,7 +173,9 @@ class Audiocall {
   async afterRender() {
     this.audioCallContainer = document.getElementById('audio-call-container');
     this.startGameButton = document.getElementById('start-game-button');
+    this.startGameButton = document.getElementById('start-game-button');
     this.startGameButton.addEventListener('click', this.goToMainGamePage);
+    this.startGameButton.addEventListener('click', this.fetchWords);
   }
 
   goToMainGamePage() {
@@ -191,7 +210,6 @@ class Audiocall {
         type: 'progressbar',
       },
     });
-    this.renderGameSlides(this.mySwiper, this.arrayOfWordsData);
     this.goToNextSlideButton = document.getElementById('button-next');
     this.goToNextSlideButton.addEventListener('click', () => {
       this.goToNextSlide(this.mySwiper);
@@ -246,44 +264,105 @@ class Audiocall {
 
   renderGameSlides(whereToAppend) {
     for (let i = 0; i < 20; i += 1) {
+      const currentArrayWithFiveObject = this.parsedArrayOfWordsData[i];
+      this.randomObj = currentArrayWithFiveObject[Math.floor(Math.random()
+        * currentArrayWithFiveObject.length)];
+      console.log(currentArrayWithFiveObject);
+      this.randomImage = this.randomObj.image;
+      this.randomAudio = this.randomObj.audio;
+      this.answerEnglishWord = this.randomObj.word;
+      console.log(this.randomAudio);
+
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper swiper-slide">
           <div class="audiocall-game__inner">
-            <div class="audiocall-game__sound audiocall-game__sound-bg">
-              <img class="audiocall-game__img" src="">
+            <div class="audiocall-game__sound icon-sound">
+              <img class="audiocall-game__sound-icon" src="../../../assets/images/audio-call-game-icon.svg">
+              <audio class="audio-sound visually-hidden" controls src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomAudio}"></audio>
+              <img class="audiocall-game__img" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomImage}">
             </div>
-            <div class="audiocall-game__english-word visually-hidden">lorem ipsum</div>
+            <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerEnglishWord}</div>
           </div>
           <ul class="audiocall-game__list">
             <li class="audiocall-game__item">
               <p class="audiocall-game__number">1</p>
-              <p class="audiocall-game__word">${this.arrayOfWordsData}</p>
+              <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][0].trans}</p>
             </li>
             <li class="audiocall-game__item audiocall-game__item-incorrect">
               <p class="audiocall-game__number">2</p>
-              <p class="audiocall-game__word">I: ${i}</p>
+              <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][1].trans}</p>
             </li>
             <li class="audiocall-game__item">
               <p class="audiocall-game__number">3</p>
-              <p class="audiocall-game__word">Lorem</p>
+              <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][2].trans}</p>
             </li>
             <li class="audiocall-game__item">
               <p class="audiocall-game__number">4</p>
-              <p class="audiocall-game__word">Lorem</p>
+              <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][3].trans}</p>
             </li>
             <li class="audiocall-game__item">
               <p class="audiocall-game__number">5</p>
-              <p class="audiocall-game__word">Lorem</p>
+              <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][4].trans}</p>
             </li>
           </ul>
         </div>
       `);
     }
+    this.audioSound = document.querySelector('.audio-sound');
+    this.audioSound.play();
+    this.soundIcon = document.querySelectorAll('.icon-sound');
+    this.soundIcon.forEach((icon) => icon.addEventListener('click', this.playSoundOnIcon));
   }
 
   goToNextSlide(swiper) {
     swiper.slideNext();
     this.countSlides += 1;
+    const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
+    this.audioSound = activeSlide.querySelector('.audio-sound');
+    this.audioSound.play();
+  }
+
+  async fetchWords() {
+    return new Promise((resolve) => {
+      const MIN_PAGE = 0;
+      const MAX_PAGE = 29;
+      const MIN_GROUP = 0;
+      const MAX_GROUP = 5;
+      for (let i = 0; i < 5; i += 1) {
+        const groupNum = Math.floor(Math.random() * (MAX_GROUP - MIN_GROUP + 1)) + MIN_GROUP;
+        const pageNum = Math.floor(Math.random() * (MAX_PAGE - MIN_PAGE + 1)) + MIN_PAGE;
+        resolve(fetch(`https://afternoon-falls-25894.herokuapp.com/words?page=${pageNum}&group=${groupNum}`)
+          .then((res) => res.json().then((data) => data.forEach((el) => {
+            const updWord = {
+              id: el.id, word: el.word, trans: el.wordTranslate, audio: el.audio, image: el.image,
+            };
+            this.arrayOfWordsData.push(updWord);
+            this.parseWordsIntoGroups();
+          }))));
+      }
+    });
+  }
+
+  parseWordsIntoGroups() {
+    if (this.arrayOfWordsData.length === 100) {
+      let startPoint = 0;
+      let endPoint = 5;
+      const startArray = this.arrayOfWordsData;
+      for (let i = 1; i < 21; i += 1) {
+        const tempArray = startArray.slice(startPoint, endPoint);
+        startPoint = endPoint;
+        endPoint += 5;
+        this.parsedArrayOfWordsData.push(tempArray);
+      }
+      this.renderGameSlides(this.mySwiper, this.arrayOfWordsData);
+    }
+    return this.parsedArrayOfWordsData;
+  }
+
+  playSoundOnIcon() {
+    const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
+    this.audioSound = activeSlide.querySelector('.audio-sound');
+    this.audioSound.play();
     if (this.countSlides === 20) {
       this.openResultsPopup();
     }
