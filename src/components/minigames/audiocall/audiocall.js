@@ -86,6 +86,8 @@ class Audiocall {
 
   clickedWordBlock = null;
 
+  listOfWordsBlock = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -365,8 +367,8 @@ class Audiocall {
         </div>
       `);
     }
-    const listOfWordsBlock = document.querySelector('.audiocall-game__list');
-    listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
+    this.listOfWordsBlock = document.querySelector('.audiocall-game__list');
+    this.listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
     this.audioSound = document.querySelector('.audio-sound');
     this.audioSound.play();
     this.soundIcon = document.querySelectorAll('.icon-sound');
@@ -381,8 +383,8 @@ class Audiocall {
     swiper.slideNext();
     this.countSlides += 1;
     const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
-    const listOfWordsBlock = activeSlide.querySelector('.audiocall-game__list');
-    listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
+    this.listOfWordsBlock = activeSlide.querySelector('.audiocall-game__list');
+    this.listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
     this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
     this.iNotKnowButton.classList.add('audiocall-game__btn--active');
@@ -440,6 +442,7 @@ class Audiocall {
   isTheRightAnswer(event) {
     const targetElement = event.target;
     if (targetElement.tagName === 'LI') {
+      this.listOfWordsBlock.removeEventListener('click', this.isTheRightAnswer);
       const wordBlock = targetElement.querySelector('.audiocall-game__word');
       this.clickedWordBlock = wordBlock;
       if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
