@@ -36,11 +36,13 @@ class Audiocall {
 
   goToNextSlideButton = null;
 
+  iNotKnowButton = null;
+
   mySwiper = null;
 
   resultsSwiper = null;
 
-  countSlides = null;
+  countSlides = 0;
 
   answerEnglishWord = null;
 
@@ -53,6 +55,40 @@ class Audiocall {
   randomAudio =null;
 
   soundIcon = null;
+
+  rightAnswersArray = [];
+
+  englishWordAnswersArray = [];
+
+  audioAnswersArray = [];
+
+  imageAnswersArray = [];
+
+  rightUsersAnswersArray = [];
+
+  wrongUsersAnswersArray = [];
+
+  numberOfMistakesBlock = null;
+
+  numberOfMistakesValue = 0;
+
+  numberOfCorrectAnswersBlock = null;
+
+  numberOfCorrectAnswersValue = 0;
+
+  blockForAppendingMistakes = null;
+
+  blockForAppendingCorrectAnswers = null;
+
+  answerWordBlockInHead = null;
+
+  answerImageBlock = null;
+
+  clickedWordBlock = null;
+
+  listOfWordsBlock = null;
+
+  allWordsBlocks = null;
 
   spinner = null;
 
@@ -71,6 +107,10 @@ class Audiocall {
     this.parseWordsIntoGroups = this.parseWordsIntoGroups.bind(this);
     this.playSoundOnIcon = this.playSoundOnIcon.bind(this);
     this.openResultsPopup = this.openResultsPopup.bind(this);
+    this.isTheRightAnswer = this.isTheRightAnswer.bind(this);
+    this.behaviousWhenAnswerIsCorrect = this.behaviousWhenAnswerIsCorrect.bind(this);
+    this.behaviousWhenAnswerIsIncorrect = this.behaviousWhenAnswerIsIncorrect.bind(this);
+    this.behaviousINotKnow = this.behaviousINotKnow.bind(this);
     this.loadTime = 3000;
   }
 
@@ -86,7 +126,7 @@ class Audiocall {
                 <div class="audiocall__confirm-exit-popup-content__text">
                   Если вы выйдете из игры, прогресс будет потерян.
                 </div>
-                <a class="btn btn--animated btn--blue" id="audiocall__confirm-exit-popup-content__close-game">Закрыть</a>
+                <a class="btn btn--animated btn--red" id="audiocall__confirm-exit-popup-content__close-game">Закрыть</a>
                 <a class="btn btn--animated btn--green" id="audiocall__confirm-exit-popup-content__close-popup">Отмена</a>
               </div>
             </div>`;
@@ -107,38 +147,25 @@ class Audiocall {
                     <div class="audiocall-statistics__content-mistake-inner">
                       <p class="audiocall-statistics__content-mistake-heading">Ошибок</p>
                       <p class="audiocall-statistics__content-mistake-number">&nbsp-&nbsp</p>
-                      <p class="audiocall-statistics__content-mistake-number">5</p>
+                      <p class="audiocall-statistics__content-mistake-number" id="number-of-mistakes">5</p>
                     </div>
-                    <div class="audiocall-statistics__content-mistake-inner">
-                      <div class="audiocall-statistics__mistake-wrapper">
-                        <img class="audiocall-statistics__mistake-img" src="../../../assets/images/audio-call-game-icon.svg">
-                        <p class="audiocall-statistics__english-word-mistake">arm</p>
-                        <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
-                        <p class="audiocall-statistics__translation-mistake">рука</p>
-                      </div>
+                    <div class="audiocall-statistics__content-mistake-inner" id="block-for-appending-mistakes">
                     </div>
                   </div>
                   <div class="audiocall-statistics__content-correct-answer">
                   <div class="audiocall-statistics__content-correct-inner">
                     <p class="audiocall-statistics__content-correct-heading">Знаю</p>
                     <p class="audiocall-statistics__content-correct-number">&nbsp-&nbsp</p>
-                    <p class="audiocall-statistics__content-correct-number">15</p>
+                    <p class="audiocall-statistics__content-correct-number" id="number-of-correct-answers">15</p>
                   </div>
-                    <div class="audiocall-statistics__correct-wrapper">
-                      <div class="audiocall-statistics__content-correct-inner">
-                        <img class="audiocall-statistics__correct-img" src="../../../assets/images/audio-call-game-icon.svg">
-                        <p class="audiocall-statistics__english-word-correct">leg</p>
-                        <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
-                        <p class="audiocall-statistics__translation-correct">нога</p>
-                      </div>
-                    </div>
+                  <div class="audiocall-statistics__content-correct-inner" id="block-for-appending-correct-answers">
+                  </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
           </div>
           <div class="audiocall-statistics__btn-inner">
             <a class="audiocall-statistics__play-btn audiocall-statistics__btn" id="audiocall-statistics__play-btn">Сыграем еще?</a>
@@ -157,7 +184,7 @@ class Audiocall {
             <div class="swiper-pagination"></div>
         </div>
         <div class="audiocall-game__btn-inner">
-          <button class="audiocall-game__btn">Не знаю</button>
+          <button class="audiocall-game__btn" id="button-i-not-know">Не знаю</button>
           <button class="audiocall-game__btn-next" id="button-next">Дальше</button>
         </div>
         <p class="audiocall-game__instruction">Вы можете управлять игрой при помощи клавиатуры. Клавиши 1, 2, 3, 4, 5 - выбор варианта ответа. Пробел - "не знаю". Клавиша → - "дальше".</p>
@@ -222,10 +249,14 @@ class Audiocall {
       },
     });
     this.goToNextSlideButton = document.getElementById('button-next');
+    this.iNotKnowButton = document.getElementById('button-i-not-know');
+    this.iNotKnowButton.addEventListener('click', this.behaviousINotKnow);
     this.goToNextSlideButton.addEventListener('click', () => {
       this.goToNextSlide(this.mySwiper);
     });
     this.statisticsPopup = document.getElementById('results-popup');
+    this.numberOfMistakesBlock = document.getElementById('number-of-mistakes');
+    this.numberOfCorrectAnswersBlock = document.getElementById('number-of-correct-answers');
   }
 
   openConfirmExitPopup() {
@@ -261,16 +292,42 @@ class Audiocall {
       observeParents: true,
       grabCurcor: true,
       simulateTouch: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
     });
     this.statisticsPopup.style.display = 'block';
+    this.numberOfCorrectAnswersValue = this.rightUsersAnswersArray.length;
+    this.numberOfMistakesValue = this.wrongUsersAnswersArray.length;
+    this.numberOfMistakesBlock.innerHTML = this.numberOfMistakesValue;
+    this.numberOfCorrectAnswersBlock.innerHTML = this.numberOfCorrectAnswersValue;
+    this.blockForAppendingMistakes = document.getElementById('block-for-appending-mistakes');
+    this.blockForAppendingCorrectAnswers = document.getElementById('block-for-appending-correct-answers');
+    for (let i = 0; i < this.numberOfMistakesValue; i += 1) {
+      const previousValue = this.blockForAppendingMistakes.innerHTML;
+      const newValue = `
+        <div class="audiocall-statistics__mistake-wrapper">
+          <img class="audiocall-statistics__mistake-img" src="../../../assets/images/audio-call-game-icon.svg">
+          <p class="audiocall-statistics__english-word-mistake">${this.wrongUsersAnswersArray[i][1]}</p>
+          <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
+          <p class="audiocall-statistics__translation-mistake">${this.wrongUsersAnswersArray[i][2]}</p>
+        </div>
+      `;
+      this.blockForAppendingMistakes.innerHTML = (previousValue + newValue);
+    }
+    for (let i = 0; i < this.numberOfCorrectAnswersValue; i += 1) {
+      const previousValue = this.blockForAppendingCorrectAnswers.innerHTML;
+      const newValue = `
+        <div class="audiocall-statistics__correct-wrapper">
+          <img class="audiocall-statistics__correct-img" src="../../../assets/images/audio-call-game-icon.svg">
+          <p class="audiocall-statistics__english-word-correct">${this.rightUsersAnswersArray[i][1]}</p>
+          <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
+          <p class="audiocall-statistics__translation-correct">${this.rightUsersAnswersArray[i][2]}</p>
+        </div>
+      `;
+      this.blockForAppendingCorrectAnswers.innerHTML = (previousValue + newValue);
+    }
   }
 
   renderGameSlides(whereToAppend) {
@@ -286,6 +343,11 @@ class Audiocall {
       this.randomImage = this.randomObj.image;
       this.randomAudio = this.randomObj.audio;
       this.answerEnglishWord = this.randomObj.word;
+      this.answerRussianWord = this.randomObj.trans;
+      this.rightAnswersArray.push(this.answerRussianWord);
+      this.englishWordAnswersArray.push(this.answerEnglishWord);
+      this.audioAnswersArray.push(this.randomAudio);
+      this.imageAnswersArray.push(this.randomImage);
 
       whereToAppend.appendSlide(`
         <div class="audiocall-game__wrapper swiper-slide">
@@ -293,7 +355,7 @@ class Audiocall {
             <div class="audiocall-game__sound icon-sound">
               <img class="audiocall-game__sound-icon" src="../../../assets/images/audio-call-game-icon.svg">
               <audio class="audio-sound visually-hidden" controls src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomAudio}"></audio>
-              <img class="audiocall-game__img" src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.randomImage}">
+              <div class="audiocall-game__img" style="background-image: none" id="audiocall-game__img"></div>
             </div>
             <div class="audiocall-game__english-word" id="audiocall-game__english-word">${this.answerEnglishWord}</div>
           </div>
@@ -302,7 +364,7 @@ class Audiocall {
               <p class="audiocall-game__number">1</p>
               <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][0].trans}</p>
             </li>
-            <li class="audiocall-game__item audiocall-game__item-incorrect">
+            <li class="audiocall-game__item">
               <p class="audiocall-game__number">2</p>
               <p class="audiocall-game__word">${this.parsedArrayOfWordsData[i][1].trans}</p>
             </li>
@@ -322,18 +384,37 @@ class Audiocall {
         </div>
       `);
     }
+    this.listOfWordsBlock = document.querySelector('.audiocall-game__list');
+    this.listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
     this.audioSound = document.querySelector('.audio-sound');
     this.audioSound.play();
     this.soundIcon = document.querySelectorAll('.icon-sound');
     this.soundIcon.forEach((icon) => icon.addEventListener('click', this.playSoundOnIcon));
+    this.iNotKnowButton.classList.add('audiocall-game__btn--active');
+    this.goToNextSlideButton.classList.remove('audiocall-game__btn-next--active');
+    this.answerWordBlockInHead = document.getElementById('audiocall-game__english-word');
+    this.answerImageBlock = document.getElementById('audiocall-game__img');
+    this.allWordsBlocks = document.querySelectorAll('.audiocall-game__item');
+    console.log(this.allWordsBlocks);
   }
 
   goToNextSlide(swiper) {
     swiper.slideNext();
     this.countSlides += 1;
     const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
+    this.listOfWordsBlock = activeSlide.querySelector('.audiocall-game__list');
+    this.listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
     this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
+    this.iNotKnowButton.classList.add('audiocall-game__btn--active');
+    this.goToNextSlideButton.classList.remove('audiocall-game__btn-next--active');
+    this.answerWordBlockInHead = activeSlide.querySelector('.audiocall-game__english-word');
+    this.answerImageBlock = activeSlide.querySelector('.audiocall-game__img');
+    this.allWordsBlocks = activeSlide.querySelectorAll('.audiocall-game__item');
+    this.allWordsBlocks.forEach((item) => {
+      const el = item;
+      el.style.cursor = 'pointer';
+    });
     if (this.countSlides >= 20) {
       this.openResultsPopup();
     }
@@ -382,6 +463,72 @@ class Audiocall {
     const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
     this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
+  }
+
+  isTheRightAnswer(event) {
+    const targetElement = event.target;
+    if (targetElement.tagName === 'LI') {
+      this.listOfWordsBlock.removeEventListener('click', this.isTheRightAnswer);
+      this.allWordsBlocks.forEach((item) => {
+        const el = item;
+        el.style.cursor = 'auto';
+      });
+      const wordBlock = targetElement.querySelector('.audiocall-game__word');
+      this.clickedWordBlock = wordBlock;
+      if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
+        this.behaviousWhenAnswerIsCorrect();
+      } else {
+        this.behaviousWhenAnswerIsIncorrect();
+      }
+    }
+  }
+
+  behaviousWhenAnswerIsCorrect() {
+    this.iNotKnowButton.classList.remove('audiocall-game__btn--active');
+    this.goToNextSlideButton.classList.add('audiocall-game__btn-next--active');
+    const audio = this.audioAnswersArray[this.countSlides];
+    const englishWords = this.englishWordAnswersArray[this.countSlides];
+    const russianWords = this.rightAnswersArray[this.countSlides];
+    const image = this.imageAnswersArray[this.countSlides];
+    this.rightUsersAnswersArray.push([audio, englishWords, russianWords]);
+    this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
+    this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
+    this.clickedWordBlock.classList.add('audiocall-game__item-correct');
+  }
+
+  behaviousWhenAnswerIsIncorrect() {
+    this.iNotKnowButton.classList.remove('audiocall-game__btn--active');
+    this.goToNextSlideButton.classList.add('audiocall-game__btn-next--active');
+    const audio = this.audioAnswersArray[this.countSlides];
+    const englishWords = this.englishWordAnswersArray[this.countSlides];
+    const russianWords = this.rightAnswersArray[this.countSlides];
+    const image = this.imageAnswersArray[this.countSlides];
+    this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
+    this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
+    this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
+    this.clickedWordBlock.classList.add('audiocall-game__item-incorrect');
+    this.allWordsBlocks.forEach((item) => {
+      if (item.querySelector('.audiocall-game__word').innerHTML === this.rightAnswersArray[this.countSlides]) {
+        item.querySelector('.audiocall-game__word').classList.add('audiocall-game__item-correct');
+      }
+    });
+  }
+
+  behaviousINotKnow() {
+    this.iNotKnowButton.classList.remove('audiocall-game__btn--active');
+    this.goToNextSlideButton.classList.add('audiocall-game__btn-next--active');
+    const audio = this.audioAnswersArray[this.countSlides];
+    const englishWords = this.englishWordAnswersArray[this.countSlides];
+    const russianWords = this.rightAnswersArray[this.countSlides];
+    const image = this.imageAnswersArray[this.countSlides];
+    this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
+    this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
+    this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
+    this.allWordsBlocks.forEach((item) => {
+      if (item.querySelector('.audiocall-game__word').innerHTML === this.rightAnswersArray[this.countSlides]) {
+        item.querySelector('.audiocall-game__word').classList.add('audiocall-game__item-correct');
+      }
+    });
   }
 }
 export default new Audiocall();
