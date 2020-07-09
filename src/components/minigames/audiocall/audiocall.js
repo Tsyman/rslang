@@ -88,6 +88,8 @@ class Audiocall {
 
   listOfWordsBlock = null;
 
+  allWordsBlocks = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -377,6 +379,8 @@ class Audiocall {
     this.goToNextSlideButton.classList.remove('audiocall-game__btn-next--active');
     this.answerWordBlockInHead = document.getElementById('audiocall-game__english-word');
     this.answerImageBlock = document.getElementById('audiocall-game__img');
+    this.allWordsBlocks = document.querySelectorAll('.audiocall-game__item');
+    console.log(this.allWordsBlocks);
   }
 
   goToNextSlide(swiper) {
@@ -391,6 +395,11 @@ class Audiocall {
     this.goToNextSlideButton.classList.remove('audiocall-game__btn-next--active');
     this.answerWordBlockInHead = activeSlide.querySelector('.audiocall-game__english-word');
     this.answerImageBlock = activeSlide.querySelector('.audiocall-game__img');
+    this.allWordsBlocks = activeSlide.querySelectorAll('.audiocall-game__item');
+    this.allWordsBlocks.forEach((item) => {
+      const el = item;
+      el.style.cursor = 'pointer';
+    });
     if (this.countSlides >= 20) {
       this.openResultsPopup();
     }
@@ -443,6 +452,10 @@ class Audiocall {
     const targetElement = event.target;
     if (targetElement.tagName === 'LI') {
       this.listOfWordsBlock.removeEventListener('click', this.isTheRightAnswer);
+      this.allWordsBlocks.forEach((item) => {
+        const el = item;
+        el.style.cursor = 'auto';
+      });
       const wordBlock = targetElement.querySelector('.audiocall-game__word');
       this.clickedWordBlock = wordBlock;
       if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
