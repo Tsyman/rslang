@@ -695,3 +695,10 @@
 .swiper-pagination-progressbar-fill {
   background-color: var(--red) !important;
 }
+
+#block-for-appending-mistakes {
+  flex-direction: column;
+}
+#block-for-appending-correct-answers {
+  flex-direction: column;
+}

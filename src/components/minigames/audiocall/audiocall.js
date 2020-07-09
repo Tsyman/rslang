@@ -74,6 +74,10 @@ class Audiocall {
 
   numberOfCorrectAnswersValue = 0;
 
+  blockForAppendingMistakes = null;
+
+  blockForAppendingCorrectAnswers = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -126,13 +130,7 @@ class Audiocall {
                       <p class="audiocall-statistics__content-mistake-number">&nbsp-&nbsp</p>
                       <p class="audiocall-statistics__content-mistake-number" id="number-of-mistakes">5</p>
                     </div>
-                    <div class="audiocall-statistics__content-mistake-inner">
-                      <div class="audiocall-statistics__mistake-wrapper">
-                        <img class="audiocall-statistics__mistake-img" src="../../../assets/images/audio-call-game-icon.svg">
-                        <p class="audiocall-statistics__english-word-mistake">arm</p>
-                        <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
-                        <p class="audiocall-statistics__translation-mistake">рука</p>
-                      </div>
+                    <div class="audiocall-statistics__content-mistake-inner" id="block-for-appending-mistakes">
                     </div>
                   </div>
                   <div class="audiocall-statistics__content-correct-answer">
@@ -141,14 +139,8 @@ class Audiocall {
                     <p class="audiocall-statistics__content-correct-number">&nbsp-&nbsp</p>
                     <p class="audiocall-statistics__content-correct-number" id="number-of-correct-answers">15</p>
                   </div>
-                    <div class="audiocall-statistics__correct-wrapper">
-                      <div class="audiocall-statistics__content-correct-inner">
-                        <img class="audiocall-statistics__correct-img" src="../../../assets/images/audio-call-game-icon.svg">
-                        <p class="audiocall-statistics__english-word-correct">leg</p>
-                        <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
-                        <p class="audiocall-statistics__translation-correct">нога</p>
-                      </div>
-                    </div>
+                  <div class="audiocall-statistics__content-correct-inner" id="block-for-appending-correct-answers">
+                  </div>
                   </div>
                 </div>
               </div>
@@ -164,6 +156,15 @@ class Audiocall {
         </div>
       </div>
     </section>
+  `;
+
+  correctAnswerWrapper = `
+    <div class="audiocall-statistics__correct-wrapper">
+      <img class="audiocall-statistics__correct-img" src="../../../assets/images/audio-call-game-icon.svg">
+      <p class="audiocall-statistics__english-word-correct">leg</p>
+      <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
+      <p class="audiocall-statistics__translation-correct">нога</p>
+    </div>
   `;
 
   mainGamePage = `
@@ -292,6 +293,20 @@ class Audiocall {
     this.numberOfMistakesValue = this.wrongUsersAnswersArray.length;
     this.numberOfMistakesBlock.innerHTML = this.numberOfMistakesValue;
     this.numberOfCorrectAnswersBlock.innerHTML = this.numberOfCorrectAnswersValue;
+    this.blockForAppendingMistakes = document.getElementById('block-for-appending-mistakes');
+    this.blockForAppendingCorrectAnswers = document.getElementById('block-for-appending-correct-answers');
+    for (let i = 0; i < this.numberOfMistakesValue; i += 1) {
+      const previousValue = this.blockForAppendingMistakes.innerHTML;
+      const newValue = `
+        <div class="audiocall-statistics__mistake-wrapper">
+          <img class="audiocall-statistics__mistake-img" src="../../../assets/images/audio-call-game-icon.svg">
+          <p class="audiocall-statistics__english-word-mistake">${this.wrongUsersAnswersArray[i][1]}</p>
+          <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
+          <p class="audiocall-statistics__translation-mistake">${this.wrongUsersAnswersArray[i][2]}</p>
+        </div>
+      `;
+      this.blockForAppendingMistakes.innerHTML = (previousValue + newValue);
+    }
   }
 
   renderGameSlides(whereToAppend) {
