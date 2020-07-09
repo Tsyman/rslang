@@ -78,6 +78,8 @@ class Audiocall {
 
   blockForAppendingCorrectAnswers = null;
 
+  answerWordBlockInHead = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -366,20 +368,20 @@ class Audiocall {
     this.soundIcon.forEach((icon) => icon.addEventListener('click', this.playSoundOnIcon));
     this.iNotKnowButton.classList.add('audiocall-game__btn--active');
     this.goToNextSlideButton.classList.remove('audiocall-game__btn-next--active');
+    this.answerWordBlockInHead = document.getElementById('audiocall-game__english-word');
   }
 
   goToNextSlide(swiper) {
     swiper.slideNext();
     this.countSlides += 1;
-    console.log(this.countSlides);
     const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
-    console.log(activeSlide);
     const listOfWordsBlock = activeSlide.querySelector('.audiocall-game__list');
     listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
     this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
     this.iNotKnowButton.classList.add('audiocall-game__btn--active');
     this.goToNextSlideButton.classList.remove('audiocall-game__btn-next--active');
+    this.answerWordBlockInHead = activeSlide.querySelector('.audiocall-game__english-word');
     if (this.countSlides >= 20) {
       this.openResultsPopup();
     }
@@ -449,7 +451,7 @@ class Audiocall {
     const englishWords = this.englishWordAnswersArray[this.countSlides];
     const russianWords = this.rightAnswersArray[this.countSlides];
     this.rightUsersAnswersArray.push([audio, englishWords, russianWords]);
-    console.log(this.rightUsersAnswersArray);
+    this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
   }
 
   behaviousWhenAnswerIsIncorrect() {
@@ -459,7 +461,7 @@ class Audiocall {
     const englishWords = this.englishWordAnswersArray[this.countSlides];
     const russianWords = this.rightAnswersArray[this.countSlides];
     this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
-    console.log(this.wrongUsersAnswersArray);
+    this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
   }
 
   behaviousINotKnow() {
@@ -469,7 +471,7 @@ class Audiocall {
     const englishWords = this.englishWordAnswersArray[this.countSlides];
     const russianWords = this.rightAnswersArray[this.countSlides];
     this.wrongUsersAnswersArray.push([audio, englishWords, russianWords]);
-    console.log(this.wrongUsersAnswersArray);
+    this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
   }
 }
 export default new Audiocall();
