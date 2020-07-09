@@ -66,6 +66,14 @@ class Audiocall {
 
   wrongUsersAnswersArray = [];
 
+  numberOfMistakesBlock = null;
+
+  numberOfMistakesValue = 0;
+
+  numberOfCorrectAnswersBlock = null;
+
+  numberOfCorrectAnswersValue = 0;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -116,7 +124,7 @@ class Audiocall {
                     <div class="audiocall-statistics__content-mistake-inner">
                       <p class="audiocall-statistics__content-mistake-heading">Ошибок</p>
                       <p class="audiocall-statistics__content-mistake-number">&nbsp-&nbsp</p>
-                      <p class="audiocall-statistics__content-mistake-number">5</p>
+                      <p class="audiocall-statistics__content-mistake-number" id="number-of-mistakes">5</p>
                     </div>
                     <div class="audiocall-statistics__content-mistake-inner">
                       <div class="audiocall-statistics__mistake-wrapper">
@@ -131,7 +139,7 @@ class Audiocall {
                   <div class="audiocall-statistics__content-correct-inner">
                     <p class="audiocall-statistics__content-correct-heading">Знаю</p>
                     <p class="audiocall-statistics__content-correct-number">&nbsp-&nbsp</p>
-                    <p class="audiocall-statistics__content-correct-number">15</p>
+                    <p class="audiocall-statistics__content-correct-number" id="number-of-correct-answers">15</p>
                   </div>
                     <div class="audiocall-statistics__correct-wrapper">
                       <div class="audiocall-statistics__content-correct-inner">
@@ -233,6 +241,8 @@ class Audiocall {
       this.goToNextSlide(this.mySwiper);
     });
     this.statisticsPopup = document.getElementById('results-popup');
+    this.numberOfMistakesBlock = document.getElementById('number-of-mistakes');
+    this.numberOfCorrectAnswersBlock = document.getElementById('number-of-correct-answers');
   }
 
   openConfirmExitPopup() {
@@ -278,6 +288,10 @@ class Audiocall {
       },
     });
     this.statisticsPopup.style.display = 'block';
+    this.numberOfCorrectAnswersValue = this.rightUsersAnswersArray.length;
+    this.numberOfMistakesValue = this.wrongUsersAnswersArray.length;
+    this.numberOfMistakesBlock.innerHTML = this.numberOfMistakesValue;
+    this.numberOfCorrectAnswersBlock.innerHTML = this.numberOfCorrectAnswersValue;
   }
 
   renderGameSlides(whereToAppend) {
