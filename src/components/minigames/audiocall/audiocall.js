@@ -317,9 +317,13 @@ class Audiocall {
   goToNextSlide(swiper) {
     swiper.slideNext();
     this.countSlides += 1;
+    console.log(this.countSlides);
     const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
     this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
+    if (this.countSlides >= 20) {
+      this.openResultsPopup();
+    }
   }
 
   async fetchWords() {
@@ -363,9 +367,6 @@ class Audiocall {
     const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
     this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
-    if (this.countSlides === 20) {
-      this.openResultsPopup();
-    }
   }
 }
 export default new Audiocall();
