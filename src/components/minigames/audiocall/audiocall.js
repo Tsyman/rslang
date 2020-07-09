@@ -460,6 +460,7 @@ class Audiocall {
     this.rightUsersAnswersArray.push([audio, englishWords, russianWords]);
     this.answerWordBlockInHead.classList.add('audiocall-game__english-word--active');
     this.answerImageBlock.style.backgroundImage = `url('https://raw.githubusercontent.com/Tsyman/rslang-data/master/${image}')`;
+    this.clickedWordBlock.classList.add('audiocall-game__item-correct');
   }
 
   behaviousWhenAnswerIsIncorrect() {
