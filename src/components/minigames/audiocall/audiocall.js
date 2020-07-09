@@ -54,6 +54,8 @@ class Audiocall {
 
   soundIcon = null;
 
+  rightAnswersArray = [];
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -65,6 +67,7 @@ class Audiocall {
     this.parseWordsIntoGroups = this.parseWordsIntoGroups.bind(this);
     this.playSoundOnIcon = this.playSoundOnIcon.bind(this);
     this.openResultsPopup = this.openResultsPopup.bind(this);
+    this.isTheRightAnswer = this.isTheRightAnswer.bind(this);
   }
 
   popup = `
@@ -271,6 +274,9 @@ class Audiocall {
       this.randomImage = this.randomObj.image;
       this.randomAudio = this.randomObj.audio;
       this.answerEnglishWord = this.randomObj.word;
+      this.answerRussianWord = this.randomObj.trans;
+      this.rightAnswersArray.push(this.answerRussianWord);
+      console.log(`Sdfsdf: ${this.answerRussianWord}`);
       console.log(this.randomAudio);
 
       whereToAppend.appendSlide(`
@@ -319,6 +325,9 @@ class Audiocall {
     this.countSlides += 1;
     console.log(this.countSlides);
     const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
+    console.log(activeSlide);
+    const listOfWordsBlock = activeSlide.querySelector('.audiocall-game__list');
+    listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
     this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
     if (this.countSlides >= 20) {
@@ -367,6 +376,20 @@ class Audiocall {
     const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
     this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
+  }
+
+  isTheRightAnswer(event) {
+    const targetElement = event.target;
+    if (targetElement.tagName === 'LI') {
+      const wordBlock = targetElement.querySelector('.audiocall-game__word');
+      console.log(wordBlock.innerHTML);
+      console.log(this.answerRussianWord);
+      if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
+        console.log('correct');
+      } else {
+        console.log('wrong');
+      }
+    }
   }
 }
 export default new Audiocall();
