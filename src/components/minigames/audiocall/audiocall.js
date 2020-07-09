@@ -90,6 +90,12 @@ class Audiocall {
 
   allWordsBlocks = null;
 
+  spinner = null;
+
+  buttonInner = null;
+
+  instruction = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -105,6 +111,7 @@ class Audiocall {
     this.behaviousWhenAnswerIsCorrect = this.behaviousWhenAnswerIsCorrect.bind(this);
     this.behaviousWhenAnswerIsIncorrect = this.behaviousWhenAnswerIsIncorrect.bind(this);
     this.behaviousINotKnow = this.behaviousINotKnow.bind(this);
+    this.loadTime = 3000;
   }
 
   popup = `
@@ -180,6 +187,9 @@ class Audiocall {
           <button class="audiocall-game__btn" id="button-i-not-know">Не знаю</button>
           <button class="audiocall-game__btn-next" id="button-next">Дальше</button>
         </div>
+        <p class="audiocall-game__instruction">Вы можете управлять игрой при помощи клавиатуры. Клавиши 1, 2, 3, 4, 5 - выбор варианта ответа. Пробел - "не знаю". Клавиша → - "дальше".</p>
+        <div class="lds-circle" id="spinner"><div></div></div>
+      </div>
   `;
 
   view = `
@@ -201,6 +211,7 @@ class Audiocall {
     this.audioCallContainer = document.getElementById('audio-call-container');
     this.startGameButton = document.getElementById('start-game-button');
     this.startGameButton = document.getElementById('start-game-button');
+    this.spinner = document.getElementById('spinner');
     this.startGameButton.addEventListener('click', this.goToMainGamePage);
     this.startGameButton.addEventListener('click', this.fetchWords);
   }
@@ -320,11 +331,15 @@ class Audiocall {
   }
 
   renderGameSlides(whereToAppend) {
+    this.spinner.style.display = 'none';
+    this.buttonInner = document.querySelector('.audiocall-game__btn-inner');
+    this.instruction = document.querySelector('.audiocall-game__instruction');
+    this.buttonInner.style.display = 'flex';
+    this.instruction.style.display = 'flex';
     for (let i = 0; i < 20; i += 1) {
       const currentArrayWithFiveObject = this.parsedArrayOfWordsData[i];
       this.randomObj = currentArrayWithFiveObject[Math.floor(Math.random()
         * currentArrayWithFiveObject.length)];
-      console.log(currentArrayWithFiveObject);
       this.randomImage = this.randomObj.image;
       this.randomAudio = this.randomObj.audio;
       this.answerEnglishWord = this.randomObj.word;
@@ -406,6 +421,8 @@ class Audiocall {
   }
 
   async fetchWords() {
+    this.spinner = document.getElementById('spinner');
+    this.spinner.style.display = 'block';
     return new Promise((resolve) => {
       const MIN_PAGE = 0;
       const MAX_PAGE = 29;
