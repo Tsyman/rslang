@@ -1,4 +1,4 @@
-import './savanna.scss';
+import './savannah.scss';
 
 function keyDownHandler(event) {
   switch (event.key) {
@@ -71,28 +71,28 @@ class SavannahMiniGame {
         <main>
           <div class="Index__wrapper">
             <button class="Content__backBtn" type="submit" onClick="location.href='/#main'">&lt;</button>
-            <p class="Index__titleText">Savanna</p>
+            <p class="Index__titleText">Savannah</p>
             <button class="Index__startBtn">Начать игру</button>
           </div>
           <div class="Content__wrapper">
             <button class="Content__backBtn">&lt;</button>
             <div class="Content__wordContentWrapper">
-              <div id ='1' class="Content__wordContent">
+              <button type"button" id ='1' class="Content__wordContent">
                 <div class="Content__wordNum">1</div>
                 <p class="Content__wordParagraph first">BirdIsTheWord</p>
-              </div>
-              <div id ='2' class="Content__wordContent">
+              </button>
+              <button type"button" id ='2' class="Content__wordContent">
                 <div class="Content__wordNum">2</div>
                 <p class="Content__wordParagraph second">BirdIsTheWord</p>
-              </div>
-              <div id ='3' class="Content__wordContent">
+              </button>
+              <button type"button" id ='3' class="Content__wordContent">
                 <div class="Content__wordNum">3</div>
                 <p class="Content__wordParagraph thirty">BirdIsTheWord</p>
-              </div>
-              <div id ='4' class="Content__wordContent">
+              </button>
+              <button type"button" id ='4' class="Content__wordContent">
                 <div class="Content__wordNum">4</div>
                 <p class="Content__wordParagraph fourth">BirdIsTheWord</p>
-              </div>
+              </button>
             </div>
             <div class="Content__lifesContainer">
               <p id="0">♥</p>
