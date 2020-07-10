@@ -194,6 +194,7 @@
     width: 600px;
   }
   @include respond(phone) {
+    height: 1050px;
     padding: 0 20px;
     width: auto;
   }
@@ -441,6 +442,9 @@
   font-size: var(--font-size-15);
   line-height: var(--line-spacing-17);
   color: var(--white);
+  @include respond(phone) {
+    padding-top: 0;
+  }
 }
 
 .audiocall-game__btn-next {
