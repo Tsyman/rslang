@@ -187,7 +187,7 @@ class Audiocall {
           <button class="audiocall-game__btn" id="button-i-not-know">Не знаю</button>
           <button class="audiocall-game__btn-next" id="button-next">Дальше</button>
         </div>
-        <p class="audiocall-game__instruction">Вы можете управлять игрой при помощи клавиатуры. Клавиши 1, 2, 3, 4, 5 - выбор варианта ответа. Пробел - "не знаю". Клавиша → - "дальше".</p>
+        <p class="audiocall-game__instruction">Вы можете управлять игрой при помощи клавиатуры. Начать игру - Enter. Клавиши 1, 2, 3, 4, 5 - выбор варианта ответа. Пробел - "Не знаю", и "Дальше".</p>
         <div class="lds-circle" id="spinner"><div></div></div>
       </div>
   `;
@@ -214,6 +214,12 @@ class Audiocall {
     this.spinner = document.getElementById('spinner');
     this.startGameButton.addEventListener('click', this.goToMainGamePage);
     this.startGameButton.addEventListener('click', this.fetchWords);
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Enter') {
+        this.goToMainGamePage();
+        this.fetchWords();
+      }
+    });
   }
 
   goToMainGamePage() {
@@ -252,9 +258,6 @@ class Audiocall {
     this.iNotKnowButton = document.getElementById('button-i-not-know');
     this.iNotKnowButton.addEventListener('click', this.behaviousINotKnow);
     document.addEventListener('keydown', (event) => {
-      console.log(event.code);
-      console.log(this.iNotKnowButton.classList.contains('audiocall-game__btn--active'));
-      console.log(this.goToNextSlideButton.classList.contains('audiocall-game__btn-next--active'));
       if ((event.code === 'Space') && (this.iNotKnowButton.classList.contains('audiocall-game__btn--active'))) {
         console.log('Done!');
         this.behaviousINotKnow();
