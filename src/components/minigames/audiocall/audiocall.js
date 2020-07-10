@@ -253,9 +253,13 @@ class Audiocall {
     this.iNotKnowButton.addEventListener('click', this.behaviousINotKnow);
     document.addEventListener('keydown', (event) => {
       console.log(event.code);
-      if (event.code === 'Space') {
+      console.log(this.iNotKnowButton.classList.contains('audiocall-game__btn--active'));
+      console.log(this.goToNextSlideButton.classList.contains('audiocall-game__btn-next--active'));
+      if ((event.code === 'Space') && (this.iNotKnowButton.classList.contains('audiocall-game__btn--active'))) {
         console.log('Done!');
         this.behaviousINotKnow();
+      } else if ((event.code === 'Space') && (this.goToNextSlideButton.classList.contains('audiocall-game__btn-next--active'))) {
+        this.goToNextSlide(this.mySwiper);
       }
     });
     this.goToNextSlideButton.addEventListener('click', () => {
