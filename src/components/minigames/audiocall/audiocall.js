@@ -253,10 +253,22 @@ class Audiocall {
     this.iNotKnowButton.addEventListener('click', this.behaviousINotKnow);
     document.addEventListener('keydown', (event) => {
       if ((event.code === 'Enter') && (this.iNotKnowButton.classList.contains('audiocall-game__btn--active'))) {
-        console.log('Done!');
         this.behaviousINotKnow();
       } else if ((event.code === 'Enter') && (this.goToNextSlideButton.classList.contains('audiocall-game__btn-next--active'))) {
         this.goToNextSlide(this.mySwiper);
+      }
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Digit1') {
+        this.isTheRightAnswer();
+      } else if (event.code === 'Digit2') {
+        this.isTheRightAnswer();
+      } else if (event.code === 'Digit3') {
+        console.log(3);
+      } else if (event.code === 'Digit4') {
+        console.log(4);
+      } else if (event.code === 'Digit5') {
+        console.log(5);
       }
     });
     this.goToNextSlideButton.addEventListener('click', () => {
@@ -474,6 +486,7 @@ class Audiocall {
   }
 
   isTheRightAnswer(event) {
+    console.log(event.target);
     let targetElement = event.target;
     if (targetElement.tagName === 'P') {
       targetElement = targetElement.parentElement;
