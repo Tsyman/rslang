@@ -251,6 +251,13 @@ class Audiocall {
     this.goToNextSlideButton = document.getElementById('button-next');
     this.iNotKnowButton = document.getElementById('button-i-not-know');
     this.iNotKnowButton.addEventListener('click', this.behaviousINotKnow);
+    document.addEventListener('keydown', (event) => {
+      console.log(event.code);
+      if (event.code === 'Space') {
+        console.log('Done!');
+        this.behaviousINotKnow();
+      }
+    });
     this.goToNextSlideButton.addEventListener('click', () => {
       this.goToNextSlide(this.mySwiper);
     });
