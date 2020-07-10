@@ -113,6 +113,7 @@ class Audiocall {
     this.behaviousINotKnow = this.behaviousINotKnow.bind(this);
     this.loadTime = 3000;
     this.onWordsBlockClick = this.onWordsBlockClick.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
   }
 
   popup = `
@@ -259,19 +260,7 @@ class Audiocall {
         this.goToNextSlide(this.mySwiper);
       }
     });
-    document.addEventListener('keydown', (event) => {
-      if (event.code === 'Digit1') {
-        this.isTheRightAnswer();
-      } else if (event.code === 'Digit2') {
-        this.isTheRightAnswer();
-      } else if (event.code === 'Digit3') {
-        console.log(3);
-      } else if (event.code === 'Digit4') {
-        console.log(4);
-      } else if (event.code === 'Digit5') {
-        console.log(5);
-      }
-    });
+    document.addEventListener('keydown', this.onKeyDown);
     this.goToNextSlideButton.addEventListener('click', () => {
       this.goToNextSlide(this.mySwiper);
     });
@@ -486,13 +475,13 @@ class Audiocall {
     this.audioSound.play();
   }
 
-  isTheRightAnswer() {
-    this.listOfWordsBlock.removeEventListener('click', this.isTheRightAnswer);
+  isTheRightAnswer(targetElement) {
+    this.listOfWordsBlock.removeEventListener('click', this.onWordsBlockClick);
     this.allWordsBlocks.forEach((item) => {
       const el = item;
       el.style.cursor = 'auto';
     });
-    const wordBlock = document.querySelector('.audiocall-game__word');
+    const wordBlock = targetElement.querySelector('.audiocall-game__word');
     this.clickedWordBlock = wordBlock;
     if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
       this.behaviousWhenAnswerIsCorrect();
@@ -555,7 +544,24 @@ class Audiocall {
       targetElement = targetElement.parentElement;
     }
     if (targetElement.tagName === 'LI') {
-      this.isTheRightAnswer();
+      this.isTheRightAnswer(targetElement);
+    }
+  }
+
+  onKeyDown(event) {
+    if (event.code === 'Digit1'
+        || event.code === 'Digit2'
+        || event.code === 'Digit3'
+        || event.code === 'Digit4'
+        || event.code === 'Digit5'
+    ) {
+      const number = event.code.slice(-1);
+      const currentSlide = document.querySelector('.swiper-slide-active');
+      const numberElements = currentSlide.getElementsByClassName('audiocall-game__number');
+      const targetElement = Array
+        .from(numberElements)
+        .filter((numberElement) => numberElement.innerHTML === number)[0];
+      this.isTheRightAnswer(targetElement.parentElement);
     }
   }
 }
