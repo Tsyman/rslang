@@ -112,6 +112,7 @@ class Audiocall {
     this.behaviousWhenAnswerIsIncorrect = this.behaviousWhenAnswerIsIncorrect.bind(this);
     this.behaviousINotKnow = this.behaviousINotKnow.bind(this);
     this.loadTime = 3000;
+    this.onWordsBlockClick = this.onWordsBlockClick.bind(this);
   }
 
   popup = `
@@ -405,7 +406,7 @@ class Audiocall {
       `);
     }
     this.listOfWordsBlock = document.querySelector('.audiocall-game__list');
-    this.listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
+    this.listOfWordsBlock.addEventListener('click', this.onWordsBlockClick);
     this.audioSound = document.querySelector('.audio-sound');
     this.audioSound.play();
     this.soundIcon = document.querySelectorAll('.icon-sound');
@@ -423,7 +424,7 @@ class Audiocall {
     this.countSlides += 1;
     const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
     this.listOfWordsBlock = activeSlide.querySelector('.audiocall-game__list');
-    this.listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
+    this.listOfWordsBlock.addEventListener('click', this.onWordsBlockClick);
     this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
     this.iNotKnowButton.classList.add('audiocall-game__btn--active');
@@ -485,25 +486,18 @@ class Audiocall {
     this.audioSound.play();
   }
 
-  isTheRightAnswer(event) {
-    console.log(event.target);
-    let targetElement = event.target;
-    if (targetElement.tagName === 'P') {
-      targetElement = targetElement.parentElement;
-    }
-    if (targetElement.tagName === 'LI') {
-      this.listOfWordsBlock.removeEventListener('click', this.isTheRightAnswer);
-      this.allWordsBlocks.forEach((item) => {
-        const el = item;
-        el.style.cursor = 'auto';
-      });
-      const wordBlock = targetElement.querySelector('.audiocall-game__word');
-      this.clickedWordBlock = wordBlock;
-      if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
-        this.behaviousWhenAnswerIsCorrect();
-      } else {
-        this.behaviousWhenAnswerIsIncorrect();
-      }
+  isTheRightAnswer() {
+    this.listOfWordsBlock.removeEventListener('click', this.isTheRightAnswer);
+    this.allWordsBlocks.forEach((item) => {
+      const el = item;
+      el.style.cursor = 'auto';
+    });
+    const wordBlock = document.querySelector('.audiocall-game__word');
+    this.clickedWordBlock = wordBlock;
+    if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
+      this.behaviousWhenAnswerIsCorrect();
+    } else {
+      this.behaviousWhenAnswerIsIncorrect();
     }
   }
 
@@ -553,6 +547,16 @@ class Audiocall {
         item.querySelector('.audiocall-game__word').classList.add('audiocall-game__item-correct');
       }
     });
+  }
+
+  onWordsBlockClick(event) {
+    let targetElement = event.target;
+    if (targetElement.tagName === 'P') {
+      targetElement = targetElement.parentElement;
+    }
+    if (targetElement.tagName === 'LI') {
+      this.isTheRightAnswer();
+    }
   }
 }
 export default new Audiocall();
