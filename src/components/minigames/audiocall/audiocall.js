@@ -214,12 +214,6 @@ class Audiocall {
     this.spinner = document.getElementById('spinner');
     this.startGameButton.addEventListener('click', this.goToMainGamePage);
     this.startGameButton.addEventListener('click', this.fetchWords);
-    document.addEventListener('keydown', (event) => {
-      if (event.code === 'Enter') {
-        this.goToMainGamePage();
-        this.fetchWords();
-      }
-    });
   }
 
   goToMainGamePage() {
@@ -258,10 +252,10 @@ class Audiocall {
     this.iNotKnowButton = document.getElementById('button-i-not-know');
     this.iNotKnowButton.addEventListener('click', this.behaviousINotKnow);
     document.addEventListener('keydown', (event) => {
-      if ((event.code === 'Space') && (this.iNotKnowButton.classList.contains('audiocall-game__btn--active'))) {
+      if ((event.code === 'Enter') && (this.iNotKnowButton.classList.contains('audiocall-game__btn--active'))) {
         console.log('Done!');
         this.behaviousINotKnow();
-      } else if ((event.code === 'Space') && (this.goToNextSlideButton.classList.contains('audiocall-game__btn-next--active'))) {
+      } else if ((event.code === 'Enter') && (this.goToNextSlideButton.classList.contains('audiocall-game__btn-next--active'))) {
         this.goToNextSlide(this.mySwiper);
       }
     });
