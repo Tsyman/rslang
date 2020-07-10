@@ -185,7 +185,7 @@
   width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  height: 850px;
+  height: 900px;
   @include respond(tab-land) {
   width: 900px;
   }
@@ -434,8 +434,10 @@
 }
 
 .audiocall-game__instruction {
-  padding-top: 40px;
   display: none;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  text-align: center;
   justify-content: center;
   font-style: italic;
   font-size: var(--font-size-15);
