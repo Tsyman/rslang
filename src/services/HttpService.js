@@ -1,17 +1,16 @@
-import config from '../common/config';
-import state from '../common/state';
-
 class HttpService {
   static async fetch(resource, init) {
+    const token = localStorage.getItem('token');
+
     Object.assign(init, {
       withCredentials: true,
       headers: {
-        Authorization: `Bearer ${state.getToken()}`,
+        Authorization: `Bearer ${token}`,
         Accept: 'application/json',
       },
     });
 
-    return window.fetch(`${config.SERVER_URL}${resource}`, init);
+    return window.fetch(`https://afternoon-falls-25894.herokuapp.com${resource}`, init);
   }
 }
 

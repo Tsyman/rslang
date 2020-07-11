@@ -1,7 +1,7 @@
 import './authorization-page.scss';
 import userRequest from '../../../services/userRequest';
 import extractTokenExpiration from './tokenHandling/decodeToken';
-import state from '../../../common/state';
+import timestamp from './tokenHandling/formattedTime';
 
 class AuthorizationPage {
   constructor() {
@@ -17,8 +17,8 @@ class AuthorizationPage {
       tokenEndTime: 'tokenEndTime',
     };
     this.paths = {
-      createUser: '/users',
-      signInUser: '/signin',
+      createUser: 'users',
+      signInUser: 'signin',
     };
   }
 
@@ -86,7 +86,7 @@ class AuthorizationPage {
             localStorage.setItem(this.keyNames.userName, name);
             this.afterSignIn(data);
           }).then(() => {
-            document.location.href = '/#games';
+            document.location.href = '/#main';
             document.getElementById('header_container').style.display = 'block';
             document.getElementById('footer_container').style.display = 'block';
           });
@@ -114,22 +114,31 @@ class AuthorizationPage {
         return response.json();
       })
       .then((data) => {
-        state.setSessionData({ ...data, tokenExpireTime: extractTokenExpiration(data.token) });
-        document.querySelector('.form').reset();
-        document.location.href = '/#games';
+        this.afterSignIn(data);
+      }).then(() => {
+        document.location.href = '/#main';
         document.getElementById('header_container').style.display = 'block';
         document.getElementById('footer_container').style.display = 'block';
       })
       .catch(() => {
-        const tooltip = document.querySelector('.tooltip');
-        tooltip.textContent = this.errorMessage;
-        tooltip.classList.add('tooltip--active');
+        document.querySelector('.tooltip').textContent = this.errorMessage;
+        document.querySelector('.tooltip').classList.add('tooltip--active');
         setTimeout(() => {
-          tooltip.classList.remove('tooltip--active');
+          document.querySelector('.tooltip').classList.remove('tooltip--active');
           this.errorMessage = '';
-          tooltip.textContent = this.errorMessage;
+          document.querySelector('.tooltip').textContent = this.errorMessage;
         }, this.tooltipTime);
       });
+  }
+
+  afterSignIn(data) {
+    localStorage.setItem(this.keyNames.token, data.token);
+    localStorage.setItem(this.keyNames.userId, data.userId);
+    localStorage.setItem(
+      this.keyNames.tokenEndTime,
+      timestamp(extractTokenExpiration(data.token)),
+    );
+    document.querySelector('.form').reset();
   }
 
   submitHandler(event) {
