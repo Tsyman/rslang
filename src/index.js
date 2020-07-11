@@ -5,6 +5,7 @@ import Stat from './components/pages/stat-page/stat-page';
 import NotFound from './components/pages/not-found/not-found';
 import Dictionary from './components/pages/dictionary-page/dictionary-page';
 import OurGames from './components/pages/our-games-page/our-games-page';
+import Sprint from './components/minigames/sprint/sprint';
 
 import HeaderPromo from './components/shared/layout/header/header-promo/header-promo';
 import Footer from './components/shared/layout/footer/footer';
@@ -17,6 +18,7 @@ const routes = {
   '/main': Main,
   '/login': AuthorizationPage,
   '/games': OurGames,
+  '/sprint': Sprint,
   '/dictionary': Dictionary,
   '/dictionary/:id': Dictionary,
 };
