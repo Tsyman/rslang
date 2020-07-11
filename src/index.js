@@ -1,12 +1,11 @@
 import AuthorizationPage from './components/pages/authorization-page/authorization-page';
 
-import Main from './components/pages/main-page/main-page';
 import Stat from './components/pages/stat-page/stat-page';
 import NotFound from './components/pages/not-found/not-found';
 import Dictionary from './components/pages/dictionary-page/dictionary-page';
 import OurGames from './components/pages/our-games-page/our-games-page';
 
-import HeaderPromo from './components/shared/layout/header/header-promo/header-promo';
+import Header from './components/shared/layout/header/header';
 import Footer from './components/shared/layout/footer/footer';
 
 import Utils from './services/Utils';
@@ -14,7 +13,6 @@ import Utils from './services/Utils';
 // List of supported routes. Any url other than these routes will throw a 404 error
 const routes = {
   '/': Stat,
-  '/main': Main,
   '/login': AuthorizationPage,
   '/games': OurGames,
   '/dictionary': Dictionary,
@@ -30,8 +28,8 @@ const router = async () => {
   const footer = document.getElementById('footer_container');
 
   // Render the Header and footer of the page
-  header.innerHTML = await HeaderPromo.render();
-  await HeaderPromo.afterRender();
+  header.innerHTML = await Header.render();
+  await Header.afterRender();
 
   footer.innerHTML = await Footer.render();
 
