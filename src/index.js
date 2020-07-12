@@ -5,7 +5,6 @@ import Stat from './components/pages/stat-page/stat-page';
 import NotFound from './components/pages/not-found/not-found';
 import Dictionary from './components/pages/dictionary-page/dictionary-page';
 import OurGames from './components/pages/our-games-page/our-games-page';
-import SettingsPage from './components/pages/settings-popup/settings-popup';
 import HeaderMain from './components/shared/layout/header/header-main';
 import HeaderPromo from './components/shared/layout/header/header-promo';
 import Footer from './components/shared/layout/footer/footer';
@@ -33,7 +32,6 @@ const router = async () => {
   const header = document.getElementById('header_container');
   const content = document.getElementById('page_container');
   const footer = document.getElementById('footer_container');
-  const settings = document.getElementById('settings_popup');
 
   // Render the Header and footer of the page
   const currentHeader = state.isAuthenticated() ? HeaderMain : HeaderPromo;
@@ -56,9 +54,6 @@ const router = async () => {
   if (page.afterRender) {
     await page.afterRender();
   }
-
-  settings.innerHTML = await SettingsPage.render();
-  await SettingsPage.afterRender();
 };
 
 // Listen on hash change:

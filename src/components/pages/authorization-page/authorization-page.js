@@ -81,7 +81,7 @@ class AuthorizationPage {
       refreshTokenExpireTime: Utils.extractTokenExpiration(data.refreshToken),
     });
     document.querySelector('.form').reset();
-    document.location.href = '/#games';
+    document.location.href = '/#main';
     this.showHeaderAndFooter();
   };
 

@@ -2,6 +2,7 @@ import './header.scss';
 import Header from './header';
 import state from '../../../../common/state';
 import Utils from '../../../../services/Utils';
+import SettingsPage from '../../../pages/settings-popup/settings-popup';
 
 class HeaderMain extends Header {
   constructor() {
@@ -54,7 +55,7 @@ class HeaderMain extends Header {
                   <div class="header-main__account">
                     <p class="header-main__text">${state.getName()}</p>
                     <div >
-                      <a class="account-btn" href="/#/">${state.getName() && state.getName()[0].toUpperCase()}</a>
+                      <a class="account-btn" id="open-popup">${state.getName() && state.getName()[0].toUpperCase()}</a>
                     </div>
                   </div>
                 </div>
@@ -68,6 +69,8 @@ class HeaderMain extends Header {
     this.items = [...document.querySelectorAll('.header-main__link')];
     const request = Utils.parseRequestURL();
     this.changeActiveItem(request?.resource);
+    document.getElementById('settings_popup').innerHTML = await SettingsPage.render();
+    await SettingsPage.afterRender();
   }
 
   changeActiveItem = (page) => {
