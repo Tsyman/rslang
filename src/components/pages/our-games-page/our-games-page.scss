@@ -1,0 +1,134 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
+@import "../../../index.scss";
+
+
+.games__container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  @include respond(tab-land) {
+  width: 900px;
+  }
+  @include respond(tab-port) {
+    padding: 0 24px;
+    width: 600px;
+  }
+  @include respond(phone) {
+    padding: 0 20px;
+    width: auto;
+  }
+}
+
+.games__wrapper {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include respond(tab-port) {
+    flex-direction: column;
+  }
+}
+
+.games {
+  padding-bottom: 30px;
+  padding-top: 50px;
+  background-color: var(--blue-light-gray);
+  @include respond(tab-land) {
+    padding-bottom: 20px;
+  }
+}
+
+.games__title {
+  font-size: var(--font-size-59);
+  line-height: var(--line-spacing-74);
+  font-weight: bold;
+  color: var(--dark);
+  @include respond(tab-land) {
+    font-size: var(--font-size-42);
+    line-height: var(--line-spacing-63);
+  }
+  @include respond(tab-port) {
+    margin-bottom: 20px;
+    font-size: var(--font-size-31);
+    line-height: var(--line-spacing-47);
+  }
+}
+
+.games__link-blue {
+  padding: 18px;
+  width: 240px;
+  border-radius: 25px;
+  box-shadow: 0px 4px 2px #0000000A;
+  text-align: center;
+  color: var(--white);
+  background-color: var(--blue);
+  cursor: pointer;
+  @include respond(tab-port) {
+    width: 200px;
+  }
+}
+
+.games__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.games__item {
+  width: 360px;
+  height: 240px;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 50px;
+  box-shadow: 0px 10px 0px #00A8FF08;
+  background-color: var(--white);
+  cursor: pointer;
+  @include respond(tab-port) {
+    margin: 0 auto;
+    margin-bottom: 25px;
+    justify-content: space-between;
+  }
+  @include respond(tab-port) {
+    width: 260px;
+  }
+}
+
+.games__item:hover {
+  box-shadow: 0 14px 28px var(--blue-light-gray), 0 10px 10px var(--blue);
+}
+
+.games__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: inherit;
+  height: inherit;
+  color: var(--blue);
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-32);
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  @include respond(tab-port) {
+    font-size: var(--font-size-17);
+    line-height: var(--line-spacing-25);
+  }
+}
+
+.games__img {
+  width: 130px;
+  height: 130px;
+  display: block;
+  @include respond(tab-land) {
+    width: 100px;
+    height: 100px;
+  }
+}
