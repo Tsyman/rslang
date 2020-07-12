@@ -32,6 +32,7 @@ const router = async () => {
   const header = document.getElementById('header_container');
   const content = document.getElementById('page_container');
   const footer = document.getElementById('footer_container');
+  const settings = document.getElementById('settings_popup');
 
   // Render the Header and footer of the page
   const currentHeader = state.isAuthenticated() ? HeaderMain : HeaderPromo;
