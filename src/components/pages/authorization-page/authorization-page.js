@@ -1,7 +1,7 @@
 import './authorization-page.scss';
 import userRequest from '../../../services/userRequest';
-import extractTokenExpiration from './tokenHandling/decodeToken';
 import state from '../../../common/state';
+import Utils from '../../../services/Utils';
 
 class AuthorizationPage {
   constructor() {
@@ -83,7 +83,10 @@ class AuthorizationPage {
             return response.json();
           })
           .then((data) => {
-            state.setSessionData({ ...data, tokenExpireTime: extractTokenExpiration(data.token) });
+            state.setSessionData({
+              ...data,
+              tokenExpireTime: Utils.extractTokenExpiration(data.token),
+            });
             document.location.href = '/#games';
             document.getElementById('header_container').style.display = 'block';
             document.getElementById('footer_container').style.display = 'block';
@@ -112,7 +115,10 @@ class AuthorizationPage {
         return response.json();
       })
       .then((data) => {
-        state.setSessionData({ ...data, tokenExpireTime: extractTokenExpiration(data.token) });
+        state.setSessionData({
+          ...data,
+          tokenExpireTime: Utils.extractTokenExpiration(data.token),
+        });
         document.querySelector('.form').reset();
         document.location.href = '/#games';
         document.getElementById('header_container').style.display = 'block';

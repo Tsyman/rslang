@@ -1,6 +1,6 @@
 import config from '../common/config';
 import state, { authorizedUserKey } from '../common/state';
-import extractTokenExpiration from '../components/pages/authorization-page/tokenHandling/decodeToken';
+import Utils from './Utils';
 
 const THIRTY_MINUTES = 20 * 1000;
 // const THIRTY_MINUTES = 30 * 60 * 1000;
@@ -46,7 +46,7 @@ class HttpService {
     });
     const tokens = await response.json();
 
-    state.setTokens({ ...tokens, tokenExpireTime: extractTokenExpiration(tokens.token) });
+    state.setTokens({ ...tokens, tokenExpireTime: Utils.extractTokenExpiration(tokens.token) });
   }
 }
 
