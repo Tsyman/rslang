@@ -71,9 +71,7 @@ class HeaderMain extends Header {
   }
 
   changeActiveItem = (page) => {
-    this.items.forEach((element) => {
-      element.classList.remove(this.activeItemClass);
-    });
+    super.changeActiveItem();
     if (page === 'dictionary') {
       document.getElementById('main-tab2').children[0].classList.add(this.activeItemClass);
     } else if (page === 'statistics') {

@@ -59,9 +59,7 @@ class HeaderPromo extends Header {
   }
 
   changeActiveItem = (page) => {
-    this.items.forEach((element) => {
-      element.classList.remove(this.activeItemClass);
-    });
+    super.changeActiveItem();
     if (page === 'team') {
       document.getElementById('promo-tab2').children[0].classList.add(this.activeItemClass);
     } else {

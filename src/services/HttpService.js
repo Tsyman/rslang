@@ -2,8 +2,7 @@ import config from '../common/config';
 import state, { authorizedUserKey } from '../common/state';
 import Utils from './Utils';
 
-const THIRTY_MINUTES = 10 * 1000;
-// const THIRTY_MINUTES = 30 * 60 * 1000;
+const THIRTY_MINUTES = 30 * 60 * 1000;
 
 class HttpService {
   static async fetch(resource, init) {
