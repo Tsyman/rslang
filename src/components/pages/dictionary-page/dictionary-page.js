@@ -5,6 +5,7 @@ import CardType from './card-type';
 import Utils from '../../../services/Utils';
 import UserService from '../../../services/UserService';
 import AggregatedWordsFilter from '../../../services/AggregatedWordsFilter';
+import state from '../../../common/state';
 
 class Dictionary {
   view = `
@@ -47,7 +48,7 @@ class Dictionary {
     this.selectTab();
 
     const response = await UserService.getAggregatedWords(
-      localStorage.getItem('userId'),
+      state.getUserId(),
       { filter: AggregatedWordsFilter.USER_WORD_NOT_NULL },
     );
 

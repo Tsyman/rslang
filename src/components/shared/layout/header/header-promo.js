@@ -1,26 +1,19 @@
-import './header-promo.scss';
-import Utils from '../../../../../services/Utils';
+import './header.scss';
 
-class HeaderPromo {
-  linksContainer = null;
+import Header from './header';
+import Utils from '../../../../services/Utils';
 
-  items = null;
-
-  alreadyRendered = false;
-
-  activeItemClass = 'promo-active-link';
-
+class HeaderPromo extends Header {
   constructor() {
-    this.changeActiveIteam = this.changeActiveIteam.bind(this);
-  }
-
-  view = `
+    super();
+    this.activeItemClass = 'promo-active-link';
+    this.view = () => `
           <header class="header-promo">
             <div class="header-promo__container">
               <nav class="header-promo__nav">
                 <div class="header-promo__logo header-promo__start">
-                  <a class="header-promo__link" href="/#/">
-                    <img src="../../../../../assets/images/logo.png">
+                  <a class="header-promo__link" href="/">
+                    <img src="../../../../assets/images/logo.png">
                   </a>
                 </div>
                 <div class="sidebar">
@@ -51,35 +44,22 @@ class HeaderPromo {
             </div>
           </header>
         `;
-
-  async render() {
-    return this.view;
   }
 
-  async afterRender() {
-    document.querySelector('.registration__secondary-btn').addEventListener('click', () => {
+  afterRender = async () => {
+    const hideHeaderAndFooter = () => {
       document.getElementById('header_container').style.display = 'none';
       document.getElementById('footer_container').style.display = 'none';
-    });
-    document.querySelector('.registration__light-btn').addEventListener('click', () => {
-      document.getElementById('header_container').style.display = 'none';
-      document.getElementById('footer_container').style.display = 'none';
-      setTimeout(() => {
-        document.querySelector('.form-footer button').click();
-      }, 0);
-    });
-    if (!this.alreadyRendered) {
-      this.items = [...document.querySelectorAll('.header-promo__link')];
-      this.linksContainer = document.querySelector('.header-promo__list');
-      const request = Utils.parseRequestURL();
-      this.changeActiveIteam(request?.resource);
-    }
+    };
+    document.querySelector('.registration__secondary-btn').addEventListener('click', hideHeaderAndFooter);
+    document.querySelector('.registration__light-btn').addEventListener('click', hideHeaderAndFooter);
+    this.items = [...document.querySelectorAll('.header-promo__link')];
+    const request = Utils.parseRequestURL();
+    this.changeActiveItem(request?.resource);
   }
 
-  changeActiveIteam(page) {
-    this.items.forEach((element) => {
-      element.classList.remove(this.activeItemClass);
-    });
+  changeActiveItem = (page) => {
+    super.changeActiveItem();
     if (page === 'team') {
       document.getElementById('promo-tab2').children[0].classList.add(this.activeItemClass);
     } else {
