@@ -25,6 +25,17 @@ const routes = {
   '/dictionary/:id': Dictionary,
 };
 
+const getParsedURL = (req) => {
+  let resource = '/';
+  if (!req.resource && state.isAuthenticated()) {
+    resource = '/main';
+  } else if (req.resource) {
+    resource = req.resource;
+  }
+
+  return `/${resource}${req.id ? '/:id' : ''}${req.verb ? ` /${req.verb}` : ''}`;
+};
+
 // The router code. Takes a URL, checks against the list of supported routes
 // and then renders the corresponding content page.
 const router = async () => {
@@ -32,7 +43,6 @@ const router = async () => {
   const header = document.getElementById('header_container');
   const content = document.getElementById('page_container');
   const footer = document.getElementById('footer_container');
-  const settings = document.getElementById('settings_popup');
 
   // Render the Header and footer of the page
   const currentHeader = state.isAuthenticated() ? HeaderMain : HeaderPromo;
@@ -45,8 +55,7 @@ const router = async () => {
   const request = Utils.parseRequestURL();
 
   // Parse the URL and if it has an id part, change it with the string ":id"
-  const parsedURL = (request.resource ? `/${request.resource}` : '/') + (request.id ? '/:id' : '')
-   + (request.verb ? `/${request.verb}` : '');
+  const parsedURL = getParsedURL(request);
 
   // Get the page from our hash of supported routes.
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
