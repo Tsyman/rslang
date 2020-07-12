@@ -13,11 +13,7 @@ class Header {
 
   afterRender = async () => {};
 
-  changeActiveItem = () => {
-    this.items.forEach((element) => {
-      element.classList.remove(this.activeItemClass);
-    });
-  }
+  changeActiveItem = () => {}
 }
 
 export default Header;

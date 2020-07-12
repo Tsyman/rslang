@@ -64,14 +64,16 @@ class HeaderMain extends Header {
         `;
   }
 
-  async afterRender() {
+  afterRender = async () => {
     this.items = [...document.querySelectorAll('.header-main__link')];
     const request = Utils.parseRequestURL();
     this.changeActiveItem(request?.resource);
   }
 
-  changeActiveItem(page) {
-    super.changeActiveItem();
+  changeActiveItem = (page) => {
+    this.items.forEach((element) => {
+      element.classList.remove(this.activeItemClass);
+    });
     if (page === 'dictionary') {
       document.getElementById('main-tab2').children[0].classList.add(this.activeItemClass);
     } else if (page === 'statistics') {

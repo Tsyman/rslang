@@ -30,8 +30,9 @@ const router = async () => {
   const footer = document.getElementById('footer_container');
 
   // Render the Header and footer of the page
-  header.innerHTML = await (state.isAuthenticated() ? HeaderMain : HeaderPromo).render();
-  await (state.isAuthenticated() ? HeaderMain : HeaderPromo).afterRender();
+  const currentHeader = state.isAuthenticated() ? HeaderMain : HeaderPromo;
+  header.innerHTML = await currentHeader.render();
+  await currentHeader.afterRender();
 
   footer.innerHTML = await Footer.render();
 

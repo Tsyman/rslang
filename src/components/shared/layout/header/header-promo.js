@@ -46,7 +46,7 @@ class HeaderPromo extends Header {
         `;
   }
 
-  async afterRender() {
+  afterRender = async () => {
     const hideHeaderAndFooter = () => {
       document.getElementById('header_container').style.display = 'none';
       document.getElementById('footer_container').style.display = 'none';
@@ -58,8 +58,10 @@ class HeaderPromo extends Header {
     this.changeActiveItem(request?.resource);
   }
 
-  changeActiveItem(page) {
-    super.changeActiveItem();
+  changeActiveItem = (page) => {
+    this.items.forEach((element) => {
+      element.classList.remove(this.activeItemClass);
+    });
     if (page === 'team') {
       document.getElementById('promo-tab2').children[0].classList.add(this.activeItemClass);
     } else {
