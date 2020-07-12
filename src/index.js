@@ -34,10 +34,10 @@ const getParsedURL = (req) => {
   if (!req.resource && state.isAuthenticated()) {
     resource = '/main';
   } else if (req.resource) {
-    resource = req.resource;
+    resource = `/${req.resource}`;
   }
 
-  return `/${resource}${req.id ? '/:id' : ''}${req.verb ? ` /${req.verb}` : ''}`;
+  return `${resource}${req.id ? '/:id' : ''}${req.verb ? ` /${req.verb}` : ''}`;
 };
 
 // The router code. Takes a URL, checks against the list of supported routes
