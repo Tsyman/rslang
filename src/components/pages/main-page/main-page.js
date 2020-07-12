@@ -1,14 +1,12 @@
 import './main-page.scss';
-import HeaderMain from '../../shared/layout/header/header-main/header-main';
+import state from '../../../common/state';
 
 class MainPage {
-  headerMain = null;
-
   view = `
     <div id="header_container-main"></div>
     <section class="section-main-page">
       <div class="section-main-page__banner">
-        Hello, <span id="section-main-page--name"> Someone</span>! Давай заниматься.
+        Hello, ${state.getName()}! Давай заниматься.
         <div class="section-main-page__banner--icon">
         </div>
       </div>
@@ -42,10 +40,10 @@ class MainPage {
     return this.view;
   }
 
-  async afterRender() {
-    this.headerMain = document.getElementById('header_container-main');
-    this.headerMain.innerHTML = await HeaderMain.render();
-    await HeaderMain.afterRender();
+  afterRender = async () => {
+    document.getElementById('go-play-button').addEventListener('click', () => {
+      document.location.href = '/#games';
+    });
   }
 }
 
