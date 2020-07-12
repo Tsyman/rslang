@@ -7,6 +7,7 @@ import Utils from '../../../services/Utils';
 import Game from './Game';
 import Player from './Player';
 import Sound from './Sound';
+import state from '../../../common/state';
 
 class Sprint {
   view = `
@@ -80,7 +81,7 @@ class Sprint {
 
   async startGame() {
     let response = await UserService.getAggregatedWords(
-      localStorage.getItem('userId'),
+      state.getUserId(),
       { filter: AggregatedWordsFilter.USER_WORD_NOT_NULL },
     );
 
