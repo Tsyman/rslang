@@ -1,0 +1,90 @@
+@import "../../../../../styles/variables";
+@import "../../../../../styles/mixins.scss";
+@import "../../../../../index.scss";
+
+.daily-notification__overlay {
+  position: fixed;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000080;
+}
+
+.daily-notification__modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -200px;
+  margin-top: -150px;
+  @include respond(tab-port) {
+    margin-left: -160px;
+  }
+  @include respond(phone) {
+    margin-left: -140px;
+  }
+}
+
+.daily-notification__wrapper {
+  width: 400px;
+  height: 320px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--white);
+  box-shadow: 0px 40px 40px #00a8ff0f;
+  border-radius: 40px;
+  @include respond(tab-port) {
+    width: 350px;
+    height: 300px;
+  }
+  @include respond(phone) {
+    width: 280px;
+    height: 290px;
+  }
+}
+
+.daily-notification__img {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.daily-notification__heading {
+  color: var(--dark);
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 10px;
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-25);
+  @include respond(phone) {
+    font-size: var(--font-size-17);
+  }
+}
+
+.daily-notification__text {
+  text-align: center;
+  font-size: var(--font-size-15);
+  line-height: var(--line-spacing-25);
+  color: var(--gray);
+  @include respond(phone) {
+    font-size: var(--font-size-11);
+  }
+}
+
+.daily-notification__link {
+  margin-top: 10px;
+  font-size: var(--font-size-15);
+  line-height: var(--line-spacing-25);
+  font-weight: bold;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.daily-notification__link:hover {
+  color: var(--red);
+}
