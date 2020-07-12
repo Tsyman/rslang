@@ -1,13 +1,14 @@
+import Stat from './components/pages/stat-page/stat-page';
+import Main from './components/pages/main-page/main-page';
 import Login from './components/pages/authorization-page/login';
 import Register from './components/pages/authorization-page/register';
-import Main from './components/pages/main-page/main-page';
-import Stat from './components/pages/stat-page/stat-page';
-import NotFound from './components/pages/not-found/not-found';
-import Dictionary from './components/pages/dictionary-page/dictionary-page';
-import OurGames from './components/pages/our-games-page/our-games-page';
 import HeaderMain from './components/shared/layout/header/header-main';
 import HeaderPromo from './components/shared/layout/header/header-promo';
+import Dictionary from './components/pages/dictionary-page/dictionary-page';
+import OurGames from './components/pages/our-games-page/our-games-page';
+import OurTeam from './components/pages/our-team/our-team';
 import Footer from './components/shared/layout/footer/footer';
+import NotFound from './components/pages/not-found/not-found';
 
 import './index.scss';
 
@@ -21,6 +22,7 @@ const routes = {
   '/login': Login,
   '/register': Register,
   '/games': OurGames,
+  '/team': OurTeam,
   '/dictionary': Dictionary,
   '/dictionary/:id': Dictionary,
 };

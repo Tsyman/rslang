@@ -19,8 +19,8 @@ class HeaderMain extends Header {
                 </div>
                 <div class="header-main__middle">
                   <ul class="header-main__list">
-                    <li class="header-main__item main-active-item" id="main-tab1">
-                      <a class="header-main__link main-active-link" href="/#games">
+                    <li class="header-main__item" id="main-tab1">
+                      <a class="header-main__link" href="/#games">
                         <span class="header-main__heading">Игры</span>
                         <img class="header-main__img" src="../../../../../assets/images/games-icon.svg">
                       </a>
@@ -83,7 +83,7 @@ class HeaderMain extends Header {
       document.getElementById('main-tab4').children[0].classList.add(this.activeItemClass);
     } else if (page === 'team') {
       document.getElementById('main-tab5').children[0].classList.add(this.activeItemClass);
-    } else {
+    } else if (page === 'games') {
       document.getElementById('main-tab1').children[0].classList.add(this.activeItemClass);
     }
   }
