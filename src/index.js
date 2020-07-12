@@ -1,13 +1,14 @@
 import AuthorizationPage from './components/pages/authorization-page/authorization-page';
-
 import Main from './components/pages/main-page/main-page';
 import Stat from './components/pages/stat-page/stat-page';
 import NotFound from './components/pages/not-found/not-found';
 import Dictionary from './components/pages/dictionary-page/dictionary-page';
 import OurGames from './components/pages/our-games-page/our-games-page';
-
+import SettingsPage from './components/pages/settings-popup/settings-popup';
 import HeaderPromo from './components/shared/layout/header/header-promo/header-promo';
 import Footer from './components/shared/layout/footer/footer';
+
+import './index.scss';
 
 import Utils from './services/Utils';
 
@@ -28,6 +29,7 @@ const router = async () => {
   const header = document.getElementById('header_container');
   const content = document.getElementById('page_container');
   const footer = document.getElementById('footer_container');
+  const settings = document.getElementById('settings_popup');
 
   // Render the Header and footer of the page
   header.innerHTML = await HeaderPromo.render();
@@ -46,7 +48,12 @@ const router = async () => {
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   const page = routes[parsedURL] ? routes[parsedURL] : NotFound;
   content.innerHTML = await page.render();
-  if (page.afterRender) await page.afterRender();
+  if (page.afterRender) {
+    await page.afterRender();
+  }
+
+  settings.innerHTML = await SettingsPage.render();
+  await SettingsPage.afterRender();
 };
 
 // Listen on hash change:
