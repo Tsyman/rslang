@@ -20,7 +20,6 @@ const Utils = {
     return request;
   },
 
-
   // --------------------------------
   //  Parse a token and return an expiration date
   // --------------------------------

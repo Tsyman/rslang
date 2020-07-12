@@ -3,6 +3,7 @@ const userIdKey = 'userId';
 const tokenKey = 'token';
 const tokenExpireTimeKey = 'tokenExpireTime';
 const refreshTokenKey = 'refreshToken';
+const refreshTokenExpireTimeKey = 'refreshTokenExpireTime';
 const nameKey = 'name';
 
 export default (
@@ -13,7 +14,7 @@ export default (
 
     if (authorizedUser) {
       const {
-        userId, name, token, refreshToken, tokenExpireTime,
+        userId, name, token, refreshToken, tokenExpireTime, refreshTokenExpireTime,
       } = authorizedUser;
       if (!isExpired(tokenExpireTime)) {
         localState.set(userIdKey, userId);
@@ -21,6 +22,7 @@ export default (
         localState.set(tokenKey, token);
         localState.set(tokenExpireTimeKey, tokenExpireTime);
         localState.set(refreshTokenKey, refreshToken);
+        localState.set(refreshTokenExpireTimeKey, refreshTokenExpireTime);
       } else {
         localStorage.removeItem(authorizedUserKey);
       }
@@ -29,26 +31,39 @@ export default (
     return {
       setSessionData: (data) => {
         const {
-          userId, name, token, refreshToken, tokenExpireTime,
+          userId, name, token, refreshToken, tokenExpireTime, refreshTokenExpireTime,
         } = data;
         localState.set(userIdKey, userId);
         localState.set(nameKey, name);
         localState.set(tokenKey, token);
         localState.set(tokenExpireTimeKey, tokenExpireTime);
         localState.set(refreshTokenKey, refreshToken);
+        localState.set(refreshTokenExpireTimeKey, refreshTokenExpireTime);
         localStorage.setItem(authorizedUserKey, JSON.stringify(data));
       },
-      setTokens: ({ token, refreshToken, tokenExpireTime }) => {
+      setTokens: ({
+        token, refreshToken, tokenExpireTime, refreshTokenExpireTime,
+      }) => {
         localState.set(tokenKey, token);
         localState.set(tokenExpireTimeKey, tokenExpireTime);
         localState.set(refreshTokenKey, refreshToken);
+        localState.set(refreshTokenExpireTimeKey, refreshTokenExpireTime);
+        localStorage.setItem(authorizedUserKey,
+          JSON.stringify({
+            ...JSON.parse(localStorage.getItem(authorizedUserKey)),
+            token,
+            refreshToken,
+            tokenExpireTime,
+            refreshTokenExpireTime,
+          }));
       },
       getUserId: () => localState.get(userIdKey),
       getName: () => localState.get(nameKey),
       getToken: () => localState.get(tokenKey),
       getTokenExpiration: () => localState.get(tokenExpireTimeKey),
       getRefreshToken: () => localState.get(refreshTokenKey),
-      isAuthenticated: () => !isExpired(localState.get(tokenExpireTimeKey)),
+      getRefreshTokenExpireTime: () => localState.get(refreshTokenExpireTimeKey),
+      isAuthenticated: () => !isExpired(localState.get(refreshTokenExpireTimeKey)),
     };
   })()
 );
