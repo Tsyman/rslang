@@ -6,7 +6,7 @@ import state from '../../../common/state';
 class AuthorizationPage {
   constructor() {
     this.errorMessage = null;
-    this.flag = true;
+    this.isLogging = false;
     this.tooltipTime = 3000;
     this.changeForm = this.changeForm.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
@@ -64,18 +64,18 @@ class AuthorizationPage {
   `;
 
   changeForm() {
-    document.querySelector('.form-name').textContent = !this.flag ? 'Создать аккаунт' : 'Войти';
+    this.isLogging = !this.isLogging;
+    document.querySelector('.form-name').textContent = !this.isLogging ? 'Создать аккаунт' : 'Войти';
     document.querySelector('.name__inner').classList.toggle('disabled');
-    document.querySelector('.submit-button').textContent = !this.flag ? 'Создать аккаунт' : 'Войти';
-    document.querySelector('.form-footer p').textContent = !this.flag ? 'Уже есть аккаунт?' : 'Нет аккаунта?';
-    document.querySelector('.form-footer button').textContent = !this.flag ? 'Войти' : 'Создать';
-    this.flag = !this.flag;
+    document.querySelector('.submit-button').textContent = !this.isLogging ? 'Создать аккаунт' : 'Войти';
+    document.querySelector('.form-footer p').textContent = !this.isLogging ? 'Уже есть аккаунт?' : 'Нет аккаунта?';
+    document.querySelector('.form-footer button').textContent = !this.isLogging ? 'Войти' : 'Создать';
   }
 
-  registerUserForm(mail, pass, name) {
-    userRequest({ email: mail, password: pass }, this.paths.createUser)
+  registerUserForm(email, password, name) {
+    userRequest({ email, password, name }, this.paths.createUser)
       .then(() => {
-        userRequest({ email: mail, password: pass }, this.paths.signInUser)
+        userRequest({ email, password }, this.paths.signInUser)
           .then((response) => {
             if (response.status.toString().charAt(0) === '5') {
               this.errorMessage = 'Проблемы с сервером';
@@ -83,9 +83,7 @@ class AuthorizationPage {
             return response.json();
           })
           .then((data) => {
-            localStorage.setItem(this.keyNames.userName, name);
-            this.afterSignIn(data);
-          }).then(() => {
+            state.setSessionData({ ...data, tokenExpireTime: extractTokenExpiration(data.token) });
             document.location.href = '/#games';
             document.getElementById('header_container').style.display = 'block';
             document.getElementById('footer_container').style.display = 'block';
@@ -138,16 +136,15 @@ class AuthorizationPage {
       const userName = document.querySelector('.input-name').value;
       const userEmail = document.querySelector('.input-email').value;
       const userPassword = document.querySelector('.input-password').value;
-      if (this.flag) {
-        this.registerUserForm(userEmail, userPassword, userName);
-      } else {
+      if (this.isLogging) {
         this.signInUserForm(userEmail, userPassword);
+      } else {
+        this.registerUserForm(userEmail, userPassword, userName);
       }
     }
   }
 
   render() {
-    this.flag = true;
     return this.view;
   }
 
@@ -158,6 +155,7 @@ class AuthorizationPage {
       document.getElementById('header_container').style.display = 'block';
       document.getElementById('footer_container').style.display = 'block';
     });
+    this.changeForm();
   }
 }
 

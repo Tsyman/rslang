@@ -116,17 +116,12 @@ class Header {
 
   async afterRender() {
     if (!state.isAuthenticated()) {
-      document.querySelector('.registration__secondary-btn').addEventListener('click', () => {
+      const hideHeaderAndFooter = () => {
         document.getElementById('header_container').style.display = 'none';
         document.getElementById('footer_container').style.display = 'none';
-      });
-      document.querySelector('.registration__light-btn').addEventListener('click', () => {
-        document.getElementById('header_container').style.display = 'none';
-        document.getElementById('footer_container').style.display = 'none';
-        setTimeout(() => {
-          document.querySelector('.form-footer button').click();
-        }, 0);
-      });
+      };
+      document.querySelector('.registration__secondary-btn').addEventListener('click', hideHeaderAndFooter);
+      document.querySelector('.registration__light-btn').addEventListener('click', hideHeaderAndFooter);
     }
     if (!this.alreadyRenderedPage) {
       this.linksGameContainer = document.querySelector('.header-promo__list');
