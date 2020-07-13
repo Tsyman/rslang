@@ -1,32 +1,26 @@
-import './header-main.scss';
-import Utils from '../../../../../services/Utils';
+import './header.scss';
+import Header from './header';
+import state from '../../../../common/state';
+import Utils from '../../../../services/Utils';
+import SettingsPage from '../../../pages/settings-popup/settings-popup';
 
-class HeaderMain {
-  linksGameContainer = null;
-
-  itemsGame = null;
-
-  alreadyRenderedPage = false;
-
-  activeItemClassGame = 'main-active-link';
-
+class HeaderMain extends Header {
   constructor() {
-    this.changeActiveIteamGames = this.changeActiveIteamGames.bind(this);
-  }
-
-  view = `
+    super();
+    this.activeItemClass = 'main-active-link';
+    this.view = () => `
           <header class="header-main">
             <div class="header-main__container">
               <nav class="header-main__nav">
                 <div class="header-main__logo header-main__start">
-                  <a class="header-main__link-logo" href="/#/">
-                    <img class="header-main__img-logo" src="../../../../../assets/images//main-logo.png">
+                  <a class="header-main__link-logo" href="/#main">
+                    <img class="header-main__img-logo" src="../../../../../assets/images/main-logo.png">
                   </a>
                 </div>
                 <div class="header-main__middle">
                   <ul class="header-main__list">
-                    <li class="header-main__item main-active-item" id="main-tab1">
-                      <a class="header-main__link main-active-link" href="/#games">
+                    <li class="header-main__item" id="main-tab1">
+                      <a class="header-main__link" href="/#games">
                         <span class="header-main__heading">Игры</span>
                         <img class="header-main__img" src="../../../../../assets/images/games-icon.svg">
                       </a>
@@ -49,13 +43,19 @@ class HeaderMain {
                       <img class="header-main__img" src="../../../../../assets/images/new-words-icon.svg">
                     </a>
                   </li>
+                  <li class="header-main__item" id="main-tab5">
+                    <a class="header-main__link" href="/#team">
+                      <span class="header-main__heading">Наша команда</span>
+                      <img class="header-main__img" src="../../../../../assets/images/team.svg">
+                    </a>
+                  </li>
                   </ul>
                 </div>
                 <div class="header-main__end">
                   <div class="header-main__account">
-                    <p class="header-main__text">Мария</p>
+                    <p class="header-main__text">${state.getName()}</p>
                     <div >
-                      <a class="account-btn" href="/#/">М</a>
+                      <a class="account-btn" id="open-popup">${state.getName() && state.getName()[0].toUpperCase()}</a>
                     </div>
                   </div>
                 </div>
@@ -63,32 +63,28 @@ class HeaderMain {
             </div>
           </header>
         `;
-
-  async render() {
-    return this.view;
   }
 
-  async afterRender() {
-    if (!this.alreadyRenderedPage) {
-      this.linksGameContainer = document.querySelector('.header-promo__list');
-      this.itemsGame = [...document.querySelectorAll('.header-promo__link')];
-      const request = Utils.parseRequestURL();
-      this.changeActiveIteamGames(request?.resource);
-    }
+  afterRender = async () => {
+    this.items = [...document.querySelectorAll('.header-main__link')];
+    const request = Utils.parseRequestURL();
+    this.changeActiveItem(request?.resource);
+    document.getElementById('settings_popup').innerHTML = await SettingsPage.render();
+    await SettingsPage.afterRender();
   }
 
-  changeActiveIteamGames(page) {
-    this.itemsGame.forEach((element) => {
-      element.classList.remove(this.activeItemClassGame);
-    });
-    if (page === 'vocabularies') {
-      document.getElementById('main-tab2').children[0].classList.add(this.activeItemClassGame);
+  changeActiveItem = (page) => {
+    super.changeActiveItem();
+    if (page === 'dictionary') {
+      document.getElementById('main-tab2').children[0].classList.add(this.activeItemClass);
     } else if (page === 'statistics') {
-      document.getElementById('main-tab3').children[0].classList.add(this.activeItemClassGame);
+      document.getElementById('main-tab3').children[0].classList.add(this.activeItemClass);
     } else if (page === 'new-words') {
-      document.getElementById('main-tab4').children[0].classList.add(this.activeItemClassGame);
-    } else {
-      document.getElementById('main-tab1').children[0].classList.add(this.activeItemClassGame);
+      document.getElementById('main-tab4').children[0].classList.add(this.activeItemClass);
+    } else if (page === 'team') {
+      document.getElementById('main-tab5').children[0].classList.add(this.activeItemClass);
+    } else if (page === 'games') {
+      document.getElementById('main-tab1').children[0].classList.add(this.activeItemClass);
     }
   }
 }

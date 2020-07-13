@@ -460,6 +460,7 @@ class SavannahMiniGame {
     document.querySelector('.Index__startBtn').addEventListener('click', this.gameLoad);
     document.querySelector('.Content__backBtn').addEventListener('click', () => {
       document.getElementById('header_container').style.display = 'block';
+      document.getElementById('footer_container').style.display = 'block';
       this.resetGame();
     });
     document.querySelector('.popup-footer .resume').addEventListener('click', () => {
@@ -469,8 +470,10 @@ class SavannahMiniGame {
     });
 
     document.querySelector('.popup-footer .menu').addEventListener('click', () => {
-      document.getElementById('page_container').innerHTML = this.view;
       this.afterRender();
+      document.getElementById('header_container').style.display = 'block';
+      document.getElementById('footer_container').style.display = 'block';
+
       this.resetGame();
     });
   }
