@@ -15,6 +15,7 @@ import './index.scss';
 import Utils from './services/Utils';
 import Audiocall from './components/minigames/audiocall/audiocall';
 import state from './common/state';
+import Speakit from './components/minigames/speakit/speakit';
 
 // List of supported routes. Any url other than these routes will throw a 404 error
 const routes = {
@@ -25,6 +26,7 @@ const routes = {
   '/games': OurGames,
   '/team': OurTeam,
   '/audiocall': Audiocall,
+  '/speakit': Speakit,
   '/dictionary': Dictionary,
   '/dictionary/:id': Dictionary,
 };
