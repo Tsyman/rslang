@@ -113,6 +113,9 @@ class Audiocall {
     this.behaviousWhenAnswerIsCorrect = this.behaviousWhenAnswerIsCorrect.bind(this);
     this.behaviousWhenAnswerIsIncorrect = this.behaviousWhenAnswerIsIncorrect.bind(this);
     this.behaviousINotKnow = this.behaviousINotKnow.bind(this);
+    this.loadTime = 3000;
+    this.onWordsBlockClick = this.onWordsBlockClick.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
     this.playSoundOnStatistics = this.playSoundOnStatistics.bind(this);
   }
 
@@ -189,7 +192,7 @@ class Audiocall {
           <button class="audiocall-game__btn" id="button-i-not-know">Не знаю</button>
           <button class="audiocall-game__btn-next" id="button-next">Дальше</button>
         </div>
-        <p class="audiocall-game__instruction">Вы можете управлять игрой при помощи клавиатуры. Клавиши 1, 2, 3, 4, 5 - выбор варианта ответа. Пробел - "не знаю". Клавиша → - "дальше".</p>
+        <p class="audiocall-game__instruction">Вы можете управлять игрой при помощи клавиатуры. Начать игру - Enter. Клавиши 1, 2, 3, 4, 5 - выбор варианта ответа. Пробел - "Не знаю", и "Дальше".</p>
         <div class="lds-circle" id="spinner"><div></div></div>
       </div>
   `;
@@ -253,6 +256,14 @@ class Audiocall {
     this.goToNextSlideButton = document.getElementById('button-next');
     this.iNotKnowButton = document.getElementById('button-i-not-know');
     this.iNotKnowButton.addEventListener('click', this.behaviousINotKnow);
+    document.addEventListener('keydown', (event) => {
+      if ((event.code === 'Enter') && (this.iNotKnowButton.classList.contains('audiocall-game__btn--active'))) {
+        this.behaviousINotKnow();
+      } else if ((event.code === 'Enter') && (this.goToNextSlideButton.classList.contains('audiocall-game__btn-next--active'))) {
+        this.goToNextSlide(this.mySwiper);
+      }
+    });
+    document.addEventListener('keydown', this.onKeyDown);
     this.goToNextSlideButton.addEventListener('click', () => {
       this.goToNextSlide(this.mySwiper);
     });
@@ -391,7 +402,7 @@ class Audiocall {
       `);
     }
     this.listOfWordsBlock = document.querySelector('.audiocall-game__list');
-    this.listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
+    this.listOfWordsBlock.addEventListener('click', this.onWordsBlockClick);
     this.audioSound = document.querySelector('.audio-sound');
     this.audioSound.play();
     this.soundIcon = document.querySelectorAll('.icon-sound');
@@ -408,7 +419,7 @@ class Audiocall {
     this.countSlides += 1;
     const activeSlide = document.getElementsByClassName('swiper-slide-active')[0];
     this.listOfWordsBlock = activeSlide.querySelector('.audiocall-game__list');
-    this.listOfWordsBlock.addEventListener('click', this.isTheRightAnswer);
+    this.listOfWordsBlock.addEventListener('click', this.onWordsBlockClick);
     this.audioSound = activeSlide.querySelector('.audio-sound');
     this.audioSound.play();
     this.iNotKnowButton.classList.add('audiocall-game__btn--active');
@@ -470,6 +481,20 @@ class Audiocall {
     this.audioSound.play();
   }
 
+  isTheRightAnswer(targetElement) {
+    this.listOfWordsBlock.removeEventListener('click', this.onWordsBlockClick);
+    this.allWordsBlocks.forEach((item) => {
+      const el = item;
+      el.style.cursor = 'auto';
+    });
+    const wordBlock = targetElement.querySelector('.audiocall-game__word');
+    this.clickedWordBlock = wordBlock;
+    if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
+      this.behaviousWhenAnswerIsCorrect();
+    } else {
+      this.behaviousWhenAnswerIsIncorrect();
+    }
+  }  
   playSoundOnStatistics(event) {
     const { target } = event;
     if (target.classList.contains('audiocall-statistics-icon')) {
@@ -477,27 +502,6 @@ class Audiocall {
       target.previousElementSibling.play();
     }
     return this;
-  }
-
-  isTheRightAnswer(event) {
-    let targetElement = event.target;
-    if (targetElement.tagName === 'P') {
-      targetElement = targetElement.parentElement;
-    }
-    if (targetElement.tagName === 'LI') {
-      this.listOfWordsBlock.removeEventListener('click', this.isTheRightAnswer);
-      this.allWordsBlocks.forEach((item) => {
-        const el = item;
-        el.style.cursor = 'auto';
-      });
-      const wordBlock = targetElement.querySelector('.audiocall-game__word');
-      this.clickedWordBlock = wordBlock;
-      if (wordBlock.innerHTML === this.rightAnswersArray[this.countSlides]) {
-        this.behaviousWhenAnswerIsCorrect();
-      } else {
-        this.behaviousWhenAnswerIsIncorrect();
-      }
-    }
   }
 
   behaviousWhenAnswerIsCorrect() {
@@ -546,6 +550,33 @@ class Audiocall {
         item.querySelector('.audiocall-game__word').classList.add('audiocall-game__item-correct');
       }
     });
+  }
+
+  onWordsBlockClick(event) {
+    let targetElement = event.target;
+    if (targetElement.tagName === 'P') {
+      targetElement = targetElement.parentElement;
+    }
+    if (targetElement.tagName === 'LI') {
+      this.isTheRightAnswer(targetElement);
+    }
+  }
+
+  onKeyDown(event) {
+    if (event.code === 'Digit1'
+        || event.code === 'Digit2'
+        || event.code === 'Digit3'
+        || event.code === 'Digit4'
+        || event.code === 'Digit5'
+    ) {
+      const number = event.code.slice(-1);
+      const currentSlide = document.querySelector('.swiper-slide-active');
+      const numberElements = currentSlide.getElementsByClassName('audiocall-game__number');
+      const targetElement = Array
+        .from(numberElements)
+        .filter((numberElement) => numberElement.innerHTML === number)[0];
+      this.isTheRightAnswer(targetElement.parentElement);
+    }
   }
 }
 export default new Audiocall();
