@@ -96,6 +96,8 @@ class Audiocall {
 
   instruction = null;
 
+  statisticsPopupAudio = null;
+
   constructor() {
     this.goToMainGamePage = this.goToMainGamePage.bind(this);
     this.openConfirmExitPopup = this.openConfirmExitPopup.bind(this);
@@ -114,6 +116,7 @@ class Audiocall {
     this.loadTime = 3000;
     this.onWordsBlockClick = this.onWordsBlockClick.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.playSoundOnStatistics = this.playSoundOnStatistics.bind(this);
   }
 
   popup = `
@@ -318,7 +321,8 @@ class Audiocall {
       const previousValue = this.blockForAppendingMistakes.innerHTML;
       const newValue = `
         <div class="audiocall-statistics__mistake-wrapper">
-          <img class="audiocall-statistics__mistake-img" src="../../../assets/images/audio-call-game-icon.svg">
+          <audio class="audio-sound-statistics visually-hidden" data-audio="statistics${i}" controls src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.wrongUsersAnswersArray[i][0]}"></audio>
+          <img class="audiocall-statistics__mistake-img audiocall-statistics-icon" data-img="statistics${i}" src="../../../assets/images/audio-call-game-icon.svg">
           <p class="audiocall-statistics__english-word-mistake">${this.wrongUsersAnswersArray[i][1]}</p>
           <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
           <p class="audiocall-statistics__translation-mistake">${this.wrongUsersAnswersArray[i][2]}</p>
@@ -330,7 +334,8 @@ class Audiocall {
       const previousValue = this.blockForAppendingCorrectAnswers.innerHTML;
       const newValue = `
         <div class="audiocall-statistics__correct-wrapper">
-          <img class="audiocall-statistics__correct-img" src="../../../assets/images/audio-call-game-icon.svg">
+          <audio class="audio-sound-statistics visually-hidden" controls src="https://raw.githubusercontent.com/Tsyman/rslang-data/master/${this.rightUsersAnswersArray[i][0]}"></audio>
+          <img class="audiocall-statistics__correct-img audiocall-statistics-icon" src="../../../assets/images/audio-call-game-icon.svg">
           <p class="audiocall-statistics__english-word-correct">${this.rightUsersAnswersArray[i][1]}</p>
           <p class="audiocall-statistics__english-word-correct">&nbsp-&nbsp</p>
           <p class="audiocall-statistics__translation-correct">${this.rightUsersAnswersArray[i][2]}</p>
@@ -338,6 +343,8 @@ class Audiocall {
       `;
       this.blockForAppendingCorrectAnswers.innerHTML = (previousValue + newValue);
     }
+    this.statisticsPopupAudio = document.querySelector('.audiocall-statistics__popup');
+    this.statisticsPopupAudio.addEventListener('click', this.playSoundOnStatistics);
   }
 
   renderGameSlides(whereToAppend) {
@@ -405,7 +412,6 @@ class Audiocall {
     this.answerWordBlockInHead = document.getElementById('audiocall-game__english-word');
     this.answerImageBlock = document.getElementById('audiocall-game__img');
     this.allWordsBlocks = document.querySelectorAll('.audiocall-game__item');
-    console.log(this.allWordsBlocks);
   }
 
   goToNextSlide(swiper) {
@@ -488,6 +494,14 @@ class Audiocall {
     } else {
       this.behaviousWhenAnswerIsIncorrect();
     }
+  }  
+  playSoundOnStatistics(event) {
+    const { target } = event;
+    if (target.classList.contains('audiocall-statistics-icon')) {
+      console.log(target.previousElementSibling);
+      target.previousElementSibling.play();
+    }
+    return this;
   }
 
   behaviousWhenAnswerIsCorrect() {
