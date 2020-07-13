@@ -1,0 +1,371 @@
+@import "../../../styles/mixins";
+.popup {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+
+  @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 720px;
+    background-color: var(--white);
+    box-shadow: 0 20px 40px rgba(var(--black), .2);
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.25);
+    transition: all .5s .2s;
+    padding: 50px;
+    @include respond(tab-land) {
+      width: 720px;
+      height: 100vh;
+    }
+    @include respond(tab-port) {
+      width: 550px;
+      height: 100vh;
+    }
+    @include respond(phone) {
+      width: 100vw;
+      padding: 5px;
+      border-radius: 0;
+      height: 100vh;
+    }
+    &__control-section {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      height: 35px;
+      margin-bottom: 30px;
+      &--information-part {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      &--logo {
+        background-image: url('/assets/images/settings-icon.png');
+        height: 35px;
+        width: 35px;
+        background-size: cover;
+        margin-right: 25px;
+      }
+      &--name {
+        font-weight: bold;
+        font-size: var(--unnamed-font-size-21);
+        line-height: var(--unnamed-line-spacing-32);
+        color: var(--gray);
+      }
+    }
+    &__settings-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      &--figure-container {
+        margin-bottom: 30px;
+        width: 100%;
+        @include respond(phone) {
+          margin-bottom: 5px;
+        }
+      }
+      &--figure-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 10px;
+        @include respond(phone) {
+          margin-bottom: 5px;
+        }
+      }
+      &--switcher-container {
+        margin-bottom: 30px;
+        width: 100%;
+        @include respond(phone) {
+          margin-bottom: 5px;
+        }
+      }
+      &--switcher-row {
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 15px;
+        @include respond(phone) {
+          margin-bottom: 10px;
+        }
+      }
+      &--figure-text {
+        font-weight: 400;
+        font-size: var(--unnamed-font-size-15);
+        line-height: var(--unnamed-line-spacing-25);
+        color: var(--dark);
+        @include respond(phone) {
+          width: 80%;
+          font-size: var(--unnamed-font-size-11);
+        }
+      }
+      &--switcher-text {
+        font-weight: 400;
+        font-size: var(--unnamed-font-size-15);
+        line-height: var(--unnamed-line-spacing-25);
+        color: var(--gray);
+        width: 75%;
+        @include respond(phone) {
+          width: 80%;
+          font-size: var(--unnamed-font-size-11);
+        }
+      }
+    }
+    &__info {
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__close {
+    &,
+    &:link,
+    &:visited {
+      color: var(--green);
+      font-size: 35px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all .2s;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    &:hover {
+      color: var(--blue);
+    }
+  }
+}
+
+.btn {
+    &,
+    &:link,
+    &:visited {
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 20px 65px;
+        display: inline-block;
+        border-radius: 100px;
+        transition: all .2s;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        font-weight: bold;
+        font-size: var(--unnamed-font-size-15);
+        line-height: var(--unnamed-line-spacing-32);
+        color: var(--white);
+        text-align: center;
+        background-color: var(--green);
+        color: var(--white);
+        @include respond(phone) {
+          padding: 7px 44px;
+          text-transform: none;
+        }
+    }
+    &--blue {
+      background-color: var(--blue);
+      color: var(--white);
+      font-weight: 600;
+      font-size: var(--unnamed-font-size-15);
+      line-height: var(--unnamed-line-spacing-32);
+      letter-spacing: var(--unnamed-character-spacing-0);
+      color: var(--white);
+      text-transform: none;
+      border-radius: 15px;
+      padding: 12px 33px;
+      &::after {
+        background-color: var(--blue);
+        border-radius: 15px;
+      }
+      @include respond(tab-land) {
+        padding: 10px 20px;
+      }
+      @include respond(phone) {
+        line-height: var(--unnamed-line-spacing-25);
+        font-weight: 400;
+        padding: 5px 10px;
+      }
+    }
+    &--green {
+      &::after {
+        background-color: var(--green);
+      }
+    }
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(var(--black),.2);
+
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+    }
+
+    &:active,
+    &:focus {
+        outline: none;
+        transform: translateY(-1px);
+        box-shadow: 0 .5px 10px rgba(var(--back),.2);
+    }
+
+    &::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 100px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: all .4s;
+    }
+
+    &--animated {
+        animation: moveInBottom .5s ease-out .75s;
+        animation-fill-mode: backwards;
+    }
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+.switch-container {
+  position: relative;
+  &__content {
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 85px;
+    height: 30px;
+    background-color: var(--gray);
+    border-radius: 25px;
+    cursor: pointer;
+    display: inline-block;
+    @include respond(phone) {
+      width: 70px;
+    }
+  }
+  &__input {
+    display: none;
+  }
+  &__label {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: block;
+    text-transform: capitalize;
+    border-radius: inherit;
+    background-color: var(--green);
+    font-size: var(--unnamed-font-size-15);
+    &:before,
+    &:after {
+      color: var(--white);
+      position: absolute;
+      top: 6px;
+    }
+    &:before {
+      content: attr(data-off);
+      right: 8px;
+    }
+    &:after {
+      content: attr(data-on);
+      opacity: 0;
+      left: 8px;
+    }
+  }
+  &__handle {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    background: var(--white);
+    border-radius: 50%;
+    transition: all .2s ease-out;
+
+  }
+}
+.switch-container__input:checked ~ .switch-container__label {
+  background-color: var(--blue);
+}
+.switch-container__input:checked ~ .switch-container__label:before {
+  opacity: 0;
+}
+.switch-container__input:checked ~ .switch-container__label:after {
+  opacity: 1;
+}
+.switch-container__input:checked ~ .switch-container__handle {
+  left: 58px;
+  @include respond(phone) {
+    left: 45px;
+  }
+}
+.settings-figure {
+  width: 235px;
+  height: 50px;
+  border-radius: 15px;
+  background: var(--blue-light-gray);
+  outline: none;
+  border: none;
+  padding: 0 20px;
+  font-weight: 400;
+  font-size: var(--unnamed-font-size-15);
+  line-height: var(--unnamed-line-spacing-25);
+  color: var(--dark);
+  &::placeholder {
+    font-weight: 400;
+    font-size: var(--unnamed-font-size-11);
+    line-height: var(--unnamed-line-spacing-17);
+    color: var(--gray);
+    @include respond(phone) {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+  @include respond(phone) {
+    width: 60px;
+    padding: 0 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}

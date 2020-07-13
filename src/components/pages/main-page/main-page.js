@@ -1,42 +1,49 @@
 import './main-page.scss';
+import state from '../../../common/state';
 
 class MainPage {
   view = `
-          <header class="header-main">
-            <div class="container">
-              <nav class="header-main__nav">
-                <div class="header-main__logo header-main__start"></div>
-                <div class="header-main__middle">
-                  <ul class="header-main__list">
-                    <li class="header-main__item main-active-item">
-                      <a class="header-main__link" href="/#games">Игры</a>
-                    </li>
-                    <li class="header-main__item">
-                      <a class="header-main__link" href="/#dictionary">Словари</a>
-                  </li>
-                  <li class="header-main__item">
-                    <a class="header-main__link" href="/#statistics">Статитсика</a>
-                  </li>
-                  <li class="header-main__item">
-                    <a class="header-main__link" href="/#learning">Новые слова</a>
-                  </li>
-                  </ul>
-                </div>
-                <div class="header-main__end">
-                  <div class="header-main__account">
-                    <p class="header-main__text">Мария</p>
-                    <div >
-                      <a class="account-btn" href="/#/">М</a>
-                    </div>
-                  </div>
-                </div>
-              </nav>
-            </div>
-          </header>
-        `;
+    <div id="header_container-main"></div>
+    <section class="section-main-page">
+      <div class="section-main-page__banner">
+        Hello, ${state.getName()}! Давай заниматься.
+        <div class="section-main-page__banner--icon">
+        </div>
+      </div>
+      <div class="section-main-page__menu">
+        <div class="section-main-page__menu--start-studying">
+          <div class="section-main-page__menu--start-studying-text">
+            Good evening! - Добрый вечер!
+          </div>
+          <div class="btn btn--animated btn--blue">
+            Выучить пару английских слов
+          </div>
+        </div>
+        <div class="section-main-page__menu--statistics">
+          <div class="section-main-page__menu--statistics-heading">
+            Статистика
+          </div>
+          <div class="section-main-page__menu--statistics-text">
+            Похоже, что вы только что зарегистрировались или очень давно не занимались
+          </div>
+          <div class="btn btn--animated btn--green" id="go-play-button">
+            Го играть!
+          </div>
+          <div class="section-main-page__menu--statistics-icon">
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
 
   async render() {
     return this.view;
+  }
+
+  afterRender = async () => {
+    document.getElementById('go-play-button').addEventListener('click', () => {
+      document.location.href = '/#games';
+    });
   }
 }
 
