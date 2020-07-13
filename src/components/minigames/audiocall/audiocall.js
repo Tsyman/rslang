@@ -113,7 +113,6 @@ class Audiocall {
     this.behaviousWhenAnswerIsCorrect = this.behaviousWhenAnswerIsCorrect.bind(this);
     this.behaviousWhenAnswerIsIncorrect = this.behaviousWhenAnswerIsIncorrect.bind(this);
     this.behaviousINotKnow = this.behaviousINotKnow.bind(this);
-    this.loadTime = 3000;
     this.onWordsBlockClick = this.onWordsBlockClick.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.playSoundOnStatistics = this.playSoundOnStatistics.bind(this);
@@ -192,7 +191,7 @@ class Audiocall {
           <button class="audiocall-game__btn" id="button-i-not-know">Не знаю</button>
           <button class="audiocall-game__btn-next" id="button-next">Дальше</button>
         </div>
-        <p class="audiocall-game__instruction">Вы можете управлять игрой при помощи клавиатуры. Начать игру - Enter. Клавиши 1, 2, 3, 4, 5 - выбор варианта ответа. Пробел - "Не знаю", и "Дальше".</p>
+        <p class="audiocall-game__instruction">Вы можете управлять игрой при помощи клавиатуры. "Не знаю" или "Дальше" - Enter. Клавиши 1, 2, 3, 4, 5 - выбор варианта ответа.</p>
         <div class="lds-circle" id="spinner"><div></div></div>
       </div>
   `;
@@ -494,7 +493,8 @@ class Audiocall {
     } else {
       this.behaviousWhenAnswerIsIncorrect();
     }
-  }  
+  }
+
   playSoundOnStatistics(event) {
     const { target } = event;
     if (target.classList.contains('audiocall-statistics-icon')) {
