@@ -13,6 +13,7 @@ import NotFound from './components/pages/not-found/not-found';
 import './index.scss';
 
 import Utils from './services/Utils';
+import Audiocall from './components/minigames/audiocall/audiocall';
 import state from './common/state';
 
 // List of supported routes. Any url other than these routes will throw a 404 error
@@ -23,6 +24,7 @@ const routes = {
   '/register': Register,
   '/games': OurGames,
   '/team': OurTeam,
+  '/audiocall': Audiocall,
   '/dictionary': Dictionary,
   '/dictionary/:id': Dictionary,
 };
