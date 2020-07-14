@@ -1,6 +1,10 @@
 import './stat-page.scss';
 
 class StatPage {
+  header = null;
+
+  footer = null;
+
   view = `
           <section class="promo">
             <div class="promo__container">
@@ -115,6 +119,23 @@ class StatPage {
 
   async render() {
     return this.view;
+  }
+
+  afterRender() {
+    this.header = document.getElementById('header_container');
+    this.footer = document.getElementById('footer_container');
+    document.querySelector('.promo__link-blue').addEventListener('click', () => {
+      this.header.style.display = 'none';
+      this.footer.style.display = 'none';
+    });
+    document.querySelector('.vocabulary__link-blue').addEventListener('click', () => {
+      this.header.style.display = 'none';
+      this.footer.style.display = 'none';
+    });
+    document.querySelector('.statistic__link').addEventListener('click', () => {
+      this.header.style.display = 'none';
+      this.footer.style.display = 'none';
+    });
   }
 }
 

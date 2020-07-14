@@ -39,6 +39,7 @@ class Statistics {
     const stats = await HttpService.fetch(`/users/${localStorage.getItem('userId')}/statistics`, { method: 'GET' });
     const response = await stats.json();
     this.learnedWords = response.learnedWords;
+    const utc = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
 
     const scriptBody = document.createElement('script');
     const scriptHead = document.createElement('script');
@@ -46,54 +47,24 @@ class Statistics {
     scriptHead.type = 'text/javascript';
     scriptBody.innerHTML = `
       google.charts.load('current', { packages: ['corechart'] });
-      google.charts.setOnLoadCallback(drawBackgroundColor);
+      google.charts.setOnLoadCallback(drawChart);
 
-      function drawBackgroundColor() {
-        const data = new google.visualization.DataTable();
-        data.addColumn('number', 'Процент');
-        data.addColumn('number', 'Всего слов');
-        data.addRows([
-          [0, 0],
-          [0.1, ${this.learnedWords}],
-          [0.2, 1000],
-          [0.4, 2000],
-          [0.6, 3000],
-          [0.8, 4000],
-          [1, 5000],
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Дата', 'Количество Слов'],
+          ['${utc}',  0],
+          ['2014',  ${this.learnedWords}],
+          ['2014',  ${this.learnedWords + 50}],
         ]);
 
-        const options = {
-          hAxis: {
-            scaleType: 'log',
-            textStyle: {
-              color: '#6B83B3',
-              fontSize: 12,
-              fontName: 'Rubik',
-            },
-          },
-          vAxis: {
-            textStyle: {
-              color: '#6B83B3',
-              fontSize: 12,
-              fontName: 'Rubik',
-            },
-          },
-          bar: { groupWidth: '90%' },
-          backgroundColor: '#fffff',
-          lineWidth: 5,
-          crosshair: {
-            color: '#01d',
-            trigger: 'selection',
-            orientation: 'vertical',
-          },
-          ticks: [0, 1000, 2000, 4000, 6000],
-          color: '#00A8FF',
-      };
-      options.hAxis.format = 'percent';
+        var options = {
+          title: 'Слов изучено',
+          hAxis: {title: 'Дата',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
 
       const chart = new google.visualization.LineChart(document.getElementById('graph__id'));
       chart.draw(data, options);
-      chart.setSelection([{ row: 38, column: null }]);
     }`;
     document.head.appendChild(scriptHead);
     scriptHead.addEventListener('load', () => {
