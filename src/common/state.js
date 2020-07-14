@@ -1,3 +1,5 @@
+import SettingsService from '../services/SettingsService';
+
 export const authorizedUserKey = 'authorizedUser';
 const userIdKey = 'userId';
 const tokenKey = 'token';
@@ -5,6 +7,7 @@ const tokenExpireTimeKey = 'tokenExpireTime';
 const refreshTokenKey = 'refreshToken';
 const refreshTokenExpireTimeKey = 'refreshTokenExpireTime';
 const nameKey = 'name';
+const settingsKey = 'settings';
 
 export default (
   (() => {
@@ -56,6 +59,17 @@ export default (
             tokenExpireTime,
             refreshTokenExpireTime,
           }));
+      },
+      setSettings: async (settings) => {
+        localState.set(settingsKey, settings);
+        await SettingsService.save(settings);
+      },
+      getSettings: async () => {
+        let settings = localState.get(settingsKey);
+        if (!settings) {
+          settings = await SettingsService.get();
+        }
+        return settings;
       },
       getUserId: () => localState.get(userIdKey),
       getName: () => localState.get(nameKey),

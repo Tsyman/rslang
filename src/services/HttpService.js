@@ -5,16 +5,16 @@ import Utils from './Utils';
 const THIRTY_MINUTES = 30 * 60 * 1000;
 
 class HttpService {
-  static async fetch(resource, init) {
+  static async fetch(resource, payload) {
     try {
-      Object.assign(init, {
+      Object.assign(payload, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${await this.getToken()}`,
           Accept: 'application/json',
         },
       });
-      return window.fetch(`${config.SERVER_URL}${resource}`, init);
+      return window.fetch(`${config.SERVER_URL}${resource}`, payload);
     } catch (e) {
       return new Promise(() => '');
     }

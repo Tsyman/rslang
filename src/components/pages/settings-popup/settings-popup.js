@@ -85,8 +85,6 @@ class SettingsPage {
               </div>
             </div>
 
-
-
             <div class="popup-content__settings-section--switcher-row">
               <div class="popup-content__settings-section--switcher-text">
                 Транскрипция слова

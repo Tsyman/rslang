@@ -17,9 +17,7 @@ class UserService {
       { method: 'GET' },
     );
 
-    const content = await response.json();
-
-    return content;
+    return response.json();
   }
 }
 
