@@ -1,4 +1,6 @@
 import './settings-popup.scss';
+import state from '../../../common/state';
+import SettingsService from '../../../services/SettingsService';
 
 class SettingsPage {
   popupOpenButton = null;
@@ -10,6 +12,8 @@ class SettingsPage {
   popupCloseButton = null;
 
   popupSaveButton = null;
+
+  settings = null;
 
   constructor() {
     this.openPopupFunction = this.openPopupFunction.bind(this);
@@ -190,6 +194,15 @@ class SettingsPage {
   `;
 
   async render() {
+    this.settings = state.getSettings();
+    if (!this.settings) {
+      this.settings = SettingsService.get(state.getUserId());
+    }
+    if (!this.settings) {
+      // Здесь надо заменить пустой объект на шаблон объекта настроек с настройками по умолчанию
+      this.settings = await SettingsService.save({});
+    }
+
     return this.view;
   }
 

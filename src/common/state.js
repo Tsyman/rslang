@@ -1,5 +1,3 @@
-import SettingsService from '../services/SettingsService';
-
 export const authorizedUserKey = 'authorizedUser';
 const userIdKey = 'userId';
 const tokenKey = 'token';
@@ -60,17 +58,8 @@ export default (
             refreshTokenExpireTime,
           }));
       },
-      setSettings: async (settings) => {
-        localState.set(settingsKey, settings);
-        await SettingsService.save(settings);
-      },
-      getSettings: async () => {
-        let settings = localState.get(settingsKey);
-        if (!settings) {
-          settings = await SettingsService.get();
-        }
-        return settings;
-      },
+      setSettings: (settings) => localState.set(settingsKey, settings),
+      getSettings: () => localState.get(settingsKey),
       getUserId: () => localState.get(userIdKey),
       getName: () => localState.get(nameKey),
       getToken: () => localState.get(tokenKey),
