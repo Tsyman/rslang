@@ -1,4 +1,5 @@
 import './statistics.scss';
+import HttpService from '../../../services/HttpService';
 
 class Statistics {
   constructor({
@@ -8,6 +9,7 @@ class Statistics {
     this.rightAnswers = rightAnswers;
     this.newWords = newWords;
     this.longSeriesCorrectAnswers = longSeriesCorrectAnswers;
+    this.learnedWords = null;
   }
 
   view = '<section class="statistics"></section>';
@@ -33,66 +35,70 @@ class Statistics {
     }
   }
 
-  createChartInStatistic = () => {
-    const body = document.querySelector('body');
-    const headLinkTag = document.querySelector('head > link');
-    const chartLoader = '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>';
-    const chartOptions = `<script>
-    console.log(1);
-    google.charts.load('current', { packages: ['corechart'] });
-google.charts.setOnLoadCallback(drawBackgroundColor);
+  createChartInStatistic = async () => {
+    const stats = await HttpService.fetch(`/users/${localStorage.getItem('userId')}/statistics`, { method: 'GET' });
+    const response = await stats.json();
+    this.learnedWords = response.learnedWords;
 
-function drawBackgroundColor() {
-  const data = new google.visualization.DataTable();
-  data.addColumn('number', 'Процент');
-  data.addColumn('number', 'Всего слов');
-  data.addRows([
-    [0, 1676],
-    [0.2, 181],
-    [0.4, 4898],
-    [0.75, 373],
-    [0.8, 2678],
-    [1, 2525],
-  ]);
+    const scriptBody = document.createElement('script');
+    const scriptHead = document.createElement('script');
+    scriptHead.src = 'https://www.gstatic.com/charts/loader.js';
+    scriptHead.type = 'text/javascript';
+    scriptBody.innerHTML = `
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawBackgroundColor);
 
-  const options = {
-    hAxis: {
-      scaleType: 'log',
-      textStyle: {
-        color: '#6B83B3',
-        fontSize: 12,
-        fontName: 'Rubik',
-      },
-    },
-    vAxis: {
-      textStyle: {
-        color: '#6B83B3',
-        fontSize: 12,
-        fontName: 'Rubik',
-      },
-    },
-    bar: { groupWidth: '90%' },
-    backgroundColor: '#fffff',
-    lineWidth: 5,
-    crosshair: {
-      color: '#01d',
-      trigger: 'selection',
-      orientation: 'vertical',
-    },
-    ticks: [0, 1000, 2000, 4000, 6000],
-    color: '#00A8FF',
-  };
-  options.hAxis.format = 'percent';
+      function drawBackgroundColor() {
+        const data = new google.visualization.DataTable();
+        data.addColumn('number', 'Процент');
+        data.addColumn('number', 'Всего слов');
+        data.addRows([
+          [0, 0],
+          [0.1, ${this.learnedWords}],
+          [0.2, 1000],
+          [0.4, 2000],
+          [0.6, 3000],
+          [0.8, 4000],
+          [1, 5000],
+        ]);
 
-  const chart = new google.visualization.LineChart(document.getElementById('graph__id'));
-  chart.draw(data, options);
-  chart.setSelection([{ row: 38, column: null }]);
-}
-    </script>`;
-    if (headLinkTag) {
-      headLinkTag.insertAdjacentHTML('afterend', chartLoader);
-      body.insertAdjacentHTML('beforeend', chartOptions);
-    }
+        const options = {
+          hAxis: {
+            scaleType: 'log',
+            textStyle: {
+              color: '#6B83B3',
+              fontSize: 12,
+              fontName: 'Rubik',
+            },
+          },
+          vAxis: {
+            textStyle: {
+              color: '#6B83B3',
+              fontSize: 12,
+              fontName: 'Rubik',
+            },
+          },
+          bar: { groupWidth: '90%' },
+          backgroundColor: '#fffff',
+          lineWidth: 5,
+          crosshair: {
+            color: '#01d',
+            trigger: 'selection',
+            orientation: 'vertical',
+          },
+          ticks: [0, 1000, 2000, 4000, 6000],
+          color: '#00A8FF',
+      };
+      options.hAxis.format = 'percent';
+
+      const chart = new google.visualization.LineChart(document.getElementById('graph__id'));
+      chart.draw(data, options);
+      chart.setSelection([{ row: 38, column: null }]);
+    }`;
+    document.head.appendChild(scriptHead);
+    scriptHead.addEventListener('load', () => {
+      document.body.appendChild(scriptBody);
+    });
   }
 
   async render() {
