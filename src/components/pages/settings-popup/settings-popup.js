@@ -196,10 +196,11 @@ class SettingsPage {
   async render() {
     this.settings = state.getSettings();
     if (!this.settings) {
-      this.settings = SettingsService.get(state.getUserId());
+      this.settings = await SettingsService.get(state.getUserId());
     }
     if (!this.settings) {
-      // Здесь надо заменить пустой объект на шаблон объекта настроек с настройками по умолчанию
+      // TODO Здесь надо заменить пустой объект на шаблон объекта настроек
+      //  с настройками по умолчанию
       this.settings = await SettingsService.save({});
     }
 
@@ -226,6 +227,7 @@ class SettingsPage {
   }
 
   closePopupFunction() {
+    // TODO здесь надо сохранять изменения настроек на бек и в state
     this.popup.style.opacity = '0';
     this.popup.style.visibility = 'hidden';
     this.popupContent.style.opacity = '0';
