@@ -33,16 +33,15 @@ class Register extends AuthorizationPage {
             })
             .then(this.handleLoginData)
             .then(() => {
-              const set = SettingsService.save(
+              SettingsService.save(
                 state.getUserId(),
                 {
                   learnedWords: 0,
                   optional: {
-                    registrationDate: new Date(),
+                    registrationDate: Date.now(),
                   },
                 },
               );
-              set.then((d) => console.log(d));
             });
         })
         .catch(this.handleError);

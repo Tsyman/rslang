@@ -12,6 +12,7 @@ class HttpService {
         headers: {
           Authorization: `Bearer ${await this.getToken()}`,
           Accept: 'application/json',
+          'content-type': 'application/json',
         },
       });
       return window.fetch(`${config.SERVER_URL}${resource}`, init);

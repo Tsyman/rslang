@@ -1,24 +1,38 @@
 import './statistics.scss';
-import HttpService from '../../../services/HttpService';
+import SettingsService from '../../../services/SettingsService';
 import state from '../../../common/state';
 
+function formatDate(date) {
+  const d = new Date(date);
+  let month = `${d.getMonth() + 1}`;
+  let day = `${d.getDate()}`;
+  const year = d.getFullYear();
+
+  if (month.length < 2) month = `0${month}`;
+  if (day.length < 2) day = `0${day}`;
+
+  return [year, month, day].join('-');
+}
+
 class Statistics {
-  constructor({
-    cardCompleted, rightAnswers, newWords, longSeriesCorrectAnswers,
-  }) {
-    this.cardCompleted = cardCompleted;
-    this.rightAnswers = rightAnswers;
-    this.newWords = newWords;
-    this.longSeriesCorrectAnswers = longSeriesCorrectAnswers;
-    this.learnedWords = null;
+  constructor() {
+    this.cardCompleted = 0;
+    this.rightAnswers = 0;
+    this.newWords = 0;
+    this.longSeriesCorrectAnswers = 0;
+    this.daysDiff = 0;
+    this.learnedWords = 0;
+    this.statistics = [
+      ['Дата', 'Количество Слов'],
+    ];
   }
 
   view = '<section class="statistics"></section>';
 
   createStatistic = () => {
-    const statistisLayout = document.querySelector('.statistics');
-    if (statistisLayout) {
-      statistisLayout.innerHTML = `
+    const statisticLayout = document.querySelector('.statistics');
+    if (statisticLayout) {
+      statisticLayout.innerHTML = `
       <div class="wrapper__statistics">
           <div class="statistic">
               <div class="statistic__icon"><img src="../../../assets/images/statistics/gym__statistics.svg" alt="Gym image" class="statistic__image"></div>
@@ -37,10 +51,22 @@ class Statistics {
   }
 
   createChartInStatistic = async () => {
-    const stats = await HttpService.fetch(`/users/${state.getUserId()}/statistics`, { method: 'GET' });
-    const response = await stats.json();
-    this.learnedWords = response.learnedWords;
-    const utc = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+    const stats = await SettingsService.get(state.getUserId());
+    this.learnedWords = stats.learnedWords;
+    const today = new Date();
+    const userRegisterDay = new Date(stats.optional.registrationDate);
+    this.daysDiff = Math.ceil(Math.abs(today - userRegisterDay) / (1000 * 60 * 60 * 24));
+
+    this.statistics.push(
+      [formatDate(stats.optional.registrationDate), 0],
+    );
+
+    for (let i = 1; i < this.daysDiff; i += 1) {
+      this.statistics.push(
+        [formatDate(new Date(userRegisterDay)
+          .setDate(userRegisterDay.getDate() + i)), this.learnedWords],
+      );
+    }
 
     const scriptBody = document.createElement('script');
     const scriptHead = document.createElement('script');
@@ -51,19 +77,9 @@ class Statistics {
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Дата', 'Количество Слов'],
-          ['${utc}',  0],
-          ['${utc}',  ${this.learnedWords}],
-          ['${utc}',  ${this.learnedWords + 50}],
-          ['${utc}',  ${this.learnedWords + 150}],
-          ['${utc}',  ${this.learnedWords + 250}],
-          ['${utc}',  ${this.learnedWords + 350}],
-          ['${utc}',  ${this.learnedWords + 450}],
-          ['${utc}',  ${this.learnedWords + 550}],
-          ['${utc}',  ${this.learnedWords + 650}],
-        ]);
-
+        var data = google.visualization.arrayToDataTable(
+          ${JSON.stringify(this.statistics)}
+        );
         var options = {
           title: 'Слов изучено',
           hAxis: {title: 'Дата',  titleTextStyle: {color: '#333'}},
@@ -85,20 +101,13 @@ class Statistics {
 
   async afterRender() {
     // apply data from API response
-    this.cardCompleted = '10';
-    this.rightAnswers = '10';
-    this.newWords = '10';
-    this.longSeriesCorrectAnswers = '30';
+    this.cardCompleted = 0;
+    this.rightAnswers = 0;
+    this.newWords = 0;
+    this.longSeriesCorrectAnswers = 0;
     this.createStatistic();
     this.createChartInStatistic();
   }
 }
 
-export default new Statistics(
-  {
-    cardCompleted: '1',
-    rightAnswers: '1',
-    newWords: '2',
-    longSeriesCorrectAnswers: '3',
-  },
-);
+export default new Statistics();
