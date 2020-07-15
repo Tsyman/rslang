@@ -21,7 +21,7 @@ class OurGames {
             </a>
           </li>
           <li class="games__item">
-            <a class="games__link" href="/#savanna">
+            <a class="games__link" href="/#savannah">
             <img class="games__img savanna" src="../../../../assets/images/savanna.svg">
             <p class="games__text">Саванна</p>
             </a>
