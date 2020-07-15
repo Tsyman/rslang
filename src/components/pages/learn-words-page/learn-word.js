@@ -29,6 +29,7 @@ class LearnWord {
     UserService.getAggregatedWords(
       state.getUserId(),
       {
+        wordsPerPage: 50,
         // TODO add a filter
       },
     ).then((data) => {
@@ -40,8 +41,29 @@ class LearnWord {
       template.innerHTML = card.render();
       cardHolder.insertBefore(template.content.firstElementChild, progressBar);
       card.afterRender(true);
+
+      const next = document.createElement('button');
+      next.classList.add('btn');
+      next.innerText = 'Следующее слово';
+      cardHolder.append(next);
+      next.addEventListener('click', this.nextWord);
     });
   }
+
+  nextWord = () => {
+    // eslint-disable-next-line no-underscore-dangle
+    const wordId = this.words.shift()._id;
+    const cardHolder = document.getElementById('learn-word-card-holder');
+    const progressBar = document.getElementById('progress-bar');
+
+    cardHolder.removeChild(document.getElementById(`${wordId}-card`));
+
+    const card = new Card(this.words[0], this.cardType);
+    const template = document.createElement('template');
+    template.innerHTML = card.render();
+    cardHolder.insertBefore(template.content.firstElementChild, progressBar);
+    card.afterRender(true);
+  };
 }
 
 export default new LearnWord();

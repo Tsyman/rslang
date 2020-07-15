@@ -33,6 +33,7 @@ class Card {
 
   async afterRender(learnModeOn) {
     const cardActions = document.getElementById(`${this.data._id}-actions`);
+    const wordNode = document.getElementById(`${this.data._id}-word`);
     const playSound = document.getElementById(`${this.data._id}-play-sound`);
     const showImage = document.getElementById(`${this.data._id}-show-image`);
     const wordTranslate = document.getElementById(`${this.data._id}-word-translate`);
@@ -62,6 +63,7 @@ class Card {
     });
 
     if (learnModeOn) {
+      wordNode.style.display = 'none';
       const settings = state.getSettings();
       example.style.display = settings.showExample.value ? 'inline-block' : 'none';
       playSound.style.display = settings.showWordAudio.value ? 'inline-block' : 'none';
@@ -70,6 +72,13 @@ class Card {
       exampleTranslate.style.display = settings.showExampleTranslation.value ? 'inline-block' : 'none';
       meaning.style.display = settings.showMeaning.value ? 'inline-block' : 'none';
       meaningTranslate.style.display = settings.showMeaningTranslation.value ? 'inline-block' : 'none';
+      showImage.style.display = settings.showImage.value ? 'inline-block' : 'none';
+
+      const input = document.createElement('input');
+      const wordInExample = example.childNodes[1];
+      input.size = wordInExample.innerText.length;
+      input.maxLength = wordInExample.innerText.length;
+      example.replaceChild(input, wordInExample);
     }
   }
 
