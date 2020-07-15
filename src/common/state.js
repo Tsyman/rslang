@@ -5,6 +5,7 @@ const tokenExpireTimeKey = 'tokenExpireTime';
 const refreshTokenKey = 'refreshToken';
 const refreshTokenExpireTimeKey = 'refreshTokenExpireTime';
 const nameKey = 'name';
+const settingsKey = 'settings';
 
 export default (
   (() => {
@@ -57,6 +58,8 @@ export default (
             refreshTokenExpireTime,
           }));
       },
+      setSettings: (settings) => localState.set(settingsKey, settings),
+      getSettings: () => localState.get(settingsKey),
       getUserId: () => localState.get(userIdKey),
       getName: () => localState.get(nameKey),
       getToken: () => localState.get(tokenKey),
