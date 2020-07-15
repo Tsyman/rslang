@@ -1,0 +1,669 @@
+@import '../../../styles/mixins.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
+
+html, body, main {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.Index {
+    &__wrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url("../../../assets/images/minigames/savanna/savanna-jungle.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: .5s linear;
+        opacity: 1;
+        z-index: 1;
+
+        &.disabled {
+            opacity: 0;
+        }
+    }
+
+    &__titleText {
+        margin: 0;
+        position: absolute;
+        top: calc(50% - 80px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 170px;
+        font-family: 'Modak', cursive;
+        text-shadow: white 7px 7px 0, white -7px -7px 0,
+        white -7px 7px 0, white 7px -7px 0;
+    }
+
+    &__startBtn {
+        display: flex;
+        position: absolute;
+        top: calc(50% + 40px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 60px;
+        height: 6%;
+        background-color: transparent;
+        border: 0;
+        font-size: 50px;
+        font-weight: bold;
+        font-family: 'Rubik', sans-serif;
+        color: #fff;
+        text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
+        white-space: nowrap;
+        outline: none;
+
+        &:hover,
+        &:active {
+            color: lightgreen;
+            text-shadow: 2px 2px 2px rgb(113, 113, 113);
+        }
+
+    }
+    @include respond(tab-port) {
+        &__titleText {
+            font-size: 80px;
+            text-shadow: white 6px 6px 0, white -6px -6px 0,
+            white -6px 6px 0, white 6px -6px 0;
+        }
+
+        &__startBtn {
+            font-size: 40px;
+        }
+    }
+    @include respond(phone-portrait) {
+        &__titleText {
+            font-size: 60px;
+        }
+    }
+}
+
+.Content {
+    &__wrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url("../../../assets/images/minigames/savanna/savanna-jungle2.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0;
+        transition: 0.8s linear;
+        z-index: 0;
+
+        &.enabled {
+            opacity: 1;
+        }
+    }
+
+    &__backBtn {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 45px;
+        border: 0;
+        padding-left: 0;
+        text-align: center;
+        font-size: 50px;
+        background-color: white;
+        color: green;
+        opacity: 0.8;
+        text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+        font-weight: bold;
+        outline: none;
+
+        &:hover,
+        &:active {
+            background-color: #4b4b4b;
+            color: lightgreen;
+        }
+    }
+
+    &__wordContentWrapper {
+        position: absolute;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        top: 85%;
+        left: 50%;
+        transform: translate(-50%, -70%);
+        width: 90%;
+        height: 20%;
+    }
+
+    &__wordContent {
+        position: relative;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        width: 23%;
+        min-width: 120px;
+        height: 48%;
+        background-color: white;
+        border-radius: 30px;
+        padding-right: 20px;
+        opacity: 0.9;
+        outline: none;
+        border: none;
+        
+        &:active {
+            background-color: #4b4b4b;
+            color: lightgreen;
+        }
+        
+    }
+
+    &__wordNum {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 10%;
+        max-width: 30px;
+        min-width: 30px;
+        height: 30px;
+        background-color: rgba(77, 118, 49, 0.8);
+        border-radius: 50%;
+        margin-left: 20px;
+        font-weight: bold;
+    }
+
+    &__wordParagraph {
+        font-size: 20px;
+        width: 100%;
+        word-wrap: break-word;
+        padding-left: 10px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        font-weight: bold;
+    }
+
+    &__lifesContainer {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 250px;
+        height: 60px;
+        background-color: white;
+        opacity: 0.8;
+        border-radius: 15px;
+        font-size: 35px;
+        font-weight: bold;
+        color: green;
+        text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+    }
+
+    &__fallingWord {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        font-size: 80px;
+        font-family: 'Rubik', sans-serif;
+        font-weight: bold;
+        text-shadow: white 2px 2px 0, white -2px -2px 0,
+        white -2px 2px 0, white 2px -2px 0;
+
+        &.animate {
+            opacity: 0;
+            animation-name: falling-word;
+            animation-duration: 4s;
+            animation-timing-function: linear;
+        }
+    }
+
+    @include respond(tab-port) {
+        &__wordContentWrapper {
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        &__wordContent {
+            width: 40%;
+
+            &:first-child {
+                margin-bottom: 10px;
+            }
+        }
+
+        &__fallingWord {
+            font-size: 60px;
+        }
+
+        &__lifesContainer {
+            width: 200px;
+            right: 10px;
+        }
+
+        &__backBtn {
+            left: 10px;
+        }
+        
+    }
+    @include respond(phone) {
+        &__wordContent {
+            margin-bottom: 10px;
+        }
+
+        &__wordContent {
+            width: 80%;
+        }
+
+        &__wordContentWrapper {
+            height: auto;
+        }
+
+        &__lifesContainer {
+            width: 180px;
+            height: 60px;
+            font-size: 30px;
+        }
+
+        &__fallingWord {
+            font-size: 50px;
+        }
+    }
+
+    @include respond(phone-portrait) {
+        &__fallingWord {
+            font-size: 40px;
+        }
+    }
+    
+}
+
+.active {
+    background-color: #4b4b4b;
+    color: lightgreen;
+}
+
+
+/* Start game overlay */
+
+.start-game__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../../assets/images/minigames/savanna/savanna-jungle2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 0.8s linear;
+    display: flex;
+    justify-content: center;
+}
+
+.overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.game-hint {
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.loader {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+
+    & div {
+        transform-origin: 40px 40px;
+        animation: loader 1.2s linear infinite;
+
+        &:after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 3px;
+            left: 37px;
+            width: 6px;
+            height: 18px;
+            border-radius: 20%;
+            background: rgb(0, 0, 0);
+        }
+
+        &:nth-child(1) {
+            transform: rotate(0deg);
+            animation-delay: -1.1s;
+        }
+
+        &:nth-child(2) {
+            transform: rotate(30deg);
+            animation-delay: -1s;
+        }
+
+        &:nth-child(3) {
+            transform: rotate(60deg);
+            animation-delay: -0.9s;
+        }
+
+        &:nth-child(4) {
+            transform: rotate(90deg);
+            animation-delay: -0.8s;
+        }
+
+        &:nth-child(5) {
+            transform: rotate(120deg);
+            animation-delay: -0.7s;
+        }
+
+        &:nth-child(6) {
+            transform: rotate(150deg);
+            animation-delay: -0.6s;
+        }
+
+        &:nth-child(7) {
+            transform: rotate(180deg);
+            animation-delay: -0.5s;
+        }
+
+        &:nth-child(8) {
+            transform: rotate(210deg);
+            animation-delay: -0.4s;
+        }
+
+        &:nth-child(9) {
+            transform: rotate(240deg);
+            animation-delay: -0.3s;
+        }
+
+        &:nth-child(10) {
+            transform: rotate(270deg);
+            animation-delay: -0.2s;
+        }
+
+        &:nth-child(11) {
+            transform: rotate(300deg);
+            animation-delay: -0.1s;
+        }
+
+        &:nth-child(12) {
+            transform: rotate(330deg);
+            animation-delay: 0s;
+        }
+    }
+}
+
+
+@keyframes loader {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+}
+
+/* Popup */
+
+.savannah-popup {
+    width: 100%;
+    max-width: 600px;
+    min-height: 650px;
+    border-radius: 8px;
+    border: 1px solid #e6e9ee;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 100px auto 0;
+    font-family: 'Rubik', sans-serif;
+
+    &__container {
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url("../../../assets/images/minigames/savanna/savanna-jungle2.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: 0.8s linear;
+        z-index: 5;
+        
+        @include respond(phone) {
+            background-color: #dfffdc;
+            background-image: none;
+        }
+    }
+
+    @include respond(phone) {
+        border: none;
+        background-color: #dfffdc;
+        border-radius: 0;
+        margin-top: 0;
+    }
+}
+
+.word {
+    &--green {
+        color: #28c38a;
+    }
+
+    &--red {
+        color: #ed593b;
+    }
+
+    &--blue {
+        color: #2582e7;
+    }
+}
+
+/* Popup header */
+
+.popup {
+    &-header {
+        margin-bottom: 20px;
+
+        &-title {
+            font-size: 34px;
+            margin: 40px 20px 20px;
+
+            @include respond(phone) {
+                font-size: 28px;
+            }
+        }
+
+        &-stats {
+            font-size: 20px;
+        }
+    }
+
+    &-body {
+        width: 90%;
+        overflow: auto;
+        height: 380px;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    &-footer {
+        display: flex;
+        flex-direction: column;
+        font-size: 18px;
+        margin-bottom: 10px;
+
+        &  .resume {
+            margin-bottom: 25px;
+        }
+
+        &  .resume:hover{
+            color: #28c38a;
+        }
+
+        & a {
+            transition: 0.7s;
+            text-decoration: underline;
+        }
+
+        & a:visited{
+            color: rgb(0, 0, 0);
+        }
+
+        & a:hover {
+            transform: scale(1.2);
+            color: rgb(0, 0, 0);
+            transition: 0.7s;
+            color: #bd2727;
+        }
+    }
+}
+
+.learning-words {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    & .title {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+}
+
+.word {
+    display: flex;
+    margin-bottom: 15px;
+    position: relative;
+    align-items: center;
+
+    &-audio {
+        background-image: url('../../../assets/images/minigames/savanna/volume.svg');
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        margin-right: 20px;
+        transition: 0.5s;
+
+        &:hover {
+            transform: scale(1.4);
+            transition: 0.5s;
+        }
+    } 
+
+    &-name {
+        @include respond(phone) {
+            font-size: 16px;
+            word-break: break-all;
+        }
+    }
+}
+
+@keyframes falling-word {
+    from {
+        top: 0%;
+    }
+    to {
+        top: 70%;
+    }
+
+    10% {
+        opacity: 0.9;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    30% {
+        opacity: 0.7;
+    }
+
+    40% {
+        opacity: 0.6;
+    }
+
+    60% {
+        opacity: 0.4;
+    }
+
+    80% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+/*
+@media (max-width: 791px) {
+    .Index {
+        &__titleText {
+            font-size: 80px;
+            text-shadow: white 6px 6px 0, white -6px -6px 0,
+            white -6px 6px 0, white 6px -6px 0;
+        }
+
+        &__startBtn {
+            font-size: 40px;
+        }
+    }
+
+    .Content {
+        &__wordContentWrapper {
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        &__wordContent {
+            width: 40%;
+
+            &:first-child {
+                margin-bottom: 10px;
+            }
+        }
+
+        &__fallingWord {
+            font-size: 60px;
+        }
+    }
+}
+
+@media (max-width: 491px) {
+    .Content {
+        &__wordContent {
+            margin-bottom: 10px;
+        }
+
+        &__wordContent {
+            width: 80%;
+        }
+
+        &__wordContentWrapper {
+            height: auto;
+        }
+
+        &__lifesContainer {
+            width: 180px;
+            height: 60px;
+            font-size: 30px;
+        }
+
+        &__fallingWord {
+            font-size: 35px;
+        }
+    }
+}
+*/

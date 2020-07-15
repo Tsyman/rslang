@@ -1,0 +1,764 @@
+@import "../../../styles/mixins";
+@import "../../../index.scss";
+@import "../../../styles/variables";
+@import "./swiper";
+
+.audiocall {
+  &__container {
+    position: relative;
+  }
+  &__close-game-button {
+    &,
+    &:link,
+    &:visited {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: var(--red);
+      font-size: 45px;
+      font-weight: 900;
+      text-decoration: none;
+      display: inline-block;
+      transition: all .2s;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    &:hover {
+      color: var(--blue);
+    }
+  }
+  &__confirm-exit-popup {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+
+    @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    &-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 320px;
+      background-color: var(--white);
+      box-shadow: 0 20px 40px rgba(var(--black), .2);
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(.25);
+      transition: all .5s .2s;
+      padding: 50px;
+      box-sizing: content-box;
+      @include respond(phone) {
+        width: 290px;
+        padding: 30px 15px;
+      }
+
+      &__heading {
+        color: var(--red);
+        margin-bottom: 20px;
+        font-weight: var(--font-style-bold);
+        font-size: var(--font-size-21);
+      }
+
+      &__text {
+        color: var(--dark);
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: var(--font-style-regular);
+        font-size: var(--font-size-17);
+      }
+    }
+  }
+}
+.btn {
+    &,
+    &:link,
+    &:visited {
+        text-transform: none;
+        text-decoration: none;
+        box-sizing: border-box;
+        padding: 15px 45px;
+        width: 165px;
+        display: inline-block;
+        border-radius: 15px;
+        transition: all .2s;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        font-weight: bold;
+        font-size: var(--unnamed-font-size-15);
+        line-height: var(--unnamed-line-spacing-32);
+        color: var(--white);
+        text-align: center;
+        background-color: var(--green);
+        color: var(--white);
+        @include respond(phone) {
+          padding: 7px 44px;
+          text-transform: none;
+        }
+    }
+    &--red {
+      background-color: var(--red);
+      color: var(--white);
+      font-weight: 600;
+      font-size: var(--unnamed-font-size-15);
+      line-height: var(--unnamed-line-spacing-32);
+      letter-spacing: var(--unnamed-character-spacing-0);
+      color: var(--white);
+      &::after {
+        background-color: var(--blue);
+        border-radius: 15px;
+      }
+    }
+    &--green {
+      &::after {
+        background-color: var(--green);
+      }
+    }
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(var(--black),.2);
+
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+    }
+
+    &:active,
+    &:focus {
+        outline: none;
+        transform: translateY(-1px);
+        box-shadow: 0 .5px 10px rgba(var(--back),.2);
+    }
+
+    &::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 15px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: all .4s;
+    }
+
+    &--animated {
+        animation: moveInBottom .5s ease-out .75s;
+        animation-fill-mode: backwards;
+    }
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+}
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+.audiocall-start__container {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 900px;
+  @include respond(tab-land) {
+  width: 900px;
+  }
+  @include respond(tab-port) {
+    padding: 0 24px;
+    width: 600px;
+  }
+  @include respond(phone) {
+    height: 1100px;
+    padding: 0 20px;
+    width: auto;
+  }
+}
+
+.audiocall-start {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(8deg, var(--game-lilac) 25%, var(--game-purple) 67%);
+  position: relative;
+}
+
+.audiocall-start__wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.audiocall-start__title {
+  margin-bottom: 80px;
+  font-weight: bold;
+  font-size: var(--font-size-84);
+  line-height: var(--line-spacing-74);
+  color: var(--white);
+  @include respond (tab-land) {
+    font-size: var(--font-size-59);
+    line-height: var(--line-spacing-63);
+  }
+  @include respond (phone) {
+    font-size: var(--font-size-42);
+    line-height: var(--line-spacing-47);
+  }
+}
+
+.audiocall-start__button {
+  width: 340px;
+  height: 80px;
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: var(--font-size-31);
+  line-height: var(--line-spacing-47);
+  color: var(--dark);
+  background-color: var(--white);
+  box-shadow: 0px 30px 15px var(--dark-gray);
+  cursor: pointer;
+  @include respond (tab-land) {
+    width: 280px;
+    height: 60px;
+    font-size: var(--font-size-21);
+    line-height: var(--line-spacing-32);
+  }
+  @include respond (phone) {
+    width: 220px;
+    font-size: var(--font-size-17);
+    line-height: var(--line-spacing-25);
+  }
+}
+
+.audiocall-start__button:hover {
+  background-color: var(--bg-blue);
+}
+
+// game
+
+.audiocall-game__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.audiocall-game__sound {
+  position: relative;
+  width: 240px;
+  height: 220px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--white);
+  cursor: pointer;
+  @include respond(tab-land) {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.audiocall-game__sound:hover {
+  background: var(--bg-blue);
+}
+
+.audiocall-game__sound-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  z-index: 4;
+}
+
+.audiocall-game__list {
+  width: 85%;
+  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  @include respond(tab-land) {
+    width: 100%;
+  }
+  @include respond(tab-port) {
+    justify-content: space-around;
+  }
+  @include respond(phone) {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+  }
+}
+
+.audiocall-game__item {
+  min-width: 240px;
+  height: 70px;
+  padding: 20px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  box-shadow: 0px 30px 15px #0000000A;
+  border-radius: 25px;
+  cursor: pointer;
+  @include respond(tab-port) {
+    min-width: 220px;
+    height: 60px;
+    margin-right: 0;
+  }
+}
+
+.audiocall-game__item:hover {
+  background: var(--bg-blue);
+}
+
+.audiocall-game__img {
+  display: none;
+  z-index: 2;
+  width: 240px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  @include respond(tab-land) {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.audiocall-game__number {
+  width: 35px;
+  height: 30px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-32);
+  color: var(--white);
+  background-color: var(--game-lilac);
+  @include respond(tab-land) {
+    font-size: var(--font-size-17);
+    line-height: var(--line-spacing-25);
+  }
+  @include respond(tab-land) {
+    font-size: var(--font-size-15);
+    line-height: var(--line-spacing-17);
+  }
+}
+
+.audiocall-game__word {
+  width: 100%;
+  text-align: center;
+  color: var(--dark);
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-32);
+  @include respond(phone) {
+    font-size: var(--font-size-17);
+    line-height: var(--line-spacing-25);
+  }
+}
+
+.audiocall-game__btn-inner {
+  // display: flex;
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+  transition: 3s;
+}
+
+.audiocall-game__btn {
+  display: none;
+  min-width: 240px;
+  height: 60px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  box-shadow: 0px 4px 1px #00A8FF1A;
+  color: var(--white);
+  background-color: var(--red);
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-32);
+  cursor: pointer;
+  @include respond(tab-port) {
+    min-width: 220px;
+    height: 60px;
+  }
+  @include respond(phone) {
+    font-size: var(--font-size-17);
+    line-height: var(--line-spacing-25);
+  }
+  &--active {
+    display: block;
+  }
+}
+
+.audiocall-game__btn:hover {
+  background-color: var(--pink);
+}
+
+.audiocall-game__instruction {
+  display: none;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  text-align: center;
+  justify-content: center;
+  font-style: italic;
+  font-size: var(--font-size-15);
+  line-height: var(--line-spacing-17);
+  color: var(--white);
+  @include respond(phone) {
+    padding-top: 0;
+  }
+}
+
+.audiocall-game__btn-next {
+  display: none;
+  min-width: 240px;
+  height: 60px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  box-shadow: 0px 4px 1px #00A8FF1A;
+  color: var(--white);
+  background-color: var(--green);
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-32);
+  cursor: pointer;
+  @include respond(tab-port) {
+    min-width: 220px;
+    height: 60px;
+  }
+  @include respond(phone) {
+    font-size: var(--font-size-17);
+    line-height: var(--line-spacing-25);
+  }
+  &--active {
+    display: block;
+  }
+}
+
+.audiocall-game__btn-next:hover {
+  background-color: var(--light-green);
+}
+
+// // //неправильный перевод зачеркивается
+
+.audiocall-game__item-incorrect {
+  text-decoration: line-through;
+}
+
+.audiocall-game__item-correct {
+  color: var(--green);
+}
+
+// // // стили после угаданного слова
+
+.audiocall-game__inner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  @include respond(tab-port) {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+}
+
+.audiocall-game__english-word {
+  display: none;
+  font-weight: bold;
+  font-size: var(--font-size-59);
+  line-height: var(--line-spacing-63);
+  color: var(--white);
+  @include respond(tab-port) {
+    font-size: var(--font-size-42);
+    line-height: var(--line-spacing-47);
+  }
+  @include respond(phone) {
+    font-size: var(--font-size-31);
+  }
+  &--active {
+    display: block;
+  }
+}
+
+
+.audiocall-statistics {
+  display: none;
+  position: fixed;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000080;
+  z-index: 2;
+}
+
+.audiocall-statistics__popup {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.audiocall-statistics__container {
+  width: 480px;
+  height: 650px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 50px;
+  color: var(--dark);
+  background-color: var(--white);
+  @include respond(tab-port) {
+    width: 350px;
+    height: 500px;
+  }
+  @include respond(phone) {
+    width: 230px;
+    height: 300px;
+    border-radius: 40px;
+  }
+}
+
+.audiocall-statistics__title {
+  text-align: center;
+  font-weight: bold;
+  font-size: var(--font-size-31);
+  line-height: var(--line-spacing-47);
+  @include respond(tab-port) {
+    font-size: var(--font-size-21);
+    line-height: var(--line-spacing-25);
+  }
+  @include respond(phone) {
+    font-size: var(--font-size-17);
+  }
+}
+
+.audiocall-statistics__img {
+  width: 280px;
+  height: 280px;
+  margin: 0 auto;
+  background-image: url(../../../assets/images/audiocall-sloth.svg);
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include respond(tab-port) {
+    width: 220px;
+    height: 190px;
+  }
+  @include respond(phone) {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+}
+
+.audiocall-statistics__btn-inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.audiocall-statistics__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  height: 60px;
+  border-radius: 15px;
+  font-weight: bold;
+  color: var(--white);
+  font-size: var(--font-size-15);
+  line-height: var(--line-spacing-17);
+  cursor: pointer;
+  @include respond(tab-port) {
+    width: 145px;
+    height: 55px;
+  }
+  @include respond(phone) {
+    width: 95px;
+    height: 40px;
+    font-size: var(--font-size-11);
+  }
+}
+
+.audiocall-statistics__play-btn {
+  background-color: var(--blue);
+}
+
+.audiocall-statistics__exit-btn {
+  background-color: var(--red);
+}
+
+.audiocall-statistics__play-btn:hover {
+  opacity: 0.8;
+}
+
+.audiocall-statistics__exit-btn:hover {
+  opacity: 0.8;
+}
+
+.audiocall-statistics__content {
+  width: 320px;
+  height: 320px;
+  margin: 0 auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  cursor: pointer;
+  @include respond(tab-port) {
+    width: 230px;
+    height: 220px;
+  }
+  @include respond(phone) {
+    width: 120px;
+    height: 60px;
+  }
+}
+
+.audiocall-statistics__content-mistake,
+.audiocall-statistics__content-correct-answer {
+  display: flex;
+  flex-direction: column;
+}
+
+.audiocall-statistics__content-mistake {
+  margin-bottom: 60px;
+  @include respond(tab-port) {
+    margin-bottom: 50px;
+  }
+  @include respond(phone) {
+    margin-bottom: 40px;
+  }
+}
+
+.audiocall-statistics__mistake-wrapper {
+  display: flex;
+  width: 100%;
+}
+.audiocall-statistics__correct-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.audiocall-statistics__content-mistake-inner,
+.audiocall-statistics__content-correct-inner {
+  width: 100%;
+  display: flex;
+}
+
+.audiocall-statistics__content-mistake-heading,
+.audiocall-statistics__content-mistake-number,
+.audiocall-statistics__content-correct-heading,
+.audiocall-statistics__content-correct-number {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: var(--font-size-21);
+  line-height: var(--line-spacing-25);
+  @include respond(tab-port) {
+    font-size: var(--font-size-17);
+  }
+  @include respond(phone) {
+    font-size: var(--font-size-15);
+    line-height: var(--line-spacing-17);
+  }
+}
+
+.audiocall-statistics__english-word-mistake,
+.audiocall-statistics__translation-mistake,
+.audiocall-statistics__english-word-correct,
+.audiocall-statistics__translation-correct {
+  padding-left: 10px;
+  font-size: var(--font-size-17);
+  line-height: var(--line-spacing-25);
+  @include respond(phone) {
+    font-size: var(--font-size-15);
+    line-height: var(--line-spacing-17);
+  }
+}
+.s2 {
+  width: 100%;
+}
+.swiper-pagination-progressbar-fill {
+  background-color: var(--red) !important;
+}
+#block-for-appending-mistakes {
+  flex-direction: column;
+}
+#block-for-appending-correct-answers {
+  flex-direction: column;
+}
+.lds-circle {
+  display: none;
+  transform: translateZ(1px);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lds-circle > div {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  background: #fff;
+  animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+@keyframes lds-circle {
+  0%, 100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+  }
+  100% {
+    transform: rotateY(3600deg);
+  }
+}

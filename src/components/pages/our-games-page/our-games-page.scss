@@ -34,8 +34,16 @@
   padding-bottom: 30px;
   padding-top: 50px;
   background-color: var(--blue-light-gray);
+  height: 100vh;
   @include respond(tab-land) {
+    height: auto;
     padding-bottom: 20px;
+  }
+  @include respond(tab-port) {
+    height: 100vh;
+  }
+  @include respond(tab-port) {
+    height: auto;
   }
 }
 
