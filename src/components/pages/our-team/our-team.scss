@@ -1,69 +1,65 @@
 @import "../../../styles/variables.scss";
 @import "../../../styles/mixins.scss";
+@import "../../../index.scss";
+
+.our-team__container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  @include respond(tab-land) {
+    width: 900px;
+  }
+  @include respond(tab-port) {
+    padding: 0 24px;
+    width: 600px;
+  }
+  @include respond(phone) {
+    padding: 0 20px;
+    width: auto;
+  }
+}
 
 .our-team {
-  width: 100%;
-  height: 100%;
   background-color: var(--blue-light-gray);
-  font-family: var(--font-family-rubik);
-  font-weight: var(--font-style-regular);
 }
-.wrapper {
-  padding: 0 20px;
-  margin: 0 auto;
 
-  @include respond(phone) {
-    width: 100%;
+.wrapper__title {
+  padding-top: 20px;
+  font-size: var(--font-size-59);
+  line-height: var(--line-spacing-74);
+  font-weight: bold;
+  text-align: left;
+  color: var(--dark);
+
+  @include respond(tab-land) {
+    font-size: var(--font-size-42);
+    line-height: var(--line-spacing-47);
   }
-  .wrapper__title {
-    width: 380px;
-    height: 150px;
-    padding: 100px 0px 160px;
-    margin: 0;
 
-    font-size: var(--font-size-59);
-    line-height: var(--line-spacing-74);
-    font-weight: bold;
-    text-align: left;
-    color: var(--dark);
-
-    @include respond(tab-land) {
-      padding: 60px 0px 0px;
-
-      font-size: var(--font-size-59);
-      line-height: var(--line-spacing-74);
-      white-space: nowrap;
-    }
-
-    @include respond(tab-port) {
-      padding: 60px 0px 0px;
-
-      font-size: var(--font-size-42);
-      line-height: var(--line-spacing-63);
-      white-space: nowrap;
-    }
-
-    @include respond(phone) {
-      padding: 40px 30px;
-      width: 0;
-      height: 0;
-
-      font-size: var(--font-size-17);
-      line-height: var(--line-spacing-32);
-      white-space: nowrap;
-    }
+  @include respond(tab-port) {
+    font-size: var(--font-size-31);
+    line-height: var(--line-spacing-32);
+    text-align: center;
   }
 }
+
+
 .our-team-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  @include respond(tab-land) {
+    justify-content: space-between;
+  }
 
-  @include respond(phone) {
+  @include respond(tab-land) {
     justify-content: space-around;
+  }
+  @include respond(tab-port) {
+    justify-content: center;
   }
   .our-team-wrapper__item {
     width: 29%;
+    height: 470px;
     margin: 30px 30px 30px 0;
 
     background-color: var(--white);
@@ -71,18 +67,16 @@
 
     @include respond(tab-land) {
       width: 45%;
-      margin: 0px;
+      margin-bottom: 30px;
       margin-top: 20px;
     }
 
     @include respond(tab-port) {
-      width: 45%;
-      margin: 0px;
+      width: 280px;
+      margin-bottom: 20px;
       margin-top: 20px;
     }
     @include respond(phone) {
-      width: 280px;
-      height: 520px;
       margin: 0;
       margin-top: 20px;
     }
@@ -95,9 +89,10 @@
       .our-team-icon__image {
         width: 210px;
         height: 210px;
-
-        vertical-align: middle;
         border-radius: 50%;
+        background-size: cover;
+        background-color: var(--blue-light-gray);
+        background-repeat: no-repeat;
 
         @include respond(tab-land) {
           max-width: 100%;
@@ -114,10 +109,15 @@
   }
   .our-team-wrapper__item:last-child {
     @include respond(phone) {
-      margin-bottom: 100px;
+      margin-bottom: 20px;
     }
   }
 }
+
+.our-team-wrapper__item:hover {
+  box-shadow: 0px 10px 0px #00A8FF08;
+}
+
 .our-team-wrapper__info {
   .our-team-wrapper__title {
     margin-top: 20px;
@@ -127,7 +127,6 @@
       text-decoration: none;
       font-size: var(--font-size-21);
       line-height: var(--line-spacing-32);
-      font-weight: 500;
 
       color: var(--dark);
       white-space: nowrap;
@@ -136,26 +135,19 @@
     }
   }
   .our-team-wrapper__description {
-    margin-top: 20px;
-    padding: 0 40px;
+    height: 75px;
+    margin-top: 10px;
+    padding: 0 20px;
 
     flex-wrap: wrap;
     text-align: center;
-    font-size: var(--font-size-11);
-    line-height: var(--line-spacing-17);
+    font-size: var(--font-size-15);
+    line-height: var(--line-spacing-25);
     font-weight: normal;
     color: var(--gray);
-
-    @include respond(tab-land) {
-      padding: 0 100px;
-    }
-
-    @include respond(tab-port) {
-      padding: 0 50px;
-    }
   }
   .our-team-wrapper__job {
-    margin-top: 10px;
+    margin-top: 5px;
 
     font-weight: normal;
     font-size: var(--font-size-11);
@@ -164,15 +156,17 @@
     color: var(--dark-blue);
   }
   .our-team-socialmedia {
-    margin-top: 10px;
+    margin-top: 20px;
 
     display: flex;
     align-items: center;
     justify-content: center;
     .our-team-socialmedia__icon {
-      padding-right: 3px;
-
-      opacity: 0.7;
+      margin-right: 7px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      opacity: 0.6;
       transition: transform 0.1s linear;
       &:hover {
         cursor: pointer;
@@ -181,4 +175,49 @@
       }
     }
   }
+}
+
+.our-team-icon__image--vlad {
+  background-image: url(../../../assets/images/our-team/vlad.jpg);
+  background-position-x: -10px;
+  // background-size: cover;
+  transform: rotate(45deg);
+}
+
+.our-team-icon__image--maxim {
+  background-image: url(../../../assets/images/our-team/maxim.jpg);
+  // background-size: contain;
+}
+
+.our-team-icon__image--sergey {
+  background-image: url(../../../assets/images/our-team/sergey.jpg);
+  // background-size: cover;
+  background-position-y: -40px;
+}
+
+.our-team-icon__image--maria {
+  background-image: url(../../../assets/images/our-team/maria.jpg);
+  // background-size: cover;
+  background-position-y: -70px;
+}
+
+.our-team-icon__image--anzhelika {
+  background-image: url(../../../assets/images/our-team/anzhelika.jpg);
+  // background-size: cover;
+  background-position-y: -40px;
+}
+
+.our-team-icon__image--artem {
+  background-image: url(../../../assets/images/our-team/artem.jpg);
+  // background-size: cover;
+}
+
+.our-team-icon__image--yura {
+  background-image: url(../../../assets/images/our-team/yura.png);
+  // background-size: cover;
+}
+
+.our-team-icon__image--valeria {
+  background-image: url(../../../assets/images/our-team/valeria.jpg);
+  // background-size: cover;
 }

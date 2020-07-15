@@ -54,8 +54,12 @@ class HeaderMain extends Header {
                 <div class="header-main__end">
                   <div class="header-main__account">
                     <p class="header-main__text">${state.getName()}</p>
-                    <div >
-                      <a class="account-btn" id="open-popup">${state.getName() && state.getName()[0].toUpperCase()}</a>
+                    <div class="dropdown">
+                      <a class="account-btn dropbtn">${state.getName() && state.getName()[0].toUpperCase()}</a>
+                      <div class="dropdown-content">
+                        <a id="open-popup" class="dropdown-content__link">Настройки</a>
+                        <a href="/#login" class="dropdown-content__link">Выход</a>
+                      </div>
                     </div>
                   </div>
                 </div>
