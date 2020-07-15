@@ -32,7 +32,7 @@ class Card {
   }
 
   async afterRender(learnModeOn) {
-    const cardActions = document.getElementById(`${this.data._id}-card`);
+    const cardActions = document.querySelector('.dictionary-card__actions');
     const playSound = document.getElementById(`${this.data._id}-play-sound`);
     const showImage = document.getElementById(`${this.data._id}-show-image`);
     const wordTranslate = document.getElementById(`${this.data._id}-word-translate`);

@@ -13,7 +13,7 @@ const getSwitchContent = (id, param) => `
         <div class="popup-content__settings-section--switcher-text">${param.text}</div>
         <div class="switch-container">
           <label class="switch-container__content">
-            <input type="checkbox" class="switch-container__input" ${param.value ? 'checked' : ''} id="${id}">
+            <input type="checkbox" class="switch-container__input" ${!param.value ? 'checked' : ''} id="${id}">
             <span class="switch-container__label" data-on="Выкл" data-off="Вкл"></span>
             <span class="switch-container__handle"></span>
           </label>
@@ -99,6 +99,18 @@ class SettingsPage {
   }
 
   async afterRender() {
+    this.popupOpenButton = document.querySelector('#open-popup');
+    this.popup = document.querySelector('#popup');
+    this.popupContent = document.querySelector('#popup-content');
+    this.popupCloseButton = document.querySelector('#popup-close-button');
+    this.popupSaveButton = document.querySelector('#popup-save-button');
+
+    this.popupOpenButton.addEventListener('click', this.openPopupFunction);
+    this.popupCloseButton.addEventListener('click', this.closePopupFunction);
+    this.popupSaveButton.addEventListener('click', this.onSaveSettings);
+  }
+
+  openPopupFunction() {
     const figureContainer = document.querySelector('.popup-content__settings-section--figure-container');
     const switcherContainer = document.querySelector('.popup-content__settings-section--switcher-container');
 
@@ -112,18 +124,6 @@ class SettingsPage {
       .map(([k, v]) => getSwitchContent(k, v))
       .join('\n');
 
-    this.popupOpenButton = document.querySelector('#open-popup');
-    this.popup = document.querySelector('#popup');
-    this.popupContent = document.querySelector('#popup-content');
-    this.popupCloseButton = document.querySelector('#popup-close-button');
-    this.popupSaveButton = document.querySelector('#popup-save-button');
-
-    this.popupOpenButton.addEventListener('click', this.openPopupFunction);
-    this.popupCloseButton.addEventListener('click', this.closePopupFunction);
-    this.popupSaveButton.addEventListener('click', this.onSaveSettings);
-  }
-
-  openPopupFunction() {
     this.popup.style.opacity = '1';
     this.popup.style.visibility = 'visible';
     this.popupContent.style.opacity = '1';
