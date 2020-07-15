@@ -196,12 +196,19 @@ class SettingsPage {
   async render() {
     this.settings = state.getSettings();
     if (!this.settings) {
-      this.settings = await SettingsService.get(state.getUserId());
+      const fetchedSettings = await SettingsService.get(state.getUserId());
+      this.settings = fetchedSettings ? fetchedSettings.optional : undefined;
     }
     if (!this.settings) {
       // TODO Здесь надо заменить пустой объект на шаблон объекта настроек
       //  с настройками по умолчанию
-      this.settings = await SettingsService.save({});
+      this.settings = await SettingsService.save(
+        state.getUserId(),
+        {
+          wordsPerDay: 1,
+          optional: { ...this.settings },
+        },
+      );
     }
 
     return this.view;

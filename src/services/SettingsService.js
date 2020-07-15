@@ -3,18 +3,18 @@ import HttpService from './HttpService';
 class SettingsService {
   static async get(userId) {
     const response = await HttpService.fetch(
-      `/users/${userId}/statistic`,
+      `/users/${userId}/settings`,
       { method: 'GET' },
     );
 
-    return response.json();
+    return response.status !== 200 ? undefined : response.json();
   }
 
   static async save(userId, settings) {
     const response = await HttpService.fetch(
-      `/users/${userId}/statistic`,
+      `/users/${userId}/settings`,
       {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(settings),
       },
     );
