@@ -1,5 +1,6 @@
 import './statistics.scss';
 import HttpService from '../../../services/HttpService';
+import state from '../../../common/state';
 
 class Statistics {
   constructor({
@@ -36,7 +37,7 @@ class Statistics {
   }
 
   createChartInStatistic = async () => {
-    const stats = await HttpService.fetch(`/users/${localStorage.getItem('userId')}/statistics`, { method: 'GET' });
+    const stats = await HttpService.fetch(`/users/${state.getUserId()}/statistics`, { method: 'GET' });
     const response = await stats.json();
     this.learnedWords = response.learnedWords;
     const utc = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
@@ -53,8 +54,14 @@ class Statistics {
         var data = google.visualization.arrayToDataTable([
           ['Дата', 'Количество Слов'],
           ['${utc}',  0],
-          ['2014',  ${this.learnedWords}],
-          ['2014',  ${this.learnedWords + 50}],
+          ['${utc}',  ${this.learnedWords}],
+          ['${utc}',  ${this.learnedWords + 50}],
+          ['${utc}',  ${this.learnedWords + 150}],
+          ['${utc}',  ${this.learnedWords + 250}],
+          ['${utc}',  ${this.learnedWords + 350}],
+          ['${utc}',  ${this.learnedWords + 450}],
+          ['${utc}',  ${this.learnedWords + 550}],
+          ['${utc}',  ${this.learnedWords + 650}],
         ]);
 
         var options = {

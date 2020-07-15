@@ -1,5 +1,7 @@
 import AuthorizationPage from './authorization-page';
 import userRequest from '../../../services/userRequest';
+import SettingsService from '../../../services/SettingsService';
+import state from '../../../common/state';
 
 class Register extends AuthorizationPage {
   constructor() {
@@ -29,7 +31,19 @@ class Register extends AuthorizationPage {
               }
               return response.json();
             })
-            .then(this.handleLoginData);
+            .then(this.handleLoginData)
+            .then(() => {
+              const set = SettingsService.save(
+                state.getUserId(),
+                {
+                  learnedWords: 0,
+                  optional: {
+                    registrationDate: new Date(),
+                  },
+                },
+              );
+              set.then((d) => console.log(d));
+            });
         })
         .catch(this.handleError);
     };
