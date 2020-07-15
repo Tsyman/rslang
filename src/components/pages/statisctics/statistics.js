@@ -22,6 +22,7 @@ class Statistics {
     this.longSeriesCorrectAnswers = 0;
     this.daysDiff = 0;
     this.learnedWords = 0;
+    this.wordsCount = 0;
     this.statistics = [
       ['Дата', 'Количество Слов'],
     ];
@@ -52,20 +53,20 @@ class Statistics {
 
   createChartInStatistic = async () => {
     const stats = await SettingsService.get(state.getUserId());
+
     this.learnedWords = stats.learnedWords;
-    const today = new Date();
-    const userRegisterDay = new Date(stats.optional.registrationDate);
-    this.daysDiff = Math.ceil(Math.abs(today - userRegisterDay) / (1000 * 60 * 60 * 24));
 
     this.statistics.push(
       [formatDate(stats.optional.registrationDate), 0],
     );
 
-    for (let i = 1; i < this.daysDiff; i += 1) {
-      this.statistics.push(
-        [formatDate(new Date(userRegisterDay)
-          .setDate(userRegisterDay.getDate() + i)), this.learnedWords],
-      );
+    if (stats.optional.wordsPerDay) {
+      Object.keys(stats.optional.wordsPerDay).forEach((elem) => {
+        this.wordsCount += stats.optional.wordsPerDay[elem];
+        this.statistics.push(
+          [formatDate(+elem), this.wordsCount],
+        );
+      });
     }
 
     const scriptBody = document.createElement('script');
