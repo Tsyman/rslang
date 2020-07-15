@@ -7,6 +7,7 @@ import HeaderMain from './components/shared/layout/header/header-main';
 import HeaderPromo from './components/shared/layout/header/header-promo';
 import Dictionary from './components/pages/dictionary-page/dictionary-page';
 import OurGames from './components/pages/our-games-page/our-games-page';
+import Sprint from './components/minigames/sprint/sprint';
 import OurTeam from './components/pages/our-team/our-team';
 import Footer from './components/shared/layout/footer/footer';
 import NotFound from './components/pages/not-found/not-found';
@@ -14,6 +15,8 @@ import NotFound from './components/pages/not-found/not-found';
 import './index.scss';
 
 import Utils from './services/Utils';
+import Audiocall from './components/minigames/audiocall/audiocall';
+import SpeakIt from './components/minigames/speakit/script';
 import state from './common/state';
 
 // List of supported routes. Any url other than these routes will throw a 404 error
@@ -24,8 +27,11 @@ const routes = {
   '/register': Register,
   '/games': OurGames,
   '/team': OurTeam,
+  '/sprint': Sprint,
+  '/audiocall': Audiocall,
   '/dictionary': Dictionary,
   '/dictionary/:id': Dictionary,
+  '/speakit': SpeakIt,
   '/savannah': SavannahMiniGame,
 };
 
