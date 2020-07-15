@@ -1,3 +1,4 @@
+import SavannahMiniGame from './components/minigames/savannah/savannah';
 import Stat from './components/pages/stat-page/stat-page';
 import Main from './components/pages/main-page/main-page';
 import Login from './components/pages/authorization-page/login';
@@ -31,6 +32,7 @@ const routes = {
   '/dictionary': Dictionary,
   '/dictionary/:id': Dictionary,
   '/speakit': SpeakIt,
+  '/savannah': SavannahMiniGame,
 };
 
 const getParsedURL = (req) => {
