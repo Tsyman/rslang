@@ -9,6 +9,7 @@ import Dictionary from './components/pages/dictionary-page/dictionary-page';
 import OurGames from './components/pages/our-games-page/our-games-page';
 import Sprint from './components/minigames/sprint/sprint';
 import OurTeam from './components/pages/our-team/our-team';
+import LearnWords from './components/pages/learn-words-page/learn-word';
 import Footer from './components/shared/layout/footer/footer';
 import NotFound from './components/pages/not-found/not-found';
 
@@ -31,6 +32,7 @@ const routes = {
   '/audiocall': Audiocall,
   '/dictionary': Dictionary,
   '/dictionary/:id': Dictionary,
+  '/new-words': LearnWords,
   '/speakit': SpeakIt,
   '/savannah': SavannahMiniGame,
 };

@@ -4,7 +4,7 @@ class UserService {
   static async getAggregatedWords(userId, parameters) {
     let query = [];
 
-    ['group', 'wordsPerPage', 'filter'].forEach((key) => {
+    ['group', 'page', 'wordsPerPage', 'filter'].forEach((key) => {
       if (parameters[key]) {
         query.push(`${key}=${encodeURIComponent(parameters[key])}`);
       }
@@ -17,9 +17,21 @@ class UserService {
       { method: 'GET' },
     );
 
-    const content = await response.json();
+    return response.json();
+  }
 
-    return content;
+  static async updateWord(userId, word) {
+    const method = word.new ? 'POST' : 'PUT';
+
+    const response = await HttpService.fetch(
+      `/users/${userId}/words/${word.id}`,
+      {
+        method,
+        body: JSON.stringify(word),
+      },
+    );
+
+    return response.json();
   }
 }
 

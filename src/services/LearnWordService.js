@@ -1,6 +1,8 @@
 import HttpService from './HttpService';
 
 class WordService {
+  wordsToLearn = [];
+
   static async getChunk(parameters) {
     let query = [];
 
@@ -20,13 +22,8 @@ class WordService {
     return response.json();
   }
 
-  static async getWordWithAssets(id) {
-    const response = await HttpService.fetch(
-      `/words/${id}`,
-      {},
-    );
+  static async getWords() {
 
-    return response.json();
   }
 }
 

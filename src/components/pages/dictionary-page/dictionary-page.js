@@ -53,13 +53,15 @@ class Dictionary {
     );
 
     let html = '';
-    response[0].paginatedResults.forEach((result) => {
+    const cards = response[0].paginatedResults.map((result) => {
       const card = new Card(result, this.cardType);
-
       html += card.render();
+      return card;
     });
 
     document.querySelector('.dictionary__card-list').innerHTML = html;
+
+    cards.forEach((card) => card.afterRender());
   }
 
   selectTab() {

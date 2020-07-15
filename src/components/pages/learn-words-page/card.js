@@ -1,6 +1,4 @@
-/* eslint-disable no-underscore-dangle */
 import CardType from './card-type';
-import WordService from '../../../services/WordService';
 
 class Card {
   constructor(data, type) {
@@ -10,12 +8,12 @@ class Card {
 
   render() {
     return `
-    <div class="dictionary-card" id="${this.data._id}-card">
+    <div class="dictionary-card">
       <div class="dictionary-card__progress"></div>
       <div>
         <span class="dictionary-card__word">${this.data.word}</span>
-        <img src="../../../assets/images/dictionary/sound.png" class="dictionary-card__word-sound" alt="Воспроизвести слово" id="${this.data._id}-play-sound">
-        <img src="../../../assets/images/dictionary/preview.png" class="dictionary-card__word-preview" title="Показать/скрыть изображение" alt="Показать/скрыть изображение" id="${this.data._id}-show-image">
+        <img src="../../../assets/images/dictionary/sound.png" class="dictionary-card__word-sound" alt="Воспроизвести слово">
+        <img src="../../../assets/images/dictionary/preview.png" class="dictionary-card__word-preview" alt="Показать изображение">
       </div>
       <div class="dictionary-card__translation">${this.data.wordTranslate}</div>
       <div class="dictionary-card__description">
@@ -26,30 +24,6 @@ class Card {
       <div class="dictionary-card__repetition"></div>
       <div class="dictionary-card__actions">${this.renderActions()}</div>
     </div>`;
-  }
-
-  async afterRender() {
-    WordService.getWordWithAssets(this.data._id).then((word) => {
-      this.data = { ...this.data, ...word };
-      const cardActions = document.getElementById(`${this.data._id}-card`);
-      cardActions.innerHTML += `
-      <img src="data:image/jpg;base64,${this.data.image}" style="display: none; width: 100%" id="${this.data._id}-image">
-      <audio src="data:audio/mpeg;base64,${this.data.audio}" style="display: none" id="${this.data._id}-audio"></audio>
-    `;
-      const playSound = document.getElementById(`${this.data._id}-play-sound`);
-      const showImage = document.getElementById(`${this.data._id}-show-image`);
-
-      showImage.addEventListener('click', () => {
-        const button = document.getElementById(`${this.data._id}-image`);
-        const current = button.style.display;
-        button.style.display = current === 'block' ? 'none' : 'block';
-      });
-
-      playSound.addEventListener('click', () => {
-        const sound = document.getElementById(`${this.data._id}-audio`);
-        sound.play();
-      });
-    });
   }
 
   renderActions() {
