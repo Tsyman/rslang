@@ -27,12 +27,12 @@ class Card {
         <div id="${this.data._id}-text-meaning-translate">${this.data.textMeaningTranslate}</div>
       </div>
       <div class="dictionary-card__repetition"></div>
-      <div class="dictionary-card__actions">${this.renderActions()}</div>
+      <div class="dictionary-card__actions" id="${this.data._id}-actions">${this.renderActions()}</div>
     </div>`;
   }
 
   async afterRender(learnModeOn) {
-    const cardActions = document.querySelector('.dictionary-card__actions');
+    const cardActions = document.getElementById(`${this.data._id}-actions`);
     const playSound = document.getElementById(`${this.data._id}-play-sound`);
     const showImage = document.getElementById(`${this.data._id}-show-image`);
     const wordTranslate = document.getElementById(`${this.data._id}-word-translate`);

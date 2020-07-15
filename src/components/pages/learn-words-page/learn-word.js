@@ -11,7 +11,6 @@ class LearnWord {
       <section class="learn-word container">
         <div class="learn-word-loader" id="learn-word-loader">Loading words...</div>  
         <div id="learn-word-card-holder" style="display: none">
-          <span id="word-meaning">translation, meaning</span>
           <div id="progress-bar">progress bar</div>
         </div>
       </section>
@@ -25,7 +24,7 @@ class LearnWord {
   async afterRender() {
     const loader = document.getElementById('learn-word-loader');
     const cardHolder = document.getElementById('learn-word-card-holder');
-    const wordMeaning = document.getElementById('word-meaning');
+    const progressBar = document.getElementById('progress-bar');
 
     UserService.getAggregatedWords(
       state.getUserId(),
@@ -39,7 +38,7 @@ class LearnWord {
       const card = new Card(this.words[0], this.cardType);
       const template = document.createElement('template');
       template.innerHTML = card.render();
-      cardHolder.insertBefore(template.content.firstElementChild, wordMeaning);
+      cardHolder.insertBefore(template.content.firstElementChild, progressBar);
       card.afterRender(true);
     });
   }
