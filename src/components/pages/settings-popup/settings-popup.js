@@ -93,6 +93,8 @@ class SettingsPage {
       await this.saveSettings(this.defaultSettings);
     }
 
+    state.setSettings(this.settings);
+
     return this.view;
   }
 
@@ -139,7 +141,7 @@ class SettingsPage {
     Object.entries(this.settings).forEach(([k, v]) => {
       this.settings[k].value = v.type === NUMBER
         ? document.getElementById(k).value
-        : document.getElementById(k).checked;
+        : !document.getElementById(k).checked;
     }, {});
     this.saveSettings(this.settings).then(this.closePopupFunction);
   };
@@ -160,7 +162,6 @@ class SettingsPage {
     }
 
     this.settings = savedSettings.optional;
-    state.setSettings(this.settings);
   };
 }
 

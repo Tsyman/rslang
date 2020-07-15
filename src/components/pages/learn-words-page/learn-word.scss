@@ -7,59 +7,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.learn-word-card {
-  margin: 20px;
-  padding: 40px 40px;
-  width: 50%;
-  height: 50%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  background: var(--white);
-  border: 2px solid #F2FBFF;
-  border-radius: 40px;
-  opacity: 1;
-  box-shadow: 1px 1px 8px 1px var(--gray);
-
-  color: #6B83B3;
-
-  & > hr {
+  & > #learn-word-card-holder {
     width: 100%;
-    border-top: 1px solid var(--dark-gray);
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
-  & > span {
-    margin: 20px 0;
-  }
-
-  & > span:first-child {
-    font-weight: 700;
-    font-size: 18px;
-  }
-
-  & > span:nth-child(2) {
-    font-weight: 700;
-    font-size: 18px;
-  }
-}
-
-.arrow {
-  display: flex;
-  align-items: center;
-
-  font-size: 40px;
-  font-weight: 700;
-  color: var(--gray);
-
-  cursor: pointer;
-
-  &:hover {
-    color: black;
+  & .dictionary-card {
+    width: 50%;
   }
 }
 
@@ -71,7 +30,7 @@
   color: #3D4B66;
   font-size: 20px;
   font-weight: bold;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   opacity: 1;
   text-transform: capitalize;
 }

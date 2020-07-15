@@ -1,5 +1,6 @@
 import './learn-word.scss';
 import UserService from '../../../services/UserService';
+import Card from '../dictionary-page/card';
 // import AggregatedWordsFilter from '../../../services/AggregatedWordsFilter';
 import state from '../../../common/state';
 
@@ -9,15 +10,10 @@ class LearnWord {
     this.view = `
       <section class="learn-word container">
         <div class="learn-word-loader" id="learn-word-loader">Loading words...</div>  
-        <div class="learn-word-card" id="learn-word-card" style="display: none">
-          <div id="top-buttons-block">TOP BUTTONS</div>
-          <span class="learn-word-text" id="learn-word-text">Some text</span>
-          <hr>
-          <span class="learn-word-text" id="learn-word-translation">Какой-то текст</span>      
-          <div id="bottom-buttons-block">BOTTOM BUTTONS</div>
+        <div id="learn-word-card-holder" style="display: none">
+          <span id="word-meaning">translation, meaning</span>
+          <div id="progress-bar">progress bar</div>
         </div>
-        <span id="word-meaning">translation, meaning</span>
-        <div id="progress-bar">progress bar</div>
       </section>
     `;
   }
@@ -28,7 +24,9 @@ class LearnWord {
 
   async afterRender() {
     const loader = document.getElementById('learn-word-loader');
-    const card = document.getElementById('learn-word-card');
+    const cardHolder = document.getElementById('learn-word-card-holder');
+    const wordMeaning = document.getElementById('word-meaning');
+
     UserService.getAggregatedWords(
       state.getUserId(),
       {
@@ -37,7 +35,12 @@ class LearnWord {
     ).then((data) => {
       this.words = data[0].paginatedResults.map((w) => (!w.userWord ? { ...w, new: true } : w));
       loader.style.display = 'none';
-      card.style.display = 'flex';
+      cardHolder.style.display = 'flex';
+      const card = new Card(this.words[0], this.cardType);
+      const template = document.createElement('template');
+      template.innerHTML = card.render();
+      cardHolder.insertBefore(template.content.firstElementChild, wordMeaning);
+      card.afterRender(true);
     });
   }
 }
